@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ronmob.qz.dao.SurveyMapper">
+    <resultMap id="SurveyMap" type="com.ronmob.qz.model.Survey">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="LONGVARCHAR"/>
+        <result column="question_cnt" property="question_cnt" jdbcType="INTEGER"/>
+        <result column="estimate_minutes" property="estimate_minutes" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="price" property="price" jdbcType="FLOAT"/>
+        <result column="org_price" property="org_price" jdbcType="FLOAT"/>
+        <result column="create_by" property="create_by" jdbcType="VARCHAR"/>
+        <result column="create_time" property="create_time" jdbcType="TIMESTAMP"/>
+        <result column="image" property="image" jdbcType="VARCHAR"/>
+        <result column="is_need_sex" property="is_need_sex" jdbcType="INTEGER"/>
+        <result column="tested_cnt" property="tested_cnt" jdbcType="INTEGER"/>
+        <result column="is_hot" property="is_hot" jdbcType="INTEGER"/>
+        <result column="is_new" property="is_new" jdbcType="INTEGER"/>
+        <result column="is_super" property="is_super" jdbcType="INTEGER"/>
+        <result column="result_template" property="result_template" jdbcType="VARCHAR"/>
+        <result column="result_template_param" property="result_template_param" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 根据id获取问卷 -->
+    <select id="getSurveyById" resultMap="SurveyMap" parameterType="java.lang.Integer">
+		select * from survey where id=#{id}
+	</select>
+
+    <!-- 获取问卷列表 -->
+    <select id="getSurveys" resultMap="SurveyMap"
+            parameterType="com.ronmob.qz.vo.SurveyListSearchVo">
+        select * from survey where 1=1
+        <if test="survey!=null and survey.id != null">
+            and id = #{survey.id}
+        </if>
+        <if test="survey!=null and survey.class_id != null">
+            and class_id = #{survey.class_id}
+        </if>
+        <if test="survey!=null and survey.status != null">
+            and status = #{survey.status}
+        </if>
+        <if test="survey!=null and survey.title!= '' and survey.title != null">
+            and title like CONCAT('%',#{survey.title},'%')
+        </if>
+        <if test="survey!=null and survey.is_super != null">
+            and is_super = #{survey.is_super}
+        </if>
+        <if test="survey!=null and survey.is_new != null">
+            and is_new = #{survey.is_new}
+        </if>
+        <if test="survey!=null and survey.is_hot != null">
+            and is_hot = #{survey.is_hot}
+        </if>
+        <if test="page != null">
+            limit #{page.firstResult},#{page.everyPageCount};
+        </if>
+    </select>
+
+    <!-- 获取问卷列表数量 -->
+    <select id="getSurveysCount" resultType="java.lang.Integer"
+            parameterType="com.ronmob.qz.vo.SurveyListSearchVo">
+        select count(*) from survey where 1=1
+        <if test="survey!=null and survey.id!= '' and survey.id != null">
+            and id = #{survey.id}
+        </if>
+        <if test="survey!=null and survey.class_id != null">
+            and class_id = #{survey.class_id}
+        </if>
+        <if test="survey!=null and survey.status != null">
+            and status = #{survey.status}
+        </if>
+        <if test="survey!=null and survey.title!= '' and survey.title != null">
+            and title like CONCAT('%',#{survey.title},'%')
+        </if>
+        <if test="survey!=null and survey.is_super != null">
+            and is_super = #{survey.is_super}
+        </if>
+        <if test="survey!=null and survey.is_new != null">
+            and is_new = #{survey.is_new}
+        </if>
+        <if test="survey!=null and survey.is_hot != null">
+            and is_hot = #{survey.is_hot}
+        </if>
+    </select>
+
+    <!-- 新增问卷 -->
+    <insert id="insertSurvey" parameterType="com.ronmob.qz.model.Survey">
+        <selectKey resultType="java.lang.Integer" keyProperty="id"
+                   order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey
+        (title,description,create_by,create_time,class_id,status,question_cnt,estimate_minutes,price,org_price,
+        image,is_need_sex,tested_cnt,is_hot,is_new,is_super,result_template,result_template_param)
+        values
+        (#{title},#{description},#{create_by},#{create_time},#{class_id},#{status},#{question_cnt},#{estimate_minutes},#{price},#{org_price},
+        #{image},#{is_need_sex},#{tested_cnt},#{is_hot},#{is_new},#{is_super},#{result_template},#{result_template_param})
+    </insert>
+
+    <!-- 更新问卷 -->
+    <update id="updateSurvey" parameterType="com.ronmob.qz.model.Survey">
+		update survey
+		set
+		title=#{title},description=#{description},create_by=#{create_by},create_time=#{create_time},
+		class_id=#{class_id},status=#{status},question_cnt=#{question_cnt},estimate_minutes=#{estimate_minutes},
+		price=#{price},org_price=#{org_price},image=#{image},is_need_sex=#{is_need_sex},tested_cnt=#{tested_cnt},
+		is_hot=#{is_hot},is_new=#{is_new},is_super=#{is_super},result_template=#{result_template},
+		result_template_param=#{result_template_param}
+		where id=#{id}
+	</update>
+</mapper>

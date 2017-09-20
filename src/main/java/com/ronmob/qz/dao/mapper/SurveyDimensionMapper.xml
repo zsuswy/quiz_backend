@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ronmob.qz.dao.SurveyDimensionMapper">
+    <resultMap id="SurveyDimensionMap" type="com.ronmob.qz.model.SurveyDimension">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="parent_id" property="result" jdbcType="INTEGER"/>
+        <result column="survey_id" property="survey_id" jdbcType="INTEGER"/>
+        <result column="seq" property="seq" jdbcType="INTEGER"/>
+        <result column="dimension_name" property="dimension_name" jdbcType="VARCHAR"/>
+        <result column="auto_calculate_type" property="auto_calculate_type" jdbcType="INTEGER"/>
+        <result column="proxy_sub_dimension_id" property="proxy_sub_dimension_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!-- 获取问卷维度列表 -->
+    <select id="getSurveyDimensions" resultMap="SurveyDimensionMap"
+            parameterType="com.ronmob.qz.vo.SurveyDimensionListSearchVo">
+        select * from survey_dimension where 1=1
+        <if test="surveyDimension!=null and surveyDimension.id != null">
+            and id = #{surveyDimension.id}
+        </if>
+        <if test="surveyDimension!=null and surveyDimension.survey_id != null">
+            and survey_id = #{surveyDimension.survey_id}
+        </if>
+        <if test="surveyDimension!=null and surveyDimension.seq != null">
+            and seq = #{surveyDimension.seq}
+        </if>
+        <if test="surveyDimension!=null and surveyDimension.parent_id != null">
+            and parent_id = #{surveyDimension.parent_id}
+        </if>
+        <if test="page != null">
+            limit #{page.firstResult},#{page.everyPageCount};
+        </if>
+    </select>
+
+    <!-- 获取问卷维度列表数量 -->
+    <select id="getSurveysCount" resultType="java.lang.Integer"
+            parameterType="com.ronmob.qz.vo.SurveyDimensionListSearchVo">
+        select count(*) from survey_dimension where 1=1
+        <if test="surveyDimension!=null and surveyDimension.id != null">
+            and id = #{surveyDimension.id}
+        </if>
+        <if test="surveyDimension!=null and surveyDimension.survey_id != null">
+            and survey_id = #{surveyDimension.survey_id}
+        </if>
+        <if test="surveyDimension!=null and surveyDimension.seq != null">
+            and seq = #{surveyDimension.seq}
+        </if>
+        <if test="surveyDimension!=null and surveyDimension.parent_id != null">
+            and parent_id = #{surveyDimension.parent_id}
+        </if>
+    </select>
+
+    <!-- 新增问卷维度 -->
+    <insert id="insertSurveyDimension" parameterType="com.ronmob.qz.model.SurveyDimension">
+        <selectKey resultType="java.lang.Integer" keyProperty="id"
+                   order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_dimension
+        (parent_id,survey_id,seq,dimension_name,auto_calculate_type,proxy_sub_dimension_id)
+        values
+        (#{parent_id},#{survey_id},#{seq},#{dimension_name},#{auto_calculate_type},#{proxy_sub_dimension_id})
+    </insert>
+
+    <!-- 更新问卷维度 -->
+    <update id="updateSurvey" parameterType="com.ronmob.qz.model.SurveyDimension">
+		update survey_dimension
+		set
+		parent_id=#{parent_id},survey_id=#{survey_id},seq=#{seq},dimension_name=#{dimension_name},
+		auto_calculate_type=#{auto_calculate_type},proxy_sub_dimension_id=#{proxy_sub_dimension_id}
+		where id=#{id}
+	</update>
+
+    <delete id="deleteSurveyDimension" parameterType="java.lang.Integer">
+        delete from survey_dimension where id=#{id}
+    </delete>
+</mapper>
