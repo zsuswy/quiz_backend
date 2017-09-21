@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ronmob.qz.dao.UserSurveyMapper">
+  <resultMap id="BaseResultMap" type="com.ronmob.qz.model.UserSurvey">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="p_user_id" jdbcType="INTEGER" property="pUserId" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="survey_id" jdbcType="INTEGER" property="surveyId" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
+    <result column="class_name" jdbcType="VARCHAR" property="className" />
+    <result column="is_need_sex" jdbcType="TINYINT" property="isNeedSex" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ronmob.qz.model.UserSurveyWithBLOBs">
+    <result column="answer" jdbcType="LONGVARCHAR" property="answer" />
+    <result column="result" jdbcType="LONGVARCHAR" property="result" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, p_user_id, status, survey_id, order_id, finish_time, class_name, is_need_sex
+  </sql>
+  <sql id="Blob_Column_List">
+    answer, result
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.ronmob.qz.model.UserSurveyExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user_survey
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.ronmob.qz.model.UserSurveyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_survey
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user_survey
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_survey
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ronmob.qz.model.UserSurveyExample">
+    delete from user_survey
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ronmob.qz.model.UserSurveyWithBLOBs">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_survey (user_id, p_user_id, status, 
+      survey_id, order_id, finish_time, 
+      class_name, is_need_sex, answer, 
+      result)
+    values (#{userId,jdbcType=INTEGER}, #{pUserId,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, 
+      #{surveyId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{finishTime,jdbcType=TIMESTAMP}, 
+      #{className,jdbcType=VARCHAR}, #{isNeedSex,jdbcType=TINYINT}, #{answer,jdbcType=LONGVARCHAR}, 
+      #{result,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ronmob.qz.model.UserSurveyWithBLOBs">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_survey
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="pUserId != null">
+        p_user_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="surveyId != null">
+        survey_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="finishTime != null">
+        finish_time,
+      </if>
+      <if test="className != null">
+        class_name,
+      </if>
+      <if test="isNeedSex != null">
+        is_need_sex,
+      </if>
+      <if test="answer != null">
+        answer,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="pUserId != null">
+        #{pUserId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="surveyId != null">
+        #{surveyId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="finishTime != null">
+        #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="className != null">
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="isNeedSex != null">
+        #{isNeedSex,jdbcType=TINYINT},
+      </if>
+      <if test="answer != null">
+        #{answer,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ronmob.qz.model.UserSurveyExample" resultType="java.lang.Long">
+    select count(*) from user_survey
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user_survey
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pUserId != null">
+        p_user_id = #{record.pUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.surveyId != null">
+        survey_id = #{record.surveyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.finishTime != null">
+        finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.className != null">
+        class_name = #{record.className,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isNeedSex != null">
+        is_need_sex = #{record.isNeedSex,jdbcType=TINYINT},
+      </if>
+      <if test="record.answer != null">
+        answer = #{record.answer,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.result != null">
+        result = #{record.result,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update user_survey
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      p_user_id = #{record.pUserId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=TINYINT},
+      survey_id = #{record.surveyId,jdbcType=INTEGER},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
+      class_name = #{record.className,jdbcType=VARCHAR},
+      is_need_sex = #{record.isNeedSex,jdbcType=TINYINT},
+      answer = #{record.answer,jdbcType=LONGVARCHAR},
+      result = #{record.result,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user_survey
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      p_user_id = #{record.pUserId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=TINYINT},
+      survey_id = #{record.surveyId,jdbcType=INTEGER},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
+      class_name = #{record.className,jdbcType=VARCHAR},
+      is_need_sex = #{record.isNeedSex,jdbcType=TINYINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ronmob.qz.model.UserSurveyWithBLOBs">
+    update user_survey
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="pUserId != null">
+        p_user_id = #{pUserId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="surveyId != null">
+        survey_id = #{surveyId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="finishTime != null">
+        finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="className != null">
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="isNeedSex != null">
+        is_need_sex = #{isNeedSex,jdbcType=TINYINT},
+      </if>
+      <if test="answer != null">
+        answer = #{answer,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ronmob.qz.model.UserSurveyWithBLOBs">
+    update user_survey
+    set user_id = #{userId,jdbcType=INTEGER},
+      p_user_id = #{pUserId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      survey_id = #{surveyId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      class_name = #{className,jdbcType=VARCHAR},
+      is_need_sex = #{isNeedSex,jdbcType=TINYINT},
+      answer = #{answer,jdbcType=LONGVARCHAR},
+      result = #{result,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ronmob.qz.model.UserSurvey">
+    update user_survey
+    set user_id = #{userId,jdbcType=INTEGER},
+      p_user_id = #{pUserId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      survey_id = #{surveyId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      class_name = #{className,jdbcType=VARCHAR},
+      is_need_sex = #{isNeedSex,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

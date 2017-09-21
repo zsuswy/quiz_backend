@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ronmob.qz.dao.SurveyDimensionScoreTextMapper">
+  <resultMap id="BaseResultMap" type="com.ronmob.qz.model.SurveyDimensionScoreText">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="dimension_id" jdbcType="INTEGER" property="dimensionId" />
+    <result column="score_max" jdbcType="INTEGER" property="scoreMax" />
+    <result column="score_min" jdbcType="INTEGER" property="scoreMin" />
+    <result column="result_title" jdbcType="VARCHAR" property="resultTitle" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ronmob.qz.model.SurveyDimensionScoreText">
+    <result column="result_comment" jdbcType="LONGVARCHAR" property="resultComment" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, dimension_id, score_max, score_min, result_title
+  </sql>
+  <sql id="Blob_Column_List">
+    result_comment
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.ronmob.qz.model.SurveyDimensionScoreTextExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from survey_dimension_score_text
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.ronmob.qz.model.SurveyDimensionScoreTextExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from survey_dimension_score_text
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from survey_dimension_score_text
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from survey_dimension_score_text
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ronmob.qz.model.SurveyDimensionScoreTextExample">
+    delete from survey_dimension_score_text
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ronmob.qz.model.SurveyDimensionScoreText">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_dimension_score_text (dimension_id, score_max, score_min, 
+      result_title, result_comment)
+    values (#{dimensionId,jdbcType=INTEGER}, #{scoreMax,jdbcType=INTEGER}, #{scoreMin,jdbcType=INTEGER}, 
+      #{resultTitle,jdbcType=VARCHAR}, #{resultComment,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ronmob.qz.model.SurveyDimensionScoreText">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_dimension_score_text
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dimensionId != null">
+        dimension_id,
+      </if>
+      <if test="scoreMax != null">
+        score_max,
+      </if>
+      <if test="scoreMin != null">
+        score_min,
+      </if>
+      <if test="resultTitle != null">
+        result_title,
+      </if>
+      <if test="resultComment != null">
+        result_comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dimensionId != null">
+        #{dimensionId,jdbcType=INTEGER},
+      </if>
+      <if test="scoreMax != null">
+        #{scoreMax,jdbcType=INTEGER},
+      </if>
+      <if test="scoreMin != null">
+        #{scoreMin,jdbcType=INTEGER},
+      </if>
+      <if test="resultTitle != null">
+        #{resultTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="resultComment != null">
+        #{resultComment,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ronmob.qz.model.SurveyDimensionScoreTextExample" resultType="java.lang.Long">
+    select count(*) from survey_dimension_score_text
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update survey_dimension_score_text
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.dimensionId != null">
+        dimension_id = #{record.dimensionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.scoreMax != null">
+        score_max = #{record.scoreMax,jdbcType=INTEGER},
+      </if>
+      <if test="record.scoreMin != null">
+        score_min = #{record.scoreMin,jdbcType=INTEGER},
+      </if>
+      <if test="record.resultTitle != null">
+        result_title = #{record.resultTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resultComment != null">
+        result_comment = #{record.resultComment,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update survey_dimension_score_text
+    set id = #{record.id,jdbcType=INTEGER},
+      dimension_id = #{record.dimensionId,jdbcType=INTEGER},
+      score_max = #{record.scoreMax,jdbcType=INTEGER},
+      score_min = #{record.scoreMin,jdbcType=INTEGER},
+      result_title = #{record.resultTitle,jdbcType=VARCHAR},
+      result_comment = #{record.resultComment,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update survey_dimension_score_text
+    set id = #{record.id,jdbcType=INTEGER},
+      dimension_id = #{record.dimensionId,jdbcType=INTEGER},
+      score_max = #{record.scoreMax,jdbcType=INTEGER},
+      score_min = #{record.scoreMin,jdbcType=INTEGER},
+      result_title = #{record.resultTitle,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ronmob.qz.model.SurveyDimensionScoreText">
+    update survey_dimension_score_text
+    <set>
+      <if test="dimensionId != null">
+        dimension_id = #{dimensionId,jdbcType=INTEGER},
+      </if>
+      <if test="scoreMax != null">
+        score_max = #{scoreMax,jdbcType=INTEGER},
+      </if>
+      <if test="scoreMin != null">
+        score_min = #{scoreMin,jdbcType=INTEGER},
+      </if>
+      <if test="resultTitle != null">
+        result_title = #{resultTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="resultComment != null">
+        result_comment = #{resultComment,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ronmob.qz.model.SurveyDimensionScoreText">
+    update survey_dimension_score_text
+    set dimension_id = #{dimensionId,jdbcType=INTEGER},
+      score_max = #{scoreMax,jdbcType=INTEGER},
+      score_min = #{scoreMin,jdbcType=INTEGER},
+      result_title = #{resultTitle,jdbcType=VARCHAR},
+      result_comment = #{resultComment,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ronmob.qz.model.SurveyDimensionScoreText">
+    update survey_dimension_score_text
+    set dimension_id = #{dimensionId,jdbcType=INTEGER},
+      score_max = #{scoreMax,jdbcType=INTEGER},
+      score_min = #{scoreMin,jdbcType=INTEGER},
+      result_title = #{resultTitle,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
