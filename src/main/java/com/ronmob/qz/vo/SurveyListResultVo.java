@@ -6,8 +6,8 @@ import com.ronmob.qz.model.common.Page;
 import com.ronmob.qz.model.Survey;
 
 public class SurveyListResultVo {
-	Page page;
-	List<Survey> surveys;
+	private Page page;
+	private List<Survey> surveyList;
 
 	public Page getPage() {
 		return page;
@@ -17,12 +17,12 @@ public class SurveyListResultVo {
 		this.page = page;
 	}
 
-	public List<Survey> getSurveys() {
-		return surveys;
+	public List<Survey> getSurveyList() {
+		return surveyList;
 	}
 
-	public void setSurveys(List<Survey> surveys) {
-		this.surveys = surveys;
+	public void setSurveyList(List<Survey> surveyList) {
+		this.surveyList = surveyList;
 	}
 
 }

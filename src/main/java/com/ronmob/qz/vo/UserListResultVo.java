@@ -7,7 +7,7 @@ import java.util.List;
 
 public class UserListResultVo {
     private Page page;
-    private List<User> users;
+    private List<User> userList;
 
     public Page getPage() {
         return page;
@@ -17,11 +17,11 @@ public class UserListResultVo {
         this.page = page;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<User> getUserList() {
+        return userList;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 }

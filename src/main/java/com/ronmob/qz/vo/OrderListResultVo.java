@@ -3,13 +3,15 @@ package com.ronmob.qz.vo;
 import com.ronmob.qz.model.Order;
 import com.ronmob.qz.model.common.Page;
 
+import java.util.List;
+
 /**
  * 创建时间：9/20/17
  * 创建人：sunwuyang
  */
-public class OrderListSearchVo {
+public class OrderListResultVo {
     private Page page;
-    private Order order;
+    private List<Order> orderList;
 
     public Page getPage() {
         return page;
@@ -19,11 +21,11 @@ public class OrderListSearchVo {
         this.page = page;
     }
 
-    public Order getOrder() {
-        return order;
+    public List<Order> getOrderList() {
+        return orderList;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
     }
 }

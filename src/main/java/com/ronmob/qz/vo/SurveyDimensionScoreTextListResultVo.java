@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class SurveyDimensionScoreTextListResultVo {
     private Page page;
-    private List<SurveyDimensionScoreText> surveyDimensionScoreTexts;
+    private List<SurveyDimensionScoreText> surveyDimensionScoreTextList;
 
     public Page getPage() {
         return page;
@@ -21,11 +21,11 @@ public class SurveyDimensionScoreTextListResultVo {
         this.page = page;
     }
 
-    public List<SurveyDimensionScoreText> getSurveyDimensionScoreTexts() {
-        return surveyDimensionScoreTexts;
+    public List<SurveyDimensionScoreText> getSurveyDimensionScoreTextList() {
+        return surveyDimensionScoreTextList;
     }
 
-    public void setSurveyDimensionScoreTexts(List<SurveyDimensionScoreText> surveyDimensionScoreTexts) {
-        this.surveyDimensionScoreTexts = surveyDimensionScoreTexts;
+    public void setSurveyDimensionScoreTextList(List<SurveyDimensionScoreText> surveyDimensionScoreTextList) {
+        this.surveyDimensionScoreTextList = surveyDimensionScoreTextList;
     }
 }

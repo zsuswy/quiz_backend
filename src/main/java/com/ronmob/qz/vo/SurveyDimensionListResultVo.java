@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class SurveyDimensionListResultVo {
     private Page page;
-    private List<SurveyDimension> surveyDimensions;
+    private List<SurveyDimension> surveyDimensionList;
 
     public Page getPage() {
         return page;
@@ -21,11 +21,11 @@ public class SurveyDimensionListResultVo {
         this.page = page;
     }
 
-    public List<SurveyDimension> getSurveyDimensions() {
-        return surveyDimensions;
+    public List<SurveyDimension> getSurveyDimensionList() {
+        return surveyDimensionList;
     }
 
-    public void setSurveyDimensions(List<SurveyDimension> surveyDimensions) {
-        this.surveyDimensions = surveyDimensions;
+    public void setSurveyDimensionList(List<SurveyDimension> surveyDimensionList) {
+        this.surveyDimensionList = surveyDimensionList;
     }
 }
