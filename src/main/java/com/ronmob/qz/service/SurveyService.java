@@ -15,13 +15,11 @@ import com.ronmob.qz.vo.SurveyQuestionListSearchVo;
  *
  */
 public interface SurveyService {
+    List<Survey> getSurveyList(SurveyListSearchVo surveyVo);
 
-    //----------------Survey相关操作-------------------
-    List<Survey> getSurveys(SurveyListSearchVo surveyVo);
+    Integer getSurveyListTotalCount(SurveyListSearchVo surveyVo);
 
-    Long getSurveysCount(SurveyListSearchVo surveyVo);
+    Survey createSurvey(Survey survey);
 
-    Survey insertSurvey(Survey survey);
-
-    void updateSurvey(Survey survey);
+    Survey updateSurvey(Survey survey);
 }

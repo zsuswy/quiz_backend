@@ -11,23 +11,24 @@ import java.util.List;
  * 创建人：sunwuyang
  */
 public class SurveyDimensionScoreTextServiceImpl implements SurveyDimensionScoreTextService {
+
     @Override
-    public List<SurveyDimensionScoreText> getSurveyDimensionScoreTexts(SurveyDimensionScoreTextListSearchVo surveyDimensionScoreTextVo) {
+    public List<SurveyDimensionScoreText> getSurveyDimensionScoreTextList(SurveyDimensionScoreTextListSearchVo surveyDimensionScoreTextVo) {
         return null;
     }
 
     @Override
-    public Long getSurveyDimensionsScoreTextCount(SurveyDimensionScoreTextListSearchVo surveyDimensionScoreTextVo) {
+    public Integer getSurveyDimensionsScoreTextListTotalCount(SurveyDimensionScoreTextListSearchVo surveyDimensionScoreTextVo) {
         return null;
     }
 
     @Override
-    public SurveyDimensionScoreText insertSurveyDimensionScoreText(SurveyDimensionScoreText surveyDimensionScoreText) {
+    public SurveyDimensionScoreText createSurveyDimensionScoreText(SurveyDimensionScoreText surveyDimensionScoreText) {
         return null;
     }
 
     @Override
-    public void updateSurveyDimensionScoreText(SurveyDimensionScoreText surveyDimensionScoreText) {
-
+    public SurveyDimensionScoreText updateSurveyDimensionScoreText(SurveyDimensionScoreText surveyDimensionScoreText) {
+        return null;
     }
 }

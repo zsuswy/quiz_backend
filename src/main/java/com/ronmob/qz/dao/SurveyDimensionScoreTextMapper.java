@@ -15,13 +15,13 @@ public interface SurveyDimensionScoreTextMapper {
     // ------------------------ SurveyDimension 相关操作 ------------------------
     List<SurveyDimensionScoreText> getSurveyDimensionScoreTexts(SurveyDimensionScoreTextListSearchVo surveyDimensionScoreTextListSearchVo);
 
-    Long getSurveyDimensionScoreTextCount(SurveyDimensionScoreTextListSearchVo surveyDimensionScoreTextListSearchVo);
+    Integer getSurveyDimensionScoreTextTotalCount(SurveyDimensionScoreTextListSearchVo surveyDimensionScoreTextListSearchVo);
 
-    void insertSurveyDimensionScoreText(SurveyDimensionScoreText surveyDimensionScoreText);
+    Integer insertSurveyDimensionScoreText(SurveyDimensionScoreText surveyDimensionScoreText);
 
-    void updateSurveyDimensionScoreText(SurveyDimensionScoreText surveyDimensionScoreText);
+    Integer updateSurveyDimensionScoreText(SurveyDimensionScoreText surveyDimensionScoreText);
 
-    void deleteSurveyDimensionScoreText(Long id);
+    Integer deleteSurveyDimensionScoreText(Integer id);
 
     // ------------------------ SurveyDimensionScoreTextService 相关操作 ------------------------
 }

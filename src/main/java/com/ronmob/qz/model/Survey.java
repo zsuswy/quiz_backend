@@ -1,5 +1,6 @@
 package com.ronmob.qz.model;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -13,8 +14,8 @@ public class Survey {
     private Integer status;
     private Integer question_cnt;
     private Integer estimate_minutes;
-    private Float price;
-    private Float org_price;
+    private BigDecimal price;
+    private BigDecimal org_price;
     private String image;
     private Integer is_need_sex;
     private Integer tested_cnt;
@@ -96,19 +97,19 @@ public class Survey {
         this.estimate_minutes = estimate_minutes;
     }
 
-    public Float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public Float getOrg_price() {
+    public BigDecimal getOrg_price() {
         return org_price;
     }
 
-    public void setOrg_price(Float org_price) {
+    public void setOrg_price(BigDecimal org_price) {
         this.org_price = org_price;
     }
 

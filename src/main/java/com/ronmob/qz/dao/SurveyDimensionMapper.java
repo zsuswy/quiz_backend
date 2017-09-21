@@ -13,11 +13,11 @@ public interface SurveyDimensionMapper {
     // ------------------------ SurveyDimension 相关操作 ------------------------
     List<SurveyDimension> getSurveyDimensions(SurveyDimensionListSearchVo surveyDimensionListSearchVo);
 
-    Long getSurveyDimesionCount(SurveyDimensionListSearchVo surveyDimensionListSearchVo);
+    Integer getSurveyDimesionTotalCount(SurveyDimensionListSearchVo surveyDimensionListSearchVo);
 
-    void insertSurveyDimension(SurveyDimension surveyDimension);
+    Integer insertSurveyDimension(SurveyDimension surveyDimension);
 
-    void updateSurveyDimension(SurveyDimension surveyDimension);
+    Integer updateSurveyDimension(SurveyDimension surveyDimension);
 
-    void deleteSurveyDimension(Long id);
+    Integer deleteSurveyDimension(Integer id);
 }

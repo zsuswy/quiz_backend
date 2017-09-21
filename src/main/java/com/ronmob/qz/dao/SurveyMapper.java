@@ -11,13 +11,13 @@ import com.ronmob.qz.vo.SurveyQuestionListSearchVo;
 
 public interface SurveyMapper {
     // ------------------------ Survey 相关操作 ------------------------
-    Survey getSurveyById(int id);
+    Survey getSurveyById(Integer id);
 
-    List<Survey> getSurveys(SurveyListSearchVo surveyVo);
+    List<Survey> getSurveyList(SurveyListSearchVo surveyVo);
 
-    Long getSurveysCount(SurveyListSearchVo surveyVo);
+    Integer getSurveyListTotalCount(SurveyListSearchVo surveyVo);
 
-    Survey insertSurvey(Survey survey);
+    Integer insertSurvey(Survey survey);
 
-    Survey updateSurvey(Survey survey);
+    Integer updateSurvey(Survey survey);
 }

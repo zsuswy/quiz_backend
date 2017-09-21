@@ -8,8 +8,8 @@
         <result column="question_cnt" property="question_cnt" jdbcType="INTEGER"/>
         <result column="estimate_minutes" property="estimate_minutes" jdbcType="INTEGER"/>
         <result column="status" property="status" jdbcType="INTEGER"/>
-        <result column="price" property="price" jdbcType="FLOAT"/>
-        <result column="org_price" property="org_price" jdbcType="FLOAT"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="org_price" property="org_price" jdbcType="DECIMAL"/>
         <result column="create_by" property="create_by" jdbcType="VARCHAR"/>
         <result column="create_time" property="create_time" jdbcType="TIMESTAMP"/>
         <result column="image" property="image" jdbcType="VARCHAR"/>
@@ -85,11 +85,7 @@
     </select>
 
     <!-- 新增问卷 -->
-    <insert id="insertSurvey" parameterType="com.ronmob.qz.model.Survey">
-        <selectKey resultType="java.lang.Integer" keyProperty="id"
-                   order="AFTER">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
+    <insert id="insertSurvey" parameterType="com.ronmob.qz.model.Survey" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into survey
         (title,description,create_by,create_time,class_id,status,question_cnt,estimate_minutes,price,org_price,
         image,is_need_sex,tested_cnt,is_hot,is_new,is_super,result_template,result_template_param)

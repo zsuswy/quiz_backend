@@ -15,7 +15,7 @@ public class CommonServiceImpl implements CommonService{
     private CommonMapper commonMapper;
 
 	@Override
-	public List<SurveyClass> getSurveyClasses(int enabled) {
+	public List<SurveyClass> getSurveyClassList(int enabled) {
 		// TODO Auto-generated method stub
 		return commonMapper.getSurveyClasses(enabled);
 	}

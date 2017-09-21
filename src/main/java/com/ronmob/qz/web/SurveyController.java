@@ -49,8 +49,8 @@ public class SurveyController {
 		if (page == null) {
 			page = new Page();
 		}
-		result.setSurveys(this.surveyService.getSurveys(vo));
-		page.setTotalCount(surveyService.getSurveysCount(vo).intValue());
+		result.setSurveyList(this.surveyService.getSurveyList(vo));
+		page.setTotalCount(surveyService.getSurveyListTotalCount(vo).intValue());
 		result.setPage(page);
 
 		return result;
@@ -65,8 +65,8 @@ public class SurveyController {
 		if (page == null) {
 			page = new Page();
 		}
-		result.setSurveyQuestions(this.surveyQuestionService.getSurveyQuestions(vo));
-		page.setTotalCount(this.surveyQuestionService.getSurveyQuestionsCount(vo));
+		result.setSurveyQuestionList(this.surveyQuestionService.getSurveyQuestionList(vo));
+		page.setTotalCount(this.surveyQuestionService.getSurveyQuestionListTotalCount(vo));
 		result.setPage(page);
 
 		return result;
@@ -77,7 +77,7 @@ public class SurveyController {
 	public ResponseResult insertSurveys(HttpSession httpSession, @RequestBody Survey vo) {
 		ResponseResult result = new ResponseResult();
 		try {
-			this.surveyService.insertSurvey(vo);
+			this.surveyService.createSurvey(vo);
 			result.setResult("success");
 			result.setData(vo);
 
@@ -109,7 +109,7 @@ public class SurveyController {
 	public ResponseResult insertSurveysQuestion(HttpSession httpSession, @RequestBody SurveyQuestion vo) {
 		ResponseResult result = new ResponseResult();
 		try {
-			this.surveyQuestionService.insertSurveyQuestion(vo);
+			this.surveyQuestionService.createSurveyQuestion(vo);
 			result.setResult("success");
 			result.setData(vo);
 		} catch (Exception ex) {
@@ -142,7 +142,7 @@ public class SurveyController {
 	public List<SurveyClass> getSurveyClasses(HttpSession httpSession,
 			@RequestParam(value = "enabled") int enabled) {
 		System.out.println(enabled);
-		return commonService.getSurveyClasses(enabled);
+		return commonService.getSurveyClassList(enabled);
 	}
 
 }

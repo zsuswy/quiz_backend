@@ -14,12 +14,12 @@ import java.util.List;
  */
 public interface SurveyDimensionService {
     //----------------SurveyDimension相关操作-------------------
-    List<SurveyDimension> getSurveyDimensions(SurveyDimensionListSearchVo surveyDimensionVo);
+    List<SurveyDimension> getSurveyDimensionList(SurveyDimensionListSearchVo surveyDimensionVo);
 
-    Long getSurveyDimensionsCount(SurveyDimensionListSearchVo surveyDimensionVo);
+    Integer getSurveyDimensionListTotalCount(SurveyDimensionListSearchVo surveyDimensionVo);
 
-    SurveyQuestion insertSurveyDimension(SurveyDimension surveyDimension);
+    SurveyDimension createSurveyDimension(SurveyDimension surveyDimension);
 
-    void updateSurveyDimension(SurveyDimension surveyDimension);
+    SurveyDimension updateSurveyDimension(SurveyDimension surveyDimension);
 }
 

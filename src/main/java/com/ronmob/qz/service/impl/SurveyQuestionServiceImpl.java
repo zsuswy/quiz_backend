@@ -19,24 +19,24 @@ public class SurveyQuestionServiceImpl implements SurveyQuestionService {
 
 
     @Override
-    public List<SurveyQuestion> getSurveyQuestions(SurveyQuestionListSearchVo surveyQuestionVo) {
-        return surveyQuestionMapper.getSurveyQuestions(surveyQuestionVo);
+    public List<SurveyQuestion> getSurveyQuestionList(SurveyQuestionListSearchVo surveyQuestionVo) {
+        return surveyQuestionMapper.getSurveyQuestionList(surveyQuestionVo);
     }
 
     @Override
-    public Integer getSurveyQuestionsCount(SurveyQuestionListSearchVo surveyQuestionVo) {
-        return surveyQuestionMapper.getSurveyQuestionsCount(surveyQuestionVo);
+    public Integer getSurveyQuestionListTotalCount(SurveyQuestionListSearchVo surveyQuestionVo) {
+        return surveyQuestionMapper.getSurveyQuestionListTotalCount(surveyQuestionVo);
     }
 
     @Override
-    public SurveyQuestion insertSurveyQuestion(SurveyQuestion surveyQuestion) {
+    public SurveyQuestion createSurveyQuestion(SurveyQuestion surveyQuestion) {
         surveyQuestionMapper.insertSurveyQuestion(surveyQuestion);
 
         return surveyQuestion;
     }
 
     @Override
-    public void updateSurveyQuestion(SurveyQuestion surveyQuestion) {
+    public SurveyQuestion updateSurveyQuestion(SurveyQuestion surveyQuestion) {
         SurveyQuestion oldQuestion = surveyQuestionMapper.getSurveyQuestionById(surveyQuestion.getId());
         System.out.println(surveyQuestion);
         System.out.println(oldQuestion);
@@ -71,6 +71,8 @@ public class SurveyQuestionServiceImpl implements SurveyQuestionService {
         }
 
         surveyQuestionMapper.updateSurveyQuestion(surveyQuestion);
+
+        return surveyQuestion;
     }
 
 }

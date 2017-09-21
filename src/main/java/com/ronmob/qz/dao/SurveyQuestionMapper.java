@@ -13,13 +13,13 @@ public interface SurveyQuestionMapper {
     // ------------------------ SurveyQuestion 相关操作 ------------------------
     SurveyQuestion getSurveyQuestionById(Integer id);
 
-    SurveyQuestion getSurveyQuestionBySeq(int seq, Integer survey_id);
+    SurveyQuestion getSurveyQuestionBySeq(Integer seq, Integer survey_id);
 
-    List<SurveyQuestion> getSurveyQuestions(SurveyQuestionListSearchVo surveyQuestionVo);
+    List<SurveyQuestion> getSurveyQuestionList(SurveyQuestionListSearchVo surveyQuestionVo);
 
-    Integer getSurveyQuestionsCount(SurveyQuestionListSearchVo surveyQuestionVo);
+    Integer getSurveyQuestionListTotalCount(SurveyQuestionListSearchVo surveyQuestionVo);
 
-    void insertSurveyQuestion(SurveyQuestion surveyQuestion);
+    Integer insertSurveyQuestion(SurveyQuestion surveyQuestion);
 
-    void updateSurveyQuestion(SurveyQuestion surveyQuestion);
+    Integer updateSurveyQuestion(SurveyQuestion surveyQuestion);
 }

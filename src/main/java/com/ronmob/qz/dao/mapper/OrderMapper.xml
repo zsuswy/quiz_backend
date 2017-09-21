@@ -1,13 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ronmob.qz.dao.OrderMapper">
-    <resultMap id="BaseResultMap" type="com.ronmob.qz.model.Order">
+    <resultMap id="OrderResultMap" type="com.ronmob.qz.model.Order">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="order_number" property="order_number" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="selectById" parameterType="java.lang.Integer"
-            resultMap="BaseResultMap">
-		select * from pay_order where id= #{id}
-	</select>
+    <select id="getOrderList" parameterType="com.ronmob.qz.vo.OrderListSearchVo"
+            resultMap="OrderResultMap">
+        SELECT * FROM "order" WHERE 1=1
+        <if test="order != null and order.id != null">
+            AND id= #{id}
+        </if>
+        <if test="order != null and order.wx_order_no != null">
+            AND wx_order_no = #{wx_order_no}
+        </if>
+        <if test="order != null and order.wx_open_id != null">
+            AND wx_open_id = #{wx_open_id}
+        </if>
+        <if test="order != null and order.out_trade_no != null">
+            AND out_trade_no = #{out_trade_no}
+        </if>
+        <if test="order != null and order.order_status != null">
+            AND order_status = #{order_status}
+        </if>
+        <if test="page != null">
+            limit #{page.firstResult},#{page.everyPageCount};
+        </if>
+    </select>
+
+
+    <select id="getOrderListTotalCount" parameterType="com.ronmob.qz.vo.OrderListSearchVo"
+            resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM "order" WHERE 1=1
+        <if test="order != null and order.id != null">
+            AND id= #{id}
+        </if>
+        <if test="order != null and order.wx_order_no != null">
+            AND wx_order_no = #{wx_order_no}
+        </if>
+        <if test="order != null and order.wx_open_id != null">
+            AND wx_open_id = #{wx_open_id}
+        </if>
+        <if test="order != null and order.out_trade_no != null">
+            AND out_trade_no = #{out_trade_no}
+        </if>
+        <if test="order != null and order.order_status != null">
+            AND order_status = #{order_status}
+        </if>
+    </select>
+
+    <insert id="insertOrder" parameterType="com.ronmob.qz.model.Order" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id">
+        INSERT INTO "order" (wx_order_no, out_trade_no, pay_amount, wx_open_id, pay_score, finish_time)
+        VALUES (#{wx_order_no},#{out_trade_no},#{pay_amount},#{wx_open_id},#{pay_score},#{finish_time})
+    </insert>
+
+    <update id="updateOrder" parameterType="com.ronmob.qz.model.Order">
+        UPDATE "order" SET wx_order_no=#{wx_order_no},out_trade_no=#{out_trade_no},pay_amount=#{pay_amount},wx_open_id=#{wx_open_id},
+        pay_score=#{pay_score},order_status=#{order_status},create_time=#{create_time},finish_time=#{finish_time}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM "order" WHERE id=#{id}
+    </delete>
 </mapper>

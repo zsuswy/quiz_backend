@@ -15,11 +15,11 @@ import java.util.List;
  */
 public interface SurveyQuestionService {
     //----------------SurveyQuestion相关操作-------------------
-    List<SurveyQuestion> getSurveyQuestions(SurveyQuestionListSearchVo surveyQuestionVo);
+    List<SurveyQuestion> getSurveyQuestionList(SurveyQuestionListSearchVo surveyQuestionListSearchVo);
 
-    Integer getSurveyQuestionsCount(SurveyQuestionListSearchVo surveyQuestionVo);
+    Integer getSurveyQuestionListTotalCount(SurveyQuestionListSearchVo surveyQuestionListSearchVo);
 
-    SurveyQuestion insertSurveyQuestion(SurveyQuestion surveyQuestion);
+    SurveyQuestion createSurveyQuestion(SurveyQuestion surveyQuestion);
 
-    void updateSurveyQuestion(SurveyQuestion surveyQuestion);
+    SurveyQuestion updateSurveyQuestion(SurveyQuestion surveyQuestion);
 }

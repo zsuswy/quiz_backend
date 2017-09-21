@@ -13,17 +13,17 @@ import java.util.List;
  */
 public class SurveyDimensionServiceImpl implements SurveyDimensionService {
     @Override
-    public List<SurveyDimension> getSurveyDimensions(SurveyDimensionListSearchVo surveyDimensionVo) {
+    public List<SurveyDimension> getSurveyDimensionList(SurveyDimensionListSearchVo surveyDimensionVo) {
         return null;
     }
 
     @Override
-    public Long getSurveyDimensionsCount(SurveyDimensionListSearchVo surveyDimensionVo) {
+    public Long getSurveyDimensionListCount(SurveyDimensionListSearchVo surveyDimensionVo) {
         return null;
     }
 
     @Override
-    public SurveyQuestion insertSurveyDimension(SurveyDimension surveyDimension) {
+    public SurveyQuestion createSurveyDimension(SurveyDimension surveyDimension) {
         return null;
     }
 

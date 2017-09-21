@@ -10,9 +10,11 @@ import java.util.List;
  * 创建人：sunwuyang
  */
 public interface OrderService {
+    List<Order> getOrderList(OrderListSearchVo searchVo);
+
+    Integer getOrderListTotalCount(OrderListSearchVo searchVo);
+
     Order createOrder(Order order);
 
     Order updateOrder(Order order);
-
-    List<Order> getOrders(OrderListSearchVo searchVo);
 }
