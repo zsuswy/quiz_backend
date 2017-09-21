@@ -21,7 +21,7 @@ public interface SurveyDimensionScoreTextMapper {
 
     Integer updateSurveyDimensionScoreText(SurveyDimensionScoreText surveyDimensionScoreText);
 
-    Integer deleteSurveyDimensionScoreText(Integer id);
+    Integer deleteSurveyDimensionScoreTextById(Integer id);
 
     // ------------------------ SurveyDimensionScoreTextService 相关操作 ------------------------
 }

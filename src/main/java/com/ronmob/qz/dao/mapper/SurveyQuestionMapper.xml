@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ronmob.qz.dao.SurveyQuestionMapper">
-    <resultMap id="SurveyQuestionMap"
+    <resultMap id="SurveyQuestionResultMap"
                type="com.ronmob.qz.model.SurveyQuestion">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="seq" property="seq" jdbcType="INTEGER"/>
@@ -13,26 +13,26 @@
     </resultMap>
 
     <!-- 获取问题 -->
-    <select id="getSurveyQuestionById" resultMap="SurveyQuestionMap"
+    <select id="getSurveyQuestionById" resultMap="SurveyQuestionResultMap"
             parameterType="java.lang.Integer">
-		select * from survey_question where id=#{id}
+		SELECT * FROM survey_question WHERE id=#{id}
 	</select>
 
     <!-- 根据seq和survey_id 获取问题 -->
-    <select id="getSurveyQuestionBySeq" resultMap="SurveyQuestionMap">
-		select * from survey_question where seq = #{seq} and
+    <select id="getSurveyQuestionBySeq" resultMap="SurveyQuestionResultMap">
+		SELECT * FROM survey_question WHERE seq = #{seq} AND
 		survey_id=#{survey_id}
 	</select>
 
     <!-- 获取问卷的问题列表 -->
-    <select id="getSurveyQuestions" resultMap="SurveyQuestionMap"
+    <select id="getSurveyQuestions" resultMap="SurveyQuestionResultMap"
             parameterType="com.ronmob.qz.vo.SurveyQuestionListSearchVo">
-        select * from survey_question where 1=1
+        SELECT * FROM survey_question WHERE 1=1
         <if test="surveyQuestion!= null and surveyQuestion.id != null">
-            and id = #{surveyQuestion.id}
+            AND id = #{surveyQuestion.id}
         </if>
         <if test="surveyQuestion!= null and surveyQuestion.survey_id != null">
-            and survey_id = #{surveyQuestion.survey_id}
+            AND survey_id = #{surveyQuestion.survey_id}
         </if>
         <if test="page != null">
             limit #{page.firstResult},#{page.everyPageCount};
@@ -42,32 +42,32 @@
     <!-- 获取问卷的问题数量 -->
     <select id="getSurveyQuestionsCount" resultType="java.lang.Integer"
             parameterType="com.ronmob.qz.vo.SurveyQuestionListSearchVo">
-        select count(*) from survey_question where 1=1
+        SELECT COUNT(*) FROM survey_question WHERE 1=1
         <if test="surveyQuestion!= null and surveyQuestion.id != null">
-            and id = #{surveyQuestion.id}
+            AND id = #{surveyQuestion.id}
         </if>
         <if test="surveyQuestion!= null and surveyQuestion.survey_id != null">
-            and survey_id = #{surveyQuestion.survey_id}
+            AND survey_id = #{surveyQuestion.survey_id}
         </if>
     </select>
 
     <!-- 新增问卷的问题 -->
-    <insert id="insertSurveyQuestion" parameterType="com.ronmob.qz.model.SurveyQuestion">
-        <selectKey resultType="java.lang.Integer" keyProperty="id"
-                   order="AFTER">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-        insert into
+    <insert id="insertSurveyQuestion" parameterType="com.ronmob.qz.model.SurveyQuestion" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO
         survey_question (seq,survey_id,title,type,question_content)
-        values
+        VALUES
         (#{seq},#{survey_id},#{title},#{type},#{question_content})
     </insert>
 
     <!-- 更新问卷的问题 -->
     <update id="updateSurveyQuestion" parameterType="com.ronmob.qz.model.SurveyQuestion">
-		update
-		survey_question set
+		UPDATE
+		survey_question SET
 		seq=#{seq},survey_id=#{survey_id},title=#{title},type=#{type},question_content=#{question_content}
-		where id=#{id}
+		WHERE id=#{id}
 	</update>
+
+    <delete id="deleteSurveyQuestionById" parameterType="java.lang.Integer">
+        DELETE FROM survey_question WHERE id=#{id}
+    </delete>
 </mapper>

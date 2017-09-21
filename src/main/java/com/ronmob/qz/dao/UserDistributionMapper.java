@@ -14,9 +14,9 @@ public interface UserDistributionMapper {
 
     Integer getUserDistributionListTotalCount(UserDistributionListSearchVo vo);
 
-    Integer InsertUserDistribution(UserDistribution userDistribution);
+    Integer insertUserDistribution(UserDistribution userDistribution);
 
-    Integer UpdateUserDistribution(UserDistribution userDistribution);
+    Integer updateUserDistribution(UserDistribution userDistribution);
 
-    Integer DeleteuserDistribution(Integer id);
+    Integer deleteUserDistributionById(Integer id);
 }

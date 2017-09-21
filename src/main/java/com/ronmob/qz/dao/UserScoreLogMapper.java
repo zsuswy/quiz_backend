@@ -14,7 +14,9 @@ public interface UserScoreLogMapper {
 
     Integer getUserScoreLogListTotalCount(UserScoreLogListSearchVo vo);
 
-    Integer InsertUserScoreLog(UserScoreLog userScoreLog);
+    Integer insertUserScoreLog(UserScoreLog userScoreLog);
 
-    Integer UpdateUserScoreLog(UserScoreLog userScoreLog);
+    Integer updateUserScoreLog(UserScoreLog userScoreLog);
+
+    Integer deleteUserScoreLogById(Integer id);
 }

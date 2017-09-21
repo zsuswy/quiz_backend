@@ -12,6 +12,7 @@ public class UserDistribution {
     private Integer to_user_id;
     private Timestamp finish_time;
     private Integer survey_id;
+    private Integer user_survey_id;
 
     public Integer getId() {
         return id;
@@ -51,5 +52,13 @@ public class UserDistribution {
 
     public void setSurvey_id(Integer survey_id) {
         this.survey_id = survey_id;
+    }
+
+    public Integer getUser_survey_id() {
+        return user_survey_id;
+    }
+
+    public void setUser_survey_id(Integer user_survey_id) {
+        this.user_survey_id = user_survey_id;
     }
 }

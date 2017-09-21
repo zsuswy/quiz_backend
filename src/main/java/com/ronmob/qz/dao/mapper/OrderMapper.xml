@@ -62,7 +62,7 @@
         WHERE id=#{id}
     </update>
 
-    <delete id="deleteById" parameterType="java.lang.Integer">
+    <delete id="deleteOrderById" parameterType="java.lang.Integer">
         DELETE FROM "order" WHERE id=#{id}
     </delete>
 </mapper>

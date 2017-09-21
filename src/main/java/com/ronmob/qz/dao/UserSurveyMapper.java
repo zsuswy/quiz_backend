@@ -14,7 +14,7 @@ public interface UserSurveyMapper {
 
     Integer getUserSurveyListTotalCount(UserSurveyListSearchVo vo);
 
-    Integer InsertUserSurvey(UserSurvey userSurvey);
+    Integer insertUserSurvey(UserSurvey userSurvey);
 
-    Integer UpdateUserSurvey(UserSurvey userSurvey);
+    Integer updateUserSurvey(UserSurvey userSurvey);
 }

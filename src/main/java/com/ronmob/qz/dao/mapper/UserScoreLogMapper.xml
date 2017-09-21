@@ -1,22 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ronmob.qz.dao.UserSurveyMapper">
-    <resultMap id="BaseResultMap" type="com.ronmob.qz.model.UserSurvey">
+<mapper namespace="com.ronmob.qz.dao.UserScoreLogMapper">
+    <resultMap id="UserScoreLogResultMap" type="com.ronmob.qz.model.UserScoreLog">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="user_id" property="order_number" jdbcType="Integer"/>
-        <result column="p_user_id" property="order_number" jdbcType="VARCHAR"/>
-        <result column="status" property="order_number" jdbcType="VARCHAR"/>
-        <result column="survey_id" property="order_number" jdbcType="VARCHAR"/>
-        <result column="order_id" property="order_number" jdbcType="VARCHAR"/>
-        <result column="finish_time" property="order_number" jdbcType="VARCHAR"/>
-        <result column="answer" property="order_number" jdbcType="VARCHAR"/>
-        <result column="result" property="order_number" jdbcType="VARCHAR"/>
-        <result column="class_name" property="order_number" jdbcType="VARCHAR"/>
-        <result column="is_need_sex" property="order_number" jdbcType="VARCHAR"/>
+        <result column="user_id" property="user_id" jdbcType="Integer"/>
+        <result column="score" property="score" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="score_time" property="score_time" jdbcType="TIMESTAMP"/>
+        <result column="amount" property="amount" jdbcType="DECIMAL"/>
     </resultMap>
 
-    <select id="getUserSurveyList" parameterType="com.ronmob.qz.vo.UserListSearchVo"
-            resultMap="BaseResultMap">
-		select * from pay_order where id= #{id}
-	</select>
+    <select id="getUserScoreLogList" parameterType="com.ronmob.qz.vo.UserScoreLogListSearchVo"
+            resultMap="UserScoreLogResultMap">
+        SELECT * FROM user_score_log WHERE 1=1
+        <if test="userScoreLog != null and userScoreLog.id != null">
+            AND id= #{id}
+        </if>
+        <if test="userScoreLog != null and userScoreLog.user_id != null">
+            AND user_id= #{user_id}
+        </if>
+        <if test="userScoreLog != null and userScoreLog.type != null">
+            AND type= #{type}
+        </if>
+        <if test="page != null">
+            limit #{page.firstResult},#{page.everyPageCount};
+        </if>
+    </select>
+
+    <select id="getUserScoreLogListTotalCount" parameterType="com.ronmob.qz.vo.UserScoreLogListSearchVo"
+            resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM user_score_log WHERE 1=1
+        <if test="userScoreLog != null and userScoreLog.id != null">
+            AND id= #{id}
+        </if>
+        <if test="userScoreLog != null and userScoreLog.user_id != null">
+            AND user_id= #{user_id}
+        </if>
+        <if test="userScoreLog != null and userScoreLog.type != null">
+            AND type= #{type}
+        </if>
+    </select>
+
+    <insert id="insertUserScoreLog" parameterType="com.ronmob.qz.model.UserScoreLog" useGeneratedKeys="true"
+            keyColumn="id" keyProperty="id">
+        INSERT INTO user_score_log (user_id, score, type, score_time, amount) VALUES
+        (#{user_id}, #{score}, #{type}, #{score_time}, #{amount})
+    </insert>
+
+    <update id="updateUserScoreLog" parameterType="com.ronmob.qz.model.UserScoreLog">
+        UPDATE user_score_log SET user_id=#{user_id}, score=#{score}, type=#{type}, score_time=#{score_time}, amount=#{amount}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteUserScoreLogById" parameterType="java.lang.Integer">
+        DELETE FROM user_score_log WHERE id=#{id}
+    </delete>
 </mapper>

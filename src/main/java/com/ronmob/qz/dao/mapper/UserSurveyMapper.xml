@@ -1,22 +1,78 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ronmob.qz.dao.UserSurveyMapper">
-    <resultMap id="BaseResultMap" type="com.ronmob.qz.model.UserSurvey">
+    <resultMap id="UserSurveyResultMap" type="com.ronmob.qz.model.UserSurvey">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="user_id" property="order_number" jdbcType="Integer"/>
-        <result column="p_user_id" property="order_number" jdbcType="VARCHAR"/>
-        <result column="status" property="order_number" jdbcType="VARCHAR"/>
-        <result column="survey_id" property="order_number" jdbcType="VARCHAR"/>
-        <result column="order_id" property="order_number" jdbcType="VARCHAR"/>
-        <result column="finish_time" property="order_number" jdbcType="VARCHAR"/>
-        <result column="answer" property="order_number" jdbcType="VARCHAR"/>
-        <result column="result" property="order_number" jdbcType="VARCHAR"/>
-        <result column="class_name" property="order_number" jdbcType="VARCHAR"/>
-        <result column="is_need_sex" property="order_number" jdbcType="VARCHAR"/>
+        <result column="user_id" property="user_id" jdbcType="INTEGER"/>
+        <result column="p_user_id" property="p_user_id" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="survey_id" property="survey_id" jdbcType="INTEGER"/>
+        <result column="order_id" property="order_id" jdbcType="INTEGER"/>
+        <result column="finish_time" property="finish_time" jdbcType="TIMESTAMP"/>
+        <result column="answer" property="answer" jdbcType="LONGVARCHAR"/>
+        <result column="result" property="result" jdbcType="LONGVARCHAR"/>
+        <result column="class_name" property="class_name" jdbcType="VARCHAR"/>
+        <result column="is_need_sex" property="is_need_sex" jdbcType="INTEGER"/>
     </resultMap>
 
-    <select id="getUserSurveyList" parameterType="com.ronmob.qz.vo.UserListSearchVo"
-            resultMap="BaseResultMap">
-		select * from pay_order where id= #{id}
-	</select>
+    <select id="getUserSurveyList" parameterType="com.ronmob.qz.vo.UserSurveyListSearchVo"
+            resultMap="UserSurveyResultMap">
+        SELECT * FROM user_survey WHERE 1=1
+        <if test="userSurvey != null and userSurvey.id != null">
+            AND id= #{id}
+        </if>
+        <if test="userSurvey != null and userSurvey.p_user_id != null">
+            AND p_user_id= #{p_user_id}
+        </if>
+        <if test="userSurvey != null and userSurvey.status != null">
+            AND status= #{status}
+        </if>
+        <if test="userSurvey != null and userSurvey.survey_id != null">
+            AND survey_id= #{survey_id}
+        </if>
+        <if test="userSurvey != null and userSurvey.user_id != null">
+            AND user_id= #{user_id}
+        </if>
+        <if test="page != null">
+            limit #{page.firstResult},#{page.everyPageCount};
+        </if>
+    </select>
+
+    <select id="getUserSurveyList" parameterType="com.ronmob.qz.vo.UserSurveyListSearchVo"
+            resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM user_survey WHERE 1=1
+        <if test="userSurvey != null and userSurvey.id != null">
+            AND id= #{id}
+        </if>
+        <if test="userSurvey != null and userSurvey.p_user_id != null">
+            AND p_user_id= #{p_user_id}
+        </if>
+        <if test="userSurvey != null and userSurvey.status != null">
+            AND status= #{status}
+        </if>
+        <if test="userSurvey != null and userSurvey.survey_id != null">
+            AND survey_id= #{survey_id}
+        </if>
+        <if test="userSurvey != null and userSurvey.user_id != null">
+            AND user_id= #{user_id}
+        </if>
+    </select>
+
+    <insert id="insertUserSurvey" parameterType="com.ronmob.qz.model.UserSurvey" useGeneratedKeys="true"
+            keyProperty="id" keyColumn="id">
+        INSERT  INTO user_survey
+        (user_id, p_user_id, status, survey_id, order_id, finish_time, answer, result, class_name, is_need_sex)
+        VALUES
+        (#{user_id}, #{p_user_id}, #{status}, #{survey_id}, #{order_id}, #{finish_time}, #{answer}, #{result}, #{class_name}, #{is_need_sex})
+    </insert>
+
+    <update id="updateUserSurvey" parameterType="com.ronmob.qz.model.UserSurvey">
+        UPDATE  user_survey SET user_id=#{user_id},p_user_id=#{p_user_id}, status=#{status}, survey_id=#{survey_id},
+        order_id=#{order_id}, finish_time=#{finish_time}, answer=#{answer}, result=#{result}, class_name=#{class_name}, is_need_sex=#{is_need_sex}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteUserSurveyById" parameterType="java.lang.Integer">
+        DELETE FROM user_survey WHERE id=#{id}
+    </delete>
 </mapper>

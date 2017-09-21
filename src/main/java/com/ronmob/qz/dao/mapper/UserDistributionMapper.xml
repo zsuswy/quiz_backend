@@ -1,22 +1,72 @@
-UserSurveyMapper.xml<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ronmob.qz.dao.UserSurveyMapper">
-    <resultMap id="BaseResultMap" type="com.ronmob.qz.model.UserSurvey">
+<mapper namespace="com.ronmob.qz.dao.UserDistributionMapper">
+    <resultMap id="UserDistributionResultMap" type="com.ronmob.qz.model.UserDistribution">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="user_id" property="order_number" jdbcType="Integer"/>
-        <result column="p_user_id" property="order_number" jdbcType="VARCHAR"/>
-        <result column="status" property="order_number" jdbcType="VARCHAR"/>
-        <result column="survey_id" property="order_number" jdbcType="VARCHAR"/>
-        <result column="order_id" property="order_number" jdbcType="VARCHAR"/>
-        <result column="finish_time" property="order_number" jdbcType="VARCHAR"/>
-        <result column="answer" property="order_number" jdbcType="VARCHAR"/>
-        <result column="result" property="order_number" jdbcType="VARCHAR"/>
-        <result column="class_name" property="order_number" jdbcType="VARCHAR"/>
-        <result column="is_need_sex" property="order_number" jdbcType="VARCHAR"/>
+        <result column="from_user_id" property="from_user_id" jdbcType="INTEGER"/>
+        <result column="to_user_id" property="to_user_id" jdbcType="INTEGER"/>
+        <result column="finish_time" property="finish_time" jdbcType="TIMESTAMP"/>
+        <result column="user_survey_id" property="user_survey_id" jdbcType="INTEGER"/>
+        <result column="survey_id" property="survey_id" jdbcType="INTEGER"/>
     </resultMap>
 
-    <select id="getUserSurveyList" parameterType="com.ronmob.qz.vo.UserListSearchVo"
-            resultMap="BaseResultMap">
-		select * from pay_order where id= #{id}
-	</select>
+    <select id="getUserDistributionList" parameterType="com.ronmob.qz.vo.UserDistributionListSearchVo"
+            resultMap="UserDistributionResultMap">
+        SELECT * FROM user_distribution WHERE 1=1
+        <if test="userDistribution != null and userDistribution.id != null">
+            AND id= #{id}
+        </if>
+        <if test="userDistribution != null and userDistribution.from_user_id != null">
+            AND from_user_id= #{from_user_id}
+        </if>
+        <if test="userDistribution != null and userDistribution.to_user_id != null">
+            AND to_user_id= #{to_user_id}
+        </if>
+        <if test="userDistribution != null and userDistribution.survey_id != null">
+            AND survey_id= #{survey_id}
+        </if>
+        <if test="userDistribution != null and userDistribution.user_survey_id != null">
+            AND user_survey_id= #{user_survey_id}
+        </if>
+        <if test="page != null">
+            limit #{page.firstResult},#{page.everyPageCount};
+        </if>
+    </select>
+
+    <select id="getUserDistributionListTotalCount" parameterType="com.ronmob.qz.vo.UserDistributionListSearchVo"
+            resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM user_distribution WHERE 1=1
+        <if test="userDistribution != null and userDistribution.id != null">
+            AND id= #{id}
+        </if>
+        <if test="userDistribution != null and userDistribution.from_user_id != null">
+            AND from_user_id= #{from_user_id}
+        </if>
+        <if test="userDistribution != null and userDistribution.to_user_id != null">
+            AND to_user_id= #{to_user_id}
+        </if>
+        <if test="userDistribution != null and userDistribution.survey_id != null">
+            AND survey_id= #{survey_id}
+        </if>
+        <if test="userDistribution != null and userDistribution.user_survey_id != null">
+            AND user_survey_id= #{user_survey_id}
+        </if>
+    </select>
+
+    <insert id="insertUserDistribution" parameterType="com.ronmob.qz.model.UserDistribution" useGeneratedKeys="true"
+            keyColumn="id" keyProperty="id">
+        INSERT INTO user_distribution (from_user_Id, to_user_id, finish_time, survey_id, user_survey_id)
+        VALUES
+        (#{from_user_Id}, #{to_user_id}, #{finish_time}, #{survey_id}, #{user_survey_id})
+    </insert>
+
+    <update id="updateUserDistribution" parameterType="com.ronmob.qz.model.UserDistribution">
+        UPDATE user_distribution SET from_user_Id=#{from_user_Id},to_user_id=#{to_user_id},finish_time=#{finish_time},
+        survey_id=#{survey_id}, user_survey_id=#{user_survey_id}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteUserDistributionById" parameterType="java.lang.Integer">
+        DELETE FROM user_distribution WHERE id=#{id}
+    </delete>
 </mapper>

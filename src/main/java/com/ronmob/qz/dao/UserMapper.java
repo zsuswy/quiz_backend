@@ -14,7 +14,9 @@ public interface UserMapper {
 
     Integer getUserListTotalCount(UserListSearchVo vo);
 
-    Integer InsertUser(User user);
+    Integer insertUser(User user);
 
-    Integer UpdateUser(User user);
+    Integer updateUser(User user);
+
+    Integer deleteUserById(Integer id);
 }

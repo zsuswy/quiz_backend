@@ -10,7 +10,6 @@ import com.ronmob.qz.vo.SurveyQuestionListSearchVo;
 import java.util.List;
 
 public interface SurveyQuestionMapper {
-    // ------------------------ SurveyQuestion 相关操作 ------------------------
     SurveyQuestion getSurveyQuestionById(Integer id);
 
     SurveyQuestion getSurveyQuestionBySeq(Integer seq, Integer survey_id);
@@ -22,4 +21,6 @@ public interface SurveyQuestionMapper {
     Integer insertSurveyQuestion(SurveyQuestion surveyQuestion);
 
     Integer updateSurveyQuestion(SurveyQuestion surveyQuestion);
+
+    Integer deleteSurveyQuestionById(Integer id);
 }

@@ -1,5 +1,6 @@
 package com.ronmob.qz.model;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
@@ -10,6 +11,7 @@ public class UserScoreLog {
     private Integer id;
     private Integer user_id;
     private Integer score;
+    private BigDecimal amount;
     private Integer score_type;
     private Timestamp score_time;
 
@@ -51,5 +53,13 @@ public class UserScoreLog {
 
     public void setScore_time(Timestamp score_time) {
         this.score_time = score_time;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 }

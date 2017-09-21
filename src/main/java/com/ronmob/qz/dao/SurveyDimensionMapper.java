@@ -10,7 +10,6 @@ import com.ronmob.qz.vo.SurveyQuestionListSearchVo;
 import java.util.List;
 
 public interface SurveyDimensionMapper {
-    // ------------------------ SurveyDimension 相关操作 ------------------------
     List<SurveyDimension> getSurveyDimensions(SurveyDimensionListSearchVo surveyDimensionListSearchVo);
 
     Integer getSurveyDimesionTotalCount(SurveyDimensionListSearchVo surveyDimensionListSearchVo);
@@ -19,5 +18,5 @@ public interface SurveyDimensionMapper {
 
     Integer updateSurveyDimension(SurveyDimension surveyDimension);
 
-    Integer deleteSurveyDimension(Integer id);
+    Integer deleteSurveyDimensionById(Integer id);
 }

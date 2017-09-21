@@ -10,9 +10,6 @@ import com.ronmob.qz.vo.SurveyListSearchVo;
 import com.ronmob.qz.vo.SurveyQuestionListSearchVo;
 
 public interface SurveyMapper {
-    // ------------------------ Survey 相关操作 ------------------------
-    Survey getSurveyById(Integer id);
-
     List<Survey> getSurveyList(SurveyListSearchVo surveyVo);
 
     Integer getSurveyListTotalCount(SurveyListSearchVo surveyVo);
@@ -20,4 +17,6 @@ public interface SurveyMapper {
     Integer insertSurvey(Survey survey);
 
     Integer updateSurvey(Survey survey);
+
+    Integer deleteSurveyById(Integer id);
 }

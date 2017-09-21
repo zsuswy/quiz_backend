@@ -16,27 +16,27 @@
 
     <select id="getUserById" parameterType="java.lang.Integer"
             resultMap="UserMap">
-		select * from user where id= #{id}
+		SELECT * FROM user WHERE id= #{id}
 	</select>
 
     <!-- 获取用户列表 -->
     <select id="getUsers" resultMap="UserMap"
             parameterType="com.ronmob.qz.vo.UserListSearchVo">
-        select * from user where 1=1
+        SELECT * FROM user WHERE 1=1
         <if test="user!=null and user.id != null">
-            and id = #{user.id}
+            AND id = #{user.id}
         </if>
         <if test="user!=null and user.wx_open_id != null">
-            and user = #{user.wx_open_id}
+            AND user = #{user.wx_open_id}
         </if>
         <if test="user!=null and user.is_agent != null">
-            and is_agent = #{user.is_agent}
+            AND is_agent = #{user.is_agent}
         </if>
         <if test="user!=null and user.password != null">
-            and password =#{user.password}
+            AND password =#{user.password}
         </if>
         <if test="user!=null and user.mobile != null">
-            and mobile = #{user.mobile}
+            AND mobile = #{user.mobile}
         </if>
         <if test="page != null">
             limit #{page.firstResult},#{page.everyPageCount};
@@ -46,43 +46,44 @@
     <!-- 获取用户列表数量 -->
     <select id="getUserCount" resultType="java.lang.Integer"
             parameterType="com.ronmob.qz.vo.UserListSearchVo">
-        select count(*) from user where 1=1
+        SELECT COUNT(*) FROM user WHERE 1=1
         <if test="user!=null and user.id != null">
-            and id = #{user.id}
+            AND id = #{user.id}
         </if>
         <if test="user!=null and user.wx_open_id != null">
-            and user = #{user.wx_open_id}
+            AND user = #{user.wx_open_id}
         </if>
         <if test="user!=null and user.is_agent != null">
-            and is_agent = #{user.is_agent}
+            AND is_agent = #{user.is_agent}
         </if>
         <if test="user!=null and user.password != null">
-            and password =#{user.password}
+            AND password =#{user.password}
         </if>
         <if test="user!=null and user.mobile != null">
-            and mobile = #{user.mobile}
+            AND mobile = #{user.mobile}
         </if>
     </select>
 
     <!-- 新增用户 -->
-    <insert id="inserUser" parameterType="com.ronmob.qz.model.User">
-        <selectKey resultType="java.lang.Integer" keyProperty="id"
-                   order="AFTER">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-        insert into user
+    <insert id="insertUser" parameterType="com.ronmob.qz.model.User" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id">
+        INSERT INTO "user"
         (user_name,password,mobile,wx_user_name,wx_open_id,is_agent,agent_pay_order_id,score,balance)
-        values
+        VALUES
         (#{user_name},#{password},#{mobile},#{wx_user_name},#{wx_open_id},
         #{is_agent},#{agent_pay_order_id},#{score},#{balance})
     </insert>
 
     <!-- 更新用户 -->
     <update id="updateUser" parameterType="com.ronmob.qz.model.User">
-        update survey
-        set
+        UPDATE "user"
+        SET
         user_name=#{user_name},password=#{password},mobile=#{mobile},wx_user_name=#{wx_user_name},
         wx_open_id=#{wx_open_id},is_agent=#{is_agent},agent_pay_order_id=#{agent_pay_order_id},score=#{score},balance=#{balance}
-        where id=#{id}
+        WHERE id=#{id}
     </update>
+
+    <delete id="deleteUserById" parameterType="java.lang.Integer">
+        DELETE FROM "user" WHERE id=#{id}
+    </delete>
 </mapper>
