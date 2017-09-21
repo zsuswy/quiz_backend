@@ -1,27 +1,36 @@
 package com.ronmob.qz.dao;
 
-import com.ronmob.qz.model.Survey;
-import com.ronmob.qz.model.SurveyDimension;
 import com.ronmob.qz.model.SurveyDimensionScoreText;
-import com.ronmob.qz.model.SurveyQuestion;
-import com.ronmob.qz.vo.SurveyDimensionListSearchVo;
-import com.ronmob.qz.vo.SurveyDimensionScoreTextListSearchVo;
-import com.ronmob.qz.vo.SurveyListSearchVo;
-import com.ronmob.qz.vo.SurveyQuestionListSearchVo;
-
+import com.ronmob.qz.model.SurveyDimensionScoreTextExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface SurveyDimensionScoreTextMapper {
-    // ------------------------ SurveyDimension 相关操作 ------------------------
-    List<SurveyDimensionScoreText> getSurveyDimensionScoreTextList(SurveyDimensionScoreTextListSearchVo surveyDimensionScoreTextListSearchVo);
+    long countByExample(SurveyDimensionScoreTextExample example);
 
-    Integer getSurveyDimensionScoreTextListTotalCount(SurveyDimensionScoreTextListSearchVo surveyDimensionScoreTextListSearchVo);
+    int deleteByExample(SurveyDimensionScoreTextExample example);
 
-    Integer insertSurveyDimensionScoreText(SurveyDimensionScoreText surveyDimensionScoreText);
+    int deleteByPrimaryKey(Integer id);
 
-    Integer updateSurveyDimensionScoreText(SurveyDimensionScoreText surveyDimensionScoreText);
+    int insert(SurveyDimensionScoreText record);
 
-    Integer deleteSurveyDimensionScoreTextById(Integer id);
+    int insertSelective(SurveyDimensionScoreText record);
 
-    // ------------------------ SurveyDimensionScoreTextService 相关操作 ------------------------
+    List<SurveyDimensionScoreText> selectByExampleWithBLOBs(SurveyDimensionScoreTextExample example);
+
+    List<SurveyDimensionScoreText> selectByExample(SurveyDimensionScoreTextExample example);
+
+    SurveyDimensionScoreText selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") SurveyDimensionScoreText record, @Param("example") SurveyDimensionScoreTextExample example);
+
+    int updateByExampleWithBLOBs(@Param("record") SurveyDimensionScoreText record, @Param("example") SurveyDimensionScoreTextExample example);
+
+    int updateByExample(@Param("record") SurveyDimensionScoreText record, @Param("example") SurveyDimensionScoreTextExample example);
+
+    int updateByPrimaryKeySelective(SurveyDimensionScoreText record);
+
+    int updateByPrimaryKeyWithBLOBs(SurveyDimensionScoreText record);
+
+    int updateByPrimaryKey(SurveyDimensionScoreText record);
 }

@@ -1,11 +1,12 @@
 package com.ronmob.qz.vo;
 
-import com.ronmob.qz.model.User;
 import com.ronmob.qz.model.common.Page;
+
+import java.util.Map;
 
 public class UserListSearchVo {
     private Page page;
-    private User user;
+    private Map param;
 
     public Page getPage() {
         return page;
@@ -15,11 +16,11 @@ public class UserListSearchVo {
         this.page = page;
     }
 
-    public User getUser() {
-        return user;
+    public Map getParam() {
+        return param;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setParam(Map param) {
+        this.param = param;
     }
 }

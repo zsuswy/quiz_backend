@@ -1,20 +1,37 @@
 package com.ronmob.qz.dao;
 
 import com.ronmob.qz.model.UserSurvey;
-import com.ronmob.qz.vo.UserSurveyListSearchVo;
-
+import com.ronmob.qz.model.UserSurveyExample;
+import com.ronmob.qz.model.UserSurveyWithBLOBs;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
-/**
- * 创建时间：9/20/17
- * 创建人：sunwuyang
- */
 public interface UserSurveyMapper {
-    List<UserSurvey> getUserSurveyList(UserSurveyListSearchVo vo);
+    long countByExample(UserSurveyExample example);
 
-    Integer getUserSurveyListTotalCount(UserSurveyListSearchVo vo);
+    int deleteByExample(UserSurveyExample example);
 
-    Integer insertUserSurvey(UserSurvey userSurvey);
+    int deleteByPrimaryKey(Integer id);
 
-    Integer updateUserSurvey(UserSurvey userSurvey);
+    int insert(UserSurveyWithBLOBs record);
+
+    int insertSelective(UserSurveyWithBLOBs record);
+
+    List<UserSurveyWithBLOBs> selectByExampleWithBLOBs(UserSurveyExample example);
+
+    List<UserSurvey> selectByExample(UserSurveyExample example);
+
+    UserSurveyWithBLOBs selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") UserSurveyWithBLOBs record, @Param("example") UserSurveyExample example);
+
+    int updateByExampleWithBLOBs(@Param("record") UserSurveyWithBLOBs record, @Param("example") UserSurveyExample example);
+
+    int updateByExample(@Param("record") UserSurvey record, @Param("example") UserSurveyExample example);
+
+    int updateByPrimaryKeySelective(UserSurveyWithBLOBs record);
+
+    int updateByPrimaryKeyWithBLOBs(UserSurveyWithBLOBs record);
+
+    int updateByPrimaryKey(UserSurvey record);
 }

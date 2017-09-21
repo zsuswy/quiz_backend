@@ -1,68 +1,274 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ronmob.qz.dao.OrderMapper">
-    <resultMap id="OrderResultMap" type="com.ronmob.qz.model.Order">
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="order_number" property="order_number" jdbcType="VARCHAR"/>
-    </resultMap>
-
-    <select id="getOrderList" parameterType="com.ronmob.qz.vo.OrderListSearchVo"
-            resultMap="OrderResultMap">
-        SELECT * FROM "order" WHERE 1=1
-        <if test="order != null and order.id != null">
-            AND id= #{id}
+  <resultMap id="BaseResultMap" type="com.ronmob.qz.model.Order">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="wx_order_no" jdbcType="VARCHAR" property="wxOrderNo" />
+    <result column="out_trade_no" jdbcType="VARCHAR" property="outTradeNo" />
+    <result column="pay_amount" jdbcType="DECIMAL" property="payAmount" />
+    <result column="wx_open_id" jdbcType="VARCHAR" property="wxOpenId" />
+    <result column="pay_score" jdbcType="INTEGER" property="payScore" />
+    <result column="order_status" jdbcType="TINYINT" property="orderStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
         </if>
-        <if test="order != null and order.wx_order_no != null">
-            AND wx_order_no = #{wx_order_no}
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
         </if>
-        <if test="order != null and order.wx_open_id != null">
-            AND wx_open_id = #{wx_open_id}
-        </if>
-        <if test="order != null and order.out_trade_no != null">
-            AND out_trade_no = #{out_trade_no}
-        </if>
-        <if test="order != null and order.order_status != null">
-            AND order_status = #{order_status}
-        </if>
-        <if test="page != null">
-            limit #{page.firstResult},#{page.everyPageCount};
-        </if>
-    </select>
-
-
-    <select id="getOrderListTotalCount" parameterType="com.ronmob.qz.vo.OrderListSearchVo"
-            resultType="java.lang.Integer">
-        SELECT COUNT(*) FROM "order" WHERE 1=1
-        <if test="order != null and order.id != null">
-            AND id= #{id}
-        </if>
-        <if test="order != null and order.wx_order_no != null">
-            AND wx_order_no = #{wx_order_no}
-        </if>
-        <if test="order != null and order.wx_open_id != null">
-            AND wx_open_id = #{wx_open_id}
-        </if>
-        <if test="order != null and order.out_trade_no != null">
-            AND out_trade_no = #{out_trade_no}
-        </if>
-        <if test="order != null and order.order_status != null">
-            AND order_status = #{order_status}
-        </if>
-    </select>
-
-    <insert id="insertOrder" parameterType="com.ronmob.qz.model.Order" useGeneratedKeys="true" keyProperty="id"
-            keyColumn="id">
-        INSERT INTO "order" (wx_order_no, out_trade_no, pay_amount, wx_open_id, pay_score, finish_time)
-        VALUES (#{wx_order_no},#{out_trade_no},#{pay_amount},#{wx_open_id},#{pay_score},#{finish_time})
-    </insert>
-
-    <update id="updateOrder" parameterType="com.ronmob.qz.model.Order">
-        UPDATE "order" SET wx_order_no=#{wx_order_no},out_trade_no=#{out_trade_no},pay_amount=#{pay_amount},wx_open_id=#{wx_open_id},
-        pay_score=#{pay_score},order_status=#{order_status},create_time=#{create_time},finish_time=#{finish_time}
-        WHERE id=#{id}
-    </update>
-
-    <delete id="deleteOrderById" parameterType="java.lang.Integer">
-        DELETE FROM "order" WHERE id=#{id}
-    </delete>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, wx_order_no, out_trade_no, pay_amount, wx_open_id, pay_score, order_status, create_time, 
+    finish_time
+  </sql>
+  <select id="selectByExample" parameterType="com.ronmob.qz.model.OrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ronmob.qz.model.OrderExample">
+    delete from order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ronmob.qz.model.Order">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order (wx_order_no, out_trade_no, pay_amount, 
+      wx_open_id, pay_score, order_status, 
+      create_time, finish_time)
+    values (#{wxOrderNo,jdbcType=VARCHAR}, #{outTradeNo,jdbcType=VARCHAR}, #{payAmount,jdbcType=DECIMAL}, 
+      #{wxOpenId,jdbcType=VARCHAR}, #{payScore,jdbcType=INTEGER}, #{orderStatus,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ronmob.qz.model.Order">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wxOrderNo != null">
+        wx_order_no,
+      </if>
+      <if test="outTradeNo != null">
+        out_trade_no,
+      </if>
+      <if test="payAmount != null">
+        pay_amount,
+      </if>
+      <if test="wxOpenId != null">
+        wx_open_id,
+      </if>
+      <if test="payScore != null">
+        pay_score,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="finishTime != null">
+        finish_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wxOrderNo != null">
+        #{wxOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNo != null">
+        #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payAmount != null">
+        #{payAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="wxOpenId != null">
+        #{wxOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="payScore != null">
+        #{payScore,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishTime != null">
+        #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ronmob.qz.model.OrderExample" resultType="java.lang.Long">
+    select count(*) from order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update order
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.wxOrderNo != null">
+        wx_order_no = #{record.wxOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outTradeNo != null">
+        out_trade_no = #{record.outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payAmount != null">
+        pay_amount = #{record.payAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wxOpenId != null">
+        wx_open_id = #{record.wxOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payScore != null">
+        pay_score = #{record.payScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderStatus != null">
+        order_status = #{record.orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.finishTime != null">
+        finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update order
+    set id = #{record.id,jdbcType=INTEGER},
+      wx_order_no = #{record.wxOrderNo,jdbcType=VARCHAR},
+      out_trade_no = #{record.outTradeNo,jdbcType=VARCHAR},
+      pay_amount = #{record.payAmount,jdbcType=DECIMAL},
+      wx_open_id = #{record.wxOpenId,jdbcType=VARCHAR},
+      pay_score = #{record.payScore,jdbcType=INTEGER},
+      order_status = #{record.orderStatus,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      finish_time = #{record.finishTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ronmob.qz.model.Order">
+    update order
+    <set>
+      <if test="wxOrderNo != null">
+        wx_order_no = #{wxOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNo != null">
+        out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payAmount != null">
+        pay_amount = #{payAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="wxOpenId != null">
+        wx_open_id = #{wxOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="payScore != null">
+        pay_score = #{payScore,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishTime != null">
+        finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ronmob.qz.model.Order">
+    update order
+    set wx_order_no = #{wxOrderNo,jdbcType=VARCHAR},
+      out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+      pay_amount = #{payAmount,jdbcType=DECIMAL},
+      wx_open_id = #{wxOpenId,jdbcType=VARCHAR},
+      pay_score = #{payScore,jdbcType=INTEGER},
+      order_status = #{orderStatus,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

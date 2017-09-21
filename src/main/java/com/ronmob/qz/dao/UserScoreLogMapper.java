@@ -1,22 +1,30 @@
 package com.ronmob.qz.dao;
 
 import com.ronmob.qz.model.UserScoreLog;
-import com.ronmob.qz.vo.UserScoreLogListSearchVo;
-
+import com.ronmob.qz.model.UserScoreLogExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
-/**
- * 创建时间：9/20/17
- * 创建人：sunwuyang
- */
 public interface UserScoreLogMapper {
-    List<UserScoreLog> getUserScoreLogList(UserScoreLogListSearchVo vo);
+    long countByExample(UserScoreLogExample example);
 
-    Integer getUserScoreLogListTotalCount(UserScoreLogListSearchVo vo);
+    int deleteByExample(UserScoreLogExample example);
 
-    Integer insertUserScoreLog(UserScoreLog userScoreLog);
+    int deleteByPrimaryKey(Integer id);
 
-    Integer updateUserScoreLog(UserScoreLog userScoreLog);
+    int insert(UserScoreLog record);
 
-    Integer deleteUserScoreLogById(Integer id);
+    int insertSelective(UserScoreLog record);
+
+    List<UserScoreLog> selectByExample(UserScoreLogExample example);
+
+    UserScoreLog selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") UserScoreLog record, @Param("example") UserScoreLogExample example);
+
+    int updateByExample(@Param("record") UserScoreLog record, @Param("example") UserScoreLogExample example);
+
+    int updateByPrimaryKeySelective(UserScoreLog record);
+
+    int updateByPrimaryKey(UserScoreLog record);
 }

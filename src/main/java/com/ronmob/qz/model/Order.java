@@ -1,88 +1,96 @@
 package com.ronmob.qz.model;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class Order {
-    private Long id;
-    private String wx_order_no;
-    private String out_trade_no;
-    private String wx_open_id;
-    private BigDecimal pay_amount;
-    private Long pay_score;
-    private Integer order_status;
-    private Timestamp create_time;
-    private Timestamp finish_time;
+    private Integer id;
 
-    public Long getId() {
+    private String wxOrderNo;
+
+    private String outTradeNo;
+
+    private BigDecimal payAmount;
+
+    private String wxOpenId;
+
+    private Integer payScore;
+
+    private Byte orderStatus;
+
+    private Date createTime;
+
+    private Date finishTime;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getWx_order_no() {
-        return wx_order_no;
+    public String getWxOrderNo() {
+        return wxOrderNo;
     }
 
-    public void setWx_order_no(String wx_order_no) {
-        this.wx_order_no = wx_order_no;
+    public void setWxOrderNo(String wxOrderNo) {
+        this.wxOrderNo = wxOrderNo == null ? null : wxOrderNo.trim();
     }
 
-    public String getOut_trade_no() {
-        return out_trade_no;
+    public String getOutTradeNo() {
+        return outTradeNo;
     }
 
-    public void setOut_trade_no(String out_trade_no) {
-        this.out_trade_no = out_trade_no;
+    public void setOutTradeNo(String outTradeNo) {
+        this.outTradeNo = outTradeNo == null ? null : outTradeNo.trim();
     }
 
-    public String getWx_open_id() {
-        return wx_open_id;
+    public BigDecimal getPayAmount() {
+        return payAmount;
     }
 
-    public void setWx_open_id(String wx_open_id) {
-        this.wx_open_id = wx_open_id;
+    public void setPayAmount(BigDecimal payAmount) {
+        this.payAmount = payAmount;
     }
 
-    public BigDecimal getPay_amount() {
-        return pay_amount;
+    public String getWxOpenId() {
+        return wxOpenId;
     }
 
-    public void setPay_amount(BigDecimal pay_amount) {
-        this.pay_amount = pay_amount;
+    public void setWxOpenId(String wxOpenId) {
+        this.wxOpenId = wxOpenId == null ? null : wxOpenId.trim();
     }
 
-    public Long getPay_score() {
-        return pay_score;
+    public Integer getPayScore() {
+        return payScore;
     }
 
-    public void setPay_score(Long pay_score) {
-        this.pay_score = pay_score;
+    public void setPayScore(Integer payScore) {
+        this.payScore = payScore;
     }
 
-    public Integer getOrder_status() {
-        return order_status;
+    public Byte getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setOrder_status(Integer order_status) {
-        this.order_status = order_status;
+    public void setOrderStatus(Byte orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
-    public Timestamp getCreate_time() {
-        return create_time;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Timestamp create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Timestamp getFinish_time() {
-        return finish_time;
+    public Date getFinishTime() {
+        return finishTime;
     }
 
-    public void setFinish_time(Timestamp finish_time) {
-        this.finish_time = finish_time;
+    public void setFinishTime(Date finishTime) {
+        this.finishTime = finishTime;
     }
 }

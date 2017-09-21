@@ -1,7 +1,8 @@
 package com.ronmob.qz.vo;
 
-import com.ronmob.qz.model.UserScoreLog;
 import com.ronmob.qz.model.common.Page;
+
+import java.util.Map;
 
 /**
  * 创建时间：9/21/17
@@ -9,7 +10,7 @@ import com.ronmob.qz.model.common.Page;
  */
 public class UserScoreLogListSearchVo {
     private Page page;
-    private UserScoreLog userScoreLog;
+    private Map param;
 
     public Page getPage() {
         return page;
@@ -19,11 +20,11 @@ public class UserScoreLogListSearchVo {
         this.page = page;
     }
 
-    public UserScoreLog getUserScoreLog() {
-        return userScoreLog;
+    public Map getParam() {
+        return param;
     }
 
-    public void setUserScoreLog(UserScoreLog userScoreLog) {
-        this.userScoreLog = userScoreLog;
+    public void setParam(Map param) {
+        this.param = param;
     }
 }

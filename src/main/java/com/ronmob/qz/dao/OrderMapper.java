@@ -1,19 +1,30 @@
 package com.ronmob.qz.dao;
 
 import com.ronmob.qz.model.Order;
-import com.ronmob.qz.vo.OrderListSearchVo;
-
+import com.ronmob.qz.model.OrderExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface OrderMapper {
-    List<Order> getOrderList(OrderListSearchVo orderListSearchVo);
+    long countByExample(OrderExample example);
 
-    Integer getOrderListTotalCount(OrderListSearchVo orderListSearchVo);
+    int deleteByExample(OrderExample example);
 
-    Integer insertOrder(Order order);
+    int deleteByPrimaryKey(Integer id);
 
-    Integer updateOrder(Order order);
+    int insert(Order record);
 
-    Integer deleteOrderById(Integer id);
+    int insertSelective(Order record);
 
+    List<Order> selectByExample(OrderExample example);
+
+    Order selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") Order record, @Param("example") OrderExample example);
+
+    int updateByExample(@Param("record") Order record, @Param("example") OrderExample example);
+
+    int updateByPrimaryKeySelective(Order record);
+
+    int updateByPrimaryKey(Order record);
 }

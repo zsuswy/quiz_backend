@@ -1,22 +1,30 @@
 package com.ronmob.qz.dao;
 
 import com.ronmob.qz.model.User;
-import com.ronmob.qz.vo.UserListSearchVo;
-
+import com.ronmob.qz.model.UserExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
-/**
- * 创建时间：9/20/17
- * 创建人：sunwuyang
- */
 public interface UserMapper {
-    List<User> getUserList(UserListSearchVo vo);
+    long countByExample(UserExample example);
 
-    Integer getUserListTotalCount(UserListSearchVo vo);
+    int deleteByExample(UserExample example);
 
-    Integer insertUser(User user);
+    int deleteByPrimaryKey(Integer id);
 
-    Integer updateUser(User user);
+    int insert(User record);
 
-    Integer deleteUserById(Integer id);
+    int insertSelective(User record);
+
+    List<User> selectByExample(UserExample example);
+
+    User selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
+
+    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
 }

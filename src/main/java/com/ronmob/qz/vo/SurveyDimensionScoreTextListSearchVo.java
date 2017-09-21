@@ -1,7 +1,8 @@
 package com.ronmob.qz.vo;
 
-import com.ronmob.qz.model.SurveyDimensionScoreText;
 import com.ronmob.qz.model.common.Page;
+
+import java.util.Map;
 
 /**
  * 创建时间：9/20/17
@@ -9,7 +10,7 @@ import com.ronmob.qz.model.common.Page;
  */
 public class SurveyDimensionScoreTextListSearchVo {
     private Page page;
-    private SurveyDimensionScoreText surveyDimensionScoreText;
+    private Map params;
 
     public Page getPage() {
         return page;
@@ -19,11 +20,11 @@ public class SurveyDimensionScoreTextListSearchVo {
         this.page = page;
     }
 
-    public SurveyDimensionScoreText getSurveyDimensionScoreText() {
-        return surveyDimensionScoreText;
+    public Map getParams() {
+        return params;
     }
 
-    public void setSurveyDimensionScoreText(SurveyDimensionScoreText surveyDimensionScoreText) {
-        this.surveyDimensionScoreText = surveyDimensionScoreText;
+    public void setParams(Map params) {
+        this.params = params;
     }
 }

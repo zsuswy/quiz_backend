@@ -1,26 +1,30 @@
 package com.ronmob.qz.dao;
 
-import com.ronmob.qz.model.Survey;
-import com.ronmob.qz.model.SurveyDimension;
 import com.ronmob.qz.model.SurveyQuestion;
-import com.ronmob.qz.vo.SurveyDimensionListSearchVo;
-import com.ronmob.qz.vo.SurveyListSearchVo;
-import com.ronmob.qz.vo.SurveyQuestionListSearchVo;
-
+import com.ronmob.qz.model.SurveyQuestionExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface SurveyQuestionMapper {
-    SurveyQuestion getSurveyQuestionById(Integer id);
+    long countByExample(SurveyQuestionExample example);
 
-    SurveyQuestion getSurveyQuestionBySeq(Integer seq, Integer survey_id);
+    int deleteByExample(SurveyQuestionExample example);
 
-    List<SurveyQuestion> getSurveyQuestionList(SurveyQuestionListSearchVo surveyQuestionVo);
+    int deleteByPrimaryKey(Integer id);
 
-    Integer getSurveyQuestionListTotalCount(SurveyQuestionListSearchVo surveyQuestionVo);
+    int insert(SurveyQuestion record);
 
-    Integer insertSurveyQuestion(SurveyQuestion surveyQuestion);
+    int insertSelective(SurveyQuestion record);
 
-    Integer updateSurveyQuestion(SurveyQuestion surveyQuestion);
+    List<SurveyQuestion> selectByExample(SurveyQuestionExample example);
 
-    Integer deleteSurveyQuestionById(Integer id);
+    SurveyQuestion selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") SurveyQuestion record, @Param("example") SurveyQuestionExample example);
+
+    int updateByExample(@Param("record") SurveyQuestion record, @Param("example") SurveyQuestionExample example);
+
+    int updateByPrimaryKeySelective(SurveyQuestion record);
+
+    int updateByPrimaryKey(SurveyQuestion record);
 }

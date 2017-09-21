@@ -1,29 +1,46 @@
 package com.ronmob.qz.model;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class Survey {
     private Integer id;
+
     private String title;
-    private String description;
-    private Integer create_by;
-    private Timestamp create_time;
-    private Integer class_id;
-    private Integer status;
-    private Integer question_cnt;
-    private Integer estimate_minutes;
+
+    private Integer createBy;
+
+    private Date createTime;
+
+    private Integer classId;
+
+    private Byte status;
+
+    private Integer questionCnt;
+
+    private Byte estimateMinutes;
+
     private BigDecimal price;
-    private BigDecimal org_price;
+
+    private BigDecimal orgPrice;
+
     private String image;
-    private Integer is_need_sex;
-    private Integer tested_cnt;
-    private String result_template;
-    private Integer is_hot;
-    private Integer is_new;
-    private Integer is_super;
-    private String result_template_param;
+
+    private Byte isNeedSex;
+
+    private Integer testedCnt;
+
+    private String resultTemplate;
+
+    private Byte isHot;
+
+    private Byte isNew;
+
+    private Byte isSuper;
+
+    private String resultTemplateParam;
+
+    private String description;
 
     public Integer getId() {
         return id;
@@ -38,63 +55,55 @@ public class Survey {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = title == null ? null : title.trim();
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getCreateBy() {
+        return createBy;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCreateBy(Integer createBy) {
+        this.createBy = createBy;
     }
 
-    public Integer getCreate_by() {
-        return create_by;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_by(Integer create_by) {
-        this.create_by = create_by;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Timestamp getCreate_time() {
-        return create_time;
+    public Integer getClassId() {
+        return classId;
     }
 
-    public void setCreate_time(Timestamp create_time) {
-        this.create_time = create_time;
+    public void setClassId(Integer classId) {
+        this.classId = classId;
     }
 
-    public Integer getClass_id() {
-        return class_id;
-    }
-
-    public void setClass_id(Integer class_id) {
-        this.class_id = class_id;
-    }
-
-    public Integer getStatus() {
+    public Byte getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Byte status) {
         this.status = status;
     }
 
-    public Integer getQuestion_cnt() {
-        return question_cnt;
+    public Integer getQuestionCnt() {
+        return questionCnt;
     }
 
-    public void setQuestion_cnt(Integer question_cnt) {
-        this.question_cnt = question_cnt;
+    public void setQuestionCnt(Integer questionCnt) {
+        this.questionCnt = questionCnt;
     }
 
-    public Integer getEstimate_minutes() {
-        return estimate_minutes;
+    public Byte getEstimateMinutes() {
+        return estimateMinutes;
     }
 
-    public void setEstimate_minutes(Integer estimate_minutes) {
-        this.estimate_minutes = estimate_minutes;
+    public void setEstimateMinutes(Byte estimateMinutes) {
+        this.estimateMinutes = estimateMinutes;
     }
 
     public BigDecimal getPrice() {
@@ -105,12 +114,12 @@ public class Survey {
         this.price = price;
     }
 
-    public BigDecimal getOrg_price() {
-        return org_price;
+    public BigDecimal getOrgPrice() {
+        return orgPrice;
     }
 
-    public void setOrg_price(BigDecimal org_price) {
-        this.org_price = org_price;
+    public void setOrgPrice(BigDecimal orgPrice) {
+        this.orgPrice = orgPrice;
     }
 
     public String getImage() {
@@ -118,62 +127,70 @@ public class Survey {
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.image = image == null ? null : image.trim();
     }
 
-    public Integer getIs_need_sex() {
-        return is_need_sex;
+    public Byte getIsNeedSex() {
+        return isNeedSex;
     }
 
-    public void setIs_need_sex(Integer is_need_sex) {
-        this.is_need_sex = is_need_sex;
+    public void setIsNeedSex(Byte isNeedSex) {
+        this.isNeedSex = isNeedSex;
     }
 
-    public Integer getTested_cnt() {
-        return tested_cnt;
+    public Integer getTestedCnt() {
+        return testedCnt;
     }
 
-    public void setTested_cnt(Integer tested_cnt) {
-        this.tested_cnt = tested_cnt;
+    public void setTestedCnt(Integer testedCnt) {
+        this.testedCnt = testedCnt;
     }
 
-    public String getResult_template() {
-        return result_template;
+    public String getResultTemplate() {
+        return resultTemplate;
     }
 
-    public void setResult_template(String result_template) {
-        this.result_template = result_template;
+    public void setResultTemplate(String resultTemplate) {
+        this.resultTemplate = resultTemplate == null ? null : resultTemplate.trim();
     }
 
-    public Integer getIs_hot() {
-        return is_hot;
+    public Byte getIsHot() {
+        return isHot;
     }
 
-    public void setIs_hot(Integer is_hot) {
-        this.is_hot = is_hot;
+    public void setIsHot(Byte isHot) {
+        this.isHot = isHot;
     }
 
-    public Integer getIs_new() {
-        return is_new;
+    public Byte getIsNew() {
+        return isNew;
     }
 
-    public void setIs_new(Integer is_new) {
-        this.is_new = is_new;
+    public void setIsNew(Byte isNew) {
+        this.isNew = isNew;
     }
 
-    public Integer getIs_super() {
-        return is_super;
+    public Byte getIsSuper() {
+        return isSuper;
     }
 
-    public void setIs_super(Integer is_super) {
-        this.is_super = is_super;
+    public void setIsSuper(Byte isSuper) {
+        this.isSuper = isSuper;
     }
 
-    public String getResult_template_param() {
-        return result_template_param;
+    public String getResultTemplateParam() {
+        return resultTemplateParam;
     }
 
-    public void setResult_template_param(String result_template_param) {
-        this.result_template_param = result_template_param;
+    public void setResultTemplateParam(String resultTemplateParam) {
+        this.resultTemplateParam = resultTemplateParam == null ? null : resultTemplateParam.trim();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 }

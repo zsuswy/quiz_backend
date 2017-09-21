@@ -2,9 +2,11 @@ package com.ronmob.qz.service.impl;
 
 import com.ronmob.qz.dao.OrderMapper;
 import com.ronmob.qz.model.Order;
+import com.ronmob.qz.model.OrderExample;
 import com.ronmob.qz.service.OrderService;
 import com.ronmob.qz.vo.OrderListSearchVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -12,36 +14,43 @@ import java.util.List;
  * 创建时间：9/20/17
  * 创建人：sunwuyang
  */
+@Service
 public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderMapper orderMapper;
 
+    private OrderExample getOrderExample(OrderListSearchVo searchVo) {
+        OrderExample orderExample = new OrderExample();
+        if (searchVo.getParams().containsKey("id")) {
+            orderExample.createCriteria().andIdEqualTo(new Integer(searchVo.getParams().get("id").toString()));
+        }
+        return orderExample;
+    }
+
     @Override
     public List<Order> getOrderList(OrderListSearchVo searchVo) {
-        return orderMapper.getOrderList(searchVo);
+        return orderMapper.selectByExample(getOrderExample(searchVo));
     }
 
     @Override
     public Integer getOrderListTotalCount(OrderListSearchVo searchVo) {
-        return orderMapper.getOrderListTotalCount(searchVo);
+        return ((Long) orderMapper.countByExample(getOrderExample(searchVo))).intValue();
     }
 
     @Override
     public Order createOrder(Order order) {
-        orderMapper.insertOrder(order);
+        orderMapper.insert(order);
         return order;
     }
 
     @Override
     public Order updateOrder(Order order) {
-        orderMapper.updateOrder(order);
+        orderMapper.updateByPrimaryKeySelective(order);
         return order;
     }
 
     @Override
     public Integer deleteOrderById(Integer id) {
-        return orderMapper.deleteOrderById(id);
+        return orderMapper.deleteByPrimaryKey(id);
     }
-
-
 }

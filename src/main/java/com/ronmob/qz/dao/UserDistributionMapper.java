@@ -1,22 +1,30 @@
 package com.ronmob.qz.dao;
 
 import com.ronmob.qz.model.UserDistribution;
-import com.ronmob.qz.vo.UserDistributionListSearchVo;
-
+import com.ronmob.qz.model.UserDistributionExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
-/**
- * 创建时间：9/20/17
- * 创建人：sunwuyang
- */
 public interface UserDistributionMapper {
-    List<UserDistribution> getUserDistributionList(UserDistributionListSearchVo vo);
+    long countByExample(UserDistributionExample example);
 
-    Integer getUserDistributionListTotalCount(UserDistributionListSearchVo vo);
+    int deleteByExample(UserDistributionExample example);
 
-    Integer insertUserDistribution(UserDistribution userDistribution);
+    int deleteByPrimaryKey(Integer id);
 
-    Integer updateUserDistribution(UserDistribution userDistribution);
+    int insert(UserDistribution record);
 
-    Integer deleteUserDistributionById(Integer id);
+    int insertSelective(UserDistribution record);
+
+    List<UserDistribution> selectByExample(UserDistributionExample example);
+
+    UserDistribution selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") UserDistribution record, @Param("example") UserDistributionExample example);
+
+    int updateByExample(@Param("record") UserDistribution record, @Param("example") UserDistributionExample example);
+
+    int updateByPrimaryKeySelective(UserDistribution record);
+
+    int updateByPrimaryKey(UserDistribution record);
 }

@@ -1,7 +1,6 @@
 package com.ronmob.qz.web;
 
 import com.ronmob.qz.model.wx.SnsApiBaseReturnResult;
-import com.ronmob.qz.service.CommonService;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;

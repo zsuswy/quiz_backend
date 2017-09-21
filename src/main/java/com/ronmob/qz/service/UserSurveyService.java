@@ -1,6 +1,7 @@
 package com.ronmob.qz.service;
 
 import com.ronmob.qz.model.UserSurvey;
+import com.ronmob.qz.model.UserSurveyWithBLOBs;
 import com.ronmob.qz.vo.UserSurveyListSearchVo;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface UserSurveyService {
 
     Integer getUserSurveyListTotalCount(UserSurveyListSearchVo userSurveyListSearchVo);
 
-    UserSurvey createUserSurvey(UserSurvey userSurvey);
+    UserSurveyWithBLOBs createUserSurvey(UserSurveyWithBLOBs userSurvey);
 
-    UserSurvey updateUserSurvey(UserSurvey userSurvey);
+    UserSurveyWithBLOBs updateUserSurvey(UserSurveyWithBLOBs userSurvey);
 }

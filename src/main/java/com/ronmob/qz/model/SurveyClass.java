@@ -2,9 +2,12 @@ package com.ronmob.qz.model;
 
 public class SurveyClass {
     private Integer id;
-    private Integer parent_class_id;
-    private String class_name;
-    private Integer enabled;
+
+    private String className;
+
+    private Integer parentClassId;
+
+    private Byte enabled;
 
     public Integer getId() {
         return id;
@@ -14,27 +17,27 @@ public class SurveyClass {
         this.id = id;
     }
 
-    public Integer getParent_class_id() {
-        return parent_class_id;
+    public String getClassName() {
+        return className;
     }
 
-    public void setParent_class_id(Integer parent_class_id) {
-        this.parent_class_id = parent_class_id;
+    public void setClassName(String className) {
+        this.className = className == null ? null : className.trim();
     }
 
-    public String getClass_name() {
-        return class_name;
+    public Integer getParentClassId() {
+        return parentClassId;
     }
 
-    public void setClass_name(String class_name) {
-        this.class_name = class_name;
+    public void setParentClassId(Integer parentClassId) {
+        this.parentClassId = parentClassId;
     }
 
-    public Integer getEnabled() {
+    public Byte getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(Integer enabled) {
+    public void setEnabled(Byte enabled) {
         this.enabled = enabled;
     }
 }

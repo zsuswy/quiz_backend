@@ -2,8 +2,8 @@ package com.ronmob.qz.vo;
 
 import java.util.List;
 
-import com.ronmob.qz.model.common.Page;
 import com.ronmob.qz.model.SurveyQuestion;
+import com.ronmob.qz.model.common.Page;
 
 public class SurveyQuestionListResultVo {
 	private Page page;

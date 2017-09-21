@@ -1,9 +1,8 @@
 package com.ronmob.qz.vo;
 
-import com.ronmob.qz.model.SurveyDimension;
 import com.ronmob.qz.model.common.Page;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * 创建时间：9/20/17
@@ -11,7 +10,7 @@ import java.util.List;
  */
 public class SurveyDimensionListSearchVo {
     private Page page;
-    private SurveyDimension surveyDimension;
+    private Map param;
 
     public Page getPage() {
         return page;
@@ -21,11 +20,11 @@ public class SurveyDimensionListSearchVo {
         this.page = page;
     }
 
-    public SurveyDimension getSurveyDimension() {
-        return surveyDimension;
+    public Map getParam() {
+        return param;
     }
 
-    public void setSurveyDimension(SurveyDimension surveyDimension) {
-        this.surveyDimension = surveyDimension;
+    public void setParam(Map param) {
+        this.param = param;
     }
 }

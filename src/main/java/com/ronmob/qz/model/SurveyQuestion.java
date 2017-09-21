@@ -2,11 +2,16 @@ package com.ronmob.qz.model;
 
 public class SurveyQuestion {
     private Integer id;
-    private Integer survey_id;
+
     private Integer seq;
+
+    private Integer surveyId;
+
     private String title;
-    private Integer type;
-    private String question_content;
+
+    private Byte type;
+
+    private String questionContent;
 
     public Integer getId() {
         return id;
@@ -14,14 +19,6 @@ public class SurveyQuestion {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getSurvey_id() {
-        return survey_id;
-    }
-
-    public void setSurvey_id(Integer survey_id) {
-        this.survey_id = survey_id;
     }
 
     public Integer getSeq() {
@@ -32,27 +29,35 @@ public class SurveyQuestion {
         this.seq = seq;
     }
 
+    public Integer getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(Integer surveyId) {
+        this.surveyId = surveyId;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = title == null ? null : title.trim();
     }
 
-    public Integer getType() {
+    public Byte getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(Byte type) {
         this.type = type;
     }
 
-    public String getQuestion_content() {
-        return question_content;
+    public String getQuestionContent() {
+        return questionContent;
     }
 
-    public void setQuestion_content(String question_content) {
-        this.question_content = question_content;
+    public void setQuestionContent(String questionContent) {
+        this.questionContent = questionContent == null ? null : questionContent.trim();
     }
 }

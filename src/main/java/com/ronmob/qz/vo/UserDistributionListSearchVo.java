@@ -1,7 +1,8 @@
 package com.ronmob.qz.vo;
 
-import com.ronmob.qz.model.UserDistribution;
 import com.ronmob.qz.model.common.Page;
+
+import java.util.Map;
 
 /**
  * 创建时间：9/21/17
@@ -9,7 +10,7 @@ import com.ronmob.qz.model.common.Page;
  */
 public class UserDistributionListSearchVo {
     private Page page;
-    private UserDistribution userDistribution;
+    private Map param;
 
     public Page getPage() {
         return page;
@@ -19,11 +20,11 @@ public class UserDistributionListSearchVo {
         this.page = page;
     }
 
-    public UserDistribution getUserDistribution() {
-        return userDistribution;
+    public Map getParam() {
+        return param;
     }
 
-    public void setUserDistribution(UserDistribution userDistribution) {
-        this.userDistribution = userDistribution;
+    public void setParam(Map param) {
+        this.param = param;
     }
 }

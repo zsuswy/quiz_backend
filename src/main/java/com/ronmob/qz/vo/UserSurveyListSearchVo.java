@@ -1,7 +1,8 @@
 package com.ronmob.qz.vo;
 
-import com.ronmob.qz.model.UserSurvey;
 import com.ronmob.qz.model.common.Page;
+
+import java.util.Map;
 
 /**
  * 创建时间：9/21/17
@@ -9,7 +10,7 @@ import com.ronmob.qz.model.common.Page;
  */
 public class UserSurveyListSearchVo {
     private Page page;
-    private UserSurvey userSurvey;
+    private Map param;
 
     public Page getPage() {
         return page;
@@ -19,11 +20,11 @@ public class UserSurveyListSearchVo {
         this.page = page;
     }
 
-    public UserSurvey getUserSurvey() {
-        return userSurvey;
+    public Map getParam() {
+        return param;
     }
 
-    public void setUserSurvey(UserSurvey userSurvey) {
-        this.userSurvey = userSurvey;
+    public void setParam(Map param) {
+        this.param = param;
     }
 }

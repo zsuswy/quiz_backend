@@ -2,20 +2,25 @@ package com.ronmob.qz.model;
 
 import java.math.BigDecimal;
 
-/**
- * 创建时间：9/20/17
- * 创建人：sunwuyang
- */
 public class User {
     private Integer id;
-    private String user_name;
+
+    private String userName;
+
     private String password;
+
     private String mobile;
-    private String wx_user_name;
-    private String wx_open_id;
-    private Integer is_agent;
-    private Integer agent_pay_order_id;
+
+    private String wxUserName;
+
+    private String wxOpenId;
+
+    private Byte isAgent;
+
+    private Integer agentPayOrderId;
+
     private Integer score;
+
     private BigDecimal balance;
 
     public Integer getId() {
@@ -26,12 +31,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getPassword() {
@@ -39,7 +44,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password == null ? null : password.trim();
     }
 
     public String getMobile() {
@@ -47,39 +52,39 @@ public class User {
     }
 
     public void setMobile(String mobile) {
-        this.mobile = mobile;
+        this.mobile = mobile == null ? null : mobile.trim();
     }
 
-    public String getWx_user_name() {
-        return wx_user_name;
+    public String getWxUserName() {
+        return wxUserName;
     }
 
-    public void setWx_user_name(String wx_user_name) {
-        this.wx_user_name = wx_user_name;
+    public void setWxUserName(String wxUserName) {
+        this.wxUserName = wxUserName == null ? null : wxUserName.trim();
     }
 
-    public String getWx_open_id() {
-        return wx_open_id;
+    public String getWxOpenId() {
+        return wxOpenId;
     }
 
-    public void setWx_open_id(String wx_open_id) {
-        this.wx_open_id = wx_open_id;
+    public void setWxOpenId(String wxOpenId) {
+        this.wxOpenId = wxOpenId == null ? null : wxOpenId.trim();
     }
 
-    public Integer getIs_agent() {
-        return is_agent;
+    public Byte getIsAgent() {
+        return isAgent;
     }
 
-    public void setIs_agent(Integer is_agent) {
-        this.is_agent = is_agent;
+    public void setIsAgent(Byte isAgent) {
+        this.isAgent = isAgent;
     }
 
-    public Integer getAgent_pay_order_id() {
-        return agent_pay_order_id;
+    public Integer getAgentPayOrderId() {
+        return agentPayOrderId;
     }
 
-    public void setAgent_pay_order_id(Integer agent_pay_order_id) {
-        this.agent_pay_order_id = agent_pay_order_id;
+    public void setAgentPayOrderId(Integer agentPayOrderId) {
+        this.agentPayOrderId = agentPayOrderId;
     }
 
     public Integer getScore() {

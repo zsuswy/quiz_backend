@@ -1,10 +1,8 @@
 package com.ronmob.qz.service;
 
 import com.ronmob.qz.model.SurveyDimension;
-import com.ronmob.qz.model.SurveyDimensionScoreText;
-import com.ronmob.qz.model.SurveyQuestion;
 import com.ronmob.qz.vo.SurveyDimensionListSearchVo;
-import com.ronmob.qz.vo.SurveyDimensionScoreTextListSearchVo;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,6 +10,7 @@ import java.util.List;
  * 创建时间：9/20/17
  * 创建人：sunwuyang
  */
+@Repository
 public interface SurveyDimensionService {
     List<SurveyDimension> getSurveyDimensionList(SurveyDimensionListSearchVo surveyDimensionVo);
 

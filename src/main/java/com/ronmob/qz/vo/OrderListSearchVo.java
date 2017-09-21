@@ -3,13 +3,16 @@ package com.ronmob.qz.vo;
 import com.ronmob.qz.model.Order;
 import com.ronmob.qz.model.common.Page;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 创建时间：9/20/17
  * 创建人：sunwuyang
  */
 public class OrderListSearchVo {
     private Page page;
-    private Order order;
+    private Map params;
 
     public Page getPage() {
         return page;
@@ -19,11 +22,11 @@ public class OrderListSearchVo {
         this.page = page;
     }
 
-    public Order getOrder() {
-        return order;
+    public Map getParams() {
+        return params;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setParams(Map params) {
+        this.params = params;
     }
 }

@@ -1,16 +1,17 @@
 package com.ronmob.qz.model;
 
-/**
- * 创建时间：9/20/17
- * 创建人：sunwuyang
- */
 public class SurveyDimensionScoreText {
     private Integer id;
-    private Integer dimension_id;
-    private Integer score_max;
-    private Integer score_min;
-    private String result_title;
-    private String result_comment;
+
+    private Integer dimensionId;
+
+    private Integer scoreMax;
+
+    private Integer scoreMin;
+
+    private String resultTitle;
+
+    private String resultComment;
 
     public Integer getId() {
         return id;
@@ -20,43 +21,43 @@ public class SurveyDimensionScoreText {
         this.id = id;
     }
 
-    public Integer getDimension_id() {
-        return dimension_id;
+    public Integer getDimensionId() {
+        return dimensionId;
     }
 
-    public void setDimension_id(Integer dimension_id) {
-        this.dimension_id = dimension_id;
+    public void setDimensionId(Integer dimensionId) {
+        this.dimensionId = dimensionId;
     }
 
-    public Integer getScore_max() {
-        return score_max;
+    public Integer getScoreMax() {
+        return scoreMax;
     }
 
-    public void setScore_max(Integer score_max) {
-        this.score_max = score_max;
+    public void setScoreMax(Integer scoreMax) {
+        this.scoreMax = scoreMax;
     }
 
-    public Integer getScore_min() {
-        return score_min;
+    public Integer getScoreMin() {
+        return scoreMin;
     }
 
-    public void setScore_min(Integer score_min) {
-        this.score_min = score_min;
+    public void setScoreMin(Integer scoreMin) {
+        this.scoreMin = scoreMin;
     }
 
-    public String getResult_title() {
-        return result_title;
+    public String getResultTitle() {
+        return resultTitle;
     }
 
-    public void setResult_title(String result_title) {
-        this.result_title = result_title;
+    public void setResultTitle(String resultTitle) {
+        this.resultTitle = resultTitle == null ? null : resultTitle.trim();
     }
 
-    public String getResult_comment() {
-        return result_comment;
+    public String getResultComment() {
+        return resultComment;
     }
 
-    public void setResult_comment(String result_comment) {
-        this.result_comment = result_comment;
+    public void setResultComment(String resultComment) {
+        this.resultComment = resultComment == null ? null : resultComment.trim();
     }
 }

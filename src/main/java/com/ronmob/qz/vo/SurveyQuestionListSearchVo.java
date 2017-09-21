@@ -1,11 +1,12 @@
 package com.ronmob.qz.vo;
 
 import com.ronmob.qz.model.common.Page;
-import com.ronmob.qz.model.SurveyQuestion;
+
+import java.util.Map;
 
 public class SurveyQuestionListSearchVo {
 	Page page;
-	SurveyQuestion surveyQuestion;
+    private Map param;
 
 	public Page getPage() {
 		return page;
@@ -15,11 +16,11 @@ public class SurveyQuestionListSearchVo {
 		this.page = page;
 	}
 
-	public SurveyQuestion getSurveyQuestion() {
-		return surveyQuestion;
-	}
+    public Map getParam() {
+        return param;
+    }
 
-	public void setSurveyQuestion(SurveyQuestion surveyQuestion) {
-		this.surveyQuestion = surveyQuestion;
-	}
+    public void setParam(Map param) {
+        this.param = param;
+    }
 }
