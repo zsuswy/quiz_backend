@@ -32,3 +32,5 @@ qz.iml
 WebContent/
 src/main/.DS_Store
 src/main/java/com/ronmob/qz/.DS_Store
+/target/
+/out/
