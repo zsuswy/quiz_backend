@@ -10,9 +10,9 @@ import com.ronmob.qz.vo.SurveyQuestionListSearchVo;
 import java.util.List;
 
 public interface SurveyDimensionMapper {
-    List<SurveyDimension> getSurveyDimensions(SurveyDimensionListSearchVo surveyDimensionListSearchVo);
+    List<SurveyDimension> getSurveyDimensionList(SurveyDimensionListSearchVo surveyDimensionListSearchVo);
 
-    Integer getSurveyDimesionTotalCount(SurveyDimensionListSearchVo surveyDimensionListSearchVo);
+    Integer getSurveyDimesionListTotalCount(SurveyDimensionListSearchVo surveyDimensionListSearchVo);
 
     Integer insertSurveyDimension(SurveyDimension surveyDimension);
 

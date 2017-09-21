@@ -17,4 +17,7 @@ public interface OrderService {
     Order createOrder(Order order);
 
     Order updateOrder(Order order);
+
+    Integer deleteOrderById(Integer id);
+
 }

@@ -1,8 +1,10 @@
 package com.ronmob.qz.service.impl;
 
+import com.ronmob.qz.dao.UserDistributionMapper;
 import com.ronmob.qz.model.UserDistribution;
 import com.ronmob.qz.service.UserDistributionService;
 import com.ronmob.qz.vo.UserDistributionListSearchVo;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -11,23 +13,33 @@ import java.util.List;
  * 创建人：sunwuyang
  */
 public class UserDistributionServiceImpl implements UserDistributionService {
+    @Autowired
+    UserDistributionMapper userDistributionMapper;
+
     @Override
     public List<UserDistribution> getUserDistributionList(UserDistributionListSearchVo userDistributionListSearchVo) {
-        return null;
+        return userDistributionMapper.getUserDistributionList(userDistributionListSearchVo);
     }
 
     @Override
     public Integer getUserDistributionListTotalCount(UserDistributionListSearchVo userDistributionListSearchVo) {
-        return null;
+        return userDistributionMapper.getUserDistributionListTotalCount(userDistributionListSearchVo);
     }
 
     @Override
     public UserDistribution createUserDistribution(UserDistribution userDistribution) {
-        return null;
+        userDistributionMapper.insertUserDistribution(userDistribution);
+        return userDistribution;
     }
 
     @Override
     public UserDistribution updateUserDistribution(UserDistribution userDistribution) {
-        return null;
+        userDistributionMapper.updateUserDistribution(userDistribution);
+        return userDistribution;
+    }
+
+    @Override
+    public Integer deleteUserDistribution(Integer id) {
+        return userDistributionMapper.deleteUserDistributionById(id);
     }
 }

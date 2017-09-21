@@ -13,7 +13,6 @@ import java.util.List;
  * 创建人：sunwuyang
  */
 public interface SurveyDimensionService {
-    //----------------SurveyDimension相关操作-------------------
     List<SurveyDimension> getSurveyDimensionList(SurveyDimensionListSearchVo surveyDimensionVo);
 
     Integer getSurveyDimensionListTotalCount(SurveyDimensionListSearchVo surveyDimensionVo);
@@ -21,5 +20,8 @@ public interface SurveyDimensionService {
     SurveyDimension createSurveyDimension(SurveyDimension surveyDimension);
 
     SurveyDimension updateSurveyDimension(SurveyDimension surveyDimension);
+
+    Integer deleteSurveyDimension(Integer id);
+
 }
 

@@ -12,7 +12,7 @@
     </resultMap>
 
     <!-- 获取问卷维度列表 -->
-    <select id="getSurveyDimensions" resultMap="SurveyDimensionResultMap"
+    <select id="getSurveyDimensionList" resultMap="SurveyDimensionResultMap"
             parameterType="com.ronmob.qz.vo.SurveyDimensionListSearchVo">
         SELECT * FROM survey_dimension WHERE 1=1
         <if test="surveyDimension!=null and surveyDimension.id != null">
@@ -33,7 +33,7 @@
     </select>
 
     <!-- 获取问卷维度列表数量 -->
-    <select id="getSurveysCount" resultType="java.lang.Integer"
+    <select id="getSurveyDimensionListTotalCount" resultType="java.lang.Integer"
             parameterType="com.ronmob.qz.vo.SurveyDimensionListSearchVo">
         SELECT COUNT(*) FROM survey_dimension WHERE 1=1
         <if test="surveyDimension!=null and surveyDimension.id != null">

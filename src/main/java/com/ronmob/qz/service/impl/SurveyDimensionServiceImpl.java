@@ -1,9 +1,11 @@
 package com.ronmob.qz.service.impl;
 
+import com.ronmob.qz.dao.SurveyDimensionMapper;
 import com.ronmob.qz.model.SurveyDimension;
 import com.ronmob.qz.model.SurveyQuestion;
 import com.ronmob.qz.service.SurveyDimensionService;
 import com.ronmob.qz.vo.SurveyDimensionListSearchVo;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -12,23 +14,33 @@ import java.util.List;
  * 创建人：sunwuyang
  */
 public class SurveyDimensionServiceImpl implements SurveyDimensionService {
+    @Autowired
+    SurveyDimensionMapper surveyDimensionMapper;
+
     @Override
     public List<SurveyDimension> getSurveyDimensionList(SurveyDimensionListSearchVo surveyDimensionVo) {
-        return null;
+        return surveyDimensionMapper.getSurveyDimensionList(surveyDimensionVo);
     }
 
     @Override
-    public Long getSurveyDimensionListCount(SurveyDimensionListSearchVo surveyDimensionVo) {
-        return null;
+    public Integer getSurveyDimensionListTotalCount(SurveyDimensionListSearchVo surveyDimensionVo) {
+        return surveyDimensionMapper.getSurveyDimesionListTotalCount(surveyDimensionVo);
     }
 
     @Override
-    public SurveyQuestion createSurveyDimension(SurveyDimension surveyDimension) {
-        return null;
+    public SurveyDimension createSurveyDimension(SurveyDimension surveyDimension) {
+        surveyDimensionMapper.insertSurveyDimension(surveyDimension);
+        return surveyDimension;
     }
 
     @Override
-    public void updateSurveyDimension(SurveyDimension surveyDimension) {
+    public SurveyDimension updateSurveyDimension(SurveyDimension surveyDimension) {
+        surveyDimensionMapper.updateSurveyDimension(surveyDimension);
+        return surveyDimension;
+    }
 
+    @Override
+    public Integer deleteSurveyDimension(Integer id) {
+        return surveyDimensionMapper.deleteSurveyDimensionById(id);
     }
 }

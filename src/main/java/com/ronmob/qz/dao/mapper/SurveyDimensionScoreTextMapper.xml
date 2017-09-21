@@ -11,7 +11,7 @@
     </resultMap>
 
     <!-- 获取问卷维度评分列表 -->
-    <select id="getSurveyDimensionScoreTexts" resultMap="SurveyDimensionScoreTextResultMap"
+    <select id="getSurveyDimensionScoreTextList" resultMap="SurveyDimensionScoreTextResultMap"
             parameterType="com.ronmob.qz.vo.SurveyDimensionScoreTextListSearchVo">
         SELECT * FROM survey_dimension_score_text WHERE 1=1
         <if test="surveyDimensionScoreText!=null and surveyDimensionScoreText.id != null">
@@ -26,7 +26,7 @@
     </select>
 
     <!-- 获取问卷维度评分列表数量 -->
-    <select id="getSurveyDimensionScoreTextCount" resultType="java.lang.Integer"
+    <select id="getSurveyDimensionScoreTextListTotalCount" resultType="java.lang.Integer"
             parameterType="com.ronmob.qz.vo.SurveyDimensionScoreTextListSearchVo">
         SELECT COUNT(*) FROM survey_dimension_score_text WHERE 1=1
         <if test="surveyDimensionScoreText!=null and surveyDimensionScoreText.id != null">

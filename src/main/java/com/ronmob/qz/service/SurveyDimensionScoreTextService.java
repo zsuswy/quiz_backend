@@ -18,4 +18,6 @@ public interface SurveyDimensionScoreTextService {
     SurveyDimensionScoreText createSurveyDimensionScoreText(SurveyDimensionScoreText surveyDimensionScoreText);
 
     SurveyDimensionScoreText updateSurveyDimensionScoreText(SurveyDimensionScoreText surveyDimensionScoreText);
+
+    Integer deleteSurveyDimensionScoreTextById(Integer id);
 }

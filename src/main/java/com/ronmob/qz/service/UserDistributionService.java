@@ -17,4 +17,6 @@ public interface UserDistributionService {
     UserDistribution createUserDistribution(UserDistribution userDistribution);
 
     UserDistribution updateUserDistribution(UserDistribution userDistribution);
+
+    Integer deleteUserDistribution(Integer id);
 }

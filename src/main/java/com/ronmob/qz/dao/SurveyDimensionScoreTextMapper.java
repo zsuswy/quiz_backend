@@ -13,9 +13,9 @@ import java.util.List;
 
 public interface SurveyDimensionScoreTextMapper {
     // ------------------------ SurveyDimension 相关操作 ------------------------
-    List<SurveyDimensionScoreText> getSurveyDimensionScoreTexts(SurveyDimensionScoreTextListSearchVo surveyDimensionScoreTextListSearchVo);
+    List<SurveyDimensionScoreText> getSurveyDimensionScoreTextList(SurveyDimensionScoreTextListSearchVo surveyDimensionScoreTextListSearchVo);
 
-    Integer getSurveyDimensionScoreTextTotalCount(SurveyDimensionScoreTextListSearchVo surveyDimensionScoreTextListSearchVo);
+    Integer getSurveyDimensionScoreTextListTotalCount(SurveyDimensionScoreTextListSearchVo surveyDimensionScoreTextListSearchVo);
 
     Integer insertSurveyDimensionScoreText(SurveyDimensionScoreText surveyDimensionScoreText);
 

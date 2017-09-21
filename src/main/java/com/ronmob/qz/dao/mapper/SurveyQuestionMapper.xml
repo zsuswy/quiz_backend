@@ -25,7 +25,7 @@
 	</select>
 
     <!-- 获取问卷的问题列表 -->
-    <select id="getSurveyQuestions" resultMap="SurveyQuestionResultMap"
+    <select id="getSurveyQuestionList" resultMap="SurveyQuestionResultMap"
             parameterType="com.ronmob.qz.vo.SurveyQuestionListSearchVo">
         SELECT * FROM survey_question WHERE 1=1
         <if test="surveyQuestion!= null and surveyQuestion.id != null">
@@ -40,7 +40,7 @@
     </select>
 
     <!-- 获取问卷的问题数量 -->
-    <select id="getSurveyQuestionsCount" resultType="java.lang.Integer"
+    <select id="getSurveyQuestionListTotalCount" resultType="java.lang.Integer"
             parameterType="com.ronmob.qz.vo.SurveyQuestionListSearchVo">
         SELECT COUNT(*) FROM survey_question WHERE 1=1
         <if test="surveyQuestion!= null and surveyQuestion.id != null">
