@@ -62,6 +62,12 @@ public class TestController {
         return userService.getUserList(vo);
     }
 
+    @RequestMapping(value = "/user", produces = "application/json")
+    @ResponseBody
+    public Object testUserService(@RequestBody SearchVo vo, HttpSession httpSession) {
+        return userService.getUserList(vo);
+    }
+
     @RequestMapping(value = "/p", produces = "application/json")
     @ResponseBody
     public Object testParams(@RequestBody SearchVo vo, HttpSession httpSession) throws Exception {

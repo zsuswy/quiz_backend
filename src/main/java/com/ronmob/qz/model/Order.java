@@ -22,6 +22,8 @@ public class Order {
 
     private Date finishTime;
 
+    private Integer userId;
+
     public Integer getId() {
         return id;
     }
@@ -92,5 +94,13 @@ public class Order {
 
     public void setFinishTime(Date finishTime) {
         this.finishTime = finishTime;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

@@ -20,11 +20,20 @@ public class OrderServiceImpl implements OrderService {
     OrderMapper orderMapper;
 
     private OrderExample getOrderExample(SearchVo searchVo) {
-        OrderExample orderExample = new OrderExample();
-        if (searchVo.getParams().containsKey("id")) {
-            orderExample.createCriteria().andIdEqualTo(new Integer(searchVo.getParams().get("id").toString()));
+        OrderExample example = new OrderExample();
+        if (searchVo.getPage() != null) {
+            example.setLimit(searchVo.getPage().getLimit());
+            example.setOffset(searchVo.getPage().getOffset());
         }
-        return orderExample;
+
+        if (searchVo.getParams().containsKey("id")) {
+            example.createCriteria().andIdEqualTo(new Integer(searchVo.getParams().get("id").toString()));
+        }
+        if (searchVo.getParams().containsKey("wx_order_no")) {
+            example.createCriteria().andIdEqualTo(new Integer(searchVo.getParams().get("id").toString()));
+        }
+
+        return example;
     }
 
     @Override

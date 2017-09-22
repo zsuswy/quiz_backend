@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 创建时间：9/20/17
@@ -21,6 +22,19 @@ public class UserServiceImpl implements UserService {
 
     private UserExample getUserExample(SearchVo searchVo) {
         UserExample example = new UserExample();
+        if (searchVo.getPage() != null) {
+            example.setLimit(searchVo.getPage().getLimit());
+            example.setOffset(searchVo.getPage().getOffset());
+        }
+
+        Map params = searchVo.getParams();
+        if (params.containsKey("id")) {
+            example.createCriteria().andIdEqualTo(new Integer(params.get("id").toString()));
+        }
+        if (params.containsKey("is_agent")) {
+            example.createCriteria().andIsAgentEqualTo(new Byte(params.get("is_agent").toString()));
+        }
+
         return example;
     }
 
