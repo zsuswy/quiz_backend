@@ -31,8 +31,8 @@ public class UserServiceImpl implements UserService {
         if (params.containsKey("id")) {
             example.createCriteria().andIdEqualTo(new Integer(params.get("id").toString()));
         }
-        if (params.containsKey("is_agent")) {
-            example.createCriteria().andIsAgentEqualTo(new Byte(params.get("is_agent").toString()));
+        if (params.containsKey("isAgent")) {
+            example.createCriteria().andIsAgentEqualTo(new Byte(params.get("isAgent").toString()));
         }
 
         return example;

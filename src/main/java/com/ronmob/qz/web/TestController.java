@@ -3,7 +3,9 @@ package com.ronmob.qz.web;
 import com.google.gson.Gson;
 import com.ronmob.qz.common.Util;
 import com.ronmob.qz.model.User;
+import com.ronmob.qz.model.common.ListResultData;
 import com.ronmob.qz.model.common.Page;
+import com.ronmob.qz.model.common.ResponseResult;
 import com.ronmob.qz.service.*;
 import com.ronmob.qz.vo.SearchVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,28 +56,49 @@ public class TestController {
         user.setBalance(new BigDecimal(20));
         user.setScore(20);
         user.setWxOpenId("lkasiuuyqkjsdfouoipuoh2yu3");
-        userService.createUser(user);
+        //userService.createUser(user);
 
         SearchVo vo = new SearchVo();
         vo.setPage(new Page());
 
-        return userService.getUserList(vo);
+        return null;//userService.getUserList(vo);
     }
 
     @RequestMapping(value = "/user", produces = "application/json")
     @ResponseBody
     public Object testUserService(@RequestBody SearchVo vo, HttpSession httpSession) {
-        return userService.getUserList(vo);
+        return null; //userService.getUserList(vo);
     }
 
     @RequestMapping(value = "/p", produces = "application/json")
     @ResponseBody
-    public Object testParams(@RequestBody SearchVo vo, HttpSession httpSession) throws Exception {
-        Gson gson = new Gson();
-        System.out.println(Util.getDateFromString(vo.getParams().get("starTime").toString()));
-        System.out.println(gson.toJson(vo));
+    public Object testParams(@RequestBody SearchVo searchVo, HttpSession httpSession) throws Exception {
 
-        return vo;
+        ResponseResult responseResult = new ResponseResult();
+        ListResultData listResultData = new ListResultData();
+
+        try {
+            // 如果有分页信息请求，那么需要返回完整的分页数据
+            if (searchVo.getPage() != null) {
+                Page page = new Page();
+                page.setPageNO(searchVo.getPage().getPageNO());
+                page.setEveryPageCount(searchVo.getPage().getEveryPageCount());
+                page.setTotalCount(orderService.getOrderListTotalCount(searchVo));
+
+                listResultData.setPage(page);
+            }
+            listResultData.setList(orderService.getOrderList(searchVo));
+
+
+            responseResult.setData(listResultData);
+            responseResult.setResult(true);
+        } catch (Exception ex) {
+            responseResult.setResult(false);
+            responseResult.setMessage(ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return responseResult;
     }
 
 }

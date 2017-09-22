@@ -1,5 +1,8 @@
 package com.ronmob.qz.common;
 
+import com.ronmob.qz.model.common.Page;
+import com.ronmob.qz.vo.SearchVo;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,5 +26,15 @@ public class Util {
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
         Date date = sdf.parse(dateString);
         return date;
+    }
+
+    public static Page getPageFromSearchVo(SearchVo searchVo) {
+        Page page = null;
+        if (searchVo.getPage() != null) {
+            page = new Page();
+            page.setPageNO(searchVo.getPage().getPageNO());
+            page.setEveryPageCount(searchVo.getPage().getEveryPageCount());
+        }
+        return page;
     }
 }

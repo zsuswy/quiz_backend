@@ -11,11 +11,11 @@ import java.util.List;
  * 创建人：sunwuyang
  */
 public interface UserSurveyService {
-    List<UserSurvey> getUserSurveyList(SearchVo searchVo);
+    List<UserSurvey> getUserSurveyList(SearchVo searchVo) throws Exception;
 
-    Integer getUserSurveyListTotalCount(SearchVo searchVo);
+    Integer getUserSurveyListTotalCount(SearchVo searchVo) throws Exception;
 
-    UserSurveyWithBLOBs createUserSurvey(UserSurveyWithBLOBs userSurvey);
+    UserSurveyWithBLOBs createUserSurvey(UserSurveyWithBLOBs userSurvey) throws Exception;
 
-    UserSurveyWithBLOBs updateUserSurvey(UserSurveyWithBLOBs userSurvey);
+    UserSurveyWithBLOBs updateUserSurvey(UserSurveyWithBLOBs userSurvey) throws Exception;
 }

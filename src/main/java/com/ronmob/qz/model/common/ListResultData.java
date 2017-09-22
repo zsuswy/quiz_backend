@@ -1,4 +1,4 @@
-package com.ronmob.qz.vo;
+package com.ronmob.qz.model.common;
 
 import com.ronmob.qz.model.Order;
 import com.ronmob.qz.model.common.Page;
@@ -9,7 +9,7 @@ import java.util.List;
  * 创建时间：9/20/17
  * 创建人：sunwuyang
  */
-public class ListResultVo {
+public class ListResultData {
     private Page page;
     private List list;
 

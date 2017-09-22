@@ -12,15 +12,14 @@ import java.util.List;
  */
 @Repository
 public interface SurveyDimensionService {
-    List<SurveyDimension> getSurveyDimensionList(SearchVo searchVo);
+    List<SurveyDimension> getSurveyDimensionList(SearchVo searchVo) throws Exception;
 
-    Integer getSurveyDimensionListTotalCount(SearchVo searchVo);
+    Integer getSurveyDimensionListTotalCount(SearchVo searchVo) throws Exception;
 
-    SurveyDimension createSurveyDimension(SurveyDimension surveyDimension);
+    SurveyDimension createSurveyDimension(SurveyDimension surveyDimension) throws Exception;
 
-    SurveyDimension updateSurveyDimension(SurveyDimension surveyDimension);
+    SurveyDimension updateSurveyDimension(SurveyDimension surveyDimension) throws Exception;
 
-    Integer deleteSurveyDimension(Integer id);
-
+    Integer deleteSurveyDimension(Integer id) throws Exception;
 }
 

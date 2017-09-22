@@ -4,12 +4,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.ronmob.qz.common.Util;
 import com.ronmob.qz.model.Survey;
 import com.ronmob.qz.model.SurveyClass;
 import com.ronmob.qz.model.SurveyQuestion;
 import com.ronmob.qz.service.SurveyClassService;
 import com.ronmob.qz.service.SurveyQuestionService;
-import com.ronmob.qz.vo.ListResultVo;
+import com.ronmob.qz.model.common.ListResultData;
 import com.ronmob.qz.vo.SearchVo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,31 +42,50 @@ public class SurveyController {
 
     @RequestMapping(value = "/getSurveys", produces = "application/json")
     @ResponseBody
-    public ListResultVo getSurveys(HttpSession httpSession, @RequestBody SearchVo vo) {
-        ListResultVo result = new ListResultVo();
-        Page page = vo.getPage();
-        if (page == null) {
-            page = new Page();
+    public ResponseResult getSurveys(HttpSession httpSession, @RequestBody SearchVo searchVo) {
+        ResponseResult result = new ResponseResult();
+        ListResultData listResultData = new ListResultData();
+        try {
+            Page page = Util.getPageFromSearchVo(searchVo);
+            if (page != null) {
+                page.setTotalCount(surveyService.getSurveyListTotalCount(searchVo));
+                listResultData.setPage(page);
+            }
+
+            listResultData.setList(this.surveyService.getSurveyList(searchVo));
+
+            result.setResult(true);
+            result.setData(listResultData);
+        } catch (Exception ex) {
+            result.setResult(false);
+            result.setMessage(ex.getMessage());
+            ex.printStackTrace();
         }
-        result.setList(this.surveyService.getSurveyList(vo));
-        page.setTotalCount(surveyService.getSurveyListTotalCount(vo).intValue());
-        result.setPage(page);
 
         return result;
     }
 
     @RequestMapping(value = "/getSurveyQuestions", produces = "application/json")
     @ResponseBody
-    public ListResultVo getSurveyQuestions(HttpSession httpSession, @RequestBody SearchVo vo) {
-        ListResultVo result = new ListResultVo();
-        Page page = vo.getPage();
-        if (page == null) {
-            page = new Page();
-        }
-        result.setList(this.surveyQuestionService.getSurveyQuestionList(vo));
-        page.setTotalCount(this.surveyQuestionService.getSurveyQuestionListTotalCount(vo));
-        result.setPage(page);
+    public ResponseResult getSurveyQuestions(HttpSession httpSession, @RequestBody SearchVo searchVo) {
+        ResponseResult result = new ResponseResult();
+        ListResultData listResultData = new ListResultData();
 
+        try {
+            Page page = Util.getPageFromSearchVo(searchVo);
+            if (page != null) {
+                page.setTotalCount(surveyQuestionService.getSurveyQuestionListTotalCount(searchVo));
+                listResultData.setPage(page);
+            }
+
+            listResultData.setList(surveyQuestionService.getSurveyQuestionList(searchVo));
+            result.setResult(true);
+            result.setData(listResultData);
+        } catch (Exception ex) {
+            result.setResult(false);
+            result.setMessage(ex.getMessage());
+            ex.printStackTrace();
+        }
         return result;
     }
 
@@ -75,11 +95,11 @@ public class SurveyController {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyService.createSurvey(vo);
-            result.setResult("success");
+            result.setResult(true);
             result.setData(vo);
 
         } catch (Exception ex) {
-            result.setResult("fail");
+            result.setResult(false);
             result.setMessage(ex.getMessage());
         }
 
@@ -92,9 +112,9 @@ public class SurveyController {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyService.updateSurvey(vo);
-            result.setResult("success");
+            result.setResult(true);
         } catch (Exception ex) {
-            result.setResult("fail");
+            result.setResult(false);
             result.setMessage(ex.getMessage());
         }
 
@@ -107,10 +127,10 @@ public class SurveyController {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyQuestionService.createSurveyQuestion(vo);
-            result.setResult("success");
+            result.setResult(true);
             result.setData(vo);
         } catch (Exception ex) {
-            result.setResult("fail");
+            result.setResult(false);
             result.setMessage(ex.getMessage());
         }
 
@@ -123,11 +143,11 @@ public class SurveyController {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyQuestionService.updateSurveyQuestion(vo);
-            result.setResult("success");
+            result.setResult(true);
             result.setData(vo);
         } catch (Exception ex) {
             System.out.println(ex);
-            result.setResult("fail");
+            result.setResult(false);
             result.setMessage(ex.getMessage());
         }
 
@@ -136,10 +156,16 @@ public class SurveyController {
 
     @RequestMapping(value = "/getSurveyClasses", produces = "application/json")
     @ResponseBody
-    public List<SurveyClass> getSurveyClasses(HttpSession httpSession,
-                                              @RequestParam(value = "enabled") Byte enabled) {
-        System.out.println(enabled);
-        return surveyClassService.getSurveyClassList(enabled);
+    public ResponseResult getSurveyClasses(Byte enabled) {
+        ResponseResult result = new ResponseResult();
+        try {
+            result.setData(surveyClassService.getSurveyClassList(enabled));
+            result.setResult(true);
+        } catch (Exception ex) {
+            result.setResult(false);
+            result.setMessage(ex.getMessage());
+        }
+        return result;
     }
 
 }

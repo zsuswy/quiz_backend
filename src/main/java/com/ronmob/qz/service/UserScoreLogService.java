@@ -10,11 +10,11 @@ import java.util.List;
  * 创建人：sunwuyang
  */
 public interface UserScoreLogService {
-    List<UserScoreLog> getUserScoreLogList(SearchVo searchVo);
+    List<UserScoreLog> getUserScoreLogList(SearchVo searchVo) throws Exception;
 
-    Integer getUserScoreLogListTotalCount(SearchVo searchVo);
+    Integer getUserScoreLogListTotalCount(SearchVo searchVo) throws Exception;
 
-    UserScoreLog createUserScoreLog(UserScoreLog userDistribution);
+    UserScoreLog createUserScoreLog(UserScoreLog userDistribution) throws Exception;
 
-    UserScoreLog updateUserScoreLog(UserScoreLog userDistribution);
+    UserScoreLog updateUserScoreLog(UserScoreLog userDistribution) throws Exception;
 }

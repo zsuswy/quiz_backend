@@ -9,11 +9,11 @@ import com.ronmob.qz.vo.SearchVo;
  *
  */
 public interface SurveyService {
-    List<Survey> getSurveyList(SearchVo searchVo);
+    List<Survey> getSurveyList(SearchVo searchVo) throws Exception;
 
-    Integer getSurveyListTotalCount(SearchVo searchVo);
+    Integer getSurveyListTotalCount(SearchVo searchVo) throws Exception;
 
-    Survey createSurvey(Survey survey);
+    Survey createSurvey(Survey survey) throws Exception;
 
-    Survey updateSurvey(Survey survey);
+    Survey updateSurvey(Survey survey) throws Exception;
 }

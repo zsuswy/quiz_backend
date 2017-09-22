@@ -21,6 +21,8 @@ public class UserSurvey {
 
     private Byte isNeedSex;
 
+    private Date createTime;
+
     public Integer getId() {
         return id;
     }
@@ -91,5 +93,13 @@ public class UserSurvey {
 
     public void setIsNeedSex(Byte isNeedSex) {
         this.isNeedSex = isNeedSex;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

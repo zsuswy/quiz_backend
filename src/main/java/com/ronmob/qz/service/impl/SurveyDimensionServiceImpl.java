@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 创建时间：9/20/17
@@ -22,6 +23,24 @@ public class SurveyDimensionServiceImpl implements SurveyDimensionService {
 
     private SurveyDimensionExample getSurveyDimensionExample(SearchVo searchVo) {
         SurveyDimensionExample example = new SurveyDimensionExample();
+        if (searchVo.getPage() != null) {
+            example.setLimit(searchVo.getPage().getLimit());
+            example.setOffset(searchVo.getPage().getOffset());
+        }
+
+        Map params = searchVo.getParams();
+        if (params.containsKey("id")) {
+            example.createCriteria().andIdEqualTo(new Integer(params.get("id").toString()));
+        }
+        if (params.containsKey("parentId")) {
+            example.createCriteria().andParentIdEqualTo(new Integer(params.get("parentId").toString()));
+        }
+        if (params.containsKey("surveyId")) {
+            example.createCriteria().andSurveyIdEqualTo(new Integer(params.get("surveyId").toString()));
+        }
+        if (params.containsKey("seq")) {
+            example.createCriteria().andSeqEqualTo(new Integer(params.get("seq").toString()));
+        }
         return example;
     }
 

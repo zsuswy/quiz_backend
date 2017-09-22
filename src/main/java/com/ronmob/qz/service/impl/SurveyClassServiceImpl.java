@@ -17,7 +17,11 @@ public class SurveyClassServiceImpl implements SurveyClassService {
     @Override
     public List<SurveyClass> getSurveyClassList(Byte enabled) {
         SurveyClassExample example = new SurveyClassExample();
-        example.createCriteria().andEnabledEqualTo(enabled);
+
+        if (enabled != null) {
+            example.createCriteria().andEnabledEqualTo(enabled);
+        }
+
         return classMapper.selectByExample(example);
     }
 }

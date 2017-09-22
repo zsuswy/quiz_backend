@@ -1,6 +1,7 @@
 package com.ronmob.qz.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ronmob.qz.model.Survey;
 import com.ronmob.qz.model.SurveyExample;
@@ -21,6 +22,30 @@ public class SurveyServiceImpl implements SurveyService {
 
     private SurveyExample getSurveyExample(SearchVo searchVo) {
         SurveyExample example = new SurveyExample();
+        if (searchVo.getPage() != null) {
+            example.setLimit(searchVo.getPage().getLimit());
+            example.setOffset(searchVo.getPage().getOffset());
+        }
+
+        Map params = searchVo.getParams();
+        if (params.containsKey("id")) {
+            example.createCriteria().andIdEqualTo(new Integer(params.get("id").toString()));
+        }
+        if (params.containsKey("status")) {
+            example.createCriteria().andStatusEqualTo(new Byte(params.get("status").toString()));
+        }
+        if (params.containsKey("isHot")) {
+            example.createCriteria().andIsHotEqualTo(new Byte(params.get("isHot").toString()));
+        }
+        if (params.containsKey("isNew")) {
+            example.createCriteria().andIsNewEqualTo(new Byte(params.get("isNew").toString()));
+        }
+        if (params.containsKey("isSuper")) {
+            example.createCriteria().andIsSuperEqualTo(new Byte(params.get("isSuper").toString()));
+        }
+        if (params.containsKey("classId")) {
+            example.createCriteria().andClassIdEqualTo(new Integer(params.get("classId").toString()));
+        }
         return example;
     }
 

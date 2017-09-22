@@ -10,11 +10,11 @@ import java.util.List;
  * 创建人：sunwuyang
  */
 public interface UserService {
-    List<User> getUserList(SearchVo searchVo);
+    List<User> getUserList(SearchVo searchVo) throws Exception;
 
-    Integer getUserListTotalCount(SearchVo searchVo);
+    Integer getUserListTotalCount(SearchVo searchVo) throws Exception;
 
-    User createUser(User user);
+    User createUser(User user) throws Exception;
 
-    User updateUser(User user);
+    User updateUser(User user) throws Exception;
 }

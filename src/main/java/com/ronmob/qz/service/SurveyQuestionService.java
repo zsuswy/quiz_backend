@@ -2,6 +2,7 @@ package com.ronmob.qz.service;
 
 import com.ronmob.qz.model.SurveyQuestion;
 import com.ronmob.qz.vo.SearchVo;
+
 import java.util.List;
 
 /**
@@ -9,11 +10,11 @@ import java.util.List;
  * 创建人：sunwuyang
  */
 public interface SurveyQuestionService {
-    List<SurveyQuestion> getSurveyQuestionList(SearchVo searchVo);
+    List<SurveyQuestion> getSurveyQuestionList(SearchVo searchVo) throws Exception;
 
-    Integer getSurveyQuestionListTotalCount(SearchVo searchVo);
+    Integer getSurveyQuestionListTotalCount(SearchVo searchVo) throws Exception;
 
-    SurveyQuestion createSurveyQuestion(SurveyQuestion surveyQuestion);
+    SurveyQuestion createSurveyQuestion(SurveyQuestion surveyQuestion) throws Exception;
 
-    SurveyQuestion updateSurveyQuestion(SurveyQuestion surveyQuestion);
+    SurveyQuestion updateSurveyQuestion(SurveyQuestion surveyQuestion) throws Exception;
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.ronmob.qz.model.SurveyClass;
+import com.ronmob.qz.model.common.ResponseResult;
 import com.ronmob.qz.service.SurveyClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,16 @@ public class CommonController {
 
     @RequestMapping(value = "/getSurveyClasses", produces = "application/json")
     @ResponseBody
-    public List<SurveyClass> getSurveyClasses(HttpSession httpSession, Byte enabled) {
-        return surveyClassService.getSurveyClassList(enabled);
+    public ResponseResult getSurveyClasses(HttpSession httpSession, Byte enabled) {
+        ResponseResult result = new ResponseResult();
+        try {
+            result.setData(surveyClassService.getSurveyClassList(enabled));
+            result.setResult(true);
+        } catch (Exception ex) {
+            result.setResult(false);
+            result.setMessage(ex.getMessage());
+        }
+
+        return result;
     }
 }

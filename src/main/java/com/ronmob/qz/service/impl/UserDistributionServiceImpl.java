@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 创建时间：9/21/17
@@ -21,6 +22,30 @@ public class UserDistributionServiceImpl implements UserDistributionService {
 
     private UserDistributionExample getUserDistributionExample(SearchVo searchVo) {
         UserDistributionExample example = new UserDistributionExample();
+
+        if (searchVo.getPage() != null) {
+            example.setLimit(searchVo.getPage().getLimit());
+            example.setOffset(searchVo.getPage().getOffset());
+        }
+
+        Map params = searchVo.getParams();
+
+        if (params.containsKey("id")) {
+            example.createCriteria().andIdEqualTo(new Integer(params.get("id").toString()));
+        }
+        if (params.containsKey("fromUserId")) {
+            example.createCriteria().andFromUserIdEqualTo(new Integer(params.get("fromUserId").toString()));
+        }
+        if (params.containsKey("toUserId")) {
+            example.createCriteria().andToUserIdEqualTo(new Integer(params.get("toUserId").toString()));
+        }
+        if (params.containsKey("surveyId")) {
+            example.createCriteria().andSurveyIdEqualTo(new Integer(params.get("surveyId").toString()));
+        }
+        if (params.containsKey("userSurveyId")) {
+            example.createCriteria().andUserSurveyIdEqualTo(new Integer(params.get("userSurveyId").toString()));
+        }
+
         return example;
     }
 

@@ -1,6 +1,7 @@
 package com.ronmob.qz.service.impl;
 
 import com.ronmob.qz.dao.SurveyQuestionMapper;
+import com.ronmob.qz.model.SurveyExample;
 import com.ronmob.qz.model.SurveyQuestion;
 import com.ronmob.qz.model.SurveyQuestionExample;
 import com.ronmob.qz.service.SurveyQuestionService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -20,6 +22,24 @@ public class SurveyQuestionServiceImpl implements SurveyQuestionService {
 
     private SurveyQuestionExample getSurveyQuestionExample(SearchVo searchVo) {
         SurveyQuestionExample example = new SurveyQuestionExample();
+        if (searchVo.getPage() != null) {
+            example.setLimit(searchVo.getPage().getLimit());
+            example.setOffset(searchVo.getPage().getOffset());
+        }
+
+        Map params = searchVo.getParams();
+        if (params.containsKey("id")) {
+            example.createCriteria().andIdEqualTo(new Integer(params.get("id").toString()));
+        }
+        if (params.containsKey("seq")) {
+            example.createCriteria().andSeqEqualTo(new Integer(params.get("seq").toString()));
+        }
+        if (params.containsKey("surveyId")) {
+            example.createCriteria().andSurveyIdEqualTo(new Integer(params.get("surveyId").toString()));
+        }
+        if (params.containsKey("type")) {
+            example.createCriteria().andTypeEqualTo(new Byte(params.get("type").toString()));
+        }
         return example;
     }
 

@@ -10,13 +10,13 @@ import java.util.List;
  * 创建人：sunwuyang
  */
 public interface UserDistributionService {
-    List<UserDistribution> getUserDistributionList(SearchVo searchVo);
+    List<UserDistribution> getUserDistributionList(SearchVo searchVo) throws Exception;
 
-    Integer getUserDistributionListTotalCount(SearchVo searchVo);
+    Integer getUserDistributionListTotalCount(SearchVo searchVo) throws Exception;
 
-    UserDistribution createUserDistribution(UserDistribution userDistribution);
+    UserDistribution createUserDistribution(UserDistribution userDistribution) throws Exception;
 
-    UserDistribution updateUserDistribution(UserDistribution userDistribution);
+    UserDistribution updateUserDistribution(UserDistribution userDistribution) throws Exception;
 
-    Integer deleteUserDistribution(Integer id);
+    Integer deleteUserDistribution(Integer id) throws Exception;
 }
