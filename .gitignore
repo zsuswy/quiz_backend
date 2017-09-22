@@ -34,4 +34,4 @@ src/main/.DS_Store
 src/main/java/com/ronmob/qz/.DS_Store
 /target/
 /out/
-/src/main/java/com/ronmob/qz/dao/mapper/
+lib/

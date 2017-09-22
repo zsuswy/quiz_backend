@@ -17,4 +17,7 @@ public interface SurveyQuestionService {
     SurveyQuestion createSurveyQuestion(SurveyQuestion surveyQuestion) throws Exception;
 
     SurveyQuestion updateSurveyQuestion(SurveyQuestion surveyQuestion) throws Exception;
+
+    Integer deleteSurveyQuestionById(Integer id) throws Exception;
+
 }

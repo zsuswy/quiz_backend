@@ -17,19 +17,4 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class CommonController {
     @Autowired
     SurveyClassService surveyClassService;
-
-    @RequestMapping(value = "/getSurveyClasses", produces = "application/json")
-    @ResponseBody
-    public ResponseResult getSurveyClasses(HttpSession httpSession, Byte enabled) {
-        ResponseResult result = new ResponseResult();
-        try {
-            result.setData(surveyClassService.getSurveyClassList(enabled));
-            result.setResult(true);
-        } catch (Exception ex) {
-            result.setResult(false);
-            result.setMessage(ex.getMessage());
-        }
-
-        return result;
-    }
 }

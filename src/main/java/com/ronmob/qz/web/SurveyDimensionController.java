@@ -1,9 +1,11 @@
 package com.ronmob.qz.web;
 
-import javax.servlet.http.HttpSession;
 import com.ronmob.qz.common.Util;
-import com.ronmob.qz.model.Survey;
+import com.ronmob.qz.model.SurveyDimension;
 import com.ronmob.qz.model.common.ListResultData;
+import com.ronmob.qz.model.common.Page;
+import com.ronmob.qz.model.common.ResponseResult;
+import com.ronmob.qz.service.SurveyDimensionService;
 import com.ronmob.qz.vo.SearchVo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,54 +14,53 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ronmob.qz.model.common.ResponseResult;
-import com.ronmob.qz.service.SurveyService;
-import com.ronmob.qz.model.common.Page;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/survey")
-public class SurveyController {
+@RequestMapping("/surveyDimension")
+public class SurveyDimensionController {
 
-    private static Log logger = LogFactory.getLog(SurveyController.class);
+    private static Log logger = LogFactory.getLog(SurveyDimensionController.class);
 
     @Autowired
-    private SurveyService surveyService;
+    SurveyDimensionService surveyDimensionService;
 
     @RequestMapping(value = "/list", produces = "application/json")
     @ResponseBody
-    public ResponseResult getSurveys(HttpSession httpSession, @RequestBody SearchVo searchVo) {
+    public ResponseResult getSurveyDimensionList(SearchVo searchVo) {
         ResponseResult result = new ResponseResult();
         ListResultData listResultData = new ListResultData();
+
         try {
             Page page = Util.getPageFromSearchVo(searchVo);
             if (page != null) {
-                page.setTotalCount(surveyService.getSurveyListTotalCount(searchVo));
+                page.setTotalCount(surveyDimensionService.getSurveyDimensionListTotalCount(searchVo));
                 listResultData.setPage(page);
             }
 
-            listResultData.setList(this.surveyService.getSurveyList(searchVo));
+            listResultData.setList(surveyDimensionService.getSurveyDimensionList(searchVo));
 
-            result.setResult(true);
             result.setData(listResultData);
+            result.setResult(true);
         } catch (Exception ex) {
             result.setResult(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
         }
-
         return result;
     }
 
+
     @RequestMapping(value = "/create", produces = "application/json")
     @ResponseBody
-    public ResponseResult insertSurvey(HttpSession httpSession, @RequestBody Survey vo) {
+    public ResponseResult insertSurveysDimension(HttpSession httpSession, @RequestBody SurveyDimension surveyDimension) {
         ResponseResult result = new ResponseResult();
         try {
-            this.surveyService.createSurvey(vo);
+            this.surveyDimensionService.createSurveyDimension(surveyDimension);
             result.setResult(true);
-            result.setData(vo);
-
+            result.setData(surveyDimension);
         } catch (Exception ex) {
             result.setResult(false);
             result.setMessage(ex.getMessage());
@@ -72,10 +73,31 @@ public class SurveyController {
 
     @RequestMapping(value = "/update", produces = "application/json")
     @ResponseBody
-    public ResponseResult updateSurvey(HttpSession httpSession, @RequestBody Survey vo) {
+    public ResponseResult updateSurveysDimension(HttpSession httpSession, @RequestBody SurveyDimension surveyDimension) {
         ResponseResult result = new ResponseResult();
         try {
-            this.surveyService.updateSurvey(vo);
+            this.surveyDimensionService.updateSurveyDimension(surveyDimension);
+            result.setResult(true);
+            result.setData(surveyDimension);
+        } catch (Exception ex) {
+            result.setResult(false);
+            result.setMessage(ex.getMessage());
+
+            logger.error(ex);
+        }
+
+        return result;
+    }
+
+    @RequestMapping(value = "/delete", produces = "application/json")
+    @ResponseBody
+    public ResponseResult deleteSurveysDimension(HttpSession httpSession, Integer id) {
+        ResponseResult result = new ResponseResult();
+        try {
+            if (id == null) {
+                throw new Exception("id参数为空");
+            }
+            surveyDimensionService.deleteSurveyDimension(id);
             result.setResult(true);
         } catch (Exception ex) {
             result.setResult(false);

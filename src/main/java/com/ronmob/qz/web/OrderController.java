@@ -1,9 +1,11 @@
 package com.ronmob.qz.web;
 
-import javax.servlet.http.HttpSession;
 import com.ronmob.qz.common.Util;
-import com.ronmob.qz.model.Survey;
+import com.ronmob.qz.model.Order;
 import com.ronmob.qz.model.common.ListResultData;
+import com.ronmob.qz.model.common.Page;
+import com.ronmob.qz.model.common.ResponseResult;
+import com.ronmob.qz.service.OrderService;
 import com.ronmob.qz.vo.SearchVo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,33 +14,33 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ronmob.qz.model.common.ResponseResult;
-import com.ronmob.qz.service.SurveyService;
-import com.ronmob.qz.model.common.Page;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/survey")
-public class SurveyController {
+@RequestMapping("/order")
+public class OrderController {
 
-    private static Log logger = LogFactory.getLog(SurveyController.class);
+    private static Log logger = LogFactory.getLog(OrderController.class);
 
     @Autowired
-    private SurveyService surveyService;
+    private OrderService orderService;
+
 
     @RequestMapping(value = "/list", produces = "application/json")
     @ResponseBody
-    public ResponseResult getSurveys(HttpSession httpSession, @RequestBody SearchVo searchVo) {
+    public ResponseResult getOrderList(HttpSession httpSession, @RequestBody SearchVo searchVo) {
         ResponseResult result = new ResponseResult();
         ListResultData listResultData = new ListResultData();
+
         try {
             Page page = Util.getPageFromSearchVo(searchVo);
             if (page != null) {
-                page.setTotalCount(surveyService.getSurveyListTotalCount(searchVo));
+                page.setTotalCount(orderService.getOrderListTotalCount(searchVo));
                 listResultData.setPage(page);
             }
 
-            listResultData.setList(this.surveyService.getSurveyList(searchVo));
-
+            listResultData.setList(orderService.getOrderList(searchVo));
             result.setResult(true);
             result.setData(listResultData);
         } catch (Exception ex) {
@@ -47,19 +49,17 @@ public class SurveyController {
 
             logger.error(ex);
         }
-
         return result;
     }
 
     @RequestMapping(value = "/create", produces = "application/json")
     @ResponseBody
-    public ResponseResult insertSurvey(HttpSession httpSession, @RequestBody Survey vo) {
+    public ResponseResult insertOrder(HttpSession httpSession, @RequestBody Order order) {
         ResponseResult result = new ResponseResult();
         try {
-            this.surveyService.createSurvey(vo);
+            this.orderService.createOrder(order);
             result.setResult(true);
-            result.setData(vo);
-
+            result.setData(order);
         } catch (Exception ex) {
             result.setResult(false);
             result.setMessage(ex.getMessage());
@@ -72,11 +72,12 @@ public class SurveyController {
 
     @RequestMapping(value = "/update", produces = "application/json")
     @ResponseBody
-    public ResponseResult updateSurvey(HttpSession httpSession, @RequestBody Survey vo) {
+    public ResponseResult updateOrder(HttpSession httpSession, @RequestBody Order order) {
         ResponseResult result = new ResponseResult();
         try {
-            this.surveyService.updateSurvey(vo);
+            this.orderService.updateOrder(order);
             result.setResult(true);
+            result.setData(order);
         } catch (Exception ex) {
             result.setResult(false);
             result.setMessage(ex.getMessage());
@@ -87,4 +88,25 @@ public class SurveyController {
         return result;
     }
 
+    @RequestMapping(value = "/delete", produces = "application/json")
+    @ResponseBody
+    public ResponseResult deleteOrder(HttpSession httpSession, Integer id) {
+        ResponseResult result = new ResponseResult();
+        try {
+            if (id == null) {
+                throw new Exception("id参数为空");
+            }
+
+            orderService.deleteOrderById(id);
+
+            result.setResult(true);
+        } catch (Exception ex) {
+            result.setResult(false);
+            result.setMessage(ex.getMessage());
+
+            logger.error(ex);
+        }
+
+        return result;
+    }
 }

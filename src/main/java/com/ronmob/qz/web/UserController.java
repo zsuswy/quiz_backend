@@ -1,9 +1,11 @@
 package com.ronmob.qz.web;
 
-import javax.servlet.http.HttpSession;
 import com.ronmob.qz.common.Util;
-import com.ronmob.qz.model.Survey;
+import com.ronmob.qz.model.User;
 import com.ronmob.qz.model.common.ListResultData;
+import com.ronmob.qz.model.common.Page;
+import com.ronmob.qz.model.common.ResponseResult;
+import com.ronmob.qz.service.UserService;
 import com.ronmob.qz.vo.SearchVo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,18 +14,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ronmob.qz.model.common.ResponseResult;
-import com.ronmob.qz.service.SurveyService;
-import com.ronmob.qz.model.common.Page;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/survey")
-public class SurveyController {
+@RequestMapping("/user")
+public class UserController {
 
-    private static Log logger = LogFactory.getLog(SurveyController.class);
+    private static Log logger = LogFactory.getLog(UserController.class);
 
     @Autowired
-    private SurveyService surveyService;
+    private UserService userService;
 
     @RequestMapping(value = "/list", produces = "application/json")
     @ResponseBody
@@ -33,11 +34,11 @@ public class SurveyController {
         try {
             Page page = Util.getPageFromSearchVo(searchVo);
             if (page != null) {
-                page.setTotalCount(surveyService.getSurveyListTotalCount(searchVo));
+                page.setTotalCount(userService.getUserListTotalCount(searchVo));
                 listResultData.setPage(page);
             }
 
-            listResultData.setList(this.surveyService.getSurveyList(searchVo));
+            listResultData.setList(this.userService.getUserList(searchVo));
 
             result.setResult(true);
             result.setData(listResultData);
@@ -53,12 +54,12 @@ public class SurveyController {
 
     @RequestMapping(value = "/create", produces = "application/json")
     @ResponseBody
-    public ResponseResult insertSurvey(HttpSession httpSession, @RequestBody Survey vo) {
+    public ResponseResult insertSurvey(HttpSession httpSession, @RequestBody User user) {
         ResponseResult result = new ResponseResult();
         try {
-            this.surveyService.createSurvey(vo);
+            this.userService.createUser(user);
             result.setResult(true);
-            result.setData(vo);
+            result.setData(user);
 
         } catch (Exception ex) {
             result.setResult(false);
@@ -72,10 +73,10 @@ public class SurveyController {
 
     @RequestMapping(value = "/update", produces = "application/json")
     @ResponseBody
-    public ResponseResult updateSurvey(HttpSession httpSession, @RequestBody Survey vo) {
+    public ResponseResult updateSurvey(HttpSession httpSession, @RequestBody User user) {
         ResponseResult result = new ResponseResult();
         try {
-            this.surveyService.updateSurvey(vo);
+            this.userService.updateUser(user);
             result.setResult(true);
         } catch (Exception ex) {
             result.setResult(false);

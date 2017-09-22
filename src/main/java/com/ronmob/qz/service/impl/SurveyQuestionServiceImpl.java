@@ -91,4 +91,8 @@ public class SurveyQuestionServiceImpl implements SurveyQuestionService {
         return surveyQuestion;
     }
 
+    @Override
+    public Integer deleteSurveyQuestionById(Integer id) throws Exception {
+        return surveyQuestionMapper.deleteByPrimaryKey(id);
+    }
 }

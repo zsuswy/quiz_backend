@@ -1,9 +1,14 @@
 package com.ronmob.qz.web;
 
-import javax.servlet.http.HttpSession;
 import com.ronmob.qz.common.Util;
-import com.ronmob.qz.model.Survey;
+import com.ronmob.qz.model.Order;
+import com.ronmob.qz.model.UserSurvey;
+import com.ronmob.qz.model.UserSurveyWithBLOBs;
 import com.ronmob.qz.model.common.ListResultData;
+import com.ronmob.qz.model.common.Page;
+import com.ronmob.qz.model.common.ResponseResult;
+import com.ronmob.qz.service.OrderService;
+import com.ronmob.qz.service.UserSurveyService;
 import com.ronmob.qz.vo.SearchVo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,33 +17,33 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ronmob.qz.model.common.ResponseResult;
-import com.ronmob.qz.service.SurveyService;
-import com.ronmob.qz.model.common.Page;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/survey")
-public class SurveyController {
+@RequestMapping("/userSurvey")
+public class UserSurveyController {
 
-    private static Log logger = LogFactory.getLog(SurveyController.class);
+    private static Log logger = LogFactory.getLog(UserSurveyController.class);
 
     @Autowired
-    private SurveyService surveyService;
+    private UserSurveyService userSurveyService;
+
 
     @RequestMapping(value = "/list", produces = "application/json")
     @ResponseBody
-    public ResponseResult getSurveys(HttpSession httpSession, @RequestBody SearchVo searchVo) {
+    public ResponseResult getUserSurveyList(HttpSession httpSession, @RequestBody SearchVo searchVo) {
         ResponseResult result = new ResponseResult();
         ListResultData listResultData = new ListResultData();
+
         try {
             Page page = Util.getPageFromSearchVo(searchVo);
             if (page != null) {
-                page.setTotalCount(surveyService.getSurveyListTotalCount(searchVo));
+                page.setTotalCount(userSurveyService.getUserSurveyListTotalCount(searchVo));
                 listResultData.setPage(page);
             }
 
-            listResultData.setList(this.surveyService.getSurveyList(searchVo));
-
+            listResultData.setList(userSurveyService.getUserSurveyList(searchVo));
             result.setResult(true);
             result.setData(listResultData);
         } catch (Exception ex) {
@@ -47,19 +52,17 @@ public class SurveyController {
 
             logger.error(ex);
         }
-
         return result;
     }
 
     @RequestMapping(value = "/create", produces = "application/json")
     @ResponseBody
-    public ResponseResult insertSurvey(HttpSession httpSession, @RequestBody Survey vo) {
+    public ResponseResult insertUserSurvey(HttpSession httpSession, @RequestBody UserSurveyWithBLOBs userSurvey) {
         ResponseResult result = new ResponseResult();
         try {
-            this.surveyService.createSurvey(vo);
+            this.userSurveyService.createUserSurvey(userSurvey);
             result.setResult(true);
-            result.setData(vo);
-
+            result.setData(userSurvey);
         } catch (Exception ex) {
             result.setResult(false);
             result.setMessage(ex.getMessage());
@@ -72,11 +75,12 @@ public class SurveyController {
 
     @RequestMapping(value = "/update", produces = "application/json")
     @ResponseBody
-    public ResponseResult updateSurvey(HttpSession httpSession, @RequestBody Survey vo) {
+    public ResponseResult updateUserSurvey(HttpSession httpSession, @RequestBody UserSurveyWithBLOBs userSurvey) {
         ResponseResult result = new ResponseResult();
         try {
-            this.surveyService.updateSurvey(vo);
+            this.userSurveyService.updateUserSurvey(userSurvey);
             result.setResult(true);
+            result.setData(userSurvey);
         } catch (Exception ex) {
             result.setResult(false);
             result.setMessage(ex.getMessage());
@@ -86,5 +90,4 @@ public class SurveyController {
 
         return result;
     }
-
 }
