@@ -1,7 +1,7 @@
 package com.ronmob.qz.service;
 
 import com.ronmob.qz.model.SurveyDimension;
-import com.ronmob.qz.vo.SurveyDimensionListSearchVo;
+import com.ronmob.qz.vo.SearchVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,9 +12,9 @@ import java.util.List;
  */
 @Repository
 public interface SurveyDimensionService {
-    List<SurveyDimension> getSurveyDimensionList(SurveyDimensionListSearchVo surveyDimensionVo);
+    List<SurveyDimension> getSurveyDimensionList(SearchVo searchVo);
 
-    Integer getSurveyDimensionListTotalCount(SurveyDimensionListSearchVo surveyDimensionVo);
+    Integer getSurveyDimensionListTotalCount(SearchVo searchVo);
 
     SurveyDimension createSurveyDimension(SurveyDimension surveyDimension);
 

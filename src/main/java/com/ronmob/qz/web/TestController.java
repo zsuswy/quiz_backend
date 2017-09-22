@@ -1,16 +1,20 @@
 package com.ronmob.qz.web;
 
+import com.google.gson.Gson;
+import com.ronmob.qz.common.Util;
 import com.ronmob.qz.model.User;
 import com.ronmob.qz.model.common.Page;
 import com.ronmob.qz.service.*;
-import com.ronmob.qz.vo.UserListSearchVo;
+import com.ronmob.qz.vo.SearchVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 创建时间：9/21/17
@@ -52,10 +56,20 @@ public class TestController {
         user.setWxOpenId("lkasiuuyqkjsdfouoipuoh2yu3");
         userService.createUser(user);
 
-        UserListSearchVo vo = new UserListSearchVo();
+        SearchVo vo = new SearchVo();
         vo.setPage(new Page());
 
         return userService.getUserList(vo);
+    }
+
+    @RequestMapping(value = "/p", produces = "application/json")
+    @ResponseBody
+    public Object testParams(@RequestBody SearchVo vo, HttpSession httpSession) throws Exception {
+        Gson gson = new Gson();
+        System.out.println(Util.getDateFromString(vo.getParams().get("starTime").toString()));
+        System.out.println(gson.toJson(vo));
+
+        return vo;
     }
 
 }

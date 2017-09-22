@@ -5,7 +5,7 @@ import com.ronmob.qz.model.UserSurvey;
 import com.ronmob.qz.model.UserSurveyExample;
 import com.ronmob.qz.model.UserSurveyWithBLOBs;
 import com.ronmob.qz.service.UserSurveyService;
-import com.ronmob.qz.vo.UserSurveyListSearchVo;
+import com.ronmob.qz.vo.SearchVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,20 +20,20 @@ public class UserSurveyServiceImpl implements UserSurveyService {
     @Autowired
     UserSurveyMapper userSurveyMapper;
 
-    private UserSurveyExample getUserExample(UserSurveyListSearchVo vo) {
+    private UserSurveyExample getUserExample(SearchVo searchVo) {
         UserSurveyExample example = new UserSurveyExample();
         return example;
     }
 
     @Override
-    public List<UserSurvey> getUserSurveyList(UserSurveyListSearchVo userSurveyListSearchVo) {
-        UserSurveyExample example = getUserExample(userSurveyListSearchVo);
+    public List<UserSurvey> getUserSurveyList(SearchVo searchVo) {
+        UserSurveyExample example = getUserExample(searchVo);
         return userSurveyMapper.selectByExample(example);
     }
 
     @Override
-    public Integer getUserSurveyListTotalCount(UserSurveyListSearchVo userSurveyListSearchVo) {
-        UserSurveyExample example = getUserExample(userSurveyListSearchVo);
+    public Integer getUserSurveyListTotalCount(SearchVo searchVo) {
+        UserSurveyExample example = getUserExample(searchVo);
 
         return ((Long) userSurveyMapper.countByExample(example)).intValue();
     }

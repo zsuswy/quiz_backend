@@ -4,7 +4,7 @@ import com.ronmob.qz.dao.SurveyQuestionMapper;
 import com.ronmob.qz.model.SurveyQuestion;
 import com.ronmob.qz.model.SurveyQuestionExample;
 import com.ronmob.qz.service.SurveyQuestionService;
-import com.ronmob.qz.vo.SurveyQuestionListSearchVo;
+import com.ronmob.qz.vo.SearchVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,21 +18,21 @@ public class SurveyQuestionServiceImpl implements SurveyQuestionService {
     @Autowired
     private SurveyQuestionMapper surveyQuestionMapper;
 
-    private SurveyQuestionExample getSurveyQuestionExample(SurveyQuestionListSearchVo vo) {
+    private SurveyQuestionExample getSurveyQuestionExample(SearchVo searchVo) {
         SurveyQuestionExample example = new SurveyQuestionExample();
         return example;
     }
 
     @Override
-    public List<SurveyQuestion> getSurveyQuestionList(SurveyQuestionListSearchVo surveyQuestionVo) {
-        SurveyQuestionExample example = getSurveyQuestionExample(surveyQuestionVo);
+    public List<SurveyQuestion> getSurveyQuestionList(SearchVo searchVo) {
+        SurveyQuestionExample example = getSurveyQuestionExample(searchVo);
 
         return surveyQuestionMapper.selectByExample(example);
     }
 
     @Override
-    public Integer getSurveyQuestionListTotalCount(SurveyQuestionListSearchVo surveyQuestionVo) {
-        SurveyQuestionExample example = getSurveyQuestionExample(surveyQuestionVo);
+    public Integer getSurveyQuestionListTotalCount(SearchVo searchVo) {
+        SurveyQuestionExample example = getSurveyQuestionExample(searchVo);
 
         return ((Long) surveyQuestionMapper.countByExample(example)).intValue();
     }

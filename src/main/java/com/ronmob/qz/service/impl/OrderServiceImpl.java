@@ -4,7 +4,7 @@ import com.ronmob.qz.dao.OrderMapper;
 import com.ronmob.qz.model.Order;
 import com.ronmob.qz.model.OrderExample;
 import com.ronmob.qz.service.OrderService;
-import com.ronmob.qz.vo.OrderListSearchVo;
+import com.ronmob.qz.vo.SearchVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderMapper orderMapper;
 
-    private OrderExample getOrderExample(OrderListSearchVo searchVo) {
+    private OrderExample getOrderExample(SearchVo searchVo) {
         OrderExample orderExample = new OrderExample();
         if (searchVo.getParams().containsKey("id")) {
             orderExample.createCriteria().andIdEqualTo(new Integer(searchVo.getParams().get("id").toString()));
@@ -28,12 +28,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getOrderList(OrderListSearchVo searchVo) {
+    public List<Order> getOrderList(SearchVo searchVo) {
         return orderMapper.selectByExample(getOrderExample(searchVo));
     }
 
     @Override
-    public Integer getOrderListTotalCount(OrderListSearchVo searchVo) {
+    public Integer getOrderListTotalCount(SearchVo searchVo) {
         return ((Long) orderMapper.countByExample(getOrderExample(searchVo))).intValue();
     }
 

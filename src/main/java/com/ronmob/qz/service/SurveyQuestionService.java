@@ -1,7 +1,7 @@
 package com.ronmob.qz.service;
 
 import com.ronmob.qz.model.SurveyQuestion;
-import com.ronmob.qz.vo.SurveyQuestionListSearchVo;
+import com.ronmob.qz.vo.SearchVo;
 import java.util.List;
 
 /**
@@ -9,9 +9,9 @@ import java.util.List;
  * 创建人：sunwuyang
  */
 public interface SurveyQuestionService {
-    List<SurveyQuestion> getSurveyQuestionList(SurveyQuestionListSearchVo surveyQuestionListSearchVo);
+    List<SurveyQuestion> getSurveyQuestionList(SearchVo searchVo);
 
-    Integer getSurveyQuestionListTotalCount(SurveyQuestionListSearchVo surveyQuestionListSearchVo);
+    Integer getSurveyQuestionListTotalCount(SearchVo searchVo);
 
     SurveyQuestion createSurveyQuestion(SurveyQuestion surveyQuestion);
 

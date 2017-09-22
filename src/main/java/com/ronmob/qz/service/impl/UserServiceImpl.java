@@ -4,7 +4,7 @@ import com.ronmob.qz.dao.UserMapper;
 import com.ronmob.qz.model.User;
 import com.ronmob.qz.model.UserExample;
 import com.ronmob.qz.service.UserService;
-import com.ronmob.qz.vo.UserListSearchVo;
+import com.ronmob.qz.vo.SearchVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,20 +19,20 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
-    private UserExample getUserExample(UserListSearchVo vo) {
+    private UserExample getUserExample(SearchVo searchVo) {
         UserExample example = new UserExample();
         return example;
     }
 
     @Override
-    public List<User> getUserList(UserListSearchVo userListSearchVo) {
-        UserExample example = getUserExample(userListSearchVo);
+    public List<User> getUserList(SearchVo searchVo) {
+        UserExample example = getUserExample(searchVo);
         return userMapper.selectByExample(example);
     }
 
     @Override
-    public Integer getUserListTotalCount(UserListSearchVo userListSearchVo) {
-        UserExample example = getUserExample(userListSearchVo);
+    public Integer getUserListTotalCount(SearchVo searchVo) {
+        UserExample example = getUserExample(searchVo);
 
         return ((Long) userMapper.countByExample(example)).intValue();
     }

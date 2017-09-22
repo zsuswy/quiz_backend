@@ -9,6 +9,8 @@ import com.ronmob.qz.model.SurveyClass;
 import com.ronmob.qz.model.SurveyQuestion;
 import com.ronmob.qz.service.SurveyClassService;
 import com.ronmob.qz.service.SurveyQuestionService;
+import com.ronmob.qz.vo.ListResultVo;
+import com.ronmob.qz.vo.SearchVo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ronmob.qz.model.common.ResponseResult;
 import com.ronmob.qz.service.SurveyService;
-import com.ronmob.qz.vo.SurveyListResultVo;
-import com.ronmob.qz.vo.SurveyListSearchVo;
-import com.ronmob.qz.vo.SurveyQuestionListResultVo;
-import com.ronmob.qz.vo.SurveyQuestionListSearchVo;
 import com.ronmob.qz.model.common.Page;
 
 @Controller
@@ -43,13 +41,13 @@ public class SurveyController {
 
     @RequestMapping(value = "/getSurveys", produces = "application/json")
     @ResponseBody
-    public SurveyListResultVo getSurveys(HttpSession httpSession, @RequestBody SurveyListSearchVo vo) {
-        SurveyListResultVo result = new SurveyListResultVo();
+    public ListResultVo getSurveys(HttpSession httpSession, @RequestBody SearchVo vo) {
+        ListResultVo result = new ListResultVo();
         Page page = vo.getPage();
         if (page == null) {
             page = new Page();
         }
-        result.setSurveyList(this.surveyService.getSurveyList(vo));
+        result.setList(this.surveyService.getSurveyList(vo));
         page.setTotalCount(surveyService.getSurveyListTotalCount(vo).intValue());
         result.setPage(page);
 
@@ -58,14 +56,13 @@ public class SurveyController {
 
     @RequestMapping(value = "/getSurveyQuestions", produces = "application/json")
     @ResponseBody
-    public SurveyQuestionListResultVo getSurveyQuestions(HttpSession httpSession,
-                                                         @RequestBody SurveyQuestionListSearchVo vo) {
-        SurveyQuestionListResultVo result = new SurveyQuestionListResultVo();
+    public ListResultVo getSurveyQuestions(HttpSession httpSession, @RequestBody SearchVo vo) {
+        ListResultVo result = new ListResultVo();
         Page page = vo.getPage();
         if (page == null) {
             page = new Page();
         }
-        result.setSurveyQuestionList(this.surveyQuestionService.getSurveyQuestionList(vo));
+        result.setList(this.surveyQuestionService.getSurveyQuestionList(vo));
         page.setTotalCount(this.surveyQuestionService.getSurveyQuestionListTotalCount(vo));
         result.setPage(page);
 

@@ -4,7 +4,7 @@ import com.ronmob.qz.dao.SurveyDimensionMapper;
 import com.ronmob.qz.model.SurveyDimension;
 import com.ronmob.qz.model.SurveyDimensionExample;
 import com.ronmob.qz.service.SurveyDimensionService;
-import com.ronmob.qz.vo.SurveyDimensionListSearchVo;
+import com.ronmob.qz.vo.SearchVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,21 +20,21 @@ public class SurveyDimensionServiceImpl implements SurveyDimensionService {
     SurveyDimensionMapper surveyDimensionMapper;
 
 
-    private SurveyDimensionExample getSurveyDimensionExample(SurveyDimensionListSearchVo vo) {
+    private SurveyDimensionExample getSurveyDimensionExample(SearchVo searchVo) {
         SurveyDimensionExample example = new SurveyDimensionExample();
         return example;
     }
 
     @Override
-    public List<SurveyDimension> getSurveyDimensionList(SurveyDimensionListSearchVo surveyDimensionVo) {
-        SurveyDimensionExample example = getSurveyDimensionExample(surveyDimensionVo);
+    public List<SurveyDimension> getSurveyDimensionList(SearchVo searchVo) {
+        SurveyDimensionExample example = getSurveyDimensionExample(searchVo);
 
         return surveyDimensionMapper.selectByExample(example);
     }
 
     @Override
-    public Integer getSurveyDimensionListTotalCount(SurveyDimensionListSearchVo surveyDimensionVo) {
-        SurveyDimensionExample example = getSurveyDimensionExample(surveyDimensionVo);
+    public Integer getSurveyDimensionListTotalCount(SearchVo searchVo) {
+        SurveyDimensionExample example = getSurveyDimensionExample(searchVo);
 
         return ((Long) surveyDimensionMapper.countByExample(example)).intValue();
     }

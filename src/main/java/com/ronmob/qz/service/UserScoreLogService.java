@@ -1,7 +1,7 @@
 package com.ronmob.qz.service;
 
 import com.ronmob.qz.model.UserScoreLog;
-import com.ronmob.qz.vo.UserScoreLogListSearchVo;
+import com.ronmob.qz.vo.SearchVo;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ import java.util.List;
  * 创建人：sunwuyang
  */
 public interface UserScoreLogService {
-    List<UserScoreLog> getUserScoreLogList(UserScoreLogListSearchVo userScoreLogListSearchVo);
+    List<UserScoreLog> getUserScoreLogList(SearchVo searchVo);
 
-    Integer getUserScoreLogListTotalCount(UserScoreLogListSearchVo userScoreLogListSearchVo);
+    Integer getUserScoreLogListTotalCount(SearchVo searchVo);
 
     UserScoreLog createUserScoreLog(UserScoreLog userDistribution);
 

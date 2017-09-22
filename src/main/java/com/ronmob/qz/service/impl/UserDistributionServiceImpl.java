@@ -4,8 +4,7 @@ import com.ronmob.qz.dao.UserDistributionMapper;
 import com.ronmob.qz.model.UserDistribution;
 import com.ronmob.qz.model.UserDistributionExample;
 import com.ronmob.qz.service.UserDistributionService;
-import com.ronmob.qz.vo.SurveyListSearchVo;
-import com.ronmob.qz.vo.UserDistributionListSearchVo;
+import com.ronmob.qz.vo.SearchVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,21 +19,21 @@ public class UserDistributionServiceImpl implements UserDistributionService {
     @Autowired
     UserDistributionMapper userDistributionMapper;
 
-    private UserDistributionExample getUserDistributionExample(UserDistributionListSearchVo vo) {
+    private UserDistributionExample getUserDistributionExample(SearchVo searchVo) {
         UserDistributionExample example = new UserDistributionExample();
         return example;
     }
 
     @Override
-    public List<UserDistribution> getUserDistributionList(UserDistributionListSearchVo userDistributionListSearchVo) {
-        UserDistributionExample example = getUserDistributionExample(userDistributionListSearchVo);
+    public List<UserDistribution> getUserDistributionList(SearchVo searchVo) {
+        UserDistributionExample example = getUserDistributionExample(searchVo);
 
         return userDistributionMapper.selectByExample(example);
     }
 
     @Override
-    public Integer getUserDistributionListTotalCount(UserDistributionListSearchVo userDistributionListSearchVo) {
-        UserDistributionExample example = getUserDistributionExample(userDistributionListSearchVo);
+    public Integer getUserDistributionListTotalCount(SearchVo searchVo) {
+        UserDistributionExample example = getUserDistributionExample(searchVo);
 
         return ((Long) userDistributionMapper.countByExample(example)).intValue();
     }

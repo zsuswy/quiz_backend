@@ -5,12 +5,12 @@ import com.ronmob.qz.model.common.Page;
 import java.util.Map;
 
 /**
- * 创建时间：9/21/17
+ * 创建时间：9/20/17
  * 创建人：sunwuyang
  */
-public class UserDistributionListSearchVo {
+public class SearchVo {
     private Page page;
-    private Map param;
+    private Map params;
 
     public Page getPage() {
         return page;
@@ -20,11 +20,11 @@ public class UserDistributionListSearchVo {
         this.page = page;
     }
 
-    public Map getParam() {
-        return param;
+    public Map getParams() {
+        return params;
     }
 
-    public void setParam(Map param) {
-        this.param = param;
+    public void setParams(Map param) {
+        this.params = param;
     }
 }

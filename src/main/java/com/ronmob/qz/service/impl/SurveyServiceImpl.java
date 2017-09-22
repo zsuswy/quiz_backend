@@ -4,12 +4,12 @@ import java.util.List;
 
 import com.ronmob.qz.model.Survey;
 import com.ronmob.qz.model.SurveyExample;
+import com.ronmob.qz.vo.SearchVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ronmob.qz.dao.SurveyMapper;
 import com.ronmob.qz.service.SurveyService;
-import com.ronmob.qz.vo.SurveyListSearchVo;
 
 /**
  *
@@ -19,21 +19,21 @@ public class SurveyServiceImpl implements SurveyService {
     @Autowired
     private SurveyMapper surveyMapper;
 
-    private SurveyExample getSurveyExample(SurveyListSearchVo vo) {
+    private SurveyExample getSurveyExample(SearchVo searchVo) {
         SurveyExample example = new SurveyExample();
         return example;
     }
 
     @Override
-    public List<Survey> getSurveyList(SurveyListSearchVo surveyVo) {
-        SurveyExample example = getSurveyExample(surveyVo);
+    public List<Survey> getSurveyList(SearchVo searchVo) {
+        SurveyExample example = getSurveyExample(searchVo);
 
         return surveyMapper.selectByExample(example);
     }
 
     @Override
-    public Integer getSurveyListTotalCount(SurveyListSearchVo surveyVo) {
-        SurveyExample example = getSurveyExample(surveyVo);
+    public Integer getSurveyListTotalCount(SearchVo searchVo) {
+        SurveyExample example = getSurveyExample(searchVo);
 
         return ((Long) surveyMapper.countByExample(example)).intValue();
     }

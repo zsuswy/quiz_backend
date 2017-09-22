@@ -1,7 +1,7 @@
 package com.ronmob.qz.service;
 
 import com.ronmob.qz.model.SurveyDimensionScoreText;
-import com.ronmob.qz.vo.SurveyDimensionScoreTextListSearchVo;
+import com.ronmob.qz.vo.SearchVo;
 import java.util.List;
 
 /**
@@ -9,9 +9,9 @@ import java.util.List;
  * 创建人：sunwuyang
  */
 public interface SurveyDimensionScoreTextService {
-    List<SurveyDimensionScoreText> getSurveyDimensionScoreTextList(SurveyDimensionScoreTextListSearchVo surveyDimensionScoreTextVo);
+    List<SurveyDimensionScoreText> getSurveyDimensionScoreTextList(SearchVo searchVo);
 
-    Integer getSurveyDimensionsScoreTextListTotalCount(SurveyDimensionScoreTextListSearchVo surveyDimensionScoreTextVo);
+    Integer getSurveyDimensionsScoreTextListTotalCount(SearchVo searchVo);
 
     SurveyDimensionScoreText createSurveyDimensionScoreText(SurveyDimensionScoreText surveyDimensionScoreText);
 

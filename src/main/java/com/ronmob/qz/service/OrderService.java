@@ -1,7 +1,8 @@
 package com.ronmob.qz.service;
 
 import com.ronmob.qz.model.Order;
-import com.ronmob.qz.vo.OrderListSearchVo;
+import com.ronmob.qz.vo.SearchVo;
+
 import java.util.List;
 
 /**
@@ -9,9 +10,9 @@ import java.util.List;
  * 创建人：sunwuyang
  */
 public interface OrderService {
-    List<Order> getOrderList(OrderListSearchVo searchVo);
+    List<Order> getOrderList(SearchVo searchVo);
 
-    Integer getOrderListTotalCount(OrderListSearchVo searchVo);
+    Integer getOrderListTotalCount(SearchVo searchVo);
 
     Order createOrder(Order order);
 

@@ -4,7 +4,7 @@ import com.ronmob.qz.dao.UserScoreLogMapper;
 import com.ronmob.qz.model.UserScoreLog;
 import com.ronmob.qz.model.UserScoreLogExample;
 import com.ronmob.qz.service.UserScoreLogService;
-import com.ronmob.qz.vo.UserScoreLogListSearchVo;
+import com.ronmob.qz.vo.SearchVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,21 +19,21 @@ public class UserScoreLogServiceImpl implements UserScoreLogService {
     @Autowired
     UserScoreLogMapper userScoreLogMapper;
 
-    private UserScoreLogExample getUserScoreLogxample(UserScoreLogListSearchVo vo) {
+    private UserScoreLogExample getUserScoreLogxample(SearchVo searchVo) {
         UserScoreLogExample example = new UserScoreLogExample();
         return example;
     }
 
     @Override
-    public List<UserScoreLog> getUserScoreLogList(UserScoreLogListSearchVo userScoreLogListSearchVo) {
-        UserScoreLogExample example = getUserScoreLogxample(userScoreLogListSearchVo);
+    public List<UserScoreLog> getUserScoreLogList(SearchVo searchVo) {
+        UserScoreLogExample example = getUserScoreLogxample(searchVo);
 
         return userScoreLogMapper.selectByExample(example);
     }
 
     @Override
-    public Integer getUserScoreLogListTotalCount(UserScoreLogListSearchVo userScoreLogListSearchVo) {
-        UserScoreLogExample example = getUserScoreLogxample(userScoreLogListSearchVo);
+    public Integer getUserScoreLogListTotalCount(SearchVo searchVo) {
+        UserScoreLogExample example = getUserScoreLogxample(searchVo);
 
         return ((Long)userScoreLogMapper.countByExample(example)).intValue();
     }

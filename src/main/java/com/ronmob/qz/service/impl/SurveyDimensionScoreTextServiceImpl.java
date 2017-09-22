@@ -4,7 +4,7 @@ import com.ronmob.qz.dao.SurveyDimensionScoreTextMapper;
 import com.ronmob.qz.model.SurveyDimensionScoreText;
 import com.ronmob.qz.model.SurveyDimensionScoreTextExample;
 import com.ronmob.qz.service.SurveyDimensionScoreTextService;
-import com.ronmob.qz.vo.SurveyDimensionScoreTextListSearchVo;
+import com.ronmob.qz.vo.SearchVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,21 +19,21 @@ public class SurveyDimensionScoreTextServiceImpl implements SurveyDimensionScore
     @Autowired
     SurveyDimensionScoreTextMapper surveyDimensionScoreTextMapper;
 
-    private SurveyDimensionScoreTextExample getSurveyDimensionScoreTextExample(SurveyDimensionScoreTextListSearchVo vo) {
+    private SurveyDimensionScoreTextExample getSurveyDimensionScoreTextExample(SearchVo searchVo) {
         SurveyDimensionScoreTextExample example = new SurveyDimensionScoreTextExample();
         return example;
     }
 
     @Override
-    public List<SurveyDimensionScoreText> getSurveyDimensionScoreTextList(SurveyDimensionScoreTextListSearchVo surveyDimensionScoreTextVo) {
-        SurveyDimensionScoreTextExample example = getSurveyDimensionScoreTextExample(surveyDimensionScoreTextVo);
+    public List<SurveyDimensionScoreText> getSurveyDimensionScoreTextList(SearchVo searchVo) {
+        SurveyDimensionScoreTextExample example = getSurveyDimensionScoreTextExample(searchVo);
 
         return surveyDimensionScoreTextMapper.selectByExample(example);
     }
 
     @Override
-    public Integer getSurveyDimensionsScoreTextListTotalCount(SurveyDimensionScoreTextListSearchVo surveyDimensionScoreTextVo) {
-        SurveyDimensionScoreTextExample example = getSurveyDimensionScoreTextExample(surveyDimensionScoreTextVo);
+    public Integer getSurveyDimensionsScoreTextListTotalCount(SearchVo searchVo) {
+        SurveyDimensionScoreTextExample example = getSurveyDimensionScoreTextExample(searchVo);
 
         return ((Long) surveyDimensionScoreTextMapper.countByExample(example)).intValue();
     }
