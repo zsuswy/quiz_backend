@@ -52,6 +52,11 @@ public class SurveyDimensionServiceImpl implements SurveyDimensionService {
     }
 
     @Override
+    public SurveyDimension getSurveyDimension(Integer id) {
+        return surveyDimensionMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public Integer getSurveyDimensionListTotalCount(SearchVo searchVo) {
         SurveyDimensionExample example = getSurveyDimensionExample(searchVo);
 

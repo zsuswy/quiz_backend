@@ -46,6 +46,18 @@ public class SurveyDimensionScoreTextServiceImpl implements SurveyDimensionScore
     }
 
     @Override
+    public SurveyDimensionScoreText getSurveyDimensionScoreText(Integer id) {
+        return surveyDimensionScoreTextMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<SurveyDimensionScoreText> getSurveyDimensionScoreTextWithBLOBsList(SearchVo searchVo) {
+        SurveyDimensionScoreTextExample example = getSurveyDimensionScoreTextExample(searchVo);
+
+        return surveyDimensionScoreTextMapper.selectByExampleWithBLOBs(example);
+    }
+
+    @Override
     public Integer getSurveyDimensionsScoreTextListTotalCount(SearchVo searchVo) {
         SurveyDimensionScoreTextExample example = getSurveyDimensionScoreTextExample(searchVo);
 
@@ -60,7 +72,7 @@ public class SurveyDimensionScoreTextServiceImpl implements SurveyDimensionScore
 
     @Override
     public SurveyDimensionScoreText updateSurveyDimensionScoreText(SurveyDimensionScoreText surveyDimensionScoreText) {
-        surveyDimensionScoreTextMapper.insert(surveyDimensionScoreText);
+        surveyDimensionScoreTextMapper.updateByPrimaryKeyWithBLOBs(surveyDimensionScoreText);
         return surveyDimensionScoreText;
     }
 

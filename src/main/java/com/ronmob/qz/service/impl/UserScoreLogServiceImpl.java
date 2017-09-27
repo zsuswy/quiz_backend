@@ -57,6 +57,11 @@ public class UserScoreLogServiceImpl implements UserScoreLogService {
     }
 
     @Override
+    public UserScoreLog getUserScoreLog(Integer id) {
+        return userScoreLogMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public Integer getUserScoreLogListTotalCount(SearchVo searchVo) throws Exception {
         UserScoreLogExample example = getUserScoreLogxample(searchVo);
 

@@ -39,7 +39,7 @@ public class SurveyDimensionScoreTextController {
                 listResultData.setPage(page);
             }
 
-            listResultData.setList(surveyDimensionScoreTextService.getSurveyDimensionScoreTextList(searchVo));
+            listResultData.setList(surveyDimensionScoreTextService.getSurveyDimensionScoreTextWithBLOBsList(searchVo));
 
             result.setData(listResultData);
             result.setSuccess(true);
@@ -52,6 +52,23 @@ public class SurveyDimensionScoreTextController {
         return result;
     }
 
+
+    @RequestMapping(value = "/get", produces = "application/json")
+    @ResponseBody
+    public ResponseResult getSurveysDimensionScoreText(Integer id) {
+        ResponseResult result = new ResponseResult();
+        try {
+            result.setSuccess(true);
+            result.setData(this.surveyDimensionScoreTextService.getSurveyDimensionScoreText(id));
+        } catch (Exception ex) {
+            result.setSuccess(false);
+            result.setMessage(ex.getMessage());
+
+            logger.error(ex);
+        }
+
+        return result;
+    }
 
     @RequestMapping(value = "/create", produces = "application/json")
     @ResponseBody

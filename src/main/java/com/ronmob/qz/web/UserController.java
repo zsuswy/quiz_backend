@@ -52,6 +52,23 @@ public class UserController {
         return result;
     }
 
+    @RequestMapping(value = "/get", produces = "application/json")
+    @ResponseBody
+    public ResponseResult getSurvey(Integer id) {
+        ResponseResult result = new ResponseResult();
+        try {
+            result.setSuccess(true);
+            result.setData(this.userService.getUser(id));
+        } catch (Exception ex) {
+            result.setSuccess(false);
+            result.setMessage(ex.getMessage());
+
+            logger.error(ex);
+        }
+
+        return result;
+    }
+
     @RequestMapping(value = "/create", produces = "application/json")
     @ResponseBody
     public ResponseResult insertSurvey(HttpSession httpSession, @RequestBody User user) {

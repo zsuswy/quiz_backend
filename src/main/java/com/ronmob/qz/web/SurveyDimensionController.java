@@ -52,6 +52,22 @@ public class SurveyDimensionController {
         return result;
     }
 
+    @RequestMapping(value = "/get", produces = "application/json")
+    @ResponseBody
+    public ResponseResult getSurveysDimension(Integer id) {
+        ResponseResult result = new ResponseResult();
+        try {
+            result.setSuccess(true);
+            result.setData(this.surveyDimensionService.getSurveyDimension(id));
+        } catch (Exception ex) {
+            result.setSuccess(false);
+            result.setMessage(ex.getMessage());
+
+            logger.error(ex);
+        }
+
+        return result;
+    }
 
     @RequestMapping(value = "/create", produces = "application/json")
     @ResponseBody

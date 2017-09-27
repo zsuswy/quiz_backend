@@ -15,6 +15,8 @@ public interface OrderService {
 
     Integer getOrderListTotalCount(SearchVo searchVo) throws Exception;
 
+    Order getOrder(Integer id) throws Exception;
+
     Order createOrder(Order order) throws Exception;
 
     Order updateOrder(Order order) throws Exception;

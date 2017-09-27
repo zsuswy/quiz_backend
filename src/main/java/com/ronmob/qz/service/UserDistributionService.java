@@ -12,6 +12,8 @@ import java.util.List;
 public interface UserDistributionService {
     List<UserDistribution> getUserDistributionList(SearchVo searchVo) throws Exception;
 
+    UserDistribution getUserDistribution(Integer id);
+
     Integer getUserDistributionListTotalCount(SearchVo searchVo) throws Exception;
 
     UserDistribution createUserDistribution(UserDistribution userDistribution) throws Exception;

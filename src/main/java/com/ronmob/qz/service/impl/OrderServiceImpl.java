@@ -49,7 +49,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getOrderList(SearchVo searchVo) throws Exception {
         return orderMapper.selectByExample(getOrderExample(searchVo));
+    }
 
+    @Override
+    public Order getOrder(Integer id) throws Exception {
+        return orderMapper.selectByPrimaryKey(id);
     }
 
     @Override

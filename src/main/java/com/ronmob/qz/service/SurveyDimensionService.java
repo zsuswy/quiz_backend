@@ -14,6 +14,8 @@ import java.util.List;
 public interface SurveyDimensionService {
     List<SurveyDimension> getSurveyDimensionList(SearchVo searchVo) throws Exception;
 
+    SurveyDimension getSurveyDimension(Integer id);
+
     Integer getSurveyDimensionListTotalCount(SearchVo searchVo) throws Exception;
 
     SurveyDimension createSurveyDimension(SurveyDimension surveyDimension) throws Exception;

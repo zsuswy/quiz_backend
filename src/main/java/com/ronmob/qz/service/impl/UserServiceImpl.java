@@ -45,6 +45,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUser(Integer id) {
+        return userMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public Integer getUserListTotalCount(SearchVo searchVo) {
         UserExample example = getUserExample(searchVo);
 

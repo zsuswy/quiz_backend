@@ -1,6 +1,7 @@
 package com.ronmob.qz.web;
 
 import javax.servlet.http.HttpSession;
+
 import com.ronmob.qz.common.Util;
 import com.ronmob.qz.model.Survey;
 import com.ronmob.qz.model.common.ListResultData;
@@ -41,6 +42,26 @@ public class SurveyController {
 
             result.setSuccess(true);
             result.setData(listResultData);
+        } catch (Exception ex) {
+            result.setSuccess(false);
+            result.setMessage(ex.getMessage());
+
+            logger.error(ex);
+        }
+
+        return result;
+    }
+
+
+    @RequestMapping(value = "/get", produces = "application/json")
+    @ResponseBody
+    public ResponseResult getSurvey(Integer id) {
+        ResponseResult result = new ResponseResult();
+        try {
+            Survey survey = this.surveyService.getSurvey(id);
+            result.setSuccess(true);
+            result.setData(survey);
+
         } catch (Exception ex) {
             result.setSuccess(false);
             result.setMessage(ex.getMessage());

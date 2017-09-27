@@ -13,6 +13,8 @@ import java.util.List;
 public interface UserSurveyService {
     List<UserSurvey> getUserSurveyList(SearchVo searchVo) throws Exception;
 
+    UserSurveyWithBLOBs getUserSurvey(Integer id);
+
     Integer getUserSurveyListTotalCount(SearchVo searchVo) throws Exception;
 
     UserSurveyWithBLOBs createUserSurvey(UserSurveyWithBLOBs userSurvey) throws Exception;

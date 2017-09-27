@@ -12,6 +12,8 @@ import java.util.List;
 public interface UserScoreLogService {
     List<UserScoreLog> getUserScoreLogList(SearchVo searchVo) throws Exception;
 
+    UserScoreLog getUserScoreLog(Integer id);
+
     Integer getUserScoreLogListTotalCount(SearchVo searchVo) throws Exception;
 
     UserScoreLog createUserScoreLog(UserScoreLog userDistribution) throws Exception;

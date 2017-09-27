@@ -7,7 +7,9 @@
     <result column="survey_id" jdbcType="INTEGER" property="surveyId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="type" jdbcType="TINYINT" property="type" />
-    <result column="question_content" jdbcType="VARCHAR" property="questionContent" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ronmob.qz.model.SurveyQuestion">
+    <result column="question_content" jdbcType="LONGVARCHAR" property="questionContent" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,8 +70,27 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, seq, survey_id, title, type, question_content
+    id, seq, survey_id, title, type
   </sql>
+  <sql id="Blob_Column_List">
+    question_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.ronmob.qz.model.SurveyQuestionExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from survey_question
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.ronmob.qz.model.SurveyQuestionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -92,9 +113,11 @@
       </if>
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from survey_question
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -115,7 +138,7 @@
     insert into survey_question (seq, survey_id, title, 
       type, question_content)
     values (#{seq,jdbcType=INTEGER}, #{surveyId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
-      #{type,jdbcType=TINYINT}, #{questionContent,jdbcType=VARCHAR})
+      #{type,jdbcType=TINYINT}, #{questionContent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ronmob.qz.model.SurveyQuestion">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -153,7 +176,7 @@
         #{type,jdbcType=TINYINT},
       </if>
       <if test="questionContent != null">
-        #{questionContent,jdbcType=VARCHAR},
+        #{questionContent,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -182,9 +205,21 @@
         type = #{record.type,jdbcType=TINYINT},
       </if>
       <if test="record.questionContent != null">
-        question_content = #{record.questionContent,jdbcType=VARCHAR},
+        question_content = #{record.questionContent,jdbcType=LONGVARCHAR},
       </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update survey_question
+    set id = #{record.id,jdbcType=INTEGER},
+      seq = #{record.seq,jdbcType=INTEGER},
+      survey_id = #{record.surveyId,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=TINYINT},
+      question_content = #{record.questionContent,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -195,8 +230,7 @@
       seq = #{record.seq,jdbcType=INTEGER},
       survey_id = #{record.surveyId,jdbcType=INTEGER},
       title = #{record.title,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=TINYINT},
-      question_content = #{record.questionContent,jdbcType=VARCHAR}
+      type = #{record.type,jdbcType=TINYINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -217,9 +251,18 @@
         type = #{type,jdbcType=TINYINT},
       </if>
       <if test="questionContent != null">
-        question_content = #{questionContent,jdbcType=VARCHAR},
+        question_content = #{questionContent,jdbcType=LONGVARCHAR},
       </if>
     </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ronmob.qz.model.SurveyQuestion">
+    update survey_question
+    set seq = #{seq,jdbcType=INTEGER},
+      survey_id = #{surveyId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      question_content = #{questionContent,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ronmob.qz.model.SurveyQuestion">
@@ -227,8 +270,7 @@
     set seq = #{seq,jdbcType=INTEGER},
       survey_id = #{surveyId,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
-      type = #{type,jdbcType=TINYINT},
-      question_content = #{questionContent,jdbcType=VARCHAR}
+      type = #{type,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

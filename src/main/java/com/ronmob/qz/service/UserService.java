@@ -12,6 +12,8 @@ import java.util.List;
 public interface UserService {
     List<User> getUserList(SearchVo searchVo) throws Exception;
 
+    User getUser(Integer id);
+
     Integer getUserListTotalCount(SearchVo searchVo) throws Exception;
 
     User createUser(User user) throws Exception;

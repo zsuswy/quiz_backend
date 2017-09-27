@@ -51,6 +51,11 @@ public class SurveyQuestionServiceImpl implements SurveyQuestionService {
     }
 
     @Override
+    public SurveyQuestion getSurveyQuestion(Integer id) {
+        return surveyQuestionMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public Integer getSurveyQuestionListTotalCount(SearchVo searchVo) {
         SurveyQuestionExample example = getSurveyQuestionExample(searchVo);
 
@@ -86,7 +91,7 @@ public class SurveyQuestionServiceImpl implements SurveyQuestionService {
             }
         }
 
-        surveyQuestionMapper.updateByPrimaryKey(surveyQuestion);
+        surveyQuestionMapper.updateByPrimaryKeyWithBLOBs(surveyQuestion);
 
         return surveyQuestion;
     }

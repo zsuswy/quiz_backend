@@ -12,6 +12,8 @@ import java.util.List;
 public interface SurveyQuestionService {
     List<SurveyQuestion> getSurveyQuestionList(SearchVo searchVo) throws Exception;
 
+    SurveyQuestion getSurveyQuestion(Integer id);
+
     Integer getSurveyQuestionListTotalCount(SearchVo searchVo) throws Exception;
 
     SurveyQuestion createSurveyQuestion(SurveyQuestion surveyQuestion) throws Exception;

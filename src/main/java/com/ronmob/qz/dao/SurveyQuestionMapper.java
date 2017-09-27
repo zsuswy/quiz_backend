@@ -16,15 +16,21 @@ public interface SurveyQuestionMapper {
 
     int insertSelective(SurveyQuestion record);
 
+    List<SurveyQuestion> selectByExampleWithBLOBs(SurveyQuestionExample example);
+
     List<SurveyQuestion> selectByExample(SurveyQuestionExample example);
 
     SurveyQuestion selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") SurveyQuestion record, @Param("example") SurveyQuestionExample example);
 
+    int updateByExampleWithBLOBs(@Param("record") SurveyQuestion record, @Param("example") SurveyQuestionExample example);
+
     int updateByExample(@Param("record") SurveyQuestion record, @Param("example") SurveyQuestionExample example);
 
     int updateByPrimaryKeySelective(SurveyQuestion record);
+
+    int updateByPrimaryKeyWithBLOBs(SurveyQuestion record);
 
     int updateByPrimaryKey(SurveyQuestion record);
 }

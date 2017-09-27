@@ -52,6 +52,23 @@ public class SurveyQuestionController {
         return result;
     }
 
+    @RequestMapping(value = "/get", produces = "application/json")
+    @ResponseBody
+    public ResponseResult getSurveyQuestion(Integer id) {
+        ResponseResult result = new ResponseResult();
+        try {
+            result.setSuccess(true);
+            result.setData(this.surveyQuestionService.getSurveyQuestion(id));
+        } catch (Exception ex) {
+            result.setSuccess(false);
+            result.setMessage(ex.getMessage());
+
+            logger.error(ex);
+        }
+
+        return result;
+    }
+
     @RequestMapping(value = "/create", produces = "application/json")
     @ResponseBody
     public ResponseResult insertSurveyQuestion(HttpSession httpSession, @RequestBody SurveyQuestion surveyQuestion) {

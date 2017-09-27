@@ -52,6 +52,23 @@ public class OrderController {
         return result;
     }
 
+    @RequestMapping(value = "/get", produces = "application/json")
+    @ResponseBody
+    public ResponseResult getOrder(Integer id) {
+        ResponseResult result = new ResponseResult();
+        try {
+            result.setSuccess(true);
+            result.setData(this.orderService.getOrder(id));
+        } catch (Exception ex) {
+            result.setSuccess(false);
+            result.setMessage(ex.getMessage());
+
+            logger.error(ex);
+        }
+
+        return result;
+    }
+
     @RequestMapping(value = "/create", produces = "application/json")
     @ResponseBody
     public ResponseResult insertOrder(HttpSession httpSession, @RequestBody Order order) {

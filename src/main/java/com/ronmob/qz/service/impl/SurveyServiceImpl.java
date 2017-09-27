@@ -50,10 +50,22 @@ public class SurveyServiceImpl implements SurveyService {
     }
 
     @Override
+    public Survey getSurvey(Integer id) {
+        return surveyMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public List<Survey> getSurveyList(SearchVo searchVo) {
         SurveyExample example = getSurveyExample(searchVo);
 
         return surveyMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<Survey> getSurveyWithBOLBsList(SearchVo searchVo) {
+        SurveyExample example = getSurveyExample(searchVo);
+
+        return surveyMapper.selectByExampleWithBLOBs(example);
     }
 
     @Override
@@ -71,7 +83,7 @@ public class SurveyServiceImpl implements SurveyService {
 
     @Override
     public Survey updateSurvey(Survey survey) {
-        surveyMapper.updateByPrimaryKey(survey);
+        surveyMapper.updateByPrimaryKeyWithBLOBs(survey);
         return survey;
     }
 }

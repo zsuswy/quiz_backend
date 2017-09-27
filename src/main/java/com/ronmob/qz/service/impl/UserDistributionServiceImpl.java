@@ -57,6 +57,11 @@ public class UserDistributionServiceImpl implements UserDistributionService {
     }
 
     @Override
+    public UserDistribution getUserDistribution(Integer id) {
+        return userDistributionMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public Integer getUserDistributionListTotalCount(SearchVo searchVo) {
         UserDistributionExample example = getUserDistributionExample(searchVo);
 

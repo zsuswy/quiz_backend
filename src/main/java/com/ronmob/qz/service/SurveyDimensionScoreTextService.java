@@ -12,6 +12,10 @@ import java.util.List;
 public interface SurveyDimensionScoreTextService {
     List<SurveyDimensionScoreText> getSurveyDimensionScoreTextList(SearchVo searchVo) throws Exception;
 
+    List<SurveyDimensionScoreText> getSurveyDimensionScoreTextWithBLOBsList(SearchVo searchVo) throws Exception;
+
+    SurveyDimensionScoreText getSurveyDimensionScoreText(Integer id);
+
     Integer getSurveyDimensionsScoreTextListTotalCount(SearchVo searchVo) throws Exception;
 
     SurveyDimensionScoreText createSurveyDimensionScoreText(SurveyDimensionScoreText surveyDimensionScoreText) throws Exception;

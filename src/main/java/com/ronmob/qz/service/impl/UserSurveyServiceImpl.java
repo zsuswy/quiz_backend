@@ -61,6 +61,11 @@ public class UserSurveyServiceImpl implements UserSurveyService {
     }
 
     @Override
+    public UserSurveyWithBLOBs getUserSurvey(Integer id) {
+        return userSurveyMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public Integer getUserSurveyListTotalCount(SearchVo searchVo) throws Exception {
         UserSurveyExample example = getUserExample(searchVo);
 
@@ -75,7 +80,7 @@ public class UserSurveyServiceImpl implements UserSurveyService {
 
     @Override
     public UserSurveyWithBLOBs updateUserSurvey(UserSurveyWithBLOBs userSurvey) {
-        userSurveyMapper.updateByPrimaryKeySelective(userSurvey);
+        userSurveyMapper.updateByPrimaryKeyWithBLOBs(userSurvey);
         return userSurvey;
     }
 }
