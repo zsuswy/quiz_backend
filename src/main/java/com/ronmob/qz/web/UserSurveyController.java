@@ -44,10 +44,10 @@ public class UserSurveyController {
             }
 
             listResultData.setList(userSurveyService.getUserSurveyList(searchVo));
-            result.setResult(true);
+            result.setSuccess(true);
             result.setData(listResultData);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
@@ -61,10 +61,10 @@ public class UserSurveyController {
         ResponseResult result = new ResponseResult();
         try {
             this.userSurveyService.createUserSurvey(userSurvey);
-            result.setResult(true);
+            result.setSuccess(true);
             result.setData(userSurvey);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
@@ -79,10 +79,10 @@ public class UserSurveyController {
         ResponseResult result = new ResponseResult();
         try {
             this.userSurveyService.updateUserSurvey(userSurvey);
-            result.setResult(true);
+            result.setSuccess(true);
             result.setData(userSurvey);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);

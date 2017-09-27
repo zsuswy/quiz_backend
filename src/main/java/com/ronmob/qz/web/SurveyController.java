@@ -39,10 +39,10 @@ public class SurveyController {
 
             listResultData.setList(this.surveyService.getSurveyList(searchVo));
 
-            result.setResult(true);
+            result.setSuccess(true);
             result.setData(listResultData);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
@@ -57,11 +57,11 @@ public class SurveyController {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyService.createSurvey(vo);
-            result.setResult(true);
+            result.setSuccess(true);
             result.setData(vo);
 
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
@@ -76,9 +76,9 @@ public class SurveyController {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyService.updateSurvey(vo);
-            result.setResult(true);
+            result.setSuccess(true);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);

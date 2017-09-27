@@ -41,10 +41,10 @@ public class OrderController {
             }
 
             listResultData.setList(orderService.getOrderList(searchVo));
-            result.setResult(true);
+            result.setSuccess(true);
             result.setData(listResultData);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
@@ -58,10 +58,10 @@ public class OrderController {
         ResponseResult result = new ResponseResult();
         try {
             this.orderService.createOrder(order);
-            result.setResult(true);
+            result.setSuccess(true);
             result.setData(order);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
@@ -76,10 +76,10 @@ public class OrderController {
         ResponseResult result = new ResponseResult();
         try {
             this.orderService.updateOrder(order);
-            result.setResult(true);
+            result.setSuccess(true);
             result.setData(order);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
@@ -99,9 +99,9 @@ public class OrderController {
 
             orderService.deleteOrderById(id);
 
-            result.setResult(true);
+            result.setSuccess(true);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);

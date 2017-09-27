@@ -24,9 +24,9 @@ public class SurveyClassController {
         ResponseResult result = new ResponseResult();
         try {
             result.setData(surveyClassService.getSurveyClassList(enabled));
-            result.setResult(true);
+            result.setSuccess(true);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);

@@ -28,7 +28,7 @@ public class SurveyDimensionScoreTextController {
 
     @RequestMapping(value = "/list", produces = "application/json")
     @ResponseBody
-    public ResponseResult getSurveyDimensionScoreTextList(SearchVo searchVo) {
+    public ResponseResult getSurveyDimensionScoreTextList(@RequestBody SearchVo searchVo) {
         ResponseResult result = new ResponseResult();
         ListResultData listResultData = new ListResultData();
 
@@ -42,9 +42,9 @@ public class SurveyDimensionScoreTextController {
             listResultData.setList(surveyDimensionScoreTextService.getSurveyDimensionScoreTextList(searchVo));
 
             result.setData(listResultData);
-            result.setResult(true);
+            result.setSuccess(true);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
@@ -59,10 +59,10 @@ public class SurveyDimensionScoreTextController {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyDimensionScoreTextService.createSurveyDimensionScoreText(surveyDimensionScoreText);
-            result.setResult(true);
+            result.setSuccess(true);
             result.setData(surveyDimensionScoreText);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
@@ -77,10 +77,10 @@ public class SurveyDimensionScoreTextController {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyDimensionScoreTextService.updateSurveyDimensionScoreText(surveyDimensionScoreText);
-            result.setResult(true);
+            result.setSuccess(true);
             result.setData(surveyDimensionScoreText);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
@@ -98,9 +98,9 @@ public class SurveyDimensionScoreTextController {
                 throw new Exception("id参数为空");
             }
             surveyDimensionScoreTextService.deleteSurveyDimensionScoreTextById(id);
-            result.setResult(true);
+            result.setSuccess(true);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);

@@ -28,7 +28,7 @@ public class SurveyDimensionController {
 
     @RequestMapping(value = "/list", produces = "application/json")
     @ResponseBody
-    public ResponseResult getSurveyDimensionList(SearchVo searchVo) {
+    public ResponseResult getSurveyDimensionList(@RequestBody SearchVo searchVo) {
         ResponseResult result = new ResponseResult();
         ListResultData listResultData = new ListResultData();
 
@@ -42,11 +42,11 @@ public class SurveyDimensionController {
             listResultData.setList(surveyDimensionService.getSurveyDimensionList(searchVo));
 
             result.setData(listResultData);
-            result.setResult(true);
+            result.setSuccess(true);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
-
+            ex.printStackTrace();
             logger.error(ex);
         }
         return result;
@@ -59,10 +59,10 @@ public class SurveyDimensionController {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyDimensionService.createSurveyDimension(surveyDimension);
-            result.setResult(true);
+            result.setSuccess(true);
             result.setData(surveyDimension);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
@@ -77,10 +77,10 @@ public class SurveyDimensionController {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyDimensionService.updateSurveyDimension(surveyDimension);
-            result.setResult(true);
+            result.setSuccess(true);
             result.setData(surveyDimension);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
@@ -98,9 +98,9 @@ public class SurveyDimensionController {
                 throw new Exception("id参数为空");
             }
             surveyDimensionService.deleteSurveyDimension(id);
-            result.setResult(true);
+            result.setSuccess(true);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);

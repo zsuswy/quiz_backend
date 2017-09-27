@@ -40,10 +40,10 @@ public class UserController {
 
             listResultData.setList(this.userService.getUserList(searchVo));
 
-            result.setResult(true);
+            result.setSuccess(true);
             result.setData(listResultData);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
@@ -58,11 +58,11 @@ public class UserController {
         ResponseResult result = new ResponseResult();
         try {
             this.userService.createUser(user);
-            result.setResult(true);
+            result.setSuccess(true);
             result.setData(user);
 
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
@@ -77,9 +77,9 @@ public class UserController {
         ResponseResult result = new ResponseResult();
         try {
             this.userService.updateUser(user);
-            result.setResult(true);
+            result.setSuccess(true);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);

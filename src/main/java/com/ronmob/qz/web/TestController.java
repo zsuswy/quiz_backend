@@ -87,9 +87,9 @@ public class TestController {
 
 
             responseResult.setData(listResultData);
-            responseResult.setResult(true);
+            responseResult.setSuccess(true);
         } catch (Exception ex) {
-            responseResult.setResult(false);
+            responseResult.setSuccess(false);
             responseResult.setMessage(ex.getMessage());
             ex.printStackTrace();
         }

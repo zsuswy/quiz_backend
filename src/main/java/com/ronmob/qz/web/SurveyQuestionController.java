@@ -41,10 +41,10 @@ public class SurveyQuestionController {
             }
 
             listResultData.setList(surveyQuestionService.getSurveyQuestionList(searchVo));
-            result.setResult(true);
+            result.setSuccess(true);
             result.setData(listResultData);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
@@ -58,10 +58,10 @@ public class SurveyQuestionController {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyQuestionService.createSurveyQuestion(surveyQuestion);
-            result.setResult(true);
+            result.setSuccess(true);
             result.setData(surveyQuestion);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
@@ -76,10 +76,10 @@ public class SurveyQuestionController {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyQuestionService.updateSurveyQuestion(surveyQuestion);
-            result.setResult(true);
+            result.setSuccess(true);
             result.setData(surveyQuestion);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
@@ -99,9 +99,9 @@ public class SurveyQuestionController {
 
             surveyQuestionService.deleteSurveyQuestionById(id);
 
-            result.setResult(true);
+            result.setSuccess(true);
         } catch (Exception ex) {
-            result.setResult(false);
+            result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
             logger.error(ex);
