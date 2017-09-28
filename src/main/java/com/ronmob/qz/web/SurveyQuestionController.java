@@ -40,7 +40,7 @@ public class SurveyQuestionController {
                 listResultData.setPage(page);
             }
 
-            listResultData.setList(surveyQuestionService.getSurveyQuestionList(searchVo));
+            listResultData.setList(surveyQuestionService.getSurveyQuestionListWithBlobs(searchVo));
             result.setSuccess(true);
             result.setData(listResultData);
         } catch (Exception ex) {

@@ -37,6 +37,9 @@ public class SurveyQuestionServiceImpl implements SurveyQuestionService {
         if (params.containsKey("surveyId")) {
             example.createCriteria().andSurveyIdEqualTo(new Integer(params.get("surveyId").toString()));
         }
+        if (params.containsKey("title")) {
+            example.createCriteria().andTitleLike('%' + params.get("title").toString() + '%');
+        }
         if (params.containsKey("type")) {
             example.createCriteria().andTypeEqualTo(new Byte(params.get("type").toString()));
         }
@@ -48,6 +51,13 @@ public class SurveyQuestionServiceImpl implements SurveyQuestionService {
         SurveyQuestionExample example = getSurveyQuestionExample(searchVo);
 
         return surveyQuestionMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<SurveyQuestion> getSurveyQuestionListWithBlobs(SearchVo searchVo) {
+        SurveyQuestionExample example = getSurveyQuestionExample(searchVo);
+
+        return surveyQuestionMapper.selectByExampleWithBLOBs(example);
     }
 
     @Override
