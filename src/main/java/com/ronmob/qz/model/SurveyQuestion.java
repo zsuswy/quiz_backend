@@ -11,6 +11,8 @@ public class SurveyQuestion {
 
     private Byte type;
 
+    private Byte sex;
+
     private String questionContent;
 
     public Integer getId() {
@@ -51,6 +53,14 @@ public class SurveyQuestion {
 
     public void setType(Byte type) {
         this.type = type;
+    }
+
+    public Byte getSex() {
+        return sex;
+    }
+
+    public void setSex(Byte sex) {
+        this.sex = sex;
     }
 
     public String getQuestionContent() {

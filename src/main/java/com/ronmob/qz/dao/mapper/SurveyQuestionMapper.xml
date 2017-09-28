@@ -7,6 +7,7 @@
     <result column="survey_id" jdbcType="INTEGER" property="surveyId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="sex" jdbcType="TINYINT" property="sex" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ronmob.qz.model.SurveyQuestion">
     <result column="question_content" jdbcType="LONGVARCHAR" property="questionContent" />
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, seq, survey_id, title, type
+    id, seq, survey_id, title, type, sex
   </sql>
   <sql id="Blob_Column_List">
     question_content
@@ -136,9 +137,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into survey_question (seq, survey_id, title, 
-      type, question_content)
+      type, sex, question_content
+      )
     values (#{seq,jdbcType=INTEGER}, #{surveyId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
-      #{type,jdbcType=TINYINT}, #{questionContent,jdbcType=LONGVARCHAR})
+      #{type,jdbcType=TINYINT}, #{sex,jdbcType=TINYINT}, #{questionContent,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.ronmob.qz.model.SurveyQuestion">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -158,6 +161,9 @@
       <if test="type != null">
         type,
       </if>
+      <if test="sex != null">
+        sex,
+      </if>
       <if test="questionContent != null">
         question_content,
       </if>
@@ -174,6 +180,9 @@
       </if>
       <if test="type != null">
         #{type,jdbcType=TINYINT},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=TINYINT},
       </if>
       <if test="questionContent != null">
         #{questionContent,jdbcType=LONGVARCHAR},
@@ -204,6 +213,9 @@
       <if test="record.type != null">
         type = #{record.type,jdbcType=TINYINT},
       </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=TINYINT},
+      </if>
       <if test="record.questionContent != null">
         question_content = #{record.questionContent,jdbcType=LONGVARCHAR},
       </if>
@@ -219,6 +231,7 @@
       survey_id = #{record.surveyId,jdbcType=INTEGER},
       title = #{record.title,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=TINYINT},
+      sex = #{record.sex,jdbcType=TINYINT},
       question_content = #{record.questionContent,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -230,7 +243,8 @@
       seq = #{record.seq,jdbcType=INTEGER},
       survey_id = #{record.surveyId,jdbcType=INTEGER},
       title = #{record.title,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=TINYINT}
+      type = #{record.type,jdbcType=TINYINT},
+      sex = #{record.sex,jdbcType=TINYINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -250,6 +264,9 @@
       <if test="type != null">
         type = #{type,jdbcType=TINYINT},
       </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
       <if test="questionContent != null">
         question_content = #{questionContent,jdbcType=LONGVARCHAR},
       </if>
@@ -262,6 +279,7 @@
       survey_id = #{surveyId,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
       type = #{type,jdbcType=TINYINT},
+      sex = #{sex,jdbcType=TINYINT},
       question_content = #{questionContent,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -270,7 +288,8 @@
     set seq = #{seq,jdbcType=INTEGER},
       survey_id = #{surveyId,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
-      type = #{type,jdbcType=TINYINT}
+      type = #{type,jdbcType=TINYINT},
+      sex = #{sex,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
