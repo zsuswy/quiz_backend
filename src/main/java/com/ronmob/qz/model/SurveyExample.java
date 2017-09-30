@@ -1245,6 +1245,76 @@ public class SurveyExample {
             addCriterion("result_template_param not between", value1, value2, "resultTemplateParam");
             return (Criteria) this;
         }
+
+        public Criteria andShortDescriptionIsNull() {
+            addCriterion("short_description is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortDescriptionIsNotNull() {
+            addCriterion("short_description is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortDescriptionEqualTo(String value) {
+            addCriterion("short_description =", value, "shortDescription");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortDescriptionNotEqualTo(String value) {
+            addCriterion("short_description <>", value, "shortDescription");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortDescriptionGreaterThan(String value) {
+            addCriterion("short_description >", value, "shortDescription");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortDescriptionGreaterThanOrEqualTo(String value) {
+            addCriterion("short_description >=", value, "shortDescription");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortDescriptionLessThan(String value) {
+            addCriterion("short_description <", value, "shortDescription");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortDescriptionLessThanOrEqualTo(String value) {
+            addCriterion("short_description <=", value, "shortDescription");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortDescriptionLike(String value) {
+            addCriterion("short_description like", value, "shortDescription");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortDescriptionNotLike(String value) {
+            addCriterion("short_description not like", value, "shortDescription");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortDescriptionIn(List<String> values) {
+            addCriterion("short_description in", values, "shortDescription");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortDescriptionNotIn(List<String> values) {
+            addCriterion("short_description not in", values, "shortDescription");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortDescriptionBetween(String value1, String value2) {
+            addCriterion("short_description between", value1, value2, "shortDescription");
+            return (Criteria) this;
+        }
+
+        public Criteria andShortDescriptionNotBetween(String value1, String value2) {
+            addCriterion("short_description not between", value1, value2, "shortDescription");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

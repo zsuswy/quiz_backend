@@ -38,7 +38,7 @@ public class SurveyController {
                 listResultData.setPage(page);
             }
 
-            listResultData.setList(this.surveyService.getSurveyList(searchVo));
+            listResultData.setList(this.surveyService.getSurveyWithBOLBsList(searchVo));
 
             result.setSuccess(true);
             result.setData(listResultData);

@@ -40,6 +40,8 @@ public class Survey {
 
     private String resultTemplateParam;
 
+    private String shortDescription;
+
     private String description;
 
     public Integer getId() {
@@ -184,6 +186,14 @@ public class Survey {
 
     public void setResultTemplateParam(String resultTemplateParam) {
         this.resultTemplateParam = resultTemplateParam == null ? null : resultTemplateParam.trim();
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription == null ? null : shortDescription.trim();
     }
 
     public String getDescription() {
