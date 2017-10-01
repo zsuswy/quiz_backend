@@ -14,7 +14,7 @@ public class Order {
 
     private String wxOpenId;
 
-    private Integer payScore;
+    private Integer scorePayAmount;
 
     private Byte orderStatus;
 
@@ -23,6 +23,14 @@ public class Order {
     private Date finishTime;
 
     private Integer userId;
+
+    private BigDecimal balancePayAmount;
+
+    private BigDecimal totalAmount;
+
+    private Integer payType;
+
+    private Integer businessId;
 
     public Integer getId() {
         return id;
@@ -64,12 +72,12 @@ public class Order {
         this.wxOpenId = wxOpenId == null ? null : wxOpenId.trim();
     }
 
-    public Integer getPayScore() {
-        return payScore;
+    public Integer getScorePayAmount() {
+        return scorePayAmount;
     }
 
-    public void setPayScore(Integer payScore) {
-        this.payScore = payScore;
+    public void setScorePayAmount(Integer scorePayAmount) {
+        this.scorePayAmount = scorePayAmount;
     }
 
     public Byte getOrderStatus() {
@@ -102,5 +110,37 @@ public class Order {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public BigDecimal getBalancePayAmount() {
+        return balancePayAmount;
+    }
+
+    public void setBalancePayAmount(BigDecimal balancePayAmount) {
+        this.balancePayAmount = balancePayAmount;
+    }
+
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public Integer getPayType() {
+        return payType;
+    }
+
+    public void setPayType(Integer payType) {
+        this.payType = payType;
+    }
+
+    public Integer getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(Integer businessId) {
+        this.businessId = businessId;
     }
 }

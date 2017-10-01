@@ -456,63 +456,63 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andPayScoreIsNull() {
-            addCriterion("pay_score is null");
+        public Criteria andScorePayAmountIsNull() {
+            addCriterion("score_pay_amount is null");
             return (Criteria) this;
         }
 
-        public Criteria andPayScoreIsNotNull() {
-            addCriterion("pay_score is not null");
+        public Criteria andScorePayAmountIsNotNull() {
+            addCriterion("score_pay_amount is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPayScoreEqualTo(Integer value) {
-            addCriterion("pay_score =", value, "payScore");
+        public Criteria andScorePayAmountEqualTo(Integer value) {
+            addCriterion("score_pay_amount =", value, "scorePayAmount");
             return (Criteria) this;
         }
 
-        public Criteria andPayScoreNotEqualTo(Integer value) {
-            addCriterion("pay_score <>", value, "payScore");
+        public Criteria andScorePayAmountNotEqualTo(Integer value) {
+            addCriterion("score_pay_amount <>", value, "scorePayAmount");
             return (Criteria) this;
         }
 
-        public Criteria andPayScoreGreaterThan(Integer value) {
-            addCriterion("pay_score >", value, "payScore");
+        public Criteria andScorePayAmountGreaterThan(Integer value) {
+            addCriterion("score_pay_amount >", value, "scorePayAmount");
             return (Criteria) this;
         }
 
-        public Criteria andPayScoreGreaterThanOrEqualTo(Integer value) {
-            addCriterion("pay_score >=", value, "payScore");
+        public Criteria andScorePayAmountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("score_pay_amount >=", value, "scorePayAmount");
             return (Criteria) this;
         }
 
-        public Criteria andPayScoreLessThan(Integer value) {
-            addCriterion("pay_score <", value, "payScore");
+        public Criteria andScorePayAmountLessThan(Integer value) {
+            addCriterion("score_pay_amount <", value, "scorePayAmount");
             return (Criteria) this;
         }
 
-        public Criteria andPayScoreLessThanOrEqualTo(Integer value) {
-            addCriterion("pay_score <=", value, "payScore");
+        public Criteria andScorePayAmountLessThanOrEqualTo(Integer value) {
+            addCriterion("score_pay_amount <=", value, "scorePayAmount");
             return (Criteria) this;
         }
 
-        public Criteria andPayScoreIn(List<Integer> values) {
-            addCriterion("pay_score in", values, "payScore");
+        public Criteria andScorePayAmountIn(List<Integer> values) {
+            addCriterion("score_pay_amount in", values, "scorePayAmount");
             return (Criteria) this;
         }
 
-        public Criteria andPayScoreNotIn(List<Integer> values) {
-            addCriterion("pay_score not in", values, "payScore");
+        public Criteria andScorePayAmountNotIn(List<Integer> values) {
+            addCriterion("score_pay_amount not in", values, "scorePayAmount");
             return (Criteria) this;
         }
 
-        public Criteria andPayScoreBetween(Integer value1, Integer value2) {
-            addCriterion("pay_score between", value1, value2, "payScore");
+        public Criteria andScorePayAmountBetween(Integer value1, Integer value2) {
+            addCriterion("score_pay_amount between", value1, value2, "scorePayAmount");
             return (Criteria) this;
         }
 
-        public Criteria andPayScoreNotBetween(Integer value1, Integer value2) {
-            addCriterion("pay_score not between", value1, value2, "payScore");
+        public Criteria andScorePayAmountNotBetween(Integer value1, Integer value2) {
+            addCriterion("score_pay_amount not between", value1, value2, "scorePayAmount");
             return (Criteria) this;
         }
 
@@ -753,6 +753,246 @@ public class OrderExample {
 
         public Criteria andUserIdNotBetween(Integer value1, Integer value2) {
             addCriterion("user_id not between", value1, value2, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalancePayAmountIsNull() {
+            addCriterion("balance_pay_amount is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalancePayAmountIsNotNull() {
+            addCriterion("balance_pay_amount is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalancePayAmountEqualTo(BigDecimal value) {
+            addCriterion("balance_pay_amount =", value, "balancePayAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalancePayAmountNotEqualTo(BigDecimal value) {
+            addCriterion("balance_pay_amount <>", value, "balancePayAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalancePayAmountGreaterThan(BigDecimal value) {
+            addCriterion("balance_pay_amount >", value, "balancePayAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalancePayAmountGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("balance_pay_amount >=", value, "balancePayAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalancePayAmountLessThan(BigDecimal value) {
+            addCriterion("balance_pay_amount <", value, "balancePayAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalancePayAmountLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("balance_pay_amount <=", value, "balancePayAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalancePayAmountIn(List<BigDecimal> values) {
+            addCriterion("balance_pay_amount in", values, "balancePayAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalancePayAmountNotIn(List<BigDecimal> values) {
+            addCriterion("balance_pay_amount not in", values, "balancePayAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalancePayAmountBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("balance_pay_amount between", value1, value2, "balancePayAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBalancePayAmountNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("balance_pay_amount not between", value1, value2, "balancePayAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalAmountIsNull() {
+            addCriterion("total_amount is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalAmountIsNotNull() {
+            addCriterion("total_amount is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalAmountEqualTo(BigDecimal value) {
+            addCriterion("total_amount =", value, "totalAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalAmountNotEqualTo(BigDecimal value) {
+            addCriterion("total_amount <>", value, "totalAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalAmountGreaterThan(BigDecimal value) {
+            addCriterion("total_amount >", value, "totalAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalAmountGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("total_amount >=", value, "totalAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalAmountLessThan(BigDecimal value) {
+            addCriterion("total_amount <", value, "totalAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalAmountLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("total_amount <=", value, "totalAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalAmountIn(List<BigDecimal> values) {
+            addCriterion("total_amount in", values, "totalAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalAmountNotIn(List<BigDecimal> values) {
+            addCriterion("total_amount not in", values, "totalAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalAmountBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("total_amount between", value1, value2, "totalAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalAmountNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("total_amount not between", value1, value2, "totalAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeIsNull() {
+            addCriterion("pay_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeIsNotNull() {
+            addCriterion("pay_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeEqualTo(Integer value) {
+            addCriterion("pay_type =", value, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeNotEqualTo(Integer value) {
+            addCriterion("pay_type <>", value, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeGreaterThan(Integer value) {
+            addCriterion("pay_type >", value, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("pay_type >=", value, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeLessThan(Integer value) {
+            addCriterion("pay_type <", value, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("pay_type <=", value, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeIn(List<Integer> values) {
+            addCriterion("pay_type in", values, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeNotIn(List<Integer> values) {
+            addCriterion("pay_type not in", values, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeBetween(Integer value1, Integer value2) {
+            addCriterion("pay_type between", value1, value2, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("pay_type not between", value1, value2, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdIsNull() {
+            addCriterion("business_Id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdIsNotNull() {
+            addCriterion("business_Id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdEqualTo(Integer value) {
+            addCriterion("business_Id =", value, "businessId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdNotEqualTo(Integer value) {
+            addCriterion("business_Id <>", value, "businessId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdGreaterThan(Integer value) {
+            addCriterion("business_Id >", value, "businessId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("business_Id >=", value, "businessId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdLessThan(Integer value) {
+            addCriterion("business_Id <", value, "businessId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdLessThanOrEqualTo(Integer value) {
+            addCriterion("business_Id <=", value, "businessId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdIn(List<Integer> values) {
+            addCriterion("business_Id in", values, "businessId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdNotIn(List<Integer> values) {
+            addCriterion("business_Id not in", values, "businessId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdBetween(Integer value1, Integer value2) {
+            addCriterion("business_Id between", value1, value2, "businessId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBusinessIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("business_Id not between", value1, value2, "businessId");
             return (Criteria) this;
         }
     }
