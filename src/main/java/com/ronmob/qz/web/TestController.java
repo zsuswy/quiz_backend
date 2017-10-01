@@ -25,7 +25,7 @@ public class TestController {
     UserService userService;
 
     @Autowired
-    OrderService orderService;
+    PayOrderService payOrderService;
 
     @Autowired
     SurveyDimensionService surveyDimensionService;
@@ -79,11 +79,11 @@ public class TestController {
                 Page page = new Page();
                 page.setPageNO(searchVo.getPage().getPageNO());
                 page.setEveryPageCount(searchVo.getPage().getEveryPageCount());
-                page.setTotalCount(orderService.getOrderListTotalCount(searchVo));
+                page.setTotalCount(payOrderService.getOrderListTotalCount(searchVo));
 
                 listResultData.setPage(page);
             }
-            listResultData.setList(orderService.getOrderList(searchVo));
+            listResultData.setList(payOrderService.getOrderList(searchVo));
 
 
             responseResult.setData(listResultData);

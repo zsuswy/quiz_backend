@@ -1,8 +1,4 @@
 package com.ronmob.qz.model.common;
-
-import com.ronmob.qz.model.Order;
-import com.ronmob.qz.model.common.Page;
-
 import java.util.List;
 
 /**

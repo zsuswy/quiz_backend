@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class OrderExample {
+public class PayOrderExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -16,7 +16,7 @@ public class OrderExample {
 
     private Integer offset;
 
-    public OrderExample() {
+    public PayOrderExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

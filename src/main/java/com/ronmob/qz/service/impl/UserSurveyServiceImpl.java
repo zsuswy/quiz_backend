@@ -41,6 +41,9 @@ public class UserSurveyServiceImpl implements UserSurveyService {
         if (params.containsKey("pUserId")) {
             example.createCriteria().andPUserIdEqualTo(new Integer(params.get("pUserId").toString()));
         }
+        if (params.containsKey("surveyId")) {
+            example.createCriteria().andSurveyIdEqualTo(new Integer(params.get("surveyId").toString()));
+        }
         if (params.containsKey("status")) {
             example.createCriteria().andStatusEqualTo(new Byte(params.get("status").toString()));
         }
@@ -81,6 +84,12 @@ public class UserSurveyServiceImpl implements UserSurveyService {
     @Override
     public UserSurveyWithBLOBs updateUserSurvey(UserSurveyWithBLOBs userSurvey) {
         userSurveyMapper.updateByPrimaryKeyWithBLOBs(userSurvey);
+        return userSurvey;
+    }
+
+    @Override
+    public UserSurvey updateUserSurvey(UserSurvey userSurvey) throws Exception {
+        userSurveyMapper.updateByPrimaryKey(userSurvey);
         return userSurvey;
     }
 }

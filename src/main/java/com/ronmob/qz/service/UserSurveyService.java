@@ -20,4 +20,6 @@ public interface UserSurveyService {
     UserSurveyWithBLOBs createUserSurvey(UserSurveyWithBLOBs userSurvey) throws Exception;
 
     UserSurveyWithBLOBs updateUserSurvey(UserSurveyWithBLOBs userSurvey) throws Exception;
+
+    UserSurvey updateUserSurvey(UserSurvey userSurvey) throws Exception;
 }

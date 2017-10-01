@@ -1,12 +1,13 @@
 package com.ronmob.qz.web;
 
 import com.ronmob.qz.common.Util;
-import com.ronmob.qz.model.Order;
+import com.ronmob.qz.model.PayOrder;
+import com.ronmob.qz.model.UserSurvey;
 import com.ronmob.qz.model.UserSurveyWithBLOBs;
 import com.ronmob.qz.model.common.ListResultData;
 import com.ronmob.qz.model.common.Page;
 import com.ronmob.qz.model.common.ResponseResult;
-import com.ronmob.qz.service.OrderService;
+import com.ronmob.qz.service.PayOrderService;
 import com.ronmob.qz.service.UserSurveyService;
 import com.ronmob.qz.vo.OrderVo;
 import com.ronmob.qz.vo.SearchVo;
@@ -20,16 +21,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/order")
-public class OrderController {
+public class PayOrderController {
 
-    private static Log logger = LogFactory.getLog(OrderController.class);
+    private static Log logger = LogFactory.getLog(PayOrderController.class);
 
     @Autowired
-    private OrderService orderService;
+    private PayOrderService payOrderService;
 
     @Autowired
     private UserSurveyService userSurveyService;
@@ -43,11 +47,11 @@ public class OrderController {
         try {
             Page page = Util.getPageFromSearchVo(searchVo);
             if (page != null) {
-                page.setTotalCount(orderService.getOrderListTotalCount(searchVo));
+                page.setTotalCount(payOrderService.getOrderListTotalCount(searchVo));
                 listResultData.setPage(page);
             }
 
-            listResultData.setList(orderService.getOrderList(searchVo));
+            listResultData.setList(payOrderService.getOrderList(searchVo));
             result.setSuccess(true);
             result.setData(listResultData);
         } catch (Exception ex) {
@@ -65,7 +69,7 @@ public class OrderController {
         ResponseResult result = new ResponseResult();
         try {
             result.setSuccess(true);
-            result.setData(this.orderService.getOrder(id));
+            result.setData(this.payOrderService.getOrder(id));
         } catch (Exception ex) {
             result.setSuccess(false);
             result.setMessage(ex.getMessage());
@@ -94,17 +98,38 @@ public class OrderController {
         return result;
     }
 
+    @RequestMapping(value = "/confirm", produces = "application/json")
+    @ResponseBody
+    public ResponseResult confirmOrder(HttpSession httpSession, @RequestBody Map params) {
+        ResponseResult result = new ResponseResult();
+        try {
+            this.confirmSurveyOrder(new Integer(params.get("id").toString()));
+            result.setSuccess(true);
+        } catch (Exception ex) {
+            result.setSuccess(false);
+            result.setMessage(ex.getMessage());
+
+            logger.error(ex);
+        }
+
+        return result;
+    }
+
+
     @Transactional
     public void createUserSurveyOrder(OrderVo orderVo) throws Exception {
         Map params = orderVo.getParams();
-        Order ord = orderVo.getOrder();
+        PayOrder ord = orderVo.getOrder();
 
+        ord.setOrderStatus(new Byte("0"));
+        ord.setCreateTime(new Date());
         // 创建订单
-        this.orderService.createOrder(ord);
+        this.payOrderService.createOrder(ord);
         UserSurveyWithBLOBs userSurvey = new UserSurveyWithBLOBs();
         userSurvey.setUserId(3); // TODO: hardcoded
         userSurvey.setSurveyId(ord.getBusinessId());
         userSurvey.setOrderId(ord.getId());
+        userSurvey.setStatus(new Byte("0"));
 
         // 设置分销用户
         if (params != null && params.containsKey("from_user_id")) {
@@ -115,12 +140,36 @@ public class OrderController {
         this.userSurveyService.createUserSurvey(userSurvey);
     }
 
+    public void confirmSurveyOrder(Integer orderId) throws Exception {
+        PayOrder order = payOrderService.getOrder(orderId);
+        order.setOrderStatus(new Byte("1"));
+        order.setFinishTime(new Date());
+
+        // TODO: 更新账户余额等
+        payOrderService.updateOrder(order);
+
+        SearchVo vo = new SearchVo();
+        HashMap<String, Object> searchParam = new HashMap<String, Object>();
+        searchParam.put("orderId", order.getBusinessId());
+        vo.setParams(searchParam);
+
+        List<UserSurvey> userSurveyList = userSurveyService.getUserSurveyList(vo);
+        if (userSurveyList.size() != 1) {
+            throw new Exception("");
+        }
+
+        UserSurvey userSurvey = userSurveyList.get(0);
+        userSurvey.setStatus(new Byte("1"));
+
+        userSurveyService.updateUserSurvey(userSurvey);
+    }
+
     @RequestMapping(value = "/update", produces = "application/json")
     @ResponseBody
-    public ResponseResult updateOrder(HttpSession httpSession, @RequestBody Order order) {
+    public ResponseResult updateOrder(HttpSession httpSession, @RequestBody PayOrder order) {
         ResponseResult result = new ResponseResult();
         try {
-            this.orderService.updateOrder(order);
+            this.payOrderService.updateOrder(order);
             result.setSuccess(true);
             result.setData(order);
         } catch (Exception ex) {
@@ -142,7 +191,7 @@ public class OrderController {
                 throw new Exception("id参数为空");
             }
 
-            orderService.deleteOrderById(id);
+            payOrderService.deleteOrderById(id);
 
             result.setSuccess(true);
         } catch (Exception ex) {

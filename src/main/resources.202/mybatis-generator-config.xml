@@ -76,7 +76,7 @@
         <table schema="" tableName="user_survey">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
-        <table schema="" tableName="order">
+        <table schema="" tableName="pay_order">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
     </context>

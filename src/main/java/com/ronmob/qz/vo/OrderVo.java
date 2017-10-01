@@ -1,7 +1,6 @@
 package com.ronmob.qz.vo;
 
-import com.ronmob.qz.model.Order;
-
+import com.ronmob.qz.model.PayOrder;
 import java.util.Map;
 
 /**
@@ -9,14 +8,14 @@ import java.util.Map;
  * 创建人：sunwuyang
  */
 public class OrderVo {
-    private Order order;
+    private PayOrder order;
     private Map params;
 
-    public Order getOrder() {
+    public PayOrder getOrder() {
         return order;
     }
 
-    public void setOrder(Order order) {
+    public void setOrder(PayOrder order) {
         this.order = order;
     }
 
