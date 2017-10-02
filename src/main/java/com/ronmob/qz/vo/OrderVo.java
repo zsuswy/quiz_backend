@@ -1,6 +1,8 @@
 package com.ronmob.qz.vo;
 
 import com.ronmob.qz.model.PayOrder;
+import com.ronmob.qz.model.UserSurvey;
+
 import java.util.Map;
 
 /**

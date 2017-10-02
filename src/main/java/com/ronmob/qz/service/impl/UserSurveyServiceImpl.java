@@ -1,5 +1,6 @@
 package com.ronmob.qz.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.ronmob.qz.common.Util;
 import com.ronmob.qz.dao.UserSurveyMapper;
 import com.ronmob.qz.model.UserSurvey;
@@ -32,26 +33,27 @@ public class UserSurveyServiceImpl implements UserSurveyService {
 
         Map params = searchVo.getParams();
 
+        UserSurveyExample.Criteria criteria = example.createCriteria();
         if (params.containsKey("id")) {
-            example.createCriteria().andIdEqualTo(new Integer(params.get("id").toString()));
+            criteria.andIdEqualTo(Util.getInteger(params.get("id").toString()));
         }
         if (params.containsKey("userId")) {
-            example.createCriteria().andUserIdEqualTo(new Integer(params.get("userId").toString()));
+            criteria.andUserIdEqualTo(Util.getInteger(params.get("userId").toString()));
         }
         if (params.containsKey("pUserId")) {
-            example.createCriteria().andPUserIdEqualTo(new Integer(params.get("pUserId").toString()));
+            criteria.andPUserIdEqualTo(Util.getInteger(params.get("pUserId").toString()));
         }
         if (params.containsKey("surveyId")) {
-            example.createCriteria().andSurveyIdEqualTo(new Integer(params.get("surveyId").toString()));
+            criteria.andSurveyIdEqualTo(Util.getInteger(params.get("surveyId").toString()));
         }
         if (params.containsKey("status")) {
-            example.createCriteria().andStatusEqualTo(new Byte(params.get("status").toString()));
+            criteria.andStatusEqualTo(Util.getByte(params.get("status").toString()));
         }
         if (params.containsKey("createTime_Start")) {
-            example.createCriteria().andCreateTimeGreaterThanOrEqualTo(Util.getDateFromString(params.get("createTime_Start").toString()));
+            criteria.andCreateTimeGreaterThanOrEqualTo(Util.getDateFromString(params.get("createTime_Start").toString()));
         }
         if (params.containsKey("createTime_End")) {
-            example.createCriteria().andCreateTimeLessThanOrEqualTo(Util.getDateFromString(params.get("createTime_End").toString()));
+            criteria.andCreateTimeLessThanOrEqualTo(Util.getDateFromString(params.get("createTime_End").toString()));
         }
 
         return example;

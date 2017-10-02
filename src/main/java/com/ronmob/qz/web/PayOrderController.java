@@ -85,8 +85,12 @@ public class PayOrderController {
     public ResponseResult createOrder(HttpSession httpSession, @RequestBody OrderVo orderVo) {
         ResponseResult result = new ResponseResult();
         try {
-            this.createUserSurveyOrder(orderVo);
+            UserSurvey userSurvey = this.createUserSurveyOrder(orderVo);
+            HashMap<String, Object> data = new HashMap<>();
+            data.put("orderId", orderVo.getOrder().getId());
+            data.put("userSurveyId", userSurvey.getId());
 
+            result.setData(data);
             result.setSuccess(true);
         } catch (Exception ex) {
             result.setSuccess(false);
@@ -98,59 +102,68 @@ public class PayOrderController {
         return result;
     }
 
-    @RequestMapping(value = "/confirm", produces = "application/json")
+    @RequestMapping(value = "/confirmOrder", produces = "application/json")
     @ResponseBody
     public ResponseResult confirmOrder(HttpSession httpSession, @RequestBody Map params) {
         ResponseResult result = new ResponseResult();
         try {
-            this.confirmSurveyOrder(new Integer(params.get("id").toString()));
+            System.out.println(params.get("orderId"));
+            result.setData(this.confirmSurveyOrder(Util.getInteger(params.get("orderId").toString())));
             result.setSuccess(true);
         } catch (Exception ex) {
             result.setSuccess(false);
             result.setMessage(ex.getMessage());
-
+            ex.printStackTrace();
             logger.error(ex);
         }
 
         return result;
     }
 
-
     @Transactional
-    public void createUserSurveyOrder(OrderVo orderVo) throws Exception {
+    public UserSurvey createUserSurveyOrder(OrderVo orderVo) throws Exception {
         Map params = orderVo.getParams();
         PayOrder ord = orderVo.getOrder();
 
+        // 创建订单
         ord.setOrderStatus(new Byte("0"));
         ord.setCreateTime(new Date());
-        // 创建订单
         this.payOrderService.createOrder(ord);
+
+        // 创建userSurvey
         UserSurveyWithBLOBs userSurvey = new UserSurveyWithBLOBs();
-        userSurvey.setUserId(3); // TODO: hardcoded
+        userSurvey.setUserId(1); // TODO: hardcoded
         userSurvey.setSurveyId(ord.getBusinessId());
         userSurvey.setOrderId(ord.getId());
         userSurvey.setStatus(new Byte("0"));
-
-        // 设置分销用户
-        if (params != null && params.containsKey("from_user_id")) {
+        if (params != null && params.containsKey("from_user_id")) {     // 设置分销用户
             userSurvey.setpUserId(new Integer(params.get("from_user_id").toString()));
         }
+        this.userSurveyService.createUserSurvey(userSurvey);            // 创建 用户测评关联
 
-        // 创建 用户测评关联
-        this.userSurveyService.createUserSurvey(userSurvey);
+        // 更新订单关联业务主键id
+        ord.setBusinessId(userSurvey.getId());
+        this.payOrderService.updateOrder(ord);
+
+        return userSurvey;
     }
 
-    public void confirmSurveyOrder(Integer orderId) throws Exception {
+    @Transactional
+    public UserSurvey confirmSurveyOrder(Integer orderId) throws Exception {
         PayOrder order = payOrderService.getOrder(orderId);
         order.setOrderStatus(new Byte("1"));
         order.setFinishTime(new Date());
 
         // TODO: 更新账户余额等
+
+        // 更新订单状态
         payOrderService.updateOrder(order);
 
         SearchVo vo = new SearchVo();
-        HashMap<String, Object> searchParam = new HashMap<String, Object>();
+        HashMap<String, Object> searchParam = new HashMap<>();
         searchParam.put("orderId", order.getBusinessId());
+        searchParam.put("status", 0);
+
         vo.setParams(searchParam);
 
         List<UserSurvey> userSurveyList = userSurveyService.getUserSurveyList(vo);
@@ -162,6 +175,8 @@ public class PayOrderController {
         userSurvey.setStatus(new Byte("1"));
 
         userSurveyService.updateUserSurvey(userSurvey);
+
+        return userSurvey;
     }
 
     @RequestMapping(value = "/update", produces = "application/json")

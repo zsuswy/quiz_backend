@@ -3,6 +3,7 @@ package com.ronmob.qz.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.ronmob.qz.common.Util;
 import com.ronmob.qz.model.Survey;
 import com.ronmob.qz.model.SurveyExample;
 import com.ronmob.qz.vo.SearchVo;
@@ -17,6 +18,10 @@ import com.ronmob.qz.service.SurveyService;
  */
 @Service
 public class SurveyServiceImpl implements SurveyService {
+    public static void main(String[] args) {
+        System.out.println(Byte.parseByte("1"));
+    }
+
     @Autowired
     private SurveyMapper surveyMapper;
 
@@ -29,22 +34,22 @@ public class SurveyServiceImpl implements SurveyService {
 
         Map params = searchVo.getParams();
         if (params.containsKey("id")) {
-            example.createCriteria().andIdEqualTo(new Integer(params.get("id").toString()));
+            example.createCriteria().andIdEqualTo(Integer.parseInt(params.get("id").toString()));
         }
         if (params.containsKey("status")) {
-            example.createCriteria().andStatusEqualTo(new Byte(params.get("status").toString()));
+            example.createCriteria().andStatusEqualTo(Util.getByte(params.get("status").toString()));
         }
         if (params.containsKey("isHot")) {
-            example.createCriteria().andIsHotEqualTo(new Byte(params.get("isHot").toString()));
+            example.createCriteria().andIsHotEqualTo(Util.getByte(params.get("isHot").toString()));
         }
         if (params.containsKey("isNew")) {
-            example.createCriteria().andIsNewEqualTo(new Byte(params.get("isNew").toString()));
+            example.createCriteria().andIsNewEqualTo(Util.getByte(params.get("isNew").toString()));
         }
         if (params.containsKey("isSuper")) {
-            example.createCriteria().andIsSuperEqualTo(new Byte(params.get("isSuper").toString()));
+            example.createCriteria().andIsSuperEqualTo(Util.getByte(params.get("isSuper").toString()));
         }
         if (params.containsKey("classId")) {
-            example.createCriteria().andClassIdEqualTo(new Integer(params.get("classId").toString()));
+            example.createCriteria().andClassIdEqualTo(Integer.parseInt(params.get("classId").toString()));
         }
         return example;
     }

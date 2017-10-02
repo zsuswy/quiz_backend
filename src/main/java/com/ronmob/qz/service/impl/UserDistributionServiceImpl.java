@@ -1,5 +1,6 @@
 package com.ronmob.qz.service.impl;
 
+import com.ronmob.qz.common.Util;
 import com.ronmob.qz.dao.UserDistributionMapper;
 import com.ronmob.qz.model.UserDistribution;
 import com.ronmob.qz.model.UserDistributionExample;
@@ -31,19 +32,19 @@ public class UserDistributionServiceImpl implements UserDistributionService {
         Map params = searchVo.getParams();
 
         if (params.containsKey("id")) {
-            example.createCriteria().andIdEqualTo(new Integer(params.get("id").toString()));
+            example.createCriteria().andIdEqualTo(Util.getInteger(params.get("id").toString()));
         }
         if (params.containsKey("fromUserId")) {
-            example.createCriteria().andFromUserIdEqualTo(new Integer(params.get("fromUserId").toString()));
+            example.createCriteria().andFromUserIdEqualTo(Util.getInteger(params.get("fromUserId").toString()));
         }
         if (params.containsKey("toUserId")) {
-            example.createCriteria().andToUserIdEqualTo(new Integer(params.get("toUserId").toString()));
+            example.createCriteria().andToUserIdEqualTo(Util.getInteger(params.get("toUserId").toString()));
         }
         if (params.containsKey("surveyId")) {
-            example.createCriteria().andSurveyIdEqualTo(new Integer(params.get("surveyId").toString()));
+            example.createCriteria().andSurveyIdEqualTo(Util.getInteger(params.get("surveyId").toString()));
         }
         if (params.containsKey("userSurveyId")) {
-            example.createCriteria().andUserSurveyIdEqualTo(new Integer(params.get("userSurveyId").toString()));
+            example.createCriteria().andUserSurveyIdEqualTo(Util.getInteger(params.get("userSurveyId").toString()));
         }
 
         return example;

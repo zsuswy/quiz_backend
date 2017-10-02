@@ -1,5 +1,6 @@
 package com.ronmob.qz.service.impl;
 
+import com.ronmob.qz.common.Util;
 import com.ronmob.qz.dao.SurveyDimensionMapper;
 import com.ronmob.qz.model.SurveyDimension;
 import com.ronmob.qz.model.SurveyDimensionExample;
@@ -30,16 +31,16 @@ public class SurveyDimensionServiceImpl implements SurveyDimensionService {
 
         Map params = searchVo.getParams();
         if (params.containsKey("id")) {
-            example.createCriteria().andIdEqualTo(new Integer(params.get("id").toString()));
+            example.createCriteria().andIdEqualTo(Util.getInteger(params.get("id").toString()));
         }
         if (params.containsKey("parentId")) {
-            example.createCriteria().andParentIdEqualTo(new Integer(params.get("parentId").toString()));
+            example.createCriteria().andParentIdEqualTo(Util.getInteger(params.get("parentId").toString()));
         }
         if (params.containsKey("surveyId")) {
-            example.createCriteria().andSurveyIdEqualTo(new Integer(params.get("surveyId").toString()));
+            example.createCriteria().andSurveyIdEqualTo(Util.getInteger(params.get("surveyId").toString()));
         }
         if (params.containsKey("seq")) {
-            example.createCriteria().andSeqEqualTo(new Integer(params.get("seq").toString()));
+            example.createCriteria().andSeqEqualTo(Util.getInteger(params.get("seq").toString()));
         }
         return example;
     }

@@ -29,6 +29,7 @@ public class SurveyController {
     @RequestMapping(value = "/list", produces = "application/json")
     @ResponseBody
     public ResponseResult getSurveys(HttpSession httpSession, @RequestBody SearchVo searchVo) {
+        logger.info("caocaoao");
         ResponseResult result = new ResponseResult();
         ListResultData listResultData = new ListResultData();
         try {
@@ -45,7 +46,7 @@ public class SurveyController {
         } catch (Exception ex) {
             result.setSuccess(false);
             result.setMessage(ex.getMessage());
-
+            ex.printStackTrace();
             logger.error(ex);
         }
 

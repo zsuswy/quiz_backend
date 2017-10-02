@@ -1,5 +1,6 @@
 package com.ronmob.qz.service.impl;
 
+import com.ronmob.qz.common.Util;
 import com.ronmob.qz.dao.UserMapper;
 import com.ronmob.qz.model.User;
 import com.ronmob.qz.model.UserExample;
@@ -29,10 +30,10 @@ public class UserServiceImpl implements UserService {
 
         Map params = searchVo.getParams();
         if (params.containsKey("id")) {
-            example.createCriteria().andIdEqualTo(new Integer(params.get("id").toString()));
+            example.createCriteria().andIdEqualTo(Util.getInteger(params.get("id").toString()));
         }
         if (params.containsKey("isAgent")) {
-            example.createCriteria().andIsAgentEqualTo(new Byte(params.get("isAgent").toString()));
+            example.createCriteria().andIsAgentEqualTo(Util.getByte(params.get("isAgent").toString()));
         }
 
         return example;

@@ -1,5 +1,6 @@
 package com.ronmob.qz.web;
 
+import com.alibaba.fastjson.JSON;
 import com.ronmob.qz.common.Util;
 import com.ronmob.qz.model.UserSurveyWithBLOBs;
 import com.ronmob.qz.model.common.ListResultData;
@@ -40,6 +41,7 @@ public class UserSurveyController {
                 listResultData.setPage(page);
             }
 
+            System.out.println(JSON.toJSONString(searchVo));
             listResultData.setList(userSurveyService.getUserSurveyList(searchVo));
             result.setSuccess(true);
             result.setData(listResultData);

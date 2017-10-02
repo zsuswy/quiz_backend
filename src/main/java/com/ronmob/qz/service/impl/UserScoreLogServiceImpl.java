@@ -32,13 +32,13 @@ public class UserScoreLogServiceImpl implements UserScoreLogService {
         Map params = searchVo.getParams();
 
         if (params.containsKey("id")) {
-            example.createCriteria().andIdEqualTo(new Integer(params.get("id").toString()));
+            example.createCriteria().andIdEqualTo(Util.getInteger(params.get("id").toString()));
         }
         if (params.containsKey("userId")) {
-            example.createCriteria().andUserIdEqualTo(new Integer(params.get("userId").toString()));
+            example.createCriteria().andUserIdEqualTo(Util.getInteger(params.get("userId").toString()));
         }
         if (params.containsKey("type")) {
-            example.createCriteria().andTypeEqualTo(new Byte(params.get("type").toString()));
+            example.createCriteria().andTypeEqualTo(Util.getByte(params.get("type").toString()));
         }
         if (params.containsKey("scoreTime_Start")) {
             example.createCriteria().andScoreTimeGreaterThanOrEqualTo(Util.getDateFromString(params.get("scoreTime_Start").toString()));

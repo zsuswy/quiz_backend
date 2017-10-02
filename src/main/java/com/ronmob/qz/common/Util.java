@@ -37,4 +37,28 @@ public class Util {
         }
         return page;
     }
+
+    public static Byte getByte(String s) {
+        int c;
+        try {
+            c = Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            double d = Double.parseDouble(s);
+            c = (int) d;
+        }
+
+        return (byte) c;
+    }
+
+
+    public static Integer getInteger(String s) {
+        int c;
+        try {
+            c = Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            double d = Double.parseDouble(s);
+            c = (int) d;
+        }
+        return c;
+    }
 }

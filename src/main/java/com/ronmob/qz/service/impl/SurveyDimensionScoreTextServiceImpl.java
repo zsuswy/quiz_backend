@@ -1,5 +1,6 @@
 package com.ronmob.qz.service.impl;
 
+import com.ronmob.qz.common.Util;
 import com.ronmob.qz.dao.SurveyDimensionScoreTextMapper;
 import com.ronmob.qz.model.SurveyDimensionScoreText;
 import com.ronmob.qz.model.SurveyDimensionScoreTextExample;
@@ -29,10 +30,10 @@ public class SurveyDimensionScoreTextServiceImpl implements SurveyDimensionScore
 
         Map params = searchVo.getParams();
         if (params.containsKey("dimensionId")) {
-            example.createCriteria().andDimensionIdEqualTo(new Integer(params.get("dimensionId").toString()));
+            example.createCriteria().andDimensionIdEqualTo(Util.getInteger(params.get("dimensionId").toString()));
         }
         if (params.containsKey("id")) {
-            example.createCriteria().andIdEqualTo(new Integer(params.get("id").toString()));
+            example.createCriteria().andIdEqualTo(Util.getInteger(params.get("id").toString()));
         }
 
         return example;
