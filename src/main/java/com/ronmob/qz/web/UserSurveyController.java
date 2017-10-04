@@ -54,6 +54,32 @@ public class UserSurveyController {
         return result;
     }
 
+    @RequestMapping(value = "/detailList", produces = "application/json")
+    @ResponseBody
+    public ResponseResult getUserSurveyDetailList(HttpSession httpSession, @RequestBody SearchVo searchVo) {
+        ResponseResult result = new ResponseResult();
+        ListResultData listResultData = new ListResultData();
+
+        try {
+            Page page = Util.getPageFromSearchVo(searchVo);
+            if (page != null) {
+                page.setTotalCount(userSurveyService.getUserSurveyListTotalCount(searchVo));
+                listResultData.setPage(page);
+            }
+
+            System.out.println(JSON.toJSONString(searchVo));
+            listResultData.setList(userSurveyService.getUserSurveyDetailList(searchVo));
+            result.setSuccess(true);
+            result.setData(listResultData);
+        } catch (Exception ex) {
+            result.setSuccess(false);
+            result.setMessage(ex.getMessage());
+
+            logger.error(ex);
+        }
+        return result;
+    }
+
     @RequestMapping(value = "/get", produces = "application/json")
     @ResponseBody
     public ResponseResult getUserSurvey(Integer id) {

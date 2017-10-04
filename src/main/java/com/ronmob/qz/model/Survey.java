@@ -42,6 +42,8 @@ public class Survey {
 
     private String shortDescription;
 
+    private Byte surveyType;
+
     private String description;
 
     public Integer getId() {
@@ -194,6 +196,14 @@ public class Survey {
 
     public void setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription == null ? null : shortDescription.trim();
+    }
+
+    public Byte getSurveyType() {
+        return surveyType;
+    }
+
+    public void setSurveyType(Byte surveyType) {
+        this.surveyType = surveyType;
     }
 
     public String getDescription() {

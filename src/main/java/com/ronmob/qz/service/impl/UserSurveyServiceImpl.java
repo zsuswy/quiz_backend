@@ -66,6 +66,12 @@ public class UserSurveyServiceImpl implements UserSurveyService {
     }
 
     @Override
+    public List<UserSurvey> getUserSurveyDetailList(SearchVo searchVo) throws Exception {
+        UserSurveyExample example = getUserExample(searchVo);
+        return userSurveyMapper.selectByExampleWithDetail(example);
+    }
+
+    @Override
     public UserSurveyWithBLOBs getUserSurvey(Integer id) {
         return userSurveyMapper.selectByPrimaryKey(id);
     }

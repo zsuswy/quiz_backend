@@ -17,6 +17,14 @@
         <result column="answer" jdbcType="LONGVARCHAR" property="answer"/>
         <result column="result" jdbcType="LONGVARCHAR" property="result"/>
     </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithDetails" type="com.ronmob.qz.model.UserSurveyDetail">
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="class_id" jdbcType="INTEGER" property="classId"/>
+        <result column="org_price" jdbcType="DECIMAL" property="orgPrice"/>
+        <result column="image" jdbcType="VARCHAR" property="image"/>
+        <result column="short_description" jdbcType="VARCHAR" property="shortDescription"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+    </resultMap>
     <sql id="Example_Where_Clause">
         <where>
             <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -78,12 +86,16 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, user_id, p_user_id, status, survey_id, order_id, finish_time, class_name, is_need_sex, 
-    create_time
+    user_survey.id, user_survey.user_id, user_survey.p_user_id, user_survey.status, user_survey.survey_id,
+    user_survey.order_id, user_survey.finish_time, user_survey.class_name, user_survey.is_need_sex,
+    user_survey.create_time
   </sql>
     <sql id="Blob_Column_List">
-    answer, result
+    user_survey.answer, user_survey.result
   </sql>
+    <sql id="Detail_Column_List">
+        survey.title, survey.short_description,survey.price,survey.org_price,survey.image,survey.class_id
+    </sql>
     <select id="selectByExampleWithBLOBs" parameterType="com.ronmob.qz.model.UserSurveyExample"
             resultMap="ResultMapWithBLOBs">
         select
@@ -116,6 +128,32 @@
         </if>
         <include refid="Base_Column_List"/>
         from user_survey
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limit != null">
+            <if test="offset != null">
+                limit ${offset}, ${limit}
+            </if>
+            <if test="offset == null">
+                limit ${limit}
+            </if>
+        </if>
+    </select>
+    <select id="selectByExampleWithDetail" parameterType="com.ronmob.qz.model.UserSurveyExample"
+            resultMap="ResultMapWithDetails">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Detail_Column_List"/>
+        from user_survey
+        join survey on user_survey.survey_id = survey.id
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -362,31 +400,31 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ronmob.qz.model.UserSurveyWithBLOBs">
-    update user_survey
-    set user_id = #{userId,jdbcType=INTEGER},
-      p_user_id = #{pUserId,jdbcType=INTEGER},
-      status = #{status,jdbcType=TINYINT},
-      survey_id = #{surveyId,jdbcType=INTEGER},
-      order_id = #{orderId,jdbcType=INTEGER},
-      finish_time = #{finishTime,jdbcType=TIMESTAMP},
-      class_name = #{className,jdbcType=VARCHAR},
-      is_need_sex = #{isNeedSex,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      answer = #{answer,jdbcType=LONGVARCHAR},
-      result = #{result,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        update user_survey
+        set user_id = #{userId,jdbcType=INTEGER},
+        p_user_id = #{pUserId,jdbcType=INTEGER},
+        status = #{status,jdbcType=TINYINT},
+        survey_id = #{surveyId,jdbcType=INTEGER},
+        order_id = #{orderId,jdbcType=INTEGER},
+        finish_time = #{finishTime,jdbcType=TIMESTAMP},
+        class_name = #{className,jdbcType=VARCHAR},
+        is_need_sex = #{isNeedSex,jdbcType=TINYINT},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        answer = #{answer,jdbcType=LONGVARCHAR},
+        result = #{result,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
     <update id="updateByPrimaryKey" parameterType="com.ronmob.qz.model.UserSurvey">
-    update user_survey
-    set user_id = #{userId,jdbcType=INTEGER},
-      p_user_id = #{pUserId,jdbcType=INTEGER},
-      status = #{status,jdbcType=TINYINT},
-      survey_id = #{surveyId,jdbcType=INTEGER},
-      order_id = #{orderId,jdbcType=INTEGER},
-      finish_time = #{finishTime,jdbcType=TIMESTAMP},
-      class_name = #{className,jdbcType=VARCHAR},
-      is_need_sex = #{isNeedSex,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        update user_survey
+        set user_id = #{userId,jdbcType=INTEGER},
+        p_user_id = #{pUserId,jdbcType=INTEGER},
+        status = #{status,jdbcType=TINYINT},
+        survey_id = #{surveyId,jdbcType=INTEGER},
+        order_id = #{orderId,jdbcType=INTEGER},
+        finish_time = #{finishTime,jdbcType=TIMESTAMP},
+        class_name = #{className,jdbcType=VARCHAR},
+        is_need_sex = #{isNeedSex,jdbcType=TINYINT},
+        create_time = #{createTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

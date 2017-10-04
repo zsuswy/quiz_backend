@@ -3,7 +3,9 @@ package com.ronmob.qz.dao;
 import com.ronmob.qz.model.UserSurvey;
 import com.ronmob.qz.model.UserSurveyExample;
 import com.ronmob.qz.model.UserSurveyWithBLOBs;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface UserSurveyMapper {
@@ -20,6 +22,8 @@ public interface UserSurveyMapper {
     List<UserSurveyWithBLOBs> selectByExampleWithBLOBs(UserSurveyExample example);
 
     List<UserSurvey> selectByExample(UserSurveyExample example);
+
+    List<UserSurvey> selectByExampleWithDetail(UserSurveyExample example);
 
     UserSurveyWithBLOBs selectByPrimaryKey(Integer id);
 

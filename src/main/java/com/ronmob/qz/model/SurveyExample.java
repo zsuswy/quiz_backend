@@ -1315,6 +1315,66 @@ public class SurveyExample {
             addCriterion("short_description not between", value1, value2, "shortDescription");
             return (Criteria) this;
         }
+
+        public Criteria andSurveyTypeIsNull() {
+            addCriterion("survey_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyTypeIsNotNull() {
+            addCriterion("survey_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyTypeEqualTo(Byte value) {
+            addCriterion("survey_type =", value, "surveyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyTypeNotEqualTo(Byte value) {
+            addCriterion("survey_type <>", value, "surveyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyTypeGreaterThan(Byte value) {
+            addCriterion("survey_type >", value, "surveyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyTypeGreaterThanOrEqualTo(Byte value) {
+            addCriterion("survey_type >=", value, "surveyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyTypeLessThan(Byte value) {
+            addCriterion("survey_type <", value, "surveyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyTypeLessThanOrEqualTo(Byte value) {
+            addCriterion("survey_type <=", value, "surveyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyTypeIn(List<Byte> values) {
+            addCriterion("survey_type in", values, "surveyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyTypeNotIn(List<Byte> values) {
+            addCriterion("survey_type not in", values, "surveyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyTypeBetween(Byte value1, Byte value2) {
+            addCriterion("survey_type between", value1, value2, "surveyType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyTypeNotBetween(Byte value1, Byte value2) {
+            addCriterion("survey_type not between", value1, value2, "surveyType");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
