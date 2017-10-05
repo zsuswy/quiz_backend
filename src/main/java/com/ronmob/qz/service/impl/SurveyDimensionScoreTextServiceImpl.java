@@ -29,11 +29,17 @@ public class SurveyDimensionScoreTextServiceImpl implements SurveyDimensionScore
         }
 
         Map params = searchVo.getParams();
+
+        SurveyDimensionScoreTextExample.Criteria criteria = example.createCriteria();
+
         if (params.containsKey("dimensionId")) {
-            example.createCriteria().andDimensionIdEqualTo(Util.getInteger(params.get("dimensionId").toString()));
+            criteria.andDimensionIdEqualTo(Util.getInteger(params.get("dimensionId").toString()));
         }
         if (params.containsKey("id")) {
-            example.createCriteria().andIdEqualTo(Util.getInteger(params.get("id").toString()));
+            criteria.andIdEqualTo(Util.getInteger(params.get("id").toString()));
+        }
+        if (params.containsKey("surveyId")) {
+            criteria.andSurveyIdEqualTo(Util.getInteger(params.get("surveyId").toString()));
         }
 
         return example;

@@ -11,6 +11,8 @@ public class SurveyDimensionScoreText {
 
     private String resultTitle;
 
+    private Integer surveyId;
+
     private String resultComment;
 
     public Integer getId() {
@@ -51,6 +53,14 @@ public class SurveyDimensionScoreText {
 
     public void setResultTitle(String resultTitle) {
         this.resultTitle = resultTitle == null ? null : resultTitle.trim();
+    }
+
+    public Integer getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(Integer surveyId) {
+        this.surveyId = surveyId;
     }
 
     public String getResultComment() {

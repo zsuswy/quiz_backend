@@ -29,11 +29,13 @@ public class UserServiceImpl implements UserService {
         }
 
         Map params = searchVo.getParams();
+        UserExample.Criteria criteria = example.createCriteria();
+
         if (params.containsKey("id")) {
-            example.createCriteria().andIdEqualTo(Util.getInteger(params.get("id").toString()));
+            criteria.andIdEqualTo(Util.getInteger(params.get("id").toString()));
         }
         if (params.containsKey("isAgent")) {
-            example.createCriteria().andIsAgentEqualTo(Util.getByte(params.get("isAgent").toString()));
+            criteria.andIsAgentEqualTo(Util.getByte(params.get("isAgent").toString()));
         }
 
         return example;

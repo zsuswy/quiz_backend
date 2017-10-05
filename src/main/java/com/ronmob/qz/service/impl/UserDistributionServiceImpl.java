@@ -31,20 +31,22 @@ public class UserDistributionServiceImpl implements UserDistributionService {
 
         Map params = searchVo.getParams();
 
+        UserDistributionExample.Criteria criteria = example.createCriteria();
+
         if (params.containsKey("id")) {
-            example.createCriteria().andIdEqualTo(Util.getInteger(params.get("id").toString()));
+            criteria.andIdEqualTo(Util.getInteger(params.get("id").toString()));
         }
         if (params.containsKey("fromUserId")) {
-            example.createCriteria().andFromUserIdEqualTo(Util.getInteger(params.get("fromUserId").toString()));
+            criteria.andFromUserIdEqualTo(Util.getInteger(params.get("fromUserId").toString()));
         }
         if (params.containsKey("toUserId")) {
-            example.createCriteria().andToUserIdEqualTo(Util.getInteger(params.get("toUserId").toString()));
+            criteria.andToUserIdEqualTo(Util.getInteger(params.get("toUserId").toString()));
         }
         if (params.containsKey("surveyId")) {
-            example.createCriteria().andSurveyIdEqualTo(Util.getInteger(params.get("surveyId").toString()));
+            criteria.andSurveyIdEqualTo(Util.getInteger(params.get("surveyId").toString()));
         }
         if (params.containsKey("userSurveyId")) {
-            example.createCriteria().andUserSurveyIdEqualTo(Util.getInteger(params.get("userSurveyId").toString()));
+            criteria.andUserSurveyIdEqualTo(Util.getInteger(params.get("userSurveyId").toString()));
         }
 
         return example;

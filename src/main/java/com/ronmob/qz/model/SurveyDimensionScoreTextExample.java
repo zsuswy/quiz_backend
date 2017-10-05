@@ -433,6 +433,66 @@ public class SurveyDimensionScoreTextExample {
             addCriterion("result_title not between", value1, value2, "resultTitle");
             return (Criteria) this;
         }
+
+        public Criteria andSurveyIdIsNull() {
+            addCriterion("survey_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyIdIsNotNull() {
+            addCriterion("survey_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyIdEqualTo(Integer value) {
+            addCriterion("survey_id =", value, "surveyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyIdNotEqualTo(Integer value) {
+            addCriterion("survey_id <>", value, "surveyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyIdGreaterThan(Integer value) {
+            addCriterion("survey_id >", value, "surveyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("survey_id >=", value, "surveyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyIdLessThan(Integer value) {
+            addCriterion("survey_id <", value, "surveyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyIdLessThanOrEqualTo(Integer value) {
+            addCriterion("survey_id <=", value, "surveyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyIdIn(List<Integer> values) {
+            addCriterion("survey_id in", values, "surveyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyIdNotIn(List<Integer> values) {
+            addCriterion("survey_id not in", values, "surveyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyIdBetween(Integer value1, Integer value2) {
+            addCriterion("survey_id between", value1, value2, "surveyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSurveyIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("survey_id not between", value1, value2, "surveyId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

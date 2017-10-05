@@ -9,7 +9,6 @@ import com.ronmob.qz.vo.SearchVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -31,20 +30,22 @@ public class UserScoreLogServiceImpl implements UserScoreLogService {
 
         Map params = searchVo.getParams();
 
+        UserScoreLogExample.Criteria criteria = example.createCriteria();
+
         if (params.containsKey("id")) {
-            example.createCriteria().andIdEqualTo(Util.getInteger(params.get("id").toString()));
+            criteria.andIdEqualTo(Util.getInteger(params.get("id").toString()));
         }
         if (params.containsKey("userId")) {
-            example.createCriteria().andUserIdEqualTo(Util.getInteger(params.get("userId").toString()));
+            criteria.andUserIdEqualTo(Util.getInteger(params.get("userId").toString()));
         }
         if (params.containsKey("type")) {
-            example.createCriteria().andTypeEqualTo(Util.getByte(params.get("type").toString()));
+            criteria.andTypeEqualTo(Util.getByte(params.get("type").toString()));
         }
         if (params.containsKey("scoreTime_Start")) {
-            example.createCriteria().andScoreTimeGreaterThanOrEqualTo(Util.getDateFromString(params.get("scoreTime_Start").toString()));
+            criteria.andScoreTimeGreaterThanOrEqualTo(Util.getDateFromString(params.get("scoreTime_Start").toString()));
         }
         if (params.containsKey("scoreTime_End")) {
-            example.createCriteria().andScoreTimeLessThanOrEqualTo(Util.getDateFromString(params.get("scoreTime_End").toString()));
+            criteria.andScoreTimeLessThanOrEqualTo(Util.getDateFromString(params.get("scoreTime_End").toString()));
         }
         return example;
     }

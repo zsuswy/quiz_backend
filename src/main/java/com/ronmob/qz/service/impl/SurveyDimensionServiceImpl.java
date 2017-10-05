@@ -30,17 +30,20 @@ public class SurveyDimensionServiceImpl implements SurveyDimensionService {
         }
 
         Map params = searchVo.getParams();
+
+        SurveyDimensionExample.Criteria criteria = example.createCriteria();
+
         if (params.containsKey("id")) {
-            example.createCriteria().andIdEqualTo(Util.getInteger(params.get("id").toString()));
+            criteria.andIdEqualTo(Util.getInteger(params.get("id").toString()));
         }
         if (params.containsKey("parentId")) {
-            example.createCriteria().andParentIdEqualTo(Util.getInteger(params.get("parentId").toString()));
+            criteria.andParentIdEqualTo(Util.getInteger(params.get("parentId").toString()));
         }
         if (params.containsKey("surveyId")) {
-            example.createCriteria().andSurveyIdEqualTo(Util.getInteger(params.get("surveyId").toString()));
+            criteria.andSurveyIdEqualTo(Util.getInteger(params.get("surveyId").toString()));
         }
         if (params.containsKey("seq")) {
-            example.createCriteria().andSeqEqualTo(Util.getInteger(params.get("seq").toString()));
+            criteria.andSeqEqualTo(Util.getInteger(params.get("seq").toString()));
         }
         return example;
     }

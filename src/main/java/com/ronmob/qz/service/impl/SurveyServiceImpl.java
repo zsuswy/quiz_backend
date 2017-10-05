@@ -18,10 +18,6 @@ import com.ronmob.qz.service.SurveyService;
  */
 @Service
 public class SurveyServiceImpl implements SurveyService {
-    public static void main(String[] args) {
-        System.out.println(Byte.parseByte("1"));
-    }
-
     @Autowired
     private SurveyMapper surveyMapper;
 
@@ -33,23 +29,26 @@ public class SurveyServiceImpl implements SurveyService {
         }
 
         Map params = searchVo.getParams();
+
+        SurveyExample.Criteria criteria = example.createCriteria();
+
         if (params.containsKey("id")) {
-            example.createCriteria().andIdEqualTo(Integer.parseInt(params.get("id").toString()));
+            criteria.andIdEqualTo(Integer.parseInt(params.get("id").toString()));
         }
         if (params.containsKey("status")) {
-            example.createCriteria().andStatusEqualTo(Util.getByte(params.get("status").toString()));
+            criteria.andStatusEqualTo(Util.getByte(params.get("status").toString()));
         }
         if (params.containsKey("isHot")) {
-            example.createCriteria().andIsHotEqualTo(Util.getByte(params.get("isHot").toString()));
+            criteria.andIsHotEqualTo(Util.getByte(params.get("isHot").toString()));
         }
         if (params.containsKey("isNew")) {
-            example.createCriteria().andIsNewEqualTo(Util.getByte(params.get("isNew").toString()));
+            criteria.andIsNewEqualTo(Util.getByte(params.get("isNew").toString()));
         }
         if (params.containsKey("isSuper")) {
-            example.createCriteria().andIsSuperEqualTo(Util.getByte(params.get("isSuper").toString()));
+            criteria.andIsSuperEqualTo(Util.getByte(params.get("isSuper").toString()));
         }
         if (params.containsKey("classId")) {
-            example.createCriteria().andClassIdEqualTo(Integer.parseInt(params.get("classId").toString()));
+            criteria.andClassIdEqualTo(Integer.parseInt(params.get("classId").toString()));
         }
         return example;
     }

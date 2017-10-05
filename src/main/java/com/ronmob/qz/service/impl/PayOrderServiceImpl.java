@@ -27,17 +27,19 @@ public class PayOrderServiceImpl implements PayOrderService {
             example.setOffset(searchVo.getPage().getOffset());
         }
 
+        PayOrderExample.Criteria criteria = example.createCriteria();
+
         if (searchVo.getParams().containsKey("id")) {
-            example.createCriteria().andIdEqualTo(Util.getInteger(searchVo.getParams().get("id").toString()));
+            criteria.andIdEqualTo(Util.getInteger(searchVo.getParams().get("id").toString()));
         }
         if (searchVo.getParams().containsKey("userId")) {
-            example.createCriteria().andUserIdEqualTo(Util.getInteger(searchVo.getParams().get("userId").toString()));
+            criteria.andUserIdEqualTo(Util.getInteger(searchVo.getParams().get("userId").toString()));
         }
         if (searchVo.getParams().containsKey("createTime_Start")) {
-            example.createCriteria().andCreateTimeGreaterThanOrEqualTo(Util.getDateFromString(searchVo.getParams().get("createTime_end").toString()));
+            criteria.andCreateTimeGreaterThanOrEqualTo(Util.getDateFromString(searchVo.getParams().get("createTime_end").toString()));
         }
         if (searchVo.getParams().containsKey("createTime_end")) {
-            example.createCriteria().andCreateTimeLessThanOrEqualTo(Util.getDateFromString(searchVo.getParams().get("createTime_end").toString()));
+            criteria.andCreateTimeLessThanOrEqualTo(Util.getDateFromString(searchVo.getParams().get("createTime_end").toString()));
         }
 
         return example;

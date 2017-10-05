@@ -1,6 +1,5 @@
 package com.ronmob.qz.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.ronmob.qz.common.Util;
 import com.ronmob.qz.dao.UserSurveyMapper;
 import com.ronmob.qz.model.UserSurvey;
@@ -11,7 +10,6 @@ import com.ronmob.qz.vo.SearchVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +32,7 @@ public class UserSurveyServiceImpl implements UserSurveyService {
         Map params = searchVo.getParams();
 
         UserSurveyExample.Criteria criteria = example.createCriteria();
+
         if (params.containsKey("id")) {
             criteria.andIdEqualTo(Util.getInteger(params.get("id").toString()));
         }

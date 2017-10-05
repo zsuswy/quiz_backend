@@ -2,7 +2,6 @@ package com.ronmob.qz.service.impl;
 
 import com.ronmob.qz.common.Util;
 import com.ronmob.qz.dao.SurveyQuestionMapper;
-import com.ronmob.qz.model.SurveyExample;
 import com.ronmob.qz.model.SurveyQuestion;
 import com.ronmob.qz.model.SurveyQuestionExample;
 import com.ronmob.qz.service.SurveyQuestionService;
@@ -29,20 +28,23 @@ public class SurveyQuestionServiceImpl implements SurveyQuestionService {
         }
 
         Map params = searchVo.getParams();
+
+        SurveyQuestionExample.Criteria criteria = example.createCriteria();
+
         if (params.containsKey("id")) {
-            example.createCriteria().andIdEqualTo(Util.getInteger(params.get("id").toString()));
+            criteria.andIdEqualTo(Util.getInteger(params.get("id").toString()));
         }
         if (params.containsKey("seq")) {
-            example.createCriteria().andSeqEqualTo(Util.getInteger(params.get("seq").toString()));
+            criteria.andSeqEqualTo(Util.getInteger(params.get("seq").toString()));
         }
         if (params.containsKey("surveyId")) {
-            example.createCriteria().andSurveyIdEqualTo(Util.getInteger(params.get("surveyId").toString()));
+            criteria.andSurveyIdEqualTo(Util.getInteger(params.get("surveyId").toString()));
         }
         if (params.containsKey("title")) {
-            example.createCriteria().andTitleLike('%' + params.get("title").toString() + '%');
+            criteria.andTitleLike('%' + params.get("title").toString() + '%');
         }
         if (params.containsKey("type")) {
-            example.createCriteria().andTypeEqualTo(Util.getByte(params.get("type").toString()));
+            criteria.andTypeEqualTo(Util.getByte(params.get("type").toString()));
         }
         return example;
     }
