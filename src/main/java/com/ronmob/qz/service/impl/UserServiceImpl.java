@@ -6,8 +6,10 @@ import com.ronmob.qz.model.User;
 import com.ronmob.qz.model.UserExample;
 import com.ronmob.qz.service.UserService;
 import com.ronmob.qz.vo.SearchVo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.security.x509.DeltaCRLIndicatorExtension;
 
 import java.util.List;
 import java.util.Map;
@@ -84,5 +86,31 @@ public class UserServiceImpl implements UserService {
     public User updateUser(User user) {
         userMapper.updateByPrimaryKey(user);
         return user;
+    }
+
+    @Override
+    public Integer addScoreBalance(User user) {
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+
+        criteria.andIdEqualTo(user.getId());
+
+        return userMapper.addScoreBalance(user, example);
+    }
+
+    @Override
+    public Integer reduceScoreBalance(User user) {
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andIdEqualTo(user.getId());
+
+        if (user.getBalance() != null) {
+            criteria.andBalanceGreaterThan(user.getBalance());
+        }
+        if (user.getScore() != null) {
+            criteria.andScoreGreaterThan(user.getScore());
+        }
+
+        return userMapper.reduceScoreBalance(user, example);
     }
 }

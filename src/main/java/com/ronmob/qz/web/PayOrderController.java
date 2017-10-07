@@ -1,13 +1,14 @@
 package com.ronmob.qz.web;
 
 import com.ronmob.qz.common.Util;
-import com.ronmob.qz.model.PayOrder;
-import com.ronmob.qz.model.UserSurvey;
-import com.ronmob.qz.model.UserSurveyWithBLOBs;
+import com.ronmob.qz.common.WxHelper;
+import com.ronmob.qz.model.*;
 import com.ronmob.qz.model.common.ListResultData;
 import com.ronmob.qz.model.common.Page;
 import com.ronmob.qz.model.common.ResponseResult;
 import com.ronmob.qz.service.PayOrderService;
+import com.ronmob.qz.service.SurveyService;
+import com.ronmob.qz.service.UserService;
 import com.ronmob.qz.service.UserSurveyService;
 import com.ronmob.qz.vo.OrderVo;
 import com.ronmob.qz.vo.SearchVo;
@@ -34,6 +35,13 @@ public class PayOrderController {
 
     @Autowired
     private PayOrderService payOrderService;
+
+    @Autowired
+    private SurveyService surveyService;
+
+    @Autowired
+    private UserService userService;
+
 
     @Autowired
     private UserSurveyService userSurveyService;
@@ -154,8 +162,20 @@ public class PayOrderController {
         order.setOrderStatus(new Byte("1"));
         order.setFinishTime(new Date());
 
-        // TODO: 更新账户余额等
-
+        // 根据订单，更新积分、账户余额等信息
+        if (order.getBalancePayAmount() != null && order.getScorePayAmount() != null) {
+            User scoreBalancUpdateInfo = new User();
+            scoreBalancUpdateInfo.setId(order.getUserId());
+            if (order.getBalancePayAmount() != null) {
+                scoreBalancUpdateInfo.setBalance(order.getBalancePayAmount());
+            }
+            if (order.getScorePayAmount() != null) {
+                scoreBalancUpdateInfo.setScore(order.getScorePayAmount());
+            }
+            if (userService.reduceScoreBalance(scoreBalancUpdateInfo) != 1) {
+                throw new Exception("账户余额或积分不足");
+            }
+        }
         // 更新订单状态
         payOrderService.updateOrder(order);
 
@@ -175,6 +195,10 @@ public class PayOrderController {
         userSurvey.setStatus(new Byte("1"));
 
         userSurveyService.updateUserSurvey(userSurvey);
+        Survey survey = surveyService.getSurvey(userSurvey.getSurveyId());
+        WxHelper.sendBuySuccess(order.getWxOpenId(),
+                survey.getTitle(),
+                "http://quiz.ronmob.com/qz/mobile/#/survey-detail-initial/" + userSurvey.getSurveyId().toString());
 
         return userSurvey;
     }

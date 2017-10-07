@@ -1,11 +1,14 @@
 package com.ronmob.qz.web;
 
+import com.ronmob.qz.common.WxHelper;
 import com.ronmob.qz.model.User;
 import com.ronmob.qz.model.common.ListResultData;
 import com.ronmob.qz.model.common.Page;
 import com.ronmob.qz.model.common.ResponseResult;
 import com.ronmob.qz.service.*;
 import com.ronmob.qz.vo.SearchVo;
+import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
+import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.aspectj.weaver.ast.Test;
@@ -77,6 +80,12 @@ public class TestController {
     public Object testUserService(HttpServletRequest req) {
         return null; //userService.getUserList(vo);
     }
+
+    @RequestMapping(value = "/msg", produces = "application/json")
+    @ResponseBody
+    public void testTemplateMessage(HttpServletRequest req) throws Exception {
+    }
+
 
     @RequestMapping(value = "/p", produces = "application/json")
     @ResponseBody

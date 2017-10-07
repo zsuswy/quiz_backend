@@ -2,9 +2,11 @@ package com.ronmob.qz.web;
 
 import com.ronmob.qz.common.Util;
 import com.ronmob.qz.model.User;
+import com.ronmob.qz.model.UserDistribution;
 import com.ronmob.qz.model.common.ListResultData;
 import com.ronmob.qz.model.common.Page;
 import com.ronmob.qz.model.common.ResponseResult;
+import com.ronmob.qz.service.UserDistributionService;
 import com.ronmob.qz.service.UserService;
 import com.ronmob.qz.vo.SearchVo;
 import org.apache.commons.logging.Log;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -25,6 +29,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserDistributionService userDistributionService;
 
     @RequestMapping(value = "/list", produces = "application/json")
     @ResponseBody
@@ -94,6 +101,44 @@ public class UserController {
         ResponseResult result = new ResponseResult();
         try {
             this.userService.updateUser(user);
+            result.setSuccess(true);
+        } catch (Exception ex) {
+            result.setSuccess(false);
+            result.setMessage(ex.getMessage());
+
+            logger.error(ex);
+        }
+
+        return result;
+    }
+
+    @RequestMapping(value = "/share", produces = "application/json")
+    @ResponseBody
+    public ResponseResult shareSurvey(HttpSession httpSession, @RequestBody Map params) {
+        ResponseResult result = new ResponseResult();
+        try {
+            User user = new User();
+            user.setId(Util.getInteger(params.get("userId").toString()));
+
+            SearchVo searchVo = new SearchVo();
+            HashMap<String, Object> ps = new HashMap<>();
+            ps.put("userId", params.get("userId"));
+            ps.put("surveyId", params.get("userId"));
+            searchVo.setParams(ps);
+            searchVo.setPage(null);
+
+            // 如果没有分享过，那么
+            if (userDistributionService.getUserDistributionListTotalCount(searchVo) == 0) {
+
+                UserDistribution userDistribution = new UserDistribution();
+                userDistribution.setFromUserId(Util.getInteger(params.get("fromUserId").toString()));
+                // userDistribution.setToUserId(Util.getInteger(params.get("toUserId").toString()));
+                userDistribution.setSurveyId(Util.getInteger(params.get("surveyId").toString()));
+                userDistributionService.createUserDistribution(userDistribution);
+
+                user.setScore(2);
+                this.userService.addScoreBalance(user);
+            }
             result.setSuccess(true);
         } catch (Exception ex) {
             result.setSuccess(false);

@@ -1,7 +1,9 @@
 package com.ronmob.qz.service;
 
 import com.ronmob.qz.model.User;
+import com.ronmob.qz.model.UserExample;
 import com.ronmob.qz.vo.SearchVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,4 +23,9 @@ public interface UserService {
     User createUser(User user) throws Exception;
 
     User updateUser(User user) throws Exception;
+
+    Integer addScoreBalance(User user) throws Exception;
+
+    Integer reduceScoreBalance(User user) throws Exception;
+
 }

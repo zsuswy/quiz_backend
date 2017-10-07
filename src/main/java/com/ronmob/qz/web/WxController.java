@@ -1,5 +1,6 @@
 package com.ronmob.qz.web;
 
+import com.ronmob.qz.common.WxHelper;
 import com.ronmob.qz.model.User;
 import com.ronmob.qz.model.common.ResponseResult;
 import com.ronmob.qz.model.wx.SnsApiBaseReturnResult;
@@ -24,32 +25,24 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/wx")
 public class WxController {
-    WxMpService wxService = new WxMpServiceImpl();
 
     @Autowired
     UserService userService;
 
     public WxController() {
-        WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
-        config.setAppId("wxfad0891e1a70421c"); // 设置微信公众号的appid
-        config.setSecret("e659387e8c350e775bf571908ff512cf"); // 设置微信公众号的app corpSecret
-        config.setToken("ronmob"); // 设置微信公众号的token
-        config.setAesKey("CDtSSu2BW9qmGTZXEinhWleml0oDJuin1w8ZOJMDNk7"); // 设置微信公众号的EncodingAESKey
-
-        wxService.setWxMpConfigStorage(config);
     }
 
     @RequestMapping(value = "/getUserInfo")
     public void getUserInfo(HttpServletRequest req, HttpServletResponse response, String retUrl) throws Exception {
         req.getSession().setAttribute("retUrl", retUrl);
-        String url = wxService.oauth2buildAuthorizationUrl("http://quiz.ronmob.com/qz/wx/sns_api_base_callback", WxConsts.OAUTH2_SCOPE_BASE, null);
+        String url = WxHelper.getWxService().oauth2buildAuthorizationUrl("http://quiz.ronmob.com/qz/wx/sns_api_base_callback", WxConsts.OAUTH2_SCOPE_BASE, null);
         response.sendRedirect(url);
     }
 
     @RequestMapping(value = "/sns_api_base_callback", produces = "application/json")
     @ResponseBody
     public Object wxSnsCallBack(HttpServletRequest req, HttpServletResponse response, String code) throws Exception {
-        WxMpOAuth2AccessToken token = wxService.oauth2getAccessToken(code);
+        WxMpOAuth2AccessToken token = WxHelper.getWxService().oauth2getAccessToken(code);
         User user = userService.getUserByWxOpenId(token.getOpenId());
         if (user == null) {
             User userNew = new User();
@@ -72,7 +65,7 @@ public class WxController {
     @RequestMapping(value = "/getJsapiTicket", produces = "application/json")
     @ResponseBody
     public Object getJsapiTicket() throws Exception {
-        return this.wxService.getJsapiTicket();
+        return WxHelper.getWxService().getJsapiTicket();
     }
 
     @RequestMapping(value = "/createJsapiSignature", produces = "application/json")
@@ -81,7 +74,7 @@ public class WxController {
         ResponseResult result = new ResponseResult();
         try {
             result.setSuccess(true);
-            result.setData(this.wxService.createJsapiSignature(url));
+            result.setData(WxHelper.getWxService().createJsapiSignature(url));
         } catch (Exception ex) {
             result.setSuccess(false);
             result.setMessage(ex.getMessage());
