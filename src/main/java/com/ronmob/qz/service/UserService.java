@@ -14,6 +14,8 @@ public interface UserService {
 
     User getUser(Integer id);
 
+    User getUserByWxOpenId(String wxOpenId);
+
     Integer getUserListTotalCount(SearchVo searchVo) throws Exception;
 
     User createUser(User user) throws Exception;

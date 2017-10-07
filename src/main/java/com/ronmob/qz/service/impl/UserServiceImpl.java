@@ -53,6 +53,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserByWxOpenId(String wxOpenId) {
+        UserExample example = new UserExample();
+
+        example.createCriteria().andWxOpenIdEqualTo(wxOpenId);
+        List<User> userList = userMapper.selectByExample(example);
+
+        if (userList.size() > 0) {
+            return userList.get(0);
+        }
+
+        return null;
+    }
+
+
+    @Override
     public Integer getUserListTotalCount(SearchVo searchVo) {
         UserExample example = getUserExample(searchVo);
 

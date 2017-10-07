@@ -6,11 +6,18 @@ import com.ronmob.qz.model.common.Page;
 import com.ronmob.qz.model.common.ResponseResult;
 import com.ronmob.qz.service.*;
 import com.ronmob.qz.vo.SearchVo;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.aspectj.weaver.ast.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 
@@ -21,6 +28,8 @@ import java.math.BigDecimal;
 @Controller
 @RequestMapping("/test")
 public class TestController {
+    private static Log logger = LogFactory.getLog(TestController.class);
+
     @Autowired
     UserService userService;
 
@@ -42,10 +51,10 @@ public class TestController {
     @Autowired
     UserSurveyService userSurveyService;
 
-
     @RequestMapping(value = "/all", produces = "application/json")
     @ResponseBody
-    public Object getSurveyClasses(HttpSession httpSession) {
+    public Object getSurveyClasses(HttpServletRequest req, HttpServletResponse response) {
+        logger.info("fuck !!!!!!!!");
         User user = new User();
         user.setUserName("Jeffrey");
         user.setIsAgent((byte) 0);
@@ -56,13 +65,16 @@ public class TestController {
 
         SearchVo vo = new SearchVo();
         vo.setPage(new Page());
-
+        Cookie ck = new Cookie("jeffrey", "hello");
+        ck.setPath("/");
+        System.out.println(ck.getDomain());
+        response.addCookie(ck);
         return null;//userService.getUserList(vo);
     }
 
     @RequestMapping(value = "/user", produces = "application/json")
     @ResponseBody
-    public Object testUserService(@RequestBody SearchVo vo, HttpSession httpSession) {
+    public Object testUserService(HttpServletRequest req) {
         return null; //userService.getUserList(vo);
     }
 

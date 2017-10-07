@@ -132,12 +132,12 @@ public class PayOrderController {
 
         // 创建userSurvey
         UserSurveyWithBLOBs userSurvey = new UserSurveyWithBLOBs();
-        userSurvey.setUserId(1); // TODO: hardcoded
+        userSurvey.setUserId(ord.getUserId());
         userSurvey.setSurveyId(ord.getBusinessId());
         userSurvey.setOrderId(ord.getId());
         userSurvey.setStatus(new Byte("0"));
-        if (params != null && params.containsKey("from_user_id")) {     // 设置分销用户
-            userSurvey.setpUserId(new Integer(params.get("from_user_id").toString()));
+        if (params != null && params.containsKey("fromUserId")) {     // 设置分销用户
+            userSurvey.setpUserId(new Integer(params.get("fromUserId").toString()));
         }
         this.userSurveyService.createUserSurvey(userSurvey);            // 创建 用户测评关联
 
