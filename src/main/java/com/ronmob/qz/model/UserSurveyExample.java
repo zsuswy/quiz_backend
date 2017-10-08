@@ -615,63 +615,63 @@ public class UserSurveyExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsNeedSexIsNull() {
-            addCriterion("is_need_sex is null");
+        public Criteria andSelectedSexIsNull() {
+            addCriterion("selected_sex is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeedSexIsNotNull() {
-            addCriterion("is_need_sex is not null");
+        public Criteria andSelectedSexIsNotNull() {
+            addCriterion("selected_sex is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeedSexEqualTo(Byte value) {
-            addCriterion("is_need_sex =", value, "isNeedSex");
+        public Criteria andSelectedSexEqualTo(Byte value) {
+            addCriterion("selected_sex =", value, "selectedSex");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeedSexNotEqualTo(Byte value) {
-            addCriterion("is_need_sex <>", value, "isNeedSex");
+        public Criteria andSelectedSexNotEqualTo(Byte value) {
+            addCriterion("selected_sex <>", value, "selectedSex");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeedSexGreaterThan(Byte value) {
-            addCriterion("is_need_sex >", value, "isNeedSex");
+        public Criteria andSelectedSexGreaterThan(Byte value) {
+            addCriterion("selected_sex >", value, "selectedSex");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeedSexGreaterThanOrEqualTo(Byte value) {
-            addCriterion("is_need_sex >=", value, "isNeedSex");
+        public Criteria andSelectedSexGreaterThanOrEqualTo(Byte value) {
+            addCriterion("selected_sex >=", value, "selectedSex");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeedSexLessThan(Byte value) {
-            addCriterion("is_need_sex <", value, "isNeedSex");
+        public Criteria andSelectedSexLessThan(Byte value) {
+            addCriterion("selected_sex <", value, "selectedSex");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeedSexLessThanOrEqualTo(Byte value) {
-            addCriterion("is_need_sex <=", value, "isNeedSex");
+        public Criteria andSelectedSexLessThanOrEqualTo(Byte value) {
+            addCriterion("selected_sex <=", value, "selectedSex");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeedSexIn(List<Byte> values) {
-            addCriterion("is_need_sex in", values, "isNeedSex");
+        public Criteria andSelectedSexIn(List<Byte> values) {
+            addCriterion("selected_sex in", values, "selectedSex");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeedSexNotIn(List<Byte> values) {
-            addCriterion("is_need_sex not in", values, "isNeedSex");
+        public Criteria andSelectedSexNotIn(List<Byte> values) {
+            addCriterion("selected_sex not in", values, "selectedSex");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeedSexBetween(Byte value1, Byte value2) {
-            addCriterion("is_need_sex between", value1, value2, "isNeedSex");
+        public Criteria andSelectedSexBetween(Byte value1, Byte value2) {
+            addCriterion("selected_sex between", value1, value2, "selectedSex");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeedSexNotBetween(Byte value1, Byte value2) {
-            addCriterion("is_need_sex not between", value1, value2, "isNeedSex");
+        public Criteria andSelectedSexNotBetween(Byte value1, Byte value2) {
+            addCriterion("selected_sex not between", value1, value2, "selectedSex");
             return (Criteria) this;
         }
 

@@ -56,7 +56,7 @@ public class UserSurveyController {
 
     @RequestMapping(value = "/detailList", produces = "application/json")
     @ResponseBody
-    public ResponseResult getUserSurveyDetailList(HttpSession httpSession, @RequestBody SearchVo searchVo) {
+    public ResponseResult getUserSurveyDetailList(@RequestBody SearchVo searchVo) {
         ResponseResult result = new ResponseResult();
         ListResultData listResultData = new ListResultData();
 
@@ -99,7 +99,7 @@ public class UserSurveyController {
 
     @RequestMapping(value = "/create", produces = "application/json")
     @ResponseBody
-    public ResponseResult insertUserSurvey(HttpSession httpSession, @RequestBody UserSurveyWithBLOBs userSurvey) {
+    public ResponseResult insertUserSurvey(@RequestBody UserSurveyWithBLOBs userSurvey) {
         ResponseResult result = new ResponseResult();
         try {
             this.userSurveyService.createUserSurvey(userSurvey);
@@ -117,7 +117,7 @@ public class UserSurveyController {
 
     @RequestMapping(value = "/update", produces = "application/json")
     @ResponseBody
-    public ResponseResult updateUserSurvey(HttpSession httpSession, @RequestBody UserSurveyWithBLOBs userSurvey) {
+    public ResponseResult updateUserSurvey(@RequestBody UserSurveyWithBLOBs userSurvey) {
         ResponseResult result = new ResponseResult();
         try {
             this.userSurveyService.updateUserSurvey(userSurvey);

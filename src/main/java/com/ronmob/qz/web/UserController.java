@@ -3,20 +3,24 @@ package com.ronmob.qz.web;
 import com.ronmob.qz.common.Util;
 import com.ronmob.qz.model.User;
 import com.ronmob.qz.model.UserDistribution;
+import com.ronmob.qz.model.UserSurvey;
 import com.ronmob.qz.model.common.ListResultData;
 import com.ronmob.qz.model.common.Page;
 import com.ronmob.qz.model.common.ResponseResult;
 import com.ronmob.qz.service.UserDistributionService;
 import com.ronmob.qz.service.UserService;
+import com.ronmob.qz.service.UserSurveyService;
 import com.ronmob.qz.vo.SearchVo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,11 +35,15 @@ public class UserController {
     private UserService userService;
 
     @Autowired
+    private UserSurveyService userSurveyService;
+
+
+    @Autowired
     private UserDistributionService userDistributionService;
 
     @RequestMapping(value = "/list", produces = "application/json")
     @ResponseBody
-    public ResponseResult getSurveys(HttpSession httpSession, @RequestBody SearchVo searchVo) {
+    public ResponseResult getSurveys(@RequestBody SearchVo searchVo) {
         ResponseResult result = new ResponseResult();
         ListResultData listResultData = new ListResultData();
         try {
@@ -78,7 +86,7 @@ public class UserController {
 
     @RequestMapping(value = "/create", produces = "application/json")
     @ResponseBody
-    public ResponseResult insertSurvey(HttpSession httpSession, @RequestBody User user) {
+    public ResponseResult insertSurvey(@RequestBody User user) {
         ResponseResult result = new ResponseResult();
         try {
             this.userService.createUser(user);
@@ -97,7 +105,7 @@ public class UserController {
 
     @RequestMapping(value = "/update", produces = "application/json")
     @ResponseBody
-    public ResponseResult updateSurvey(HttpSession httpSession, @RequestBody User user) {
+    public ResponseResult updateSurvey(@RequestBody User user) {
         ResponseResult result = new ResponseResult();
         try {
             this.userService.updateUser(user);
@@ -114,31 +122,14 @@ public class UserController {
 
     @RequestMapping(value = "/share", produces = "application/json")
     @ResponseBody
-    public ResponseResult shareSurvey(HttpSession httpSession, @RequestBody Map params) {
+    public ResponseResult shareSurvey(HttpServletRequest req, @RequestBody Map params) {
         ResponseResult result = new ResponseResult();
         try {
-            User user = new User();
-            user.setId(Util.getInteger(params.get("userId").toString()));
+            Integer userId = Util.getInteger(req.getHeader("Accept-Base"));
+            Integer surveyId = Util.getInteger(params.get("surveyId").toString());
 
-            SearchVo searchVo = new SearchVo();
-            HashMap<String, Object> ps = new HashMap<>();
-            ps.put("userId", params.get("userId"));
-            ps.put("surveyId", params.get("userId"));
-            searchVo.setParams(ps);
-            searchVo.setPage(null);
+            this.shareSurveyBus(userId, surveyId);
 
-            // 如果没有分享过，那么
-            if (userDistributionService.getUserDistributionListTotalCount(searchVo) == 0) {
-
-                UserDistribution userDistribution = new UserDistribution();
-                userDistribution.setFromUserId(Util.getInteger(params.get("fromUserId").toString()));
-                // userDistribution.setToUserId(Util.getInteger(params.get("toUserId").toString()));
-                userDistribution.setSurveyId(Util.getInteger(params.get("surveyId").toString()));
-                userDistributionService.createUserDistribution(userDistribution);
-
-                user.setScore(2);
-                this.userService.addScoreBalance(user);
-            }
             result.setSuccess(true);
         } catch (Exception ex) {
             result.setSuccess(false);
@@ -148,6 +139,39 @@ public class UserController {
         }
 
         return result;
+    }
+
+    @Transactional
+    protected void shareSurveyBus(Integer userId, Integer surveyId) throws Exception {
+        User user = new User();
+        user.setId(userId);
+
+        SearchVo userSurveySearchVo = new SearchVo();
+        HashMap<String, Object> psUserSurvey = new HashMap<>();
+        psUserSurvey.put("userId", userId);
+        psUserSurvey.put("surveyId", surveyId);
+        userSurveySearchVo.setParams(psUserSurvey);
+        userSurveySearchVo.setPage(null);
+
+        if (userSurveyService.getUserSurveyListTotalCount(userSurveySearchVo) == 0) {
+            return;
+        }
+
+        SearchVo distributionSearchVo = new SearchVo();
+        HashMap<String, Object> psDistSearchVo = new HashMap<>();
+        psDistSearchVo.put("fromUserId", userId);
+        psDistSearchVo.put("surveyId", surveyId);
+        distributionSearchVo.setParams(psDistSearchVo);
+        distributionSearchVo.setPage(null);
+        // 如果没有分享过，那么
+        if (userDistributionService.getUserDistributionListTotalCount(distributionSearchVo) == 0) {
+            UserDistribution userDistribution = new UserDistribution();
+            userDistribution.setFromUserId(userId);
+            userDistribution.setSurveyId(surveyId);
+            userDistributionService.createUserDistribution(userDistribution);
+            user.setScore(2);
+            this.userService.addScoreBalance(user);
+        }
     }
 
 }

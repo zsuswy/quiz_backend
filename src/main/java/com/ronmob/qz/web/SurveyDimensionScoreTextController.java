@@ -72,7 +72,7 @@ public class SurveyDimensionScoreTextController {
 
     @RequestMapping(value = "/create", produces = "application/json")
     @ResponseBody
-    public ResponseResult insertSurveysDimensionScoreText(HttpSession httpSession, @RequestBody SurveyDimensionScoreText surveyDimensionScoreText) {
+    public ResponseResult insertSurveysDimensionScoreText(@RequestBody SurveyDimensionScoreText surveyDimensionScoreText) {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyDimensionScoreTextService.createSurveyDimensionScoreText(surveyDimensionScoreText);
@@ -90,7 +90,7 @@ public class SurveyDimensionScoreTextController {
 
     @RequestMapping(value = "/update", produces = "application/json")
     @ResponseBody
-    public ResponseResult updateSurveysDimensionScoreText(HttpSession httpSession, @RequestBody SurveyDimensionScoreText surveyDimensionScoreText) {
+    public ResponseResult updateSurveysDimensionScoreText(@RequestBody SurveyDimensionScoreText surveyDimensionScoreText) {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyDimensionScoreTextService.updateSurveyDimensionScoreText(surveyDimensionScoreText);
@@ -108,7 +108,7 @@ public class SurveyDimensionScoreTextController {
 
     @RequestMapping(value = "/delete", produces = "application/json")
     @ResponseBody
-    public ResponseResult deleteSurveysDimensionScoreText(HttpSession httpSession, Integer id) {
+    public ResponseResult deleteSurveysDimensionScoreText(Integer id) {
         ResponseResult result = new ResponseResult();
         try {
             if (id == null) {

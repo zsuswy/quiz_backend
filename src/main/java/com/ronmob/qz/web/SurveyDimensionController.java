@@ -71,7 +71,7 @@ public class SurveyDimensionController {
 
     @RequestMapping(value = "/create", produces = "application/json")
     @ResponseBody
-    public ResponseResult insertSurveysDimension(HttpSession httpSession, @RequestBody SurveyDimension surveyDimension) {
+    public ResponseResult insertSurveysDimension(@RequestBody SurveyDimension surveyDimension) {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyDimensionService.createSurveyDimension(surveyDimension);
@@ -89,7 +89,7 @@ public class SurveyDimensionController {
 
     @RequestMapping(value = "/update", produces = "application/json")
     @ResponseBody
-    public ResponseResult updateSurveysDimension(HttpSession httpSession, @RequestBody SurveyDimension surveyDimension) {
+    public ResponseResult updateSurveysDimension(@RequestBody SurveyDimension surveyDimension) {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyDimensionService.updateSurveyDimension(surveyDimension);
@@ -107,7 +107,7 @@ public class SurveyDimensionController {
 
     @RequestMapping(value = "/delete", produces = "application/json")
     @ResponseBody
-    public ResponseResult deleteSurveysDimension(HttpSession httpSession, Integer id) {
+    public ResponseResult deleteSurveysDimension(Integer id) {
         ResponseResult result = new ResponseResult();
         try {
             if (id == null) {

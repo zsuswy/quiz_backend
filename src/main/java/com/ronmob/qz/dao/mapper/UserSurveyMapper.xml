@@ -10,7 +10,7 @@
         <result column="order_id" jdbcType="INTEGER" property="orderId"/>
         <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime"/>
         <result column="class_name" jdbcType="VARCHAR" property="className"/>
-        <result column="is_need_sex" jdbcType="TINYINT" property="isNeedSex"/>
+        <result column="selected_sex" jdbcType="TINYINT" property="selectedSex"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ronmob.qz.model.UserSurveyWithBLOBs">
@@ -87,7 +87,7 @@
     </sql>
     <sql id="Base_Column_List">
     user_survey.id, user_survey.user_id, user_survey.p_user_id, user_survey.status, user_survey.survey_id,
-    user_survey.order_id, user_survey.finish_time, user_survey.class_name, user_survey.is_need_sex,
+    user_survey.order_id, user_survey.finish_time, user_survey.class_name, user_survey.selected_sex,
     user_survey.create_time
   </sql>
     <sql id="Blob_Column_List">
@@ -193,11 +193,11 @@
         </selectKey>
         insert into user_survey (user_id, p_user_id, status,
         survey_id, order_id, finish_time,
-        class_name, is_need_sex, create_time,
+        class_name, selected_sex, create_time,
         answer, result)
         values (#{userId,jdbcType=INTEGER}, #{pUserId,jdbcType=INTEGER}, #{status,jdbcType=TINYINT},
         #{surveyId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{finishTime,jdbcType=TIMESTAMP},
-        #{className,jdbcType=VARCHAR}, #{isNeedSex,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP},
+        #{className,jdbcType=VARCHAR}, #{selectedSex,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP},
         #{answer,jdbcType=LONGVARCHAR}, #{result,jdbcType=LONGVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.ronmob.qz.model.UserSurveyWithBLOBs">
@@ -227,8 +227,8 @@
             <if test="className != null">
                 class_name,
             </if>
-            <if test="isNeedSex != null">
-                is_need_sex,
+            <if test="selectedSex != null">
+                selected_sex,
             </if>
             <if test="createTime != null">
                 create_time,
@@ -262,8 +262,8 @@
             <if test="className != null">
                 #{className,jdbcType=VARCHAR},
             </if>
-            <if test="isNeedSex != null">
-                #{isNeedSex,jdbcType=TINYINT},
+            <if test="selectedSex != null">
+                #{selectedSex,jdbcType=TINYINT},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
@@ -309,8 +309,8 @@
             <if test="record.className != null">
                 class_name = #{record.className,jdbcType=VARCHAR},
             </if>
-            <if test="record.isNeedSex != null">
-                is_need_sex = #{record.isNeedSex,jdbcType=TINYINT},
+            <if test="record.selectedSex != null">
+                selected_sex = #{record.selectedSex,jdbcType=TINYINT},
             </if>
             <if test="record.createTime != null">
                 create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -336,7 +336,7 @@
         order_id = #{record.orderId,jdbcType=INTEGER},
         finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
         class_name = #{record.className,jdbcType=VARCHAR},
-        is_need_sex = #{record.isNeedSex,jdbcType=TINYINT},
+        selected_sex = #{record.selectedSex,jdbcType=TINYINT},
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
         answer = #{record.answer,jdbcType=LONGVARCHAR},
         result = #{record.result,jdbcType=LONGVARCHAR}
@@ -354,7 +354,7 @@
         order_id = #{record.orderId,jdbcType=INTEGER},
         finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
         class_name = #{record.className,jdbcType=VARCHAR},
-        is_need_sex = #{record.isNeedSex,jdbcType=TINYINT},
+        selected_sex = #{record.selectedSex,jdbcType=TINYINT},
         create_time = #{record.createTime,jdbcType=TIMESTAMP}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
@@ -384,8 +384,8 @@
             <if test="className != null">
                 class_name = #{className,jdbcType=VARCHAR},
             </if>
-            <if test="isNeedSex != null">
-                is_need_sex = #{isNeedSex,jdbcType=TINYINT},
+            <if test="selectedSex != null">
+                selected_sex = #{selectedSex,jdbcType=TINYINT},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -408,7 +408,7 @@
         order_id = #{orderId,jdbcType=INTEGER},
         finish_time = #{finishTime,jdbcType=TIMESTAMP},
         class_name = #{className,jdbcType=VARCHAR},
-        is_need_sex = #{isNeedSex,jdbcType=TINYINT},
+        selected_sex = #{selectedSex,jdbcType=TINYINT},
         create_time = #{createTime,jdbcType=TIMESTAMP},
         answer = #{answer,jdbcType=LONGVARCHAR},
         result = #{result,jdbcType=LONGVARCHAR}
@@ -423,7 +423,7 @@
         order_id = #{orderId,jdbcType=INTEGER},
         finish_time = #{finishTime,jdbcType=TIMESTAMP},
         class_name = #{className,jdbcType=VARCHAR},
-        is_need_sex = #{isNeedSex,jdbcType=TINYINT},
+        selected_sex = #{selectedSex,jdbcType=TINYINT},
         create_time = #{createTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=INTEGER}
     </update>

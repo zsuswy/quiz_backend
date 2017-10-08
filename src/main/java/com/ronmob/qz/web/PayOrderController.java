@@ -48,7 +48,7 @@ public class PayOrderController {
 
     @RequestMapping(value = "/list", produces = "application/json")
     @ResponseBody
-    public ResponseResult getOrderList(HttpSession httpSession, @RequestBody SearchVo searchVo) {
+    public ResponseResult getOrderList(@RequestBody SearchVo searchVo) {
         ResponseResult result = new ResponseResult();
         ListResultData listResultData = new ListResultData();
 
@@ -90,7 +90,7 @@ public class PayOrderController {
 
     @RequestMapping(value = "/create", produces = "application/json")
     @ResponseBody
-    public ResponseResult createOrder(HttpSession httpSession, @RequestBody OrderVo orderVo) {
+    public ResponseResult createOrder(@RequestBody OrderVo orderVo) {
         ResponseResult result = new ResponseResult();
         try {
             UserSurvey userSurvey = this.createUserSurveyOrder(orderVo);
@@ -112,7 +112,7 @@ public class PayOrderController {
 
     @RequestMapping(value = "/confirmOrder", produces = "application/json")
     @ResponseBody
-    public ResponseResult confirmOrder(HttpSession httpSession, @RequestBody Map params) {
+    public ResponseResult confirmOrder(@RequestBody Map params) {
         ResponseResult result = new ResponseResult();
         try {
             System.out.println(params.get("orderId"));
@@ -145,7 +145,7 @@ public class PayOrderController {
         userSurvey.setOrderId(ord.getId());
         userSurvey.setStatus(new Byte("0"));
         if (params != null && params.containsKey("fromUserId")) {     // 设置分销用户
-            userSurvey.setpUserId(new Integer(params.get("fromUserId").toString()));
+            userSurvey.setpUserId(Util.getInteger(params.get("fromUserId").toString()));
         }
         this.userSurveyService.createUserSurvey(userSurvey);            // 创建 用户测评关联
 
@@ -163,7 +163,7 @@ public class PayOrderController {
         order.setFinishTime(new Date());
 
         // 根据订单，更新积分、账户余额等信息
-        if (order.getBalancePayAmount() != null && order.getScorePayAmount() != null) {
+        if (order.getBalancePayAmount() != null || order.getScorePayAmount() != null) {
             User scoreBalancUpdateInfo = new User();
             scoreBalancUpdateInfo.setId(order.getUserId());
             if (order.getBalancePayAmount() != null) {
@@ -188,7 +188,7 @@ public class PayOrderController {
 
         List<UserSurvey> userSurveyList = userSurveyService.getUserSurveyList(vo);
         if (userSurveyList.size() != 1) {
-            throw new Exception("");
+            throw new Exception("找不到对应的订单");
         }
 
         UserSurvey userSurvey = userSurveyList.get(0);
@@ -205,7 +205,7 @@ public class PayOrderController {
 
     @RequestMapping(value = "/update", produces = "application/json")
     @ResponseBody
-    public ResponseResult updateOrder(HttpSession httpSession, @RequestBody PayOrder order) {
+    public ResponseResult updateOrder(@RequestBody PayOrder order) {
         ResponseResult result = new ResponseResult();
         try {
             this.payOrderService.updateOrder(order);
@@ -223,7 +223,7 @@ public class PayOrderController {
 
     @RequestMapping(value = "/delete", produces = "application/json")
     @ResponseBody
-    public ResponseResult deleteOrder(HttpSession httpSession, Integer id) {
+    public ResponseResult deleteOrder(Integer id) {
         ResponseResult result = new ResponseResult();
         try {
             if (id == null) {

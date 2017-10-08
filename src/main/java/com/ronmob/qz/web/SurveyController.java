@@ -28,8 +28,7 @@ public class SurveyController {
 
     @RequestMapping(value = "/list", produces = "application/json")
     @ResponseBody
-    public ResponseResult getSurveys(HttpSession httpSession, @RequestBody SearchVo searchVo) {
-        logger.info("caocaoao");
+    public ResponseResult getSurveys(@RequestBody SearchVo searchVo) {
         ResponseResult result = new ResponseResult();
         ListResultData listResultData = new ListResultData();
         try {
@@ -75,7 +74,7 @@ public class SurveyController {
 
     @RequestMapping(value = "/create", produces = "application/json")
     @ResponseBody
-    public ResponseResult insertSurvey(HttpSession httpSession, @RequestBody Survey vo) {
+    public ResponseResult insertSurvey(@RequestBody Survey vo) {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyService.createSurvey(vo);
@@ -94,7 +93,7 @@ public class SurveyController {
 
     @RequestMapping(value = "/update", produces = "application/json")
     @ResponseBody
-    public ResponseResult updateSurvey(HttpSession httpSession, @RequestBody Survey vo) {
+    public ResponseResult updateSurvey(@RequestBody Survey vo) {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyService.updateSurvey(vo);

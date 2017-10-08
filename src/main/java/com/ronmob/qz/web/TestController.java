@@ -84,12 +84,13 @@ public class TestController {
     @RequestMapping(value = "/msg", produces = "application/json")
     @ResponseBody
     public void testTemplateMessage(HttpServletRequest req) throws Exception {
+        req.getHeader("");
     }
 
 
     @RequestMapping(value = "/p", produces = "application/json")
     @ResponseBody
-    public Object testParams(@RequestBody SearchVo searchVo, HttpSession httpSession) throws Exception {
+    public Object testParams(@RequestBody SearchVo searchVo) throws Exception {
 
         ResponseResult responseResult = new ResponseResult();
         ListResultData listResultData = new ListResultData();

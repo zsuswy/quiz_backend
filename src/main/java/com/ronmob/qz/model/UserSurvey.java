@@ -3,25 +3,25 @@ package com.ronmob.qz.model;
 import java.util.Date;
 
 public class UserSurvey {
-    protected Integer id;
+    private Integer id;
 
-    protected Integer userId;
+    private Integer userId;
 
-    protected Integer pUserId;
+    private Integer pUserId;
 
-    protected Byte status;
+    private Byte status;
 
-    protected Integer surveyId;
+    private Integer surveyId;
 
-    protected Integer orderId;
+    private Integer orderId;
 
-    protected Date finishTime;
+    private Date finishTime;
 
-    protected String className;
+    private String className;
 
-    protected Byte isNeedSex;
+    private Byte selectedSex;
 
-    protected Date createTime;
+    private Date createTime;
 
     public Integer getId() {
         return id;
@@ -87,12 +87,12 @@ public class UserSurvey {
         this.className = className == null ? null : className.trim();
     }
 
-    public Byte getIsNeedSex() {
-        return isNeedSex;
+    public Byte getSelectedSex() {
+        return selectedSex;
     }
 
-    public void setIsNeedSex(Byte isNeedSex) {
-        this.isNeedSex = isNeedSex;
+    public void setSelectedSex(Byte selectedSex) {
+        this.selectedSex = selectedSex;
     }
 
     public Date getCreateTime() {

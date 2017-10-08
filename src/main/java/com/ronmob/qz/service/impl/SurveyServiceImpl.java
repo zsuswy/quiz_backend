@@ -48,7 +48,7 @@ public class SurveyServiceImpl implements SurveyService {
             criteria.andIsSuperEqualTo(Util.getByte(params.get("isSuper").toString()));
         }
         if (params.containsKey("classId")) {
-            criteria.andClassIdEqualTo(Integer.parseInt(params.get("classId").toString()));
+            criteria.andClassIdEqualTo(Util.getInteger(params.get("classId").toString()));
         }
         return example;
     }

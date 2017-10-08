@@ -29,7 +29,7 @@ public class SurveyQuestionController {
 
     @RequestMapping(value = "/list", produces = "application/json")
     @ResponseBody
-    public ResponseResult getSurveyQuestionList(HttpSession httpSession, @RequestBody SearchVo searchVo) {
+    public ResponseResult getSurveyQuestionList(@RequestBody SearchVo searchVo) {
         ResponseResult result = new ResponseResult();
         ListResultData listResultData = new ListResultData();
 
@@ -71,7 +71,7 @@ public class SurveyQuestionController {
 
     @RequestMapping(value = "/create", produces = "application/json")
     @ResponseBody
-    public ResponseResult insertSurveyQuestion(HttpSession httpSession, @RequestBody SurveyQuestion surveyQuestion) {
+    public ResponseResult insertSurveyQuestion(@RequestBody SurveyQuestion surveyQuestion) {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyQuestionService.createSurveyQuestion(surveyQuestion);
@@ -89,7 +89,7 @@ public class SurveyQuestionController {
 
     @RequestMapping(value = "/update", produces = "application/json")
     @ResponseBody
-    public ResponseResult updateSurveyQuestion(HttpSession httpSession, @RequestBody SurveyQuestion surveyQuestion) {
+    public ResponseResult updateSurveyQuestion(@RequestBody SurveyQuestion surveyQuestion) {
         ResponseResult result = new ResponseResult();
         try {
             this.surveyQuestionService.updateSurveyQuestion(surveyQuestion);
@@ -107,7 +107,7 @@ public class SurveyQuestionController {
 
     @RequestMapping(value = "/delete", produces = "application/json")
     @ResponseBody
-    public ResponseResult deleteSurveyQuestion(HttpSession httpSession, Integer id) {
+    public ResponseResult deleteSurveyQuestion(Integer id) {
         ResponseResult result = new ResponseResult();
         try {
             if (id == null) {
