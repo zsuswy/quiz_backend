@@ -1,6 +1,7 @@
 package com.ronmob.qz.service;
 
 import com.ronmob.qz.model.PayOrder;
+import com.ronmob.qz.vo.OrderVo;
 import com.ronmob.qz.vo.SearchVo;
 
 import java.text.ParseException;
@@ -22,4 +23,8 @@ public interface PayOrderService {
     PayOrder updateOrder(PayOrder order) throws Exception;
 
     Integer deleteOrderById(Integer id) throws Exception;
+
+    PayOrder getNoPayOrder(Integer surveyId, Integer userId) throws Exception;
+
+    PayOrder createOrGetPayOrder(OrderVo orderVo) throws Exception;
 }

@@ -12,6 +12,7 @@ import com.ronmob.qz.service.UserService;
 import com.ronmob.qz.service.UserSurveyService;
 import com.ronmob.qz.vo.OrderVo;
 import com.ronmob.qz.vo.SearchVo;
+import com.sun.corba.se.spi.activation.ServerAlreadyRegisteredHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,80 +129,23 @@ public class PayOrderController {
         return result;
     }
 
+
+
     @Transactional
-    public UserSurvey createUserSurveyOrder(OrderVo orderVo) throws Exception {
-        Map params = orderVo.getParams();
-        PayOrder ord = orderVo.getOrder();
-
-        // 创建订单
-        ord.setOrderStatus(new Byte("0"));
-        ord.setCreateTime(new Date());
-        this.payOrderService.createOrder(ord);
-
+    public UserSurvey createUserSurvey(PayOrder order) throws Exception {
         // 创建userSurvey
         UserSurveyWithBLOBs userSurvey = new UserSurveyWithBLOBs();
-        userSurvey.setUserId(ord.getUserId());
-        userSurvey.setSurveyId(ord.getBusinessId());
-        userSurvey.setOrderId(ord.getId());
+        userSurvey.setUserId(order.getUserId());
+        userSurvey.setSurveyId(order.getSurveyId());
+        userSurvey.setOrderId(order.getId());
         userSurvey.setStatus(new Byte("0"));
-        if (params != null && params.containsKey("fromUserId")) {     // 设置分销用户
-            userSurvey.setpUserId(Util.getInteger(params.get("fromUserId").toString()));
-        }
-        this.userSurveyService.createUserSurvey(userSurvey);            // 创建 用户测评关联
-
-        // 更新订单关联业务主键id
-        ord.setBusinessId(userSurvey.getId());
-        this.payOrderService.updateOrder(ord);
-
-        return userSurvey;
+        return this.userSurveyService.createUserSurvey(userSurvey);
     }
+
+
 
     @Transactional
-    public UserSurvey confirmSurveyOrder(Integer orderId) throws Exception {
-        PayOrder order = payOrderService.getOrder(orderId);
-        order.setOrderStatus(new Byte("1"));
-        order.setFinishTime(new Date());
 
-        // 根据订单，更新积分、账户余额等信息
-        if (order.getBalancePayAmount() != null || order.getScorePayAmount() != null) {
-            User scoreBalancUpdateInfo = new User();
-            scoreBalancUpdateInfo.setId(order.getUserId());
-            if (order.getBalancePayAmount() != null) {
-                scoreBalancUpdateInfo.setBalance(order.getBalancePayAmount());
-            }
-            if (order.getScorePayAmount() != null) {
-                scoreBalancUpdateInfo.setScore(order.getScorePayAmount());
-            }
-            if (userService.reduceScoreBalance(scoreBalancUpdateInfo) != 1) {
-                throw new Exception("账户余额或积分不足");
-            }
-        }
-        // 更新订单状态
-        payOrderService.updateOrder(order);
-
-        SearchVo vo = new SearchVo();
-        HashMap<String, Object> searchParam = new HashMap<>();
-        searchParam.put("orderId", order.getBusinessId());
-        searchParam.put("status", 0);
-
-        vo.setParams(searchParam);
-
-        List<UserSurvey> userSurveyList = userSurveyService.getUserSurveyList(vo);
-        if (userSurveyList.size() != 1) {
-            throw new Exception("找不到对应的订单");
-        }
-
-        UserSurvey userSurvey = userSurveyList.get(0);
-        userSurvey.setStatus(new Byte("1"));
-
-        userSurveyService.updateUserSurvey(userSurvey);
-        Survey survey = surveyService.getSurvey(userSurvey.getSurveyId());
-        WxHelper.sendBuySuccess(order.getWxOpenId(),
-                survey.getTitle(),
-                "http://quiz.ronmob.com/qz/mobile/#/survey-detail-initial/" + userSurvey.getSurveyId().toString());
-
-        return userSurvey;
-    }
 
     @RequestMapping(value = "/update", produces = "application/json")
     @ResponseBody

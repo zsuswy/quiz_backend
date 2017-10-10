@@ -1,5 +1,8 @@
 package com.ronmob.qz.common;
 
+import com.github.binarywang.wxpay.config.WxPayConfig;
+import com.github.binarywang.wxpay.service.WxPayService;
+import com.github.binarywang.wxpay.service.impl.WxPayServiceImpl;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
@@ -14,6 +17,7 @@ import java.util.Date;
  */
 public class WxHelper {
     private static WxMpService wxService;
+    private static WxPayService wxPayService;
     private static final String SCORE_CHANGE_TEMPLATE_ID = "n8vit1t5P9B-8iMtryDj3Qg30Yy8f0GHRsnF8K8yfSQ";
     private static final String BUY_SUCCESS_TEMPLATE_ID = "H5-7i3LFYdb2Zu0UWK9JOgvr-fZYLDLTyHTnE01Lwu0";
 
@@ -24,17 +28,29 @@ public class WxHelper {
         config.setSecret("e659387e8c350e775bf571908ff512cf"); // 设置微信公众号的app corpSecret
         config.setToken("ronmob"); // 设置微信公众号的token
         config.setAesKey("CDtSSu2BW9qmGTZXEinhWleml0oDJuin1w8ZOJMDNk7"); // 设置微信公众号的EncodingAESKey
-
         wxService.setWxMpConfigStorage(config);
+
+
+        wxPayService = new WxPayServiceImpl();
+        WxPayConfig payConfig = new WxPayConfig();
+        payConfig.setAppId("wxfad0891e1a70421c");
+        payConfig.setMchId("1261829701");
+        payConfig.setMchKey("db4ccd7781e76bc556e2b05aa0e2bd5d");
+        payConfig.setNotifyUrl("http://quiz.ronmob.com/qz/wx/notify");
+        wxPayService.setConfig(payConfig);
     }
 
     public static WxMpService getWxService() {
         return wxService;
     }
 
+    public static WxPayService getPayService() {
+        return wxPayService;
+    }
+
     /**
      * 购买成功后的模版消息
-     * */
+     */
     public static void sendBuySuccess(String wxOpenId, String surveyTitle, String url) throws Exception {
         WxMpTemplateMessage templateMessage = new WxMpTemplateMessage();
         templateMessage.setToUser(wxOpenId);
@@ -48,7 +64,7 @@ public class WxHelper {
 
     /**
      * 积分变动的模版消息
-     * */
+     */
     public static void sendScoreChange(String wxOpenId, String scoreChange, String scoreTotal, String url) throws Exception {
         WxMpTemplateMessage templateMessage = new WxMpTemplateMessage();
         templateMessage.setToUser(wxOpenId);

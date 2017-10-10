@@ -936,63 +936,63 @@ public class PayOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andBusinessIdIsNull() {
-            addCriterion("business_Id is null");
+        public Criteria andSurveyIdIsNull() {
+            addCriterion("survey_Id is null");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessIdIsNotNull() {
-            addCriterion("business_Id is not null");
+        public Criteria andSurveyIdIsNotNull() {
+            addCriterion("survey_Id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessIdEqualTo(Integer value) {
-            addCriterion("business_Id =", value, "businessId");
+        public Criteria andSurveyIdEqualTo(Integer value) {
+            addCriterion("survey_Id =", value, "SurveyId");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessIdNotEqualTo(Integer value) {
-            addCriterion("business_Id <>", value, "businessId");
+        public Criteria andSurveyIdNotEqualTo(Integer value) {
+            addCriterion("survey_Id <>", value, "SurveyId");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessIdGreaterThan(Integer value) {
-            addCriterion("business_Id >", value, "businessId");
+        public Criteria andSurveyIdGreaterThan(Integer value) {
+            addCriterion("survey_Id >", value, "SurveyId");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("business_Id >=", value, "businessId");
+        public Criteria andSurveyIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("survey_Id >=", value, "SurveyId");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessIdLessThan(Integer value) {
-            addCriterion("business_Id <", value, "businessId");
+        public Criteria andSurveyIdLessThan(Integer value) {
+            addCriterion("survey_Id <", value, "SurveyId");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessIdLessThanOrEqualTo(Integer value) {
-            addCriterion("business_Id <=", value, "businessId");
+        public Criteria andSurveyIdLessThanOrEqualTo(Integer value) {
+            addCriterion("survey_Id <=", value, "SurveyId");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessIdIn(List<Integer> values) {
-            addCriterion("business_Id in", values, "businessId");
+        public Criteria andSurveyIdIn(List<Integer> values) {
+            addCriterion("survey_Id in", values, "SurveyId");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessIdNotIn(List<Integer> values) {
-            addCriterion("business_Id not in", values, "businessId");
+        public Criteria andSurveyIdNotIn(List<Integer> values) {
+            addCriterion("survey_Id not in", values, "SurveyId");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessIdBetween(Integer value1, Integer value2) {
-            addCriterion("business_Id between", value1, value2, "businessId");
+        public Criteria andSurveyIdBetween(Integer value1, Integer value2) {
+            addCriterion("survey_Id between", value1, value2, "SurveyId");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("business_Id not between", value1, value2, "businessId");
+        public Criteria andSurveyIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("survey_Id not between", value1, value2, "SurveyId");
             return (Criteria) this;
         }
     }

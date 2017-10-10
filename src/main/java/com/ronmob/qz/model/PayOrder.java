@@ -30,7 +30,7 @@ public class PayOrder {
 
     private Integer payType;
 
-    private Integer businessId;
+    private Integer surveyId;
 
     public Integer getId() {
         return id;
@@ -136,11 +136,11 @@ public class PayOrder {
         this.payType = payType;
     }
 
-    public Integer getBusinessId() {
-        return businessId;
+    public Integer getSurveyId() {
+        return surveyId;
     }
 
-    public void setBusinessId(Integer businessId) {
-        this.businessId = businessId;
+    public void setSurveyId(Integer surveyId) {
+        this.surveyId = surveyId;
     }
 }
