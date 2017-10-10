@@ -947,52 +947,112 @@ public class PayOrderExample {
         }
 
         public Criteria andSurveyIdEqualTo(Integer value) {
-            addCriterion("survey_Id =", value, "SurveyId");
+            addCriterion("survey_Id =", value, "surveyId");
             return (Criteria) this;
         }
 
         public Criteria andSurveyIdNotEqualTo(Integer value) {
-            addCriterion("survey_Id <>", value, "SurveyId");
+            addCriterion("survey_Id <>", value, "surveyId");
             return (Criteria) this;
         }
 
         public Criteria andSurveyIdGreaterThan(Integer value) {
-            addCriterion("survey_Id >", value, "SurveyId");
+            addCriterion("survey_Id >", value, "surveyId");
             return (Criteria) this;
         }
 
         public Criteria andSurveyIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("survey_Id >=", value, "SurveyId");
+            addCriterion("survey_Id >=", value, "surveyId");
             return (Criteria) this;
         }
 
         public Criteria andSurveyIdLessThan(Integer value) {
-            addCriterion("survey_Id <", value, "SurveyId");
+            addCriterion("survey_Id <", value, "surveyId");
             return (Criteria) this;
         }
 
         public Criteria andSurveyIdLessThanOrEqualTo(Integer value) {
-            addCriterion("survey_Id <=", value, "SurveyId");
+            addCriterion("survey_Id <=", value, "surveyId");
             return (Criteria) this;
         }
 
         public Criteria andSurveyIdIn(List<Integer> values) {
-            addCriterion("survey_Id in", values, "SurveyId");
+            addCriterion("survey_Id in", values, "surveyId");
             return (Criteria) this;
         }
 
         public Criteria andSurveyIdNotIn(List<Integer> values) {
-            addCriterion("survey_Id not in", values, "SurveyId");
+            addCriterion("survey_Id not in", values, "surveyId");
             return (Criteria) this;
         }
 
         public Criteria andSurveyIdBetween(Integer value1, Integer value2) {
-            addCriterion("survey_Id between", value1, value2, "SurveyId");
+            addCriterion("survey_Id between", value1, value2, "surveyId");
             return (Criteria) this;
         }
 
         public Criteria andSurveyIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("survey_Id not between", value1, value2, "SurveyId");
+            addCriterion("survey_Id not between", value1, value2, "surveyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromUserIdIsNull() {
+            addCriterion("from_user_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromUserIdIsNotNull() {
+            addCriterion("from_user_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromUserIdEqualTo(Integer value) {
+            addCriterion("from_user_id =", value, "fromUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromUserIdNotEqualTo(Integer value) {
+            addCriterion("from_user_id <>", value, "fromUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromUserIdGreaterThan(Integer value) {
+            addCriterion("from_user_id >", value, "fromUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromUserIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("from_user_id >=", value, "fromUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromUserIdLessThan(Integer value) {
+            addCriterion("from_user_id <", value, "fromUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromUserIdLessThanOrEqualTo(Integer value) {
+            addCriterion("from_user_id <=", value, "fromUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromUserIdIn(List<Integer> values) {
+            addCriterion("from_user_id in", values, "fromUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromUserIdNotIn(List<Integer> values) {
+            addCriterion("from_user_id not in", values, "fromUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromUserIdBetween(Integer value1, Integer value2) {
+            addCriterion("from_user_id between", value1, value2, "fromUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromUserIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("from_user_id not between", value1, value2, "fromUserId");
             return (Criteria) this;
         }
     }

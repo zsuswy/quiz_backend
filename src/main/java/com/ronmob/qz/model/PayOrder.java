@@ -32,6 +32,8 @@ public class PayOrder {
 
     private Integer surveyId;
 
+    private Integer fromUserId;
+
     public Integer getId() {
         return id;
     }
@@ -142,5 +144,13 @@ public class PayOrder {
 
     public void setSurveyId(Integer surveyId) {
         this.surveyId = surveyId;
+    }
+
+    public Integer getFromUserId() {
+        return fromUserId;
+    }
+
+    public void setFromUserId(Integer fromUserId) {
+        this.fromUserId = fromUserId;
     }
 }
