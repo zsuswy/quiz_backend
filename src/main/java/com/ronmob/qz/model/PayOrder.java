@@ -14,7 +14,7 @@ public class PayOrder {
 
     private String wxOpenId;
 
-    private Integer scorePayAmount;
+    private BigDecimal scorePayAmount;
 
     private Byte orderStatus;
 
@@ -76,11 +76,11 @@ public class PayOrder {
         this.wxOpenId = wxOpenId == null ? null : wxOpenId.trim();
     }
 
-    public Integer getScorePayAmount() {
+    public BigDecimal getScorePayAmount() {
         return scorePayAmount;
     }
 
-    public void setScorePayAmount(Integer scorePayAmount) {
+    public void setScorePayAmount(BigDecimal scorePayAmount) {
         this.scorePayAmount = scorePayAmount;
     }
 

@@ -466,52 +466,52 @@ public class PayOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andScorePayAmountEqualTo(Integer value) {
+        public Criteria andScorePayAmountEqualTo(BigDecimal value) {
             addCriterion("score_pay_amount =", value, "scorePayAmount");
             return (Criteria) this;
         }
 
-        public Criteria andScorePayAmountNotEqualTo(Integer value) {
+        public Criteria andScorePayAmountNotEqualTo(BigDecimal value) {
             addCriterion("score_pay_amount <>", value, "scorePayAmount");
             return (Criteria) this;
         }
 
-        public Criteria andScorePayAmountGreaterThan(Integer value) {
+        public Criteria andScorePayAmountGreaterThan(BigDecimal value) {
             addCriterion("score_pay_amount >", value, "scorePayAmount");
             return (Criteria) this;
         }
 
-        public Criteria andScorePayAmountGreaterThanOrEqualTo(Integer value) {
+        public Criteria andScorePayAmountGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("score_pay_amount >=", value, "scorePayAmount");
             return (Criteria) this;
         }
 
-        public Criteria andScorePayAmountLessThan(Integer value) {
+        public Criteria andScorePayAmountLessThan(BigDecimal value) {
             addCriterion("score_pay_amount <", value, "scorePayAmount");
             return (Criteria) this;
         }
 
-        public Criteria andScorePayAmountLessThanOrEqualTo(Integer value) {
+        public Criteria andScorePayAmountLessThanOrEqualTo(BigDecimal value) {
             addCriterion("score_pay_amount <=", value, "scorePayAmount");
             return (Criteria) this;
         }
 
-        public Criteria andScorePayAmountIn(List<Integer> values) {
+        public Criteria andScorePayAmountIn(List<BigDecimal> values) {
             addCriterion("score_pay_amount in", values, "scorePayAmount");
             return (Criteria) this;
         }
 
-        public Criteria andScorePayAmountNotIn(List<Integer> values) {
+        public Criteria andScorePayAmountNotIn(List<BigDecimal> values) {
             addCriterion("score_pay_amount not in", values, "scorePayAmount");
             return (Criteria) this;
         }
 
-        public Criteria andScorePayAmountBetween(Integer value1, Integer value2) {
+        public Criteria andScorePayAmountBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("score_pay_amount between", value1, value2, "scorePayAmount");
             return (Criteria) this;
         }
 
-        public Criteria andScorePayAmountNotBetween(Integer value1, Integer value2) {
+        public Criteria andScorePayAmountNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("score_pay_amount not between", value1, value2, "scorePayAmount");
             return (Criteria) this;
         }

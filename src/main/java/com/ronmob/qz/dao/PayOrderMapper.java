@@ -2,9 +2,7 @@ package com.ronmob.qz.dao;
 
 import com.ronmob.qz.model.PayOrder;
 import com.ronmob.qz.model.PayOrderExample;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface PayOrderMapper {

@@ -7,7 +7,7 @@
     <result column="out_trade_no" jdbcType="VARCHAR" property="outTradeNo" />
     <result column="pay_amount" jdbcType="DECIMAL" property="payAmount" />
     <result column="wx_open_id" jdbcType="VARCHAR" property="wxOpenId" />
-    <result column="score_pay_amount" jdbcType="INTEGER" property="scorePayAmount" />
+    <result column="score_pay_amount" jdbcType="DECIMAL" property="scorePayAmount" />
     <result column="order_status" jdbcType="TINYINT" property="orderStatus" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
@@ -105,7 +105,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
+    select 
     <include refid="Base_Column_List" />
     from pay_order
     where id = #{id,jdbcType=INTEGER}
@@ -131,16 +131,16 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into pay_order (wx_order_no, out_trade_no, pay_amount,
-      wx_open_id, score_pay_amount, order_status,
-      create_time, finish_time, user_id,
-      balance_pay_amount, total_amount, pay_type,
+    insert into pay_order (wx_order_no, out_trade_no, pay_amount, 
+      wx_open_id, score_pay_amount, order_status, 
+      create_time, finish_time, user_id, 
+      balance_pay_amount, total_amount, pay_type, 
       survey_Id, from_user_id, transaction_id
       )
-    values (#{wxOrderNo,jdbcType=VARCHAR}, #{outTradeNo,jdbcType=VARCHAR}, #{payAmount,jdbcType=DECIMAL},
-      #{wxOpenId,jdbcType=VARCHAR}, #{scorePayAmount,jdbcType=INTEGER}, #{orderStatus,jdbcType=TINYINT},
-      #{createTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER},
-      #{balancePayAmount,jdbcType=DECIMAL}, #{totalAmount,jdbcType=DECIMAL}, #{payType,jdbcType=INTEGER},
+    values (#{wxOrderNo,jdbcType=VARCHAR}, #{outTradeNo,jdbcType=VARCHAR}, #{payAmount,jdbcType=DECIMAL}, 
+      #{wxOpenId,jdbcType=VARCHAR}, #{scorePayAmount,jdbcType=DECIMAL}, #{orderStatus,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}, 
+      #{balancePayAmount,jdbcType=DECIMAL}, #{totalAmount,jdbcType=DECIMAL}, #{payType,jdbcType=INTEGER}, 
       #{surveyId,jdbcType=INTEGER}, #{fromUserId,jdbcType=INTEGER}, #{transactionId,jdbcType=VARCHAR}
       )
   </insert>
@@ -210,7 +210,7 @@
         #{wxOpenId,jdbcType=VARCHAR},
       </if>
       <if test="scorePayAmount != null">
-        #{scorePayAmount,jdbcType=INTEGER},
+        #{scorePayAmount,jdbcType=DECIMAL},
       </if>
       <if test="orderStatus != null">
         #{orderStatus,jdbcType=TINYINT},
@@ -269,7 +269,7 @@
         wx_open_id = #{record.wxOpenId,jdbcType=VARCHAR},
       </if>
       <if test="record.scorePayAmount != null">
-        score_pay_amount = #{record.scorePayAmount,jdbcType=INTEGER},
+        score_pay_amount = #{record.scorePayAmount,jdbcType=DECIMAL},
       </if>
       <if test="record.orderStatus != null">
         order_status = #{record.orderStatus,jdbcType=TINYINT},
@@ -313,7 +313,7 @@
       out_trade_no = #{record.outTradeNo,jdbcType=VARCHAR},
       pay_amount = #{record.payAmount,jdbcType=DECIMAL},
       wx_open_id = #{record.wxOpenId,jdbcType=VARCHAR},
-      score_pay_amount = #{record.scorePayAmount,jdbcType=INTEGER},
+      score_pay_amount = #{record.scorePayAmount,jdbcType=DECIMAL},
       order_status = #{record.orderStatus,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
@@ -344,7 +344,7 @@
         wx_open_id = #{wxOpenId,jdbcType=VARCHAR},
       </if>
       <if test="scorePayAmount != null">
-        score_pay_amount = #{scorePayAmount,jdbcType=INTEGER},
+        score_pay_amount = #{scorePayAmount,jdbcType=DECIMAL},
       </if>
       <if test="orderStatus != null">
         order_status = #{orderStatus,jdbcType=TINYINT},
@@ -385,7 +385,7 @@
       out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
       pay_amount = #{payAmount,jdbcType=DECIMAL},
       wx_open_id = #{wxOpenId,jdbcType=VARCHAR},
-      score_pay_amount = #{scorePayAmount,jdbcType=INTEGER},
+      score_pay_amount = #{scorePayAmount,jdbcType=DECIMAL},
       order_status = #{orderStatus,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       finish_time = #{finishTime,jdbcType=TIMESTAMP},

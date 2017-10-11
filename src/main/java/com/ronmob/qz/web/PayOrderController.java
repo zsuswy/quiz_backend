@@ -91,7 +91,7 @@ public class PayOrderController {
             PayOrder ord = payOrderService.createOrGetPayOrder(payOrder);
 
             // 没有余额和积分支付，直接返回微信支付订单
-            if (ord.getScorePayAmount() < 0.1 && ord.getBalancePayAmount().longValue() < 0.1) {
+            if (ord.getScorePayAmount().doubleValue() < 0.1 && ord.getBalancePayAmount().longValue() < 0.1) {
                 // 重新发起一笔支付要使用原订单号
                 Map payInfo = this.payOrderService.createWxOrderForJsApi(payOrder, req.getHeader("Accept-Wx"), Util.getIpAddress(req));
                 result.setData(payInfo);
