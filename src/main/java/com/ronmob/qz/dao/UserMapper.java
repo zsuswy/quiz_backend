@@ -2,9 +2,7 @@ package com.ronmob.qz.dao;
 
 import com.ronmob.qz.model.User;
 import com.ronmob.qz.model.UserExample;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {

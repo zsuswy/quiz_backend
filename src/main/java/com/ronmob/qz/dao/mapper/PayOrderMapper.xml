@@ -17,6 +17,7 @@
     <result column="pay_type" jdbcType="INTEGER" property="payType" />
     <result column="survey_Id" jdbcType="INTEGER" property="surveyId" />
     <result column="from_user_id" jdbcType="INTEGER" property="fromUserId" />
+    <result column="transaction_id" jdbcType="VARCHAR" property="transactionId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -79,7 +80,7 @@
   <sql id="Base_Column_List">
     id, wx_order_no, out_trade_no, pay_amount, wx_open_id, score_pay_amount, order_status, 
     create_time, finish_time, user_id, balance_pay_amount, total_amount, pay_type, survey_Id, 
-    from_user_id
+    from_user_id, transaction_id
   </sql>
   <select id="selectByExample" parameterType="com.ronmob.qz.model.PayOrderExample" resultMap="BaseResultMap">
     select
@@ -104,12 +105,19 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from pay_order
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="selectByOutTradeNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from pay_order
+    where id = #{out_trade_no,jdbcType=VARCHAR}
+  </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from pay_order
     where id = #{id,jdbcType=INTEGER}
   </delete>
@@ -123,16 +131,18 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into pay_order (wx_order_no, out_trade_no, pay_amount, 
-      wx_open_id, score_pay_amount, order_status, 
-      create_time, finish_time, user_id, 
-      balance_pay_amount, total_amount, pay_type, 
-      survey_Id, from_user_id)
-    values (#{wxOrderNo,jdbcType=VARCHAR}, #{outTradeNo,jdbcType=VARCHAR}, #{payAmount,jdbcType=DECIMAL}, 
-      #{wxOpenId,jdbcType=VARCHAR}, #{scorePayAmount,jdbcType=INTEGER}, #{orderStatus,jdbcType=TINYINT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}, 
-      #{balancePayAmount,jdbcType=DECIMAL}, #{totalAmount,jdbcType=DECIMAL}, #{payType,jdbcType=INTEGER}, 
-      #{surveyId,jdbcType=INTEGER}, #{fromUserId,jdbcType=INTEGER})
+    insert into pay_order (wx_order_no, out_trade_no, pay_amount,
+      wx_open_id, score_pay_amount, order_status,
+      create_time, finish_time, user_id,
+      balance_pay_amount, total_amount, pay_type,
+      survey_Id, from_user_id, transaction_id
+      )
+    values (#{wxOrderNo,jdbcType=VARCHAR}, #{outTradeNo,jdbcType=VARCHAR}, #{payAmount,jdbcType=DECIMAL},
+      #{wxOpenId,jdbcType=VARCHAR}, #{scorePayAmount,jdbcType=INTEGER}, #{orderStatus,jdbcType=TINYINT},
+      #{createTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER},
+      #{balancePayAmount,jdbcType=DECIMAL}, #{totalAmount,jdbcType=DECIMAL}, #{payType,jdbcType=INTEGER},
+      #{surveyId,jdbcType=INTEGER}, #{fromUserId,jdbcType=INTEGER}, #{transactionId,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.ronmob.qz.model.PayOrder">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -182,6 +192,9 @@
       <if test="fromUserId != null">
         from_user_id,
       </if>
+      <if test="transactionId != null">
+        transaction_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="wxOrderNo != null">
@@ -225,6 +238,9 @@
       </if>
       <if test="fromUserId != null">
         #{fromUserId,jdbcType=INTEGER},
+      </if>
+      <if test="transactionId != null">
+        #{transactionId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -282,6 +298,9 @@
       <if test="record.fromUserId != null">
         from_user_id = #{record.fromUserId,jdbcType=INTEGER},
       </if>
+      <if test="record.transactionId != null">
+        transaction_id = #{record.transactionId,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -303,7 +322,8 @@
       total_amount = #{record.totalAmount,jdbcType=DECIMAL},
       pay_type = #{record.payType,jdbcType=INTEGER},
       survey_Id = #{record.surveyId,jdbcType=INTEGER},
-      from_user_id = #{record.fromUserId,jdbcType=INTEGER}
+      from_user_id = #{record.fromUserId,jdbcType=INTEGER},
+      transaction_id = #{record.transactionId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -353,6 +373,9 @@
       <if test="fromUserId != null">
         from_user_id = #{fromUserId,jdbcType=INTEGER},
       </if>
+      <if test="transactionId != null">
+        transaction_id = #{transactionId,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -371,7 +394,8 @@
       total_amount = #{totalAmount,jdbcType=DECIMAL},
       pay_type = #{payType,jdbcType=INTEGER},
       survey_Id = #{surveyId,jdbcType=INTEGER},
-      from_user_id = #{fromUserId,jdbcType=INTEGER}
+      from_user_id = #{fromUserId,jdbcType=INTEGER},
+      transaction_id = #{transactionId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

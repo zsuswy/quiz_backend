@@ -7,11 +7,14 @@ import com.github.binarywang.wxpay.bean.result.WxPayBaseResult;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.ronmob.qz.common.Util;
 import com.ronmob.qz.common.WxHelper;
+import com.ronmob.qz.model.PayOrder;
 import com.ronmob.qz.model.User;
 import com.ronmob.qz.model.common.ResponseResult;
 import com.ronmob.qz.model.wx.SnsApiBaseReturnResult;
+import com.ronmob.qz.service.PayOrderService;
 import com.ronmob.qz.service.UserService;
 import com.ronmob.qz.vo.SearchVo;
+import javafx.beans.property.adapter.ReadOnlyJavaBeanBooleanProperty;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -31,8 +34,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 @RequestMapping("/wx")
@@ -41,6 +43,10 @@ public class WxController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    PayOrderService payOrderService;
+
 
     public WxController() {
     }
@@ -98,36 +104,6 @@ public class WxController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/createOrder", produces = "application/json")
-    public ResponseResult createOrder(HttpServletRequest req, @RequestBody Map params) {
-        ResponseResult result = new ResponseResult();
-        try {
-            WxPayUnifiedOrderRequest orderRequest = new WxPayUnifiedOrderRequest();
-            orderRequest.setBody("订单描述");
-
-            UUID uuid = UUID.randomUUID();
-            orderRequest.setOutTradeNo(uuid.toString().replace("-", ""));
-
-            orderRequest.setTotalFee(WxPayBaseRequest.yuanToFee(order.getTotalFee()));//元转成分
-            orderRequest.setOpenid("openId");
-            orderRequest.setSpbillCreateIp(Util.getIpAddress(req));
-            orderRequest.setTradeType("JSAPI");
-            // orderRequest.setTimeStart("yyyyMMddHHmmss");
-            // orderRequest.setTimeExpire("yyyyMMddHHmmss");
-
-            Map<String, String> payInfo = WxHelper.getPayService().getPayInfo(orderRequest);
-
-            result.setData(payInfo);
-            result.setSuccess(true);
-        } catch (Exception ex) {
-            result.setMessage(ex.getMessage());
-            result.setSuccess(false);
-        }
-
-        return result;
-    }
-
-    @ResponseBody
     @RequestMapping("/notify")
     public ResponseResult payNotify(@RequestBody String xmlData) {
         ResponseResult responseResult = new ResponseResult();
@@ -137,9 +113,15 @@ public class WxController {
             WxPayOrderNotifyResult result = wxPayService.parseOrderNotifyResult(xmlData);
 
             // 结果正确
-            String orderId = result.getOutTradeNo();
-            String tradeNo = result.getTransactionId();
+            String outTradeNo = result.getOutTradeNo();
+            String orderId = result.getTransactionId();
             String totalFee = WxPayBaseResult.feeToYuan(result.getTotalFee());
+
+            PayOrder order = payOrderService.getOrderByOutTradeNo(outTradeNo);
+            order.setOrderStatus(Util.getByte("1"));
+
+            order.setTransactionId(orderId);
+
 
             //自己处理订单的业务逻辑，需要判断订单是否已经支付过，否则可能会重复调用
             responseResult.setSuccess(true);

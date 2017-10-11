@@ -9,7 +9,8 @@ import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 
-import java.util.Date;
+import java.security.MessageDigest;
+import java.util.*;
 
 /**
  * 创建时间：07/10/2017
@@ -78,5 +79,4 @@ public class WxHelper {
 
         WxHelper.getWxService().getTemplateMsgService().sendTemplateMsg(templateMessage);
     }
-
 }

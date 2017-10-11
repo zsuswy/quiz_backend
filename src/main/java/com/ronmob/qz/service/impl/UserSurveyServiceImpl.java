@@ -2,6 +2,7 @@ package com.ronmob.qz.service.impl;
 
 import com.ronmob.qz.common.Util;
 import com.ronmob.qz.dao.UserSurveyMapper;
+import com.ronmob.qz.model.PayOrder;
 import com.ronmob.qz.model.UserSurvey;
 import com.ronmob.qz.model.UserSurveyExample;
 import com.ronmob.qz.model.UserSurveyWithBLOBs;
@@ -87,6 +88,19 @@ public class UserSurveyServiceImpl implements UserSurveyService {
         userSurveyMapper.insert(userSurvey);
         return userSurvey;
     }
+
+    @Override
+    public UserSurvey createUserSurveyFromOrder(PayOrder order) throws Exception {
+        // 创建userSurvey
+        UserSurveyWithBLOBs userSurvey = new UserSurveyWithBLOBs();
+        userSurvey.setUserId(order.getUserId());
+        userSurvey.setSurveyId(order.getSurveyId());
+        userSurvey.setOrderId(order.getId());
+        userSurvey.setpUserId(order.getFromUserId());
+        userSurvey.setStatus(new Byte("0"));
+        return this.createUserSurvey(userSurvey);
+    }
+
 
     @Override
     public UserSurveyWithBLOBs updateUserSurvey(UserSurveyWithBLOBs userSurvey) {

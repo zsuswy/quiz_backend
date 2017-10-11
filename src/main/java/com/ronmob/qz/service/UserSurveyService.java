@@ -1,5 +1,6 @@
 package com.ronmob.qz.service;
 
+import com.ronmob.qz.model.PayOrder;
 import com.ronmob.qz.model.UserSurvey;
 import com.ronmob.qz.model.UserSurveyWithBLOBs;
 import com.ronmob.qz.vo.SearchVo;
@@ -19,6 +20,8 @@ public interface UserSurveyService {
     Integer getUserSurveyListTotalCount(SearchVo searchVo) throws Exception;
 
     UserSurveyWithBLOBs createUserSurvey(UserSurveyWithBLOBs userSurvey) throws Exception;
+
+    UserSurvey createUserSurveyFromOrder(PayOrder order) throws Exception;
 
     UserSurveyWithBLOBs updateUserSurvey(UserSurveyWithBLOBs userSurvey) throws Exception;
 

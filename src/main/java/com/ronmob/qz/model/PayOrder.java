@@ -34,6 +34,8 @@ public class PayOrder {
 
     private Integer fromUserId;
 
+    private String transactionId;
+
     public Integer getId() {
         return id;
     }
@@ -152,5 +154,13 @@ public class PayOrder {
 
     public void setFromUserId(Integer fromUserId) {
         this.fromUserId = fromUserId;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId == null ? null : transactionId.trim();
     }
 }

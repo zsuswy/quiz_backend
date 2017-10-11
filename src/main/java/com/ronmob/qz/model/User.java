@@ -19,7 +19,7 @@ public class User {
 
     private Integer agentPayOrderId;
 
-    private Integer score;
+    private BigDecimal score;
 
     private BigDecimal balance;
 
@@ -87,11 +87,11 @@ public class User {
         this.agentPayOrderId = agentPayOrderId;
     }
 
-    public Integer getScore() {
+    public BigDecimal getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
+    public void setScore(BigDecimal score) {
         this.score = score;
     }
 

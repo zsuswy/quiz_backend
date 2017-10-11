@@ -2,7 +2,9 @@ package com.ronmob.qz.dao;
 
 import com.ronmob.qz.model.PayOrder;
 import com.ronmob.qz.model.PayOrderExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface PayOrderMapper {
@@ -19,6 +21,8 @@ public interface PayOrderMapper {
     List<PayOrder> selectByExample(PayOrderExample example);
 
     PayOrder selectByPrimaryKey(Integer id);
+
+    PayOrder selectByOutTradeNo(String out_trade_no);
 
     int updateByExampleSelective(@Param("record") PayOrder record, @Param("example") PayOrderExample example);
 

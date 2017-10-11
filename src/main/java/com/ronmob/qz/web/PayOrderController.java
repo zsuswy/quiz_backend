@@ -1,7 +1,6 @@
 package com.ronmob.qz.web;
 
 import com.ronmob.qz.common.Util;
-import com.ronmob.qz.common.WxHelper;
 import com.ronmob.qz.model.*;
 import com.ronmob.qz.model.common.ListResultData;
 import com.ronmob.qz.model.common.Page;
@@ -10,9 +9,7 @@ import com.ronmob.qz.service.PayOrderService;
 import com.ronmob.qz.service.SurveyService;
 import com.ronmob.qz.service.UserService;
 import com.ronmob.qz.service.UserSurveyService;
-import com.ronmob.qz.vo.OrderVo;
 import com.ronmob.qz.vo.SearchVo;
-import com.sun.corba.se.spi.activation.ServerAlreadyRegisteredHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller
@@ -89,17 +83,20 @@ public class PayOrderController {
         return result;
     }
 
-    @RequestMapping(value = "/create", produces = "application/json")
+    @RequestMapping(value = "/pay", produces = "application/json")
     @ResponseBody
-    public ResponseResult createOrder(@RequestBody OrderVo orderVo) {
+    public ResponseResult pay(HttpServletRequest req, @RequestBody PayOrder payOrder) {
         ResponseResult result = new ResponseResult();
         try {
-            UserSurvey userSurvey = this.createUserSurveyOrder(orderVo);
-            HashMap<String, Object> data = new HashMap<>();
-            data.put("orderId", orderVo.getOrder().getId());
-            data.put("userSurveyId", userSurvey.getId());
+            PayOrder ord = payOrderService.createOrGetPayOrder(payOrder);
 
-            result.setData(data);
+            // 没有余额和积分支付，直接返回微信支付订单
+            if (ord.getScorePayAmount() < 0.1 && ord.getBalancePayAmount().longValue() < 0.1) {
+                // 重新发起一笔支付要使用原订单号
+                Map payInfo = this.payOrderService.createWxOrderForJsApi(payOrder, req.getHeader("Accept-Wx"), Util.getIpAddress(req));
+                result.setData(payInfo);
+            }
+
             result.setSuccess(true);
         } catch (Exception ex) {
             result.setSuccess(false);
@@ -110,42 +107,6 @@ public class PayOrderController {
 
         return result;
     }
-
-    @RequestMapping(value = "/confirmOrder", produces = "application/json")
-    @ResponseBody
-    public ResponseResult confirmOrder(@RequestBody Map params) {
-        ResponseResult result = new ResponseResult();
-        try {
-            System.out.println(params.get("orderId"));
-            result.setData(this.confirmSurveyOrder(Util.getInteger(params.get("orderId").toString())));
-            result.setSuccess(true);
-        } catch (Exception ex) {
-            result.setSuccess(false);
-            result.setMessage(ex.getMessage());
-            ex.printStackTrace();
-            logger.error(ex);
-        }
-
-        return result;
-    }
-
-
-
-    @Transactional
-    public UserSurvey createUserSurvey(PayOrder order) throws Exception {
-        // 创建userSurvey
-        UserSurveyWithBLOBs userSurvey = new UserSurveyWithBLOBs();
-        userSurvey.setUserId(order.getUserId());
-        userSurvey.setSurveyId(order.getSurveyId());
-        userSurvey.setOrderId(order.getId());
-        userSurvey.setStatus(new Byte("0"));
-        return this.userSurveyService.createUserSurvey(userSurvey);
-    }
-
-
-
-    @Transactional
-
 
     @RequestMapping(value = "/update", produces = "application/json")
     @ResponseBody
