@@ -16,7 +16,7 @@ public class PayOrder {
 
     private BigDecimal scorePayAmount;
 
-    private Byte orderStatus;
+    private Byte status;
 
     private Date createTime;
 
@@ -84,12 +84,12 @@ public class PayOrder {
         this.scorePayAmount = scorePayAmount;
     }
 
-    public Byte getOrderStatus() {
-        return orderStatus;
+    public Byte getStatus() {
+        return status;
     }
 
-    public void setOrderStatus(Byte orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 
     public Date getCreateTime() {

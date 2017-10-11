@@ -14,12 +14,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -36,7 +36,6 @@ public class PayOrderController {
 
     @Autowired
     private UserService userService;
-
 
     @Autowired
     private UserSurveyService userSurveyService;
@@ -87,22 +86,50 @@ public class PayOrderController {
     @ResponseBody
     public ResponseResult pay(HttpServletRequest req, @RequestBody PayOrder payOrder) {
         ResponseResult result = new ResponseResult();
+        HashMap<String, Object> data = new HashMap<>();
         try {
             PayOrder ord = payOrderService.createOrGetPayOrder(payOrder);
+            data.put("order", ord);
 
-            // 没有余额和积分支付，直接返回微信支付订单
-            if (ord.getScorePayAmount().doubleValue() < 0.1 && ord.getBalancePayAmount().longValue() < 0.1) {
-                // 重新发起一笔支付要使用原订单号
+            if (ord.getPayAmount().doubleValue() < 0.0001) {// 不需要微信支付
+                data.put("wxpPayType", "none");
+            }
+            // 需要部分支付，那么返回微信支付订单
+            else if (ord.getPayAmount().doubleValue() > 0.001 &&
+                    (ord.getPayAmount().doubleValue() > 0.00001
+                            || ord.getScorePayAmount().doubleValue() > 0.00001)) {
+                // 重新发起一笔支付要使用原订单号,逻辑已处理
                 Map payInfo = this.payOrderService.createWxOrderForJsApi(payOrder, req.getHeader("Accept-Wx"), Util.getIpAddress(req));
-                result.setData(payInfo);
+                data.put("payInfo", payInfo);
+                data.put("wxpPayType", "partial");
+            } else {
+                data.put("wxpPayType", "all");
             }
 
+            result.setData(data);
+            result.setSuccess(true);
+        } catch (Exception ex) {
+            result.setSuccess(false);
+            result.setMessage(ex.getMessage());
+            ex.printStackTrace();
+            logger.error(ex);
+        }
+
+        return result;
+    }
+
+    @RequestMapping(value = "/confirm", produces = "application/json")
+    @ResponseBody
+    public ResponseResult confirmOrder(Integer orderId) {
+        ResponseResult result = new ResponseResult();
+        try {
+            result.setData(this.payOrderService.confirmOrder(orderId));
             result.setSuccess(true);
         } catch (Exception ex) {
             result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
-            logger.error(ex);
+            ex.printStackTrace();
         }
 
         return result;

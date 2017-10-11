@@ -516,63 +516,63 @@ public class PayOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusIsNull() {
-            addCriterion("order_status is null");
+        public Criteria andstatusIsNull() {
+            addCriterion("status is null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusIsNotNull() {
-            addCriterion("order_status is not null");
+        public Criteria andstatusIsNotNull() {
+            addCriterion("status is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusEqualTo(Byte value) {
-            addCriterion("order_status =", value, "orderStatus");
+        public Criteria andstatusEqualTo(Byte value) {
+            addCriterion("status =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusNotEqualTo(Byte value) {
-            addCriterion("order_status <>", value, "orderStatus");
+        public Criteria andstatusNotEqualTo(Byte value) {
+            addCriterion("status <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusGreaterThan(Byte value) {
-            addCriterion("order_status >", value, "orderStatus");
+        public Criteria andstatusGreaterThan(Byte value) {
+            addCriterion("status >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusGreaterThanOrEqualTo(Byte value) {
-            addCriterion("order_status >=", value, "orderStatus");
+        public Criteria andstatusGreaterThanOrEqualTo(Byte value) {
+            addCriterion("status >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusLessThan(Byte value) {
-            addCriterion("order_status <", value, "orderStatus");
+        public Criteria andstatusLessThan(Byte value) {
+            addCriterion("status <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusLessThanOrEqualTo(Byte value) {
-            addCriterion("order_status <=", value, "orderStatus");
+        public Criteria andstatusLessThanOrEqualTo(Byte value) {
+            addCriterion("status <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusIn(List<Byte> values) {
-            addCriterion("order_status in", values, "orderStatus");
+        public Criteria andstatusIn(List<Byte> values) {
+            addCriterion("status in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusNotIn(List<Byte> values) {
-            addCriterion("order_status not in", values, "orderStatus");
+        public Criteria andstatusNotIn(List<Byte> values) {
+            addCriterion("status not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusBetween(Byte value1, Byte value2) {
-            addCriterion("order_status between", value1, value2, "orderStatus");
+        public Criteria andstatusBetween(Byte value1, Byte value2) {
+            addCriterion("status between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusNotBetween(Byte value1, Byte value2) {
-            addCriterion("order_status not between", value1, value2, "orderStatus");
+        public Criteria andstatusNotBetween(Byte value1, Byte value2) {
+            addCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }
 

@@ -77,6 +77,13 @@ public class UserSurveyServiceImpl implements UserSurveyService {
     }
 
     @Override
+    public UserSurveyWithBLOBs getUserSurveyByOrderId(Integer orderId) {
+        UserSurveyExample example = new UserSurveyExample();
+        example.createCriteria().andOrderIdEqualTo(orderId);
+        return userSurveyMapper.selectByExampleWithBLOBs(example).get(0);
+    }
+
+    @Override
     public Integer getUserSurveyListTotalCount(SearchVo searchVo) throws Exception {
         UserSurveyExample example = getUserExample(searchVo);
 

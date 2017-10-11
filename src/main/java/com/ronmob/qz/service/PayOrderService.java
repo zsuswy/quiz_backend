@@ -31,5 +31,5 @@ public interface PayOrderService {
 
     Map createWxOrderForJsApi(PayOrder order, String wxOpenId, String ipAddress) throws Exception;
 
-    Map queryWxOrder(Integer orderId) throws Exception;
+    Integer confirmOrder(Integer orderId) throws Exception;
 }

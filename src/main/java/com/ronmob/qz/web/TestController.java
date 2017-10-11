@@ -62,7 +62,7 @@ public class TestController {
         user.setUserName("Jeffrey");
         user.setIsAgent((byte) 0);
         user.setBalance(new BigDecimal(20));
-        user.setScore(20);
+        user.setScore(new BigDecimal(20));
         user.setWxOpenId("lkasiuuyqkjsdfouoipuoh2yu3");
         //userService.createUser(user);
 

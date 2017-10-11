@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -169,7 +170,7 @@ public class UserController {
             userDistribution.setFromUserId(userId);
             userDistribution.setSurveyId(surveyId);
             userDistributionService.createUserDistribution(userDistribution);
-            user.setScore(2);
+            user.setScore(new BigDecimal(2));
             this.userService.addScoreBalance(user);
         }
     }

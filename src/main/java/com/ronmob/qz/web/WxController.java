@@ -118,7 +118,7 @@ public class WxController {
             String totalFee = WxPayBaseResult.feeToYuan(result.getTotalFee());
 
             PayOrder order = payOrderService.getOrderByOutTradeNo(outTradeNo);
-            order.setOrderStatus(Util.getByte("1"));
+            order.setStatus(Util.getByte("1"));
 
             order.setTransactionId(orderId);
 
