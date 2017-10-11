@@ -105,10 +105,10 @@ public class UserServiceImpl implements UserService {
         criteria.andIdEqualTo(user.getId());
 
         if (user.getBalance() != null) {
-            criteria.andBalanceGreaterThan(user.getBalance());
+            criteria.andBalanceGreaterThanOrEqualTo(user.getBalance());
         }
         if (user.getScore() != null) {
-            criteria.andScoreGreaterThan(user.getScore());
+            criteria.andScoreGreaterThanOrEqualTo(user.getScore());
         }
 
         return userMapper.reduceScoreBalance(user, example);

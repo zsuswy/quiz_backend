@@ -158,8 +158,6 @@ public class PayOrderServiceImpl implements PayOrderService {
      */
     @Override
     public PayOrder createOrGetPayOrder(PayOrder userOrder) throws Exception {
-        System.out.println(JSON.toJSONString(userOrder));
-        System.out.println(userOrder.getId());
         PayOrder existOrder = null;
         if (userOrder.getId() != null) {
             existOrder = this.payOrderMapper.selectByPrimaryKey(userOrder.getId());
@@ -167,14 +165,7 @@ public class PayOrderServiceImpl implements PayOrderService {
             existOrder = getNoPayOrder(userOrder.getSurveyId(), userOrder.getUserId());
         }
 
-        System.out.println(existOrder);
-
         if (existOrder != null) {
-            System.out.println("fasdfasdfasdf");
-
-            // 重新计算一次，以免余额、积分发生变化
-            calculateOrderScoreBalance(existOrder);
-            this.payOrderMapper.updateByPrimaryKeySelective(existOrder);
             return existOrder;
         }
 
@@ -186,7 +177,11 @@ public class PayOrderServiceImpl implements PayOrderService {
         userOrder.setTotalAmount(survey.getPrice());
         this.calculateOrderScoreBalance(userOrder); // 计算支付相关金额
 
-        return this.createOrder(userOrder);
+        this.createOrder(userOrder);
+
+        this.createOrGetUserSurvey(userOrder);
+
+        return userOrder;
     }
 
     /**
@@ -256,6 +251,9 @@ public class PayOrderServiceImpl implements PayOrderService {
         }
     }
 
+    /**
+     * 返回UserSurveyId
+     */
     @Transactional
     public Integer confirmOrder(Integer orderId) throws Exception {
         PayOrder ord = payOrderMapper.selectByPrimaryKey(orderId);
@@ -285,7 +283,7 @@ public class PayOrderServiceImpl implements PayOrderService {
     public Map createWxOrderForJsApi(PayOrder order, String wxOpenId, String ipAddress) throws Exception {
         WxPayUnifiedOrderRequest orderRequest = new WxPayUnifiedOrderRequest();
         orderRequest.setBody("订单描述");
-
+        System.out.println(JSON.toJSONString(order));
         // 重新发起一笔支付要使用原订单号
         orderRequest.setOutTradeNo(order.getOutTradeNo());
         orderRequest.setTotalFee(WxPayBaseRequest.yuanToFee(order.getPayAmount().toString()));//元转成分
@@ -297,8 +295,6 @@ public class PayOrderServiceImpl implements PayOrderService {
 
         // 直接返回前端，给支付调用
         Map<String, String> payInfo = WxHelper.getPayService().getPayInfo(orderRequest);
-
-        this.createOrGetUserSurvey(order);
         return payInfo;
     }
 }

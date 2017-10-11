@@ -96,10 +96,10 @@ public class PayOrderController {
             }
             // 需要部分支付，那么返回微信支付订单
             else if (ord.getPayAmount().doubleValue() > 0.001 &&
-                    (ord.getPayAmount().doubleValue() > 0.00001
+                    (ord.getBalancePayAmount().doubleValue() > 0.00001
                             || ord.getScorePayAmount().doubleValue() > 0.00001)) {
                 // 重新发起一笔支付要使用原订单号,逻辑已处理
-                Map payInfo = this.payOrderService.createWxOrderForJsApi(payOrder, req.getHeader("Accept-Wx"), Util.getIpAddress(req));
+                Map payInfo = this.payOrderService.createWxOrderForJsApi(ord, req.getHeader("Accept-Wx"), Util.getIpAddress(req));
                 data.put("payInfo", payInfo);
                 data.put("wxpPayType", "partial");
             } else {
