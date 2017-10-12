@@ -92,7 +92,7 @@ public class PayOrderController {
             PayOrder ord = payOrderService.createOrGetPayOrder(payOrder);
             data.put("order", ord);
             UserSurvey userSurvey = userSurveyService.getUserSurveyByOrderId(ord.getId());
-            data.put("userSurveyId", userSurvey.getId());
+            data.put("userSurveyId", userSurvey.getId().toString());
 
             if (ord.getPayAmount().doubleValue() < 0.0001) {// 不需要微信支付
                 data.put("wxpPayType", "none");
