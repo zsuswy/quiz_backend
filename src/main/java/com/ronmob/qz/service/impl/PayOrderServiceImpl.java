@@ -1,18 +1,12 @@
 package com.ronmob.qz.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.github.binarywang.wxpay.bean.request.WxPayBaseRequest;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
 import com.ronmob.qz.common.Util;
-import com.ronmob.qz.common.WxHelper;
 import com.ronmob.qz.dao.PayOrderMapper;
 import com.ronmob.qz.model.*;
-import com.ronmob.qz.service.PayOrderService;
-import com.ronmob.qz.service.SurveyService;
-import com.ronmob.qz.service.UserService;
-import com.ronmob.qz.service.UserSurveyService;
+import com.ronmob.qz.service.*;
 import com.ronmob.qz.vo.SearchVo;
-import com.ronmob.qz.web.PayOrderController;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +22,7 @@ import java.util.*;
  */
 @Service
 public class PayOrderServiceImpl implements PayOrderService {
-    private static Log logger = LogFactory.getLog(PayOrderController.class);
+    private static Log logger = LogFactory.getLog(PayOrderServiceImpl.class);
 
     @Autowired
     PayOrderMapper payOrderMapper;
@@ -41,6 +35,9 @@ public class PayOrderServiceImpl implements PayOrderService {
 
     @Autowired
     UserSurveyService userSurveyService;
+
+    @Autowired
+    WxHelper wxHelper;
 
     private PayOrderExample getOrderExample(SearchVo searchVo) throws Exception {
         PayOrderExample example = new PayOrderExample();
@@ -75,7 +72,6 @@ public class PayOrderServiceImpl implements PayOrderService {
 
     @Override
     public List<PayOrder> getOrderList(SearchVo searchVo) throws Exception {
-        System.out.println(JSON.toJSONString(searchVo));
         return payOrderMapper.selectByExample(getOrderExample(searchVo));
     }
 
@@ -138,12 +134,11 @@ public class PayOrderServiceImpl implements PayOrderService {
         searchVo.setParams(params);
 
         List<PayOrder> orders = this.getOrderList(searchVo);
-        System.out.println(orders.size());
         if (orders == null || orders.size() == 0)
             return null;
 
         if (orders.size() > 1) {
-            System.out.println(String.format("Survey %s 未支付订单数大于1。", surveyId.toString()));
+            throw new Exception(String.format("Survey %s 未支付订单数大于1。", surveyId.toString()));
         }
 
         return orders.get(0);
@@ -157,6 +152,7 @@ public class PayOrderServiceImpl implements PayOrderService {
      * @throws Exception 异常
      */
     @Override
+    @Transactional
     public PayOrder createOrGetPayOrder(PayOrder userOrder) throws Exception {
         PayOrder existOrder = null;
         if (userOrder.getId() != null) {
@@ -196,13 +192,13 @@ public class PayOrderServiceImpl implements PayOrderService {
         BigDecimal payAmount;
 
         // 没有余额和积分，那么直接微信支付，不需要跳到支付页面
-        if (user.getScore().longValue() < 0.001 && user.getBalance().longValue() < 0.001) {
+        if (user.getScore().doubleValue() < 0.001 && user.getBalance().doubleValue() < 0.001) {
             order.setTotalAmount(survey.getPrice());
             order.setPayAmount(survey.getPrice());
         } else {
             // 计算 余额、积分 支付金额
             if (user.getScore().doubleValue() > 0.001) {
-                scorePay = survey.getPrice().longValue() > user.getScore().longValue() ? user.getScore() : survey.getPrice();
+                scorePay = survey.getPrice().doubleValue() > user.getScore().doubleValue() ? user.getScore() : survey.getPrice();
             } else {
                 scorePay = new BigDecimal(0.00);
             }
@@ -257,23 +253,13 @@ public class PayOrderServiceImpl implements PayOrderService {
     @Transactional
     public Integer confirmOrder(Integer orderId) throws Exception {
         PayOrder ord = payOrderMapper.selectByPrimaryKey(orderId);
-
-
-        System.out.println("ord");
-
-        System.out.println(ord);
-
         ord.setStatus(Util.getByte("1"));
+
         this.updateOrder(ord);
 
-
         UserSurvey userSurvey = this.createOrGetUserSurvey(ord);
-
-        System.out.println("userSurvey");
-
-        System.out.println(userSurvey);
-
         userSurvey.setStatus(Util.getByte("1"));
+
         userSurveyService.updateUserSurvey(userSurvey);
 
         return userSurvey.getId();
@@ -283,7 +269,6 @@ public class PayOrderServiceImpl implements PayOrderService {
     public Map createWxOrderForJsApi(PayOrder order, String wxOpenId, String ipAddress) throws Exception {
         WxPayUnifiedOrderRequest orderRequest = new WxPayUnifiedOrderRequest();
         orderRequest.setBody("订单描述");
-        System.out.println(JSON.toJSONString(order));
         // 重新发起一笔支付要使用原订单号
         orderRequest.setOutTradeNo(order.getOutTradeNo());
         orderRequest.setTotalFee(WxPayBaseRequest.yuanToFee(order.getPayAmount().toString()));//元转成分
@@ -294,7 +279,7 @@ public class PayOrderServiceImpl implements PayOrderService {
         // orderRequest.setTimeExpire("yyyyMMddHHmmss");
 
         // 直接返回前端，给支付调用
-        Map<String, String> payInfo = WxHelper.getPayService().getPayInfo(orderRequest);
+        Map<String, String> payInfo = wxHelper.getPayService().getPayInfo(orderRequest);
         return payInfo;
     }
 }

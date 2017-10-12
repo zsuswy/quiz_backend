@@ -114,7 +114,7 @@
     select
     <include refid="Base_Column_List" />
     from pay_order
-    where id = #{out_trade_no,jdbcType=VARCHAR}
+    where out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
   </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

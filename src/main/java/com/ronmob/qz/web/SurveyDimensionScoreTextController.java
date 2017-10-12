@@ -20,7 +20,6 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/surveyDimensionScoreText")
 public class SurveyDimensionScoreTextController {
-
     private static Log logger = LogFactory.getLog(SurveyDimensionScoreTextController.class);
 
     @Autowired

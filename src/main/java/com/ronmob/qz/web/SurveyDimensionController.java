@@ -20,7 +20,6 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/surveyDimension")
 public class SurveyDimensionController {
-
     private static Log logger = LogFactory.getLog(SurveyDimensionController.class);
 
     @Autowired
@@ -46,7 +45,7 @@ public class SurveyDimensionController {
         } catch (Exception ex) {
             result.setSuccess(false);
             result.setMessage(ex.getMessage());
-            ex.printStackTrace();
+
             logger.error(ex);
         }
         return result;

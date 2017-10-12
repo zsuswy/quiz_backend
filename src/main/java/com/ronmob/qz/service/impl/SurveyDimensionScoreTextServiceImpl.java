@@ -6,6 +6,8 @@ import com.ronmob.qz.model.SurveyDimensionScoreText;
 import com.ronmob.qz.model.SurveyDimensionScoreTextExample;
 import com.ronmob.qz.service.SurveyDimensionScoreTextService;
 import com.ronmob.qz.vo.SearchVo;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ import java.util.Map;
  */
 @Service
 public class SurveyDimensionScoreTextServiceImpl implements SurveyDimensionScoreTextService {
+    private static Log logger = LogFactory.getLog(SurveyDimensionScoreTextServiceImpl.class);
+
     @Autowired
     SurveyDimensionScoreTextMapper surveyDimensionScoreTextMapper;
 

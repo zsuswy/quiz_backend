@@ -19,13 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/order")
 public class PayOrderController {
-
     private static Log logger = LogFactory.getLog(PayOrderController.class);
 
     @Autowired
@@ -90,20 +91,24 @@ public class PayOrderController {
         try {
             PayOrder ord = payOrderService.createOrGetPayOrder(payOrder);
             data.put("order", ord);
+            UserSurvey userSurvey = userSurveyService.getUserSurveyByOrderId(ord.getId());
+            data.put("userSurveyId", userSurvey.getId());
 
             if (ord.getPayAmount().doubleValue() < 0.0001) {// 不需要微信支付
                 data.put("wxpPayType", "none");
             }
             // 需要部分支付，那么返回微信支付订单
-            else if (ord.getPayAmount().doubleValue() > 0.001 &&
-                    (ord.getBalancePayAmount().doubleValue() > 0.00001
-                            || ord.getScorePayAmount().doubleValue() > 0.00001)) {
+            else {
                 // 重新发起一笔支付要使用原订单号,逻辑已处理
                 Map payInfo = this.payOrderService.createWxOrderForJsApi(ord, req.getHeader("Accept-Wx"), Util.getIpAddress(req));
                 data.put("payInfo", payInfo);
-                data.put("wxpPayType", "partial");
-            } else {
-                data.put("wxpPayType", "all");
+                if (ord.getPayAmount().doubleValue() > 0.001 &&
+                        ((ord.getBalancePayAmount() != null && ord.getBalancePayAmount().doubleValue() > 0.00001)
+                                || (ord.getScorePayAmount() != null && ord.getScorePayAmount().doubleValue() > 0.00001))) {
+                    data.put("wxpPayType", "partial");
+                } else {
+                    data.put("wxpPayType", "all");
+                }
             }
 
             result.setData(data);
@@ -111,7 +116,7 @@ public class PayOrderController {
         } catch (Exception ex) {
             result.setSuccess(false);
             result.setMessage(ex.getMessage());
-            ex.printStackTrace();
+
             logger.error(ex);
         }
 
@@ -129,7 +134,7 @@ public class PayOrderController {
             result.setSuccess(false);
             result.setMessage(ex.getMessage());
 
-            ex.printStackTrace();
+            logger.error(ex);
         }
 
         return result;

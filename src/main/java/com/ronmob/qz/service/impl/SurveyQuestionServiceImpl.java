@@ -6,6 +6,8 @@ import com.ronmob.qz.model.SurveyQuestion;
 import com.ronmob.qz.model.SurveyQuestionExample;
 import com.ronmob.qz.service.SurveyQuestionService;
 import com.ronmob.qz.vo.SearchVo;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,9 @@ import java.util.Map;
  */
 @Service
 public class SurveyQuestionServiceImpl implements SurveyQuestionService {
+
+    private static Log logger = LogFactory.getLog(SurveyQuestionServiceImpl.class);
+
     @Autowired
     private SurveyQuestionMapper surveyQuestionMapper;
 
@@ -84,26 +89,6 @@ public class SurveyQuestionServiceImpl implements SurveyQuestionService {
 
     @Override
     public SurveyQuestion updateSurveyQuestion(SurveyQuestion surveyQuestion) {
-//        SurveyQuestion oldQuestion = surveyQuestionMapper.selectByPrimaryKey(surveyQuestion.getId());
-//        System.out.println(surveyQuestion);
-//        System.out.println(oldQuestion);
-
-//        // 如果 seq 被更新过，那么需要调换 seq
-//        if (oldQuestion.getSeq() != surveyQuestion.getSeq()) {
-//
-//            SurveyQuestionExample exam = new SurveyQuestionExample();
-//            exam.createCriteria().andSeqEqualTo(surveyQuestion.getSeq());
-//            exam.createCriteria().andSurveyIdEqualTo(surveyQuestion.getSurveyId());
-//
-//            // 查找是否有需要更新序号的问题
-//            SurveyQuestion questionOfSeqToChange = surveyQuestionMapper.selectByExample(exam).get(0);
-//
-//            if (questionOfSeqToChange != null) {
-//                questionOfSeqToChange.setSeq(oldQuestion.getSeq());
-//                surveyQuestionMapper.updateByPrimaryKey(questionOfSeqToChange);
-//            }
-//        }
-
         surveyQuestionMapper.updateByPrimaryKeyWithBLOBs(surveyQuestion);
 
         return surveyQuestion;

@@ -6,6 +6,8 @@ import com.ronmob.qz.model.UserScoreLog;
 import com.ronmob.qz.model.UserScoreLogExample;
 import com.ronmob.qz.service.UserScoreLogService;
 import com.ronmob.qz.vo.SearchVo;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ import java.util.Map;
  */
 @Service
 public class UserScoreLogServiceImpl implements UserScoreLogService {
+    private static Log logger = LogFactory.getLog(UserScoreLogServiceImpl.class);
+
     @Autowired
     UserScoreLogMapper userScoreLogMapper;
 

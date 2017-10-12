@@ -20,7 +20,7 @@ public interface PayOrderMapper {
 
     PayOrder selectByPrimaryKey(Integer id);
 
-    PayOrder selectByOutTradeNo(String out_trade_no);
+    PayOrder selectByOutTradeNo(String outTradeNo);
 
     int updateByExampleSelective(@Param("record") PayOrder record, @Param("example") PayOrderExample example);
 

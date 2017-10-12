@@ -7,6 +7,8 @@ import com.ronmob.qz.common.Util;
 import com.ronmob.qz.model.Survey;
 import com.ronmob.qz.model.SurveyExample;
 import com.ronmob.qz.vo.SearchVo;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ import com.ronmob.qz.service.SurveyService;
  */
 @Service
 public class SurveyServiceImpl implements SurveyService {
+    private static Log logger = LogFactory.getLog(SurveyServiceImpl.class);
+
     @Autowired
     private SurveyMapper surveyMapper;
 

@@ -20,7 +20,6 @@ import com.ronmob.qz.model.common.Page;
 @Controller
 @RequestMapping("/survey")
 public class SurveyController {
-
     private static Log logger = LogFactory.getLog(SurveyController.class);
 
     @Autowired
@@ -45,7 +44,7 @@ public class SurveyController {
         } catch (Exception ex) {
             result.setSuccess(false);
             result.setMessage(ex.getMessage());
-            ex.printStackTrace();
+
             logger.error(ex);
         }
 

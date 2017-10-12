@@ -20,7 +20,6 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/surveyQuestion")
 public class SurveyQuestionController {
-
     private static Log logger = LogFactory.getLog(SurveyQuestionController.class);
 
     @Autowired

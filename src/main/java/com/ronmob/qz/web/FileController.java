@@ -1,6 +1,8 @@
 package com.ronmob.qz.web;
 
 import com.ronmob.qz.common.MD5Tool;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/file")
 public class FileController {
+    private static Log logger = LogFactory.getLog(FileController.class);
+
     @Value("${upload_dir}")
     private String upload_dir;
 

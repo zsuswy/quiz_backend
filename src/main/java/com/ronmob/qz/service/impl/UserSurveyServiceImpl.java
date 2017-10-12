@@ -7,7 +7,10 @@ import com.ronmob.qz.model.UserSurvey;
 import com.ronmob.qz.model.UserSurveyExample;
 import com.ronmob.qz.model.UserSurveyWithBLOBs;
 import com.ronmob.qz.service.UserSurveyService;
+import com.ronmob.qz.service.WxHelper;
 import com.ronmob.qz.vo.SearchVo;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +23,13 @@ import java.util.Map;
  */
 @Service
 public class UserSurveyServiceImpl implements UserSurveyService {
+    private static Log logger = LogFactory.getLog(UserSurveyServiceImpl.class);
+
     @Autowired
     UserSurveyMapper userSurveyMapper;
+
+    @Autowired
+    WxHelper wxHelper;
 
     private UserSurveyExample getUserExample(SearchVo searchVo) throws Exception {
         UserSurveyExample example = new UserSurveyExample();
@@ -42,6 +50,9 @@ public class UserSurveyServiceImpl implements UserSurveyService {
         }
         if (params.containsKey("pUserId")) {
             criteria.andPUserIdEqualTo(Util.getInteger(params.get("pUserId").toString()));
+        }
+        if (params.containsKey("orderId")) {
+            criteria.andOrderIdEqualTo(Util.getInteger(params.get("orderId").toString()));
         }
         if (params.containsKey("surveyId")) {
             criteria.andSurveyIdEqualTo(Util.getInteger(params.get("surveyId").toString()));

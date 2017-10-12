@@ -29,7 +29,6 @@ import java.util.Map;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
     private static Log logger = LogFactory.getLog(UserController.class);
 
     @Autowired
@@ -129,7 +128,7 @@ public class UserController {
             Integer userId = Util.getInteger(req.getHeader("Accept-Base"));
             Integer surveyId = Util.getInteger(params.get("surveyId").toString());
 
-            this.shareSurveyBus(userId, surveyId);
+            this.shareSurvey(userId, surveyId);
 
             result.setSuccess(true);
         } catch (Exception ex) {
@@ -143,7 +142,7 @@ public class UserController {
     }
 
     @Transactional
-    protected void shareSurveyBus(Integer userId, Integer surveyId) throws Exception {
+    protected void shareSurvey(Integer userId, Integer surveyId) throws Exception {
         User user = new User();
         user.setId(userId);
 

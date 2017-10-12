@@ -1,11 +1,15 @@
 package com.ronmob.qz.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.google.gson.internal.JsonReaderInternalAccess;
 import com.ronmob.qz.common.Util;
 import com.ronmob.qz.dao.UserMapper;
 import com.ronmob.qz.model.User;
 import com.ronmob.qz.model.UserExample;
 import com.ronmob.qz.service.UserService;
 import com.ronmob.qz.vo.SearchVo;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +24,8 @@ import java.util.Map;
  */
 @Service
 public class UserServiceImpl implements UserService {
+    private static Log logger = LogFactory.getLog(UserServiceImpl.class);
+
     @Autowired
     UserMapper userMapper;
 
@@ -100,10 +106,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer reduceScoreBalance(User user) {
+        if (user.getBalance() == null && user.getScore() == null)
+            return 0;
+
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
         criteria.andIdEqualTo(user.getId());
 
+        logger.info(JSON.toJSONString(user));
         if (user.getBalance() != null) {
             criteria.andBalanceGreaterThanOrEqualTo(user.getBalance());
         }

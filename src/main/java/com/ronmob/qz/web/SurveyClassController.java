@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/surveyClass")
 public class SurveyClassController {
-
     private static Log logger = LogFactory.getLog(SurveyClassController.class);
 
     @Autowired

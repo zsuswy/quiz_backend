@@ -21,7 +21,6 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/userSurvey")
 public class UserSurveyController {
-
     private static Log logger = LogFactory.getLog(UserSurveyController.class);
 
     @Autowired
@@ -41,7 +40,6 @@ public class UserSurveyController {
                 listResultData.setPage(page);
             }
 
-            System.out.println(JSON.toJSONString(searchVo));
             listResultData.setList(userSurveyService.getUserSurveyList(searchVo));
             result.setSuccess(true);
             result.setData(listResultData);
@@ -67,7 +65,6 @@ public class UserSurveyController {
                 listResultData.setPage(page);
             }
 
-            System.out.println(JSON.toJSONString(searchVo));
             listResultData.setList(userSurveyService.getUserSurveyDetailList(searchVo));
             result.setSuccess(true);
             result.setData(listResultData);
