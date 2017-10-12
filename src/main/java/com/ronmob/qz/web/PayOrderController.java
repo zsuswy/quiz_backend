@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,12 +29,6 @@ public class PayOrderController {
 
     @Autowired
     private PayOrderService payOrderService;
-
-    @Autowired
-    private SurveyService surveyService;
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private UserSurveyService userSurveyService;
