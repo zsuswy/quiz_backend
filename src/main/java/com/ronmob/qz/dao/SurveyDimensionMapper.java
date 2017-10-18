@@ -16,15 +16,21 @@ public interface SurveyDimensionMapper {
 
     int insertSelective(SurveyDimension record);
 
+    List<SurveyDimension> selectByExampleWithBLOBs(SurveyDimensionExample example);
+
     List<SurveyDimension> selectByExample(SurveyDimensionExample example);
 
     SurveyDimension selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") SurveyDimension record, @Param("example") SurveyDimensionExample example);
 
+    int updateByExampleWithBLOBs(@Param("record") SurveyDimension record, @Param("example") SurveyDimensionExample example);
+
     int updateByExample(@Param("record") SurveyDimension record, @Param("example") SurveyDimensionExample example);
 
     int updateByPrimaryKeySelective(SurveyDimension record);
+
+    int updateByPrimaryKeyWithBLOBs(SurveyDimension record);
 
     int updateByPrimaryKey(SurveyDimension record);
 }

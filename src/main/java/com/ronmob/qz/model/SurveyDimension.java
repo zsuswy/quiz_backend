@@ -15,6 +15,8 @@ public class SurveyDimension {
 
     private Integer proxySubDimensionId;
 
+    private String description;
+
     public Integer getId() {
         return id;
     }
@@ -69,5 +71,13 @@ public class SurveyDimension {
 
     public void setProxySubDimensionId(Integer proxySubDimensionId) {
         this.proxySubDimensionId = proxySubDimensionId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 }

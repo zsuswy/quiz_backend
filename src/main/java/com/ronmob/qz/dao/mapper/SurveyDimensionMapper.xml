@@ -10,6 +10,9 @@
     <result column="auto_calculate_type" jdbcType="TINYINT" property="autoCalculateType" />
     <result column="proxy_sub_dimension_id" jdbcType="INTEGER" property="proxySubDimensionId" />
   </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ronmob.qz.model.SurveyDimension">
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -71,6 +74,25 @@
   <sql id="Base_Column_List">
     id, parent_id, survey_id, seq, dimension_name, auto_calculate_type, proxy_sub_dimension_id
   </sql>
+  <sql id="Blob_Column_List">
+    description
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.ronmob.qz.model.SurveyDimensionExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from survey_dimension
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.ronmob.qz.model.SurveyDimensionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -93,9 +115,11 @@
       </if>
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from survey_dimension
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -114,11 +138,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into survey_dimension (parent_id, survey_id, seq, 
-      dimension_name, auto_calculate_type, proxy_sub_dimension_id
-      )
+      dimension_name, auto_calculate_type, proxy_sub_dimension_id, 
+      description)
     values (#{parentId,jdbcType=INTEGER}, #{surveyId,jdbcType=INTEGER}, #{seq,jdbcType=INTEGER}, 
-      #{dimensionName,jdbcType=VARCHAR}, #{autoCalculateType,jdbcType=TINYINT}, #{proxySubDimensionId,jdbcType=INTEGER}
-      )
+      #{dimensionName,jdbcType=VARCHAR}, #{autoCalculateType,jdbcType=TINYINT}, #{proxySubDimensionId,jdbcType=INTEGER}, 
+      #{description,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ronmob.qz.model.SurveyDimension">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -144,6 +168,9 @@
       <if test="proxySubDimensionId != null">
         proxy_sub_dimension_id,
       </if>
+      <if test="description != null">
+        description,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="parentId != null">
@@ -163,6 +190,9 @@
       </if>
       <if test="proxySubDimensionId != null">
         #{proxySubDimensionId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -196,7 +226,24 @@
       <if test="record.proxySubDimensionId != null">
         proxy_sub_dimension_id = #{record.proxySubDimensionId,jdbcType=INTEGER},
       </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update survey_dimension
+    set id = #{record.id,jdbcType=INTEGER},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      survey_id = #{record.surveyId,jdbcType=INTEGER},
+      seq = #{record.seq,jdbcType=INTEGER},
+      dimension_name = #{record.dimensionName,jdbcType=VARCHAR},
+      auto_calculate_type = #{record.autoCalculateType,jdbcType=TINYINT},
+      proxy_sub_dimension_id = #{record.proxySubDimensionId,jdbcType=INTEGER},
+      description = #{record.description,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -235,7 +282,21 @@
       <if test="proxySubDimensionId != null">
         proxy_sub_dimension_id = #{proxySubDimensionId,jdbcType=INTEGER},
       </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ronmob.qz.model.SurveyDimension">
+    update survey_dimension
+    set parent_id = #{parentId,jdbcType=INTEGER},
+      survey_id = #{surveyId,jdbcType=INTEGER},
+      seq = #{seq,jdbcType=INTEGER},
+      dimension_name = #{dimensionName,jdbcType=VARCHAR},
+      auto_calculate_type = #{autoCalculateType,jdbcType=TINYINT},
+      proxy_sub_dimension_id = #{proxySubDimensionId,jdbcType=INTEGER},
+      description = #{description,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ronmob.qz.model.SurveyDimension">
