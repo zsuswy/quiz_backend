@@ -1176,73 +1176,73 @@ public class SurveyExample {
             return (Criteria) this;
         }
 
-        public Criteria andResultTemplateParamIsNull() {
-            addCriterion("result_template_param is null");
+        public Criteria andParamsIsNull() {
+            addCriterion("params is null");
             return (Criteria) this;
         }
 
-        public Criteria andResultTemplateParamIsNotNull() {
-            addCriterion("result_template_param is not null");
+        public Criteria andParamsIsNotNull() {
+            addCriterion("params is not null");
             return (Criteria) this;
         }
 
-        public Criteria andResultTemplateParamEqualTo(String value) {
-            addCriterion("result_template_param =", value, "resultTemplateParam");
+        public Criteria andParamsEqualTo(String value) {
+            addCriterion("params =", value, "params");
             return (Criteria) this;
         }
 
-        public Criteria andResultTemplateParamNotEqualTo(String value) {
-            addCriterion("result_template_param <>", value, "resultTemplateParam");
+        public Criteria andParamsNotEqualTo(String value) {
+            addCriterion("params <>", value, "params");
             return (Criteria) this;
         }
 
-        public Criteria andResultTemplateParamGreaterThan(String value) {
-            addCriterion("result_template_param >", value, "resultTemplateParam");
+        public Criteria andParamsGreaterThan(String value) {
+            addCriterion("params >", value, "params");
             return (Criteria) this;
         }
 
-        public Criteria andResultTemplateParamGreaterThanOrEqualTo(String value) {
-            addCriterion("result_template_param >=", value, "resultTemplateParam");
+        public Criteria andParamsGreaterThanOrEqualTo(String value) {
+            addCriterion("params >=", value, "params");
             return (Criteria) this;
         }
 
-        public Criteria andResultTemplateParamLessThan(String value) {
-            addCriterion("result_template_param <", value, "resultTemplateParam");
+        public Criteria andParamsLessThan(String value) {
+            addCriterion("params <", value, "params");
             return (Criteria) this;
         }
 
-        public Criteria andResultTemplateParamLessThanOrEqualTo(String value) {
-            addCriterion("result_template_param <=", value, "resultTemplateParam");
+        public Criteria andParamsLessThanOrEqualTo(String value) {
+            addCriterion("params <=", value, "params");
             return (Criteria) this;
         }
 
-        public Criteria andResultTemplateParamLike(String value) {
-            addCriterion("result_template_param like", value, "resultTemplateParam");
+        public Criteria andParamsLike(String value) {
+            addCriterion("params like", value, "params");
             return (Criteria) this;
         }
 
-        public Criteria andResultTemplateParamNotLike(String value) {
-            addCriterion("result_template_param not like", value, "resultTemplateParam");
+        public Criteria andParamsNotLike(String value) {
+            addCriterion("params not like", value, "params");
             return (Criteria) this;
         }
 
-        public Criteria andResultTemplateParamIn(List<String> values) {
-            addCriterion("result_template_param in", values, "resultTemplateParam");
+        public Criteria andParamsIn(List<String> values) {
+            addCriterion("params in", values, "params");
             return (Criteria) this;
         }
 
-        public Criteria andResultTemplateParamNotIn(List<String> values) {
-            addCriterion("result_template_param not in", values, "resultTemplateParam");
+        public Criteria andParamsNotIn(List<String> values) {
+            addCriterion("params not in", values, "params");
             return (Criteria) this;
         }
 
-        public Criteria andResultTemplateParamBetween(String value1, String value2) {
-            addCriterion("result_template_param between", value1, value2, "resultTemplateParam");
+        public Criteria andParamsBetween(String value1, String value2) {
+            addCriterion("params between", value1, value2, "params");
             return (Criteria) this;
         }
 
-        public Criteria andResultTemplateParamNotBetween(String value1, String value2) {
-            addCriterion("result_template_param not between", value1, value2, "resultTemplateParam");
+        public Criteria andParamsNotBetween(String value1, String value2) {
+            addCriterion("params not between", value1, value2, "params");
             return (Criteria) this;
         }
 

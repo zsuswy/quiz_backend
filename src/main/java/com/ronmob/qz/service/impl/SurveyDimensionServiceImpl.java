@@ -56,7 +56,7 @@ public class SurveyDimensionServiceImpl implements SurveyDimensionService {
     public List<SurveyDimension> getSurveyDimensionList(SearchVo searchVo) {
         SurveyDimensionExample example = getSurveyDimensionExample(searchVo);
 
-        return surveyDimensionMapper.selectByExample(example);
+        return surveyDimensionMapper.selectByExampleWithBLOBs(example);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class SurveyDimensionServiceImpl implements SurveyDimensionService {
 
     @Override
     public SurveyDimension updateSurveyDimension(SurveyDimension surveyDimension) {
-        surveyDimensionMapper.updateByPrimaryKey(surveyDimension);
+        surveyDimensionMapper.updateByPrimaryKeyWithBLOBs(surveyDimension);
         return surveyDimension;
     }
 

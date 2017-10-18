@@ -19,7 +19,7 @@
         <result column="is_hot" jdbcType="TINYINT" property="isHot"/>
         <result column="is_new" jdbcType="TINYINT" property="isNew"/>
         <result column="is_super" jdbcType="TINYINT" property="isSuper"/>
-        <result column="result_template_param" jdbcType="VARCHAR" property="resultTemplateParam"/>
+        <result column="params" jdbcType="VARCHAR" property="params"/>
         <result column="short_description" jdbcType="VARCHAR" property="shortDescription"/>
         <result column="survey_type" jdbcType="TINYINT" property="surveyType"/>
     </resultMap>
@@ -89,7 +89,7 @@
     <sql id="Base_Column_List">
     id, title, create_by, create_time, class_id, status, question_cnt, estimate_minutes, 
     price, org_price, image, is_need_sex, tested_cnt, result_template, is_hot, is_new, 
-    is_super, result_template_param, short_description, survey_type
+    is_super, params, short_description, survey_type
   </sql>
     <sql id="Blob_Column_List">
     description
@@ -168,14 +168,14 @@
         estimate_minutes, price, org_price,
         image, is_need_sex, tested_cnt,
         result_template, is_hot, is_new,
-        is_super, result_template_param, short_description,
+        is_super, params, short_description,
         survey_type, description)
         values (#{title,jdbcType=VARCHAR}, #{createBy,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
         #{classId,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{questionCnt,jdbcType=INTEGER},
         #{estimateMinutes,jdbcType=TINYINT}, #{price,jdbcType=DECIMAL}, #{orgPrice,jdbcType=DECIMAL},
         #{image,jdbcType=VARCHAR}, #{isNeedSex,jdbcType=TINYINT}, #{testedCnt,jdbcType=INTEGER},
         #{resultTemplate,jdbcType=VARCHAR}, #{isHot,jdbcType=TINYINT}, #{isNew,jdbcType=TINYINT},
-        #{isSuper,jdbcType=TINYINT}, #{resultTemplateParam,jdbcType=VARCHAR}, #{shortDescription,jdbcType=VARCHAR},
+        #{isSuper,jdbcType=TINYINT}, #{params,jdbcType=VARCHAR}, #{shortDescription,jdbcType=VARCHAR},
         #{surveyType,jdbcType=TINYINT}, #{description,jdbcType=LONGVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.ronmob.qz.model.Survey">
@@ -232,8 +232,8 @@
             <if test="isSuper != null">
                 is_super,
             </if>
-            <if test="resultTemplateParam != null">
-                result_template_param,
+            <if test="params != null">
+                params,
             </if>
             <if test="shortDescription != null">
                 short_description,
@@ -294,8 +294,8 @@
             <if test="isSuper != null">
                 #{isSuper,jdbcType=TINYINT},
             </if>
-            <if test="resultTemplateParam != null">
-                #{resultTemplateParam,jdbcType=VARCHAR},
+            <if test="params != null">
+                #{params,jdbcType=VARCHAR},
             </if>
             <if test="shortDescription != null">
                 #{shortDescription,jdbcType=VARCHAR},
@@ -368,8 +368,8 @@
             <if test="record.isSuper != null">
                 is_super = #{record.isSuper,jdbcType=TINYINT},
             </if>
-            <if test="record.resultTemplateParam != null">
-                result_template_param = #{record.resultTemplateParam,jdbcType=VARCHAR},
+            <if test="record.params != null">
+                params = #{record.params,jdbcType=VARCHAR},
             </if>
             <if test="record.shortDescription != null">
                 short_description = #{record.shortDescription,jdbcType=VARCHAR},
@@ -404,7 +404,7 @@
         is_hot = #{record.isHot,jdbcType=TINYINT},
         is_new = #{record.isNew,jdbcType=TINYINT},
         is_super = #{record.isSuper,jdbcType=TINYINT},
-        result_template_param = #{record.resultTemplateParam,jdbcType=VARCHAR},
+        params = #{record.params,jdbcType=VARCHAR},
         short_description = #{record.shortDescription,jdbcType=VARCHAR},
         survey_type = #{record.surveyType,jdbcType=TINYINT},
         description = #{record.description,jdbcType=LONGVARCHAR}
@@ -431,7 +431,7 @@
         is_hot = #{record.isHot,jdbcType=TINYINT},
         is_new = #{record.isNew,jdbcType=TINYINT},
         is_super = #{record.isSuper,jdbcType=TINYINT},
-        result_template_param = #{record.resultTemplateParam,jdbcType=VARCHAR},
+        params = #{record.params,jdbcType=VARCHAR},
         short_description = #{record.shortDescription,jdbcType=VARCHAR},
         survey_type = #{record.surveyType,jdbcType=TINYINT}
         <if test="_parameter != null">
@@ -489,8 +489,8 @@
             <if test="isSuper != null">
                 is_super = #{isSuper,jdbcType=TINYINT},
             </if>
-            <if test="resultTemplateParam != null">
-                result_template_param = #{resultTemplateParam,jdbcType=VARCHAR},
+            <if test="params != null">
+                params = #{params,jdbcType=VARCHAR},
             </if>
             <if test="shortDescription != null">
                 short_description = #{shortDescription,jdbcType=VARCHAR},
@@ -522,7 +522,7 @@
       is_hot = #{isHot,jdbcType=TINYINT},
       is_new = #{isNew,jdbcType=TINYINT},
       is_super = #{isSuper,jdbcType=TINYINT},
-      result_template_param = #{resultTemplateParam,jdbcType=VARCHAR},
+      params = #{params,jdbcType=VARCHAR},
       short_description = #{shortDescription,jdbcType=VARCHAR},
       survey_type = #{surveyType,jdbcType=TINYINT},
       description = #{description,jdbcType=LONGVARCHAR}
@@ -546,7 +546,7 @@
       is_hot = #{isHot,jdbcType=TINYINT},
       is_new = #{isNew,jdbcType=TINYINT},
       is_super = #{isSuper,jdbcType=TINYINT},
-      result_template_param = #{resultTemplateParam,jdbcType=VARCHAR},
+      params = #{params,jdbcType=VARCHAR},
       short_description = #{shortDescription,jdbcType=VARCHAR},
       survey_type = #{surveyType,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}

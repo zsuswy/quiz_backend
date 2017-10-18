@@ -38,7 +38,7 @@ public class Survey {
 
     private Byte isSuper;
 
-    private String resultTemplateParam;
+    private String params;
 
     private String shortDescription;
 
@@ -182,12 +182,12 @@ public class Survey {
         this.isSuper = isSuper;
     }
 
-    public String getResultTemplateParam() {
-        return resultTemplateParam;
+    public String getParams() {
+        return params;
     }
 
-    public void setResultTemplateParam(String resultTemplateParam) {
-        this.resultTemplateParam = resultTemplateParam == null ? null : resultTemplateParam.trim();
+    public void setParams(String params) {
+        this.params = params == null ? null : params.trim();
     }
 
     public String getShortDescription() {
