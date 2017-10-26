@@ -13,6 +13,8 @@ public class SurveyDimensionScoreText {
 
     private Integer surveyId;
 
+    private String params;
+
     private String resultComment;
 
     public Integer getId() {
@@ -61,6 +63,14 @@ public class SurveyDimensionScoreText {
 
     public void setSurveyId(Integer surveyId) {
         this.surveyId = surveyId;
+    }
+
+    public String getParams() {
+        return params;
+    }
+
+    public void setParams(String params) {
+        this.params = params == null ? null : params.trim();
     }
 
     public String getResultComment() {

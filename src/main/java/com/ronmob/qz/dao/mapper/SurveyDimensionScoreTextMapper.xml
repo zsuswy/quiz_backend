@@ -8,6 +8,7 @@
     <result column="score_min" jdbcType="INTEGER" property="scoreMin" />
     <result column="result_title" jdbcType="VARCHAR" property="resultTitle" />
     <result column="survey_id" jdbcType="INTEGER" property="surveyId" />
+    <result column="params" jdbcType="VARCHAR" property="params" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ronmob.qz.model.SurveyDimensionScoreText">
     <result column="result_comment" jdbcType="LONGVARCHAR" property="resultComment" />
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, dimension_id, score_max, score_min, result_title, survey_id
+    id, dimension_id, score_max, score_min, result_title, survey_id, params
   </sql>
   <sql id="Blob_Column_List">
     result_comment
@@ -137,11 +138,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into survey_dimension_score_text (dimension_id, score_max, score_min, 
-      result_title, survey_id, result_comment
-      )
+      result_title, survey_id, params, 
+      result_comment)
     values (#{dimensionId,jdbcType=INTEGER}, #{scoreMax,jdbcType=INTEGER}, #{scoreMin,jdbcType=INTEGER}, 
-      #{resultTitle,jdbcType=VARCHAR}, #{surveyId,jdbcType=INTEGER}, #{resultComment,jdbcType=LONGVARCHAR}
-      )
+      #{resultTitle,jdbcType=VARCHAR}, #{surveyId,jdbcType=INTEGER}, #{params,jdbcType=VARCHAR}, 
+      #{resultComment,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ronmob.qz.model.SurveyDimensionScoreText">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -164,6 +165,9 @@
       <if test="surveyId != null">
         survey_id,
       </if>
+      <if test="params != null">
+        params,
+      </if>
       <if test="resultComment != null">
         result_comment,
       </if>
@@ -183,6 +187,9 @@
       </if>
       <if test="surveyId != null">
         #{surveyId,jdbcType=INTEGER},
+      </if>
+      <if test="params != null">
+        #{params,jdbcType=VARCHAR},
       </if>
       <if test="resultComment != null">
         #{resultComment,jdbcType=LONGVARCHAR},
@@ -216,6 +223,9 @@
       <if test="record.surveyId != null">
         survey_id = #{record.surveyId,jdbcType=INTEGER},
       </if>
+      <if test="record.params != null">
+        params = #{record.params,jdbcType=VARCHAR},
+      </if>
       <if test="record.resultComment != null">
         result_comment = #{record.resultComment,jdbcType=LONGVARCHAR},
       </if>
@@ -232,6 +242,7 @@
       score_min = #{record.scoreMin,jdbcType=INTEGER},
       result_title = #{record.resultTitle,jdbcType=VARCHAR},
       survey_id = #{record.surveyId,jdbcType=INTEGER},
+      params = #{record.params,jdbcType=VARCHAR},
       result_comment = #{record.resultComment,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -244,7 +255,8 @@
       score_max = #{record.scoreMax,jdbcType=INTEGER},
       score_min = #{record.scoreMin,jdbcType=INTEGER},
       result_title = #{record.resultTitle,jdbcType=VARCHAR},
-      survey_id = #{record.surveyId,jdbcType=INTEGER}
+      survey_id = #{record.surveyId,jdbcType=INTEGER},
+      params = #{record.params,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -267,6 +279,9 @@
       <if test="surveyId != null">
         survey_id = #{surveyId,jdbcType=INTEGER},
       </if>
+      <if test="params != null">
+        params = #{params,jdbcType=VARCHAR},
+      </if>
       <if test="resultComment != null">
         result_comment = #{resultComment,jdbcType=LONGVARCHAR},
       </if>
@@ -280,6 +295,7 @@
       score_min = #{scoreMin,jdbcType=INTEGER},
       result_title = #{resultTitle,jdbcType=VARCHAR},
       survey_id = #{surveyId,jdbcType=INTEGER},
+      params = #{params,jdbcType=VARCHAR},
       result_comment = #{resultComment,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -289,7 +305,8 @@
       score_max = #{scoreMax,jdbcType=INTEGER},
       score_min = #{scoreMin,jdbcType=INTEGER},
       result_title = #{resultTitle,jdbcType=VARCHAR},
-      survey_id = #{surveyId,jdbcType=INTEGER}
+      survey_id = #{surveyId,jdbcType=INTEGER},
+      params = #{params,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
