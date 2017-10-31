@@ -245,63 +245,63 @@ public class UserSurveyExample {
             return (Criteria) this;
         }
 
-        public Criteria andPUserIdIsNull() {
-            addCriterion("p_user_id is null");
+        public Criteria andFromUserIdIsNull() {
+            addCriterion("from_user_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andPUserIdIsNotNull() {
-            addCriterion("p_user_id is not null");
+        public Criteria andFromUserIdIsNotNull() {
+            addCriterion("from_user_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPUserIdEqualTo(Integer value) {
-            addCriterion("p_user_id =", value, "pUserId");
+        public Criteria andFromUserIdEqualTo(Integer value) {
+            addCriterion("from_user_id =", value, "pUserId");
             return (Criteria) this;
         }
 
-        public Criteria andPUserIdNotEqualTo(Integer value) {
-            addCriterion("p_user_id <>", value, "pUserId");
+        public Criteria andFromUserIdNotEqualTo(Integer value) {
+            addCriterion("from_user_id <>", value, "pUserId");
             return (Criteria) this;
         }
 
-        public Criteria andPUserIdGreaterThan(Integer value) {
-            addCriterion("p_user_id >", value, "pUserId");
+        public Criteria andFromUserIdGreaterThan(Integer value) {
+            addCriterion("from_user_id >", value, "pUserId");
             return (Criteria) this;
         }
 
-        public Criteria andPUserIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("p_user_id >=", value, "pUserId");
+        public Criteria andFromUserIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("from_user_id >=", value, "pUserId");
             return (Criteria) this;
         }
 
-        public Criteria andPUserIdLessThan(Integer value) {
-            addCriterion("p_user_id <", value, "pUserId");
+        public Criteria andFromUserIdLessThan(Integer value) {
+            addCriterion("from_user_id <", value, "pUserId");
             return (Criteria) this;
         }
 
-        public Criteria andPUserIdLessThanOrEqualTo(Integer value) {
-            addCriterion("p_user_id <=", value, "pUserId");
+        public Criteria andFromUserIdLessThanOrEqualTo(Integer value) {
+            addCriterion("from_user_id <=", value, "pUserId");
             return (Criteria) this;
         }
 
-        public Criteria andPUserIdIn(List<Integer> values) {
-            addCriterion("p_user_id in", values, "pUserId");
+        public Criteria andFromUserIdIn(List<Integer> values) {
+            addCriterion("from_user_id in", values, "pUserId");
             return (Criteria) this;
         }
 
-        public Criteria andPUserIdNotIn(List<Integer> values) {
-            addCriterion("p_user_id not in", values, "pUserId");
+        public Criteria andFromUserIdNotIn(List<Integer> values) {
+            addCriterion("from_user_id not in", values, "pUserId");
             return (Criteria) this;
         }
 
-        public Criteria andPUserIdBetween(Integer value1, Integer value2) {
-            addCriterion("p_user_id between", value1, value2, "pUserId");
+        public Criteria andFromUserIdBetween(Integer value1, Integer value2) {
+            addCriterion("from_user_id between", value1, value2, "pUserId");
             return (Criteria) this;
         }
 
-        public Criteria andPUserIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("p_user_id not between", value1, value2, "pUserId");
+        public Criteria andFromUserIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("from_user_id not between", value1, value2, "pUserId");
             return (Criteria) this;
         }
 

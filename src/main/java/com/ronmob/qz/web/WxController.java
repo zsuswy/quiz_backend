@@ -45,6 +45,10 @@ public class WxController {
     @Value("${host_with_app_name}")
     private String hostWithAppName;
 
+    @Value("${mobile_app_url}")
+    private String mobileAppUrl;
+
+
     @RequestMapping(value = "/getUserInfo")
     public void getUserInfo(HttpServletRequest req, HttpServletResponse response, String retUrl) throws Exception {
         req.getSession().setAttribute("retUrl", retUrl);
@@ -136,4 +140,18 @@ public class WxController {
 
         return "<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[FAIL]]></return_msg></xml>";
     }
+
+    /**
+     * 微信分享入口
+     */
+    @ResponseBody
+    @RequestMapping("/share")
+    public void payNotify(String path, String fromUserId, HttpServletResponse response) throws Exception {
+        String retUrl = mobileAppUrl + "/#?path=" + path;
+        if (fromUserId != null) {
+            retUrl = retUrl + "&fromUserId=" + fromUserId;
+        }
+        response.sendRedirect(retUrl);
+    }
+
 }

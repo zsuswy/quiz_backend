@@ -114,7 +114,7 @@ public class UserSurveyServiceImpl implements UserSurveyService {
         userSurvey.setUserId(order.getUserId());
         userSurvey.setSurveyId(order.getSurveyId());
         userSurvey.setOrderId(order.getId());
-        userSurvey.setpUserId(order.getFromUserId());
+        userSurvey.setFromUserId(order.getFromUserId());
         userSurvey.setStatus(new Byte("0"));
         return this.createUserSurvey(userSurvey);
     }

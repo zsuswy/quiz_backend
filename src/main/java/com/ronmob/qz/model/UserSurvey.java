@@ -7,7 +7,7 @@ public class UserSurvey {
 
     private Integer userId;
 
-    private Integer pUserId;
+    private Integer fromUserId;
 
     private Byte status;
 
@@ -39,12 +39,12 @@ public class UserSurvey {
         this.userId = userId;
     }
 
-    public Integer getpUserId() {
-        return pUserId;
+    public Integer getFromUserId() {
+        return fromUserId;
     }
 
-    public void setpUserId(Integer pUserId) {
-        this.pUserId = pUserId;
+    public void setFromUserId(Integer fromUserId) {
+        this.fromUserId = fromUserId;
     }
 
     public Byte getStatus() {

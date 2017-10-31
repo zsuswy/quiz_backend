@@ -122,11 +122,10 @@ public class UserController {
 
     @RequestMapping(value = "/share", produces = "application/json")
     @ResponseBody
-    public ResponseResult shareSurvey(HttpServletRequest req, @RequestBody Map params) {
+    public ResponseResult shareSurvey(HttpServletRequest req, Integer surveyId) {
         ResponseResult result = new ResponseResult();
         try {
             Integer userId = Util.getInteger(req.getHeader("Accept-Base"));
-            Integer surveyId = Util.getInteger(params.get("surveyId").toString());
 
             this.shareSurvey(userId, surveyId);
 

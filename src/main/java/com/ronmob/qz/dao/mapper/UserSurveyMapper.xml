@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.ronmob.qz.model.UserSurvey">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="user_id" jdbcType="INTEGER" property="userId"/>
-        <result column="p_user_id" jdbcType="INTEGER" property="pUserId"/>
+        <result column="from_user_id" jdbcType="INTEGER" property="fromUserId"/>
         <result column="status" jdbcType="TINYINT" property="status"/>
         <result column="survey_id" jdbcType="INTEGER" property="surveyId"/>
         <result column="order_id" jdbcType="INTEGER" property="orderId"/>
@@ -86,7 +86,7 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    user_survey.id, user_survey.user_id, user_survey.p_user_id, user_survey.status, user_survey.survey_id,
+    user_survey.id, user_survey.user_id, user_survey.from_user_id, user_survey.status, user_survey.survey_id,
     user_survey.order_id, user_survey.finish_time, user_survey.class_name, user_survey.selected_sex,
     user_survey.create_time
   </sql>
@@ -191,11 +191,11 @@
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into user_survey (user_id, p_user_id, status,
+        insert into user_survey (user_id, from_user_id, status,
         survey_id, order_id, finish_time,
         class_name, selected_sex, create_time,
         answer, result)
-        values (#{userId,jdbcType=INTEGER}, #{pUserId,jdbcType=INTEGER}, #{status,jdbcType=TINYINT},
+        values (#{userId,jdbcType=INTEGER}, #{fromUserId,jdbcType=INTEGER}, #{status,jdbcType=TINYINT},
         #{surveyId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{finishTime,jdbcType=TIMESTAMP},
         #{className,jdbcType=VARCHAR}, #{selectedSex,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP},
         #{answer,jdbcType=LONGVARCHAR}, #{result,jdbcType=LONGVARCHAR})
@@ -209,8 +209,8 @@
             <if test="userId != null">
                 user_id,
             </if>
-            <if test="pUserId != null">
-                p_user_id,
+            <if test="fromUserId != null">
+                from_user_id,
             </if>
             <if test="status != null">
                 status,
@@ -244,8 +244,8 @@
             <if test="userId != null">
                 #{userId,jdbcType=INTEGER},
             </if>
-            <if test="pUserId != null">
-                #{pUserId,jdbcType=INTEGER},
+            <if test="fromUserId != null">
+                #{fromUserId,jdbcType=INTEGER},
             </if>
             <if test="status != null">
                 #{status,jdbcType=TINYINT},
@@ -291,8 +291,8 @@
             <if test="record.userId != null">
                 user_id = #{record.userId,jdbcType=INTEGER},
             </if>
-            <if test="record.pUserId != null">
-                p_user_id = #{record.pUserId,jdbcType=INTEGER},
+            <if test="record.fromUserId != null">
+                from_user_id = #{record.fromUserId,jdbcType=INTEGER},
             </if>
             <if test="record.status != null">
                 status = #{record.status,jdbcType=TINYINT},
@@ -330,7 +330,7 @@
         update user_survey
         set id = #{record.id,jdbcType=INTEGER},
         user_id = #{record.userId,jdbcType=INTEGER},
-        p_user_id = #{record.pUserId,jdbcType=INTEGER},
+        from_user_id = #{record.fromUserId,jdbcType=INTEGER},
         status = #{record.status,jdbcType=TINYINT},
         survey_id = #{record.surveyId,jdbcType=INTEGER},
         order_id = #{record.orderId,jdbcType=INTEGER},
@@ -348,7 +348,7 @@
         update user_survey
         set id = #{record.id,jdbcType=INTEGER},
         user_id = #{record.userId,jdbcType=INTEGER},
-        p_user_id = #{record.pUserId,jdbcType=INTEGER},
+        from_user_id = #{record.fromUserId,jdbcType=INTEGER},
         status = #{record.status,jdbcType=TINYINT},
         survey_id = #{record.surveyId,jdbcType=INTEGER},
         order_id = #{record.orderId,jdbcType=INTEGER},
@@ -366,8 +366,8 @@
             <if test="userId != null">
                 user_id = #{userId,jdbcType=INTEGER},
             </if>
-            <if test="pUserId != null">
-                p_user_id = #{pUserId,jdbcType=INTEGER},
+            <if test="fromUserId != null">
+                from_user_id = #{fromUserId,jdbcType=INTEGER},
             </if>
             <if test="status != null">
                 status = #{status,jdbcType=TINYINT},
@@ -402,7 +402,7 @@
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ronmob.qz.model.UserSurveyWithBLOBs">
         update user_survey
         set user_id = #{userId,jdbcType=INTEGER},
-        p_user_id = #{pUserId,jdbcType=INTEGER},
+        from_user_id = #{fromUserId,jdbcType=INTEGER},
         status = #{status,jdbcType=TINYINT},
         survey_id = #{surveyId,jdbcType=INTEGER},
         order_id = #{orderId,jdbcType=INTEGER},
@@ -417,7 +417,7 @@
     <update id="updateByPrimaryKey" parameterType="com.ronmob.qz.model.UserSurvey">
         update user_survey
         set user_id = #{userId,jdbcType=INTEGER},
-        p_user_id = #{pUserId,jdbcType=INTEGER},
+        from_user_id = #{fromUserId,jdbcType=INTEGER},
         status = #{status,jdbcType=TINYINT},
         survey_id = #{surveyId,jdbcType=INTEGER},
         order_id = #{orderId,jdbcType=INTEGER},

@@ -235,7 +235,7 @@ public class PayOrderServiceImpl implements PayOrderService {
             UserSurveyWithBLOBs userSurvey = new UserSurveyWithBLOBs();
             userSurvey.setStatus(Util.getByte("0"));
             userSurvey.setOrderId(order.getId());
-            userSurvey.setpUserId(order.getFromUserId());
+            userSurvey.setFromUserId(order.getFromUserId());
             userSurvey.setSurveyId(order.getSurveyId());
             userSurvey.setUserId(order.getUserId());
 
