@@ -22,6 +22,8 @@ public interface UserSurveyService {
 
     Integer getUserSurveyListTotalCount(SearchVo searchVo) throws Exception;
 
+    Integer getPayedSurveyListTotalCount(SearchVo searchVo) throws Exception;
+
     UserSurveyWithBLOBs createUserSurvey(UserSurveyWithBLOBs userSurvey) throws Exception;
 
     UserSurvey createUserSurveyFromOrder(PayOrder order) throws Exception;

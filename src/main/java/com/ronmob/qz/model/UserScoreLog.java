@@ -8,13 +8,15 @@ public class UserScoreLog {
 
     private Integer userId;
 
-    private Integer score;
+    private BigDecimal score;
 
     private Byte type;
 
     private Date scoreTime;
 
     private BigDecimal amount;
+
+    private String description;
 
     public Integer getId() {
         return id;
@@ -32,11 +34,11 @@ public class UserScoreLog {
         this.userId = userId;
     }
 
-    public Integer getScore() {
+    public BigDecimal getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
+    public void setScore(BigDecimal score) {
         this.score = score;
     }
 
@@ -62,5 +64,13 @@ public class UserScoreLog {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 }

@@ -49,7 +49,7 @@ public class UserSurveyServiceImpl implements UserSurveyService {
             criteria.andUserIdEqualTo(Util.getInteger(params.get("userId").toString()));
         }
         if (params.containsKey("pUserId")) {
-            criteria.andPUserIdEqualTo(Util.getInteger(params.get("pUserId").toString()));
+            criteria.andFromUserIdEqualTo(Util.getInteger(params.get("pUserId").toString()));
         }
         if (params.containsKey("orderId")) {
             criteria.andOrderIdEqualTo(Util.getInteger(params.get("orderId").toString()));
@@ -97,6 +97,14 @@ public class UserSurveyServiceImpl implements UserSurveyService {
     @Override
     public Integer getUserSurveyListTotalCount(SearchVo searchVo) throws Exception {
         UserSurveyExample example = getUserExample(searchVo);
+
+        return ((Long) userSurveyMapper.countByExample(example)).intValue();
+    }
+
+    @Override
+    public Integer getPayedSurveyListTotalCount(SearchVo searchVo) throws Exception {
+        UserSurveyExample example = getUserExample(searchVo);
+        example.getOredCriteria().get(0).andStatusGreaterThan(Util.getByte("0"));
 
         return ((Long) userSurveyMapper.countByExample(example)).intValue();
     }

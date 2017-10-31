@@ -7,8 +7,6 @@ public class UserDistribution {
 
     private Integer fromUserId;
 
-    private Integer toUserId;
-
     private Date finishTime;
 
     private Integer surveyId;
@@ -29,14 +27,6 @@ public class UserDistribution {
 
     public void setFromUserId(Integer fromUserId) {
         this.fromUserId = fromUserId;
-    }
-
-    public Integer getToUserId() {
-        return toUserId;
-    }
-
-    public void setToUserId(Integer toUserId) {
-        this.toUserId = toUserId;
     }
 
     public Date getFinishTime() {

@@ -37,6 +37,9 @@ public class PayOrderServiceImpl implements PayOrderService {
     UserSurveyService userSurveyService;
 
     @Autowired
+    UserScoreLogService userScoreLogService;
+
+    @Autowired
     WxHelper wxHelper;
 
     private PayOrderExample getOrderExample(SearchVo searchVo) throws Exception {
@@ -261,6 +264,21 @@ public class PayOrderServiceImpl implements PayOrderService {
         userSurvey.setStatus(Util.getByte("1"));
 
         userSurveyService.updateUserSurvey(userSurvey);
+
+        // 如果是代理商分享，那么计算代理商的收益
+        if (ord.getFromUserId() > 0) {
+            User fromUser = userService.getUser(ord.getFromUserId());
+            if (fromUser.getIsAgent() == 1) {
+                UserScoreLog userScoreLog = new UserScoreLog();
+                userScoreLog.setType(new Byte("2"));
+                userScoreLog.setUserId(fromUser.getId());
+                userScoreLog.setScoreTime(new Date());
+                userScoreLog.setAmount(new BigDecimal(1));
+                userScoreLog.setDescription("分销奖励金额，测评编号：" + userSurvey.getSurveyId());
+
+                userScoreLogService.createUserScoreLog(userScoreLog);
+            }
+        }
 
         return userSurvey.getId();
     }

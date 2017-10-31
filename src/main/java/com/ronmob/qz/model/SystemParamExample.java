@@ -1,10 +1,9 @@
 package com.ronmob.qz.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class UserDistributionExample {
+public class SystemParamExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +14,7 @@ public class UserDistributionExample {
 
     private Integer offset;
 
-    public UserDistributionExample() {
+    public SystemParamExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -185,243 +184,203 @@ public class UserDistributionExample {
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdIsNull() {
-            addCriterion("from_user_Id is null");
+        public Criteria andParamNameIsNull() {
+            addCriterion("param_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdIsNotNull() {
-            addCriterion("from_user_Id is not null");
+        public Criteria andParamNameIsNotNull() {
+            addCriterion("param_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdEqualTo(Integer value) {
-            addCriterion("from_user_Id =", value, "fromUserId");
+        public Criteria andParamNameEqualTo(String value) {
+            addCriterion("param_name =", value, "paramName");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdNotEqualTo(Integer value) {
-            addCriterion("from_user_Id <>", value, "fromUserId");
+        public Criteria andParamNameNotEqualTo(String value) {
+            addCriterion("param_name <>", value, "paramName");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdGreaterThan(Integer value) {
-            addCriterion("from_user_Id >", value, "fromUserId");
+        public Criteria andParamNameGreaterThan(String value) {
+            addCriterion("param_name >", value, "paramName");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("from_user_Id >=", value, "fromUserId");
+        public Criteria andParamNameGreaterThanOrEqualTo(String value) {
+            addCriterion("param_name >=", value, "paramName");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdLessThan(Integer value) {
-            addCriterion("from_user_Id <", value, "fromUserId");
+        public Criteria andParamNameLessThan(String value) {
+            addCriterion("param_name <", value, "paramName");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdLessThanOrEqualTo(Integer value) {
-            addCriterion("from_user_Id <=", value, "fromUserId");
+        public Criteria andParamNameLessThanOrEqualTo(String value) {
+            addCriterion("param_name <=", value, "paramName");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdIn(List<Integer> values) {
-            addCriterion("from_user_Id in", values, "fromUserId");
+        public Criteria andParamNameLike(String value) {
+            addCriterion("param_name like", value, "paramName");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdNotIn(List<Integer> values) {
-            addCriterion("from_user_Id not in", values, "fromUserId");
+        public Criteria andParamNameNotLike(String value) {
+            addCriterion("param_name not like", value, "paramName");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdBetween(Integer value1, Integer value2) {
-            addCriterion("from_user_Id between", value1, value2, "fromUserId");
+        public Criteria andParamNameIn(List<String> values) {
+            addCriterion("param_name in", values, "paramName");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("from_user_Id not between", value1, value2, "fromUserId");
+        public Criteria andParamNameNotIn(List<String> values) {
+            addCriterion("param_name not in", values, "paramName");
             return (Criteria) this;
         }
 
-        public Criteria andFinishTimeIsNull() {
-            addCriterion("finish_time is null");
+        public Criteria andParamNameBetween(String value1, String value2) {
+            addCriterion("param_name between", value1, value2, "paramName");
             return (Criteria) this;
         }
 
-        public Criteria andFinishTimeIsNotNull() {
-            addCriterion("finish_time is not null");
+        public Criteria andParamNameNotBetween(String value1, String value2) {
+            addCriterion("param_name not between", value1, value2, "paramName");
             return (Criteria) this;
         }
 
-        public Criteria andFinishTimeEqualTo(Date value) {
-            addCriterion("finish_time =", value, "finishTime");
+        public Criteria andParamValueIsNull() {
+            addCriterion("param_value is null");
             return (Criteria) this;
         }
 
-        public Criteria andFinishTimeNotEqualTo(Date value) {
-            addCriterion("finish_time <>", value, "finishTime");
+        public Criteria andParamValueIsNotNull() {
+            addCriterion("param_value is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFinishTimeGreaterThan(Date value) {
-            addCriterion("finish_time >", value, "finishTime");
+        public Criteria andParamValueEqualTo(String value) {
+            addCriterion("param_value =", value, "paramValue");
             return (Criteria) this;
         }
 
-        public Criteria andFinishTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("finish_time >=", value, "finishTime");
+        public Criteria andParamValueNotEqualTo(String value) {
+            addCriterion("param_value <>", value, "paramValue");
             return (Criteria) this;
         }
 
-        public Criteria andFinishTimeLessThan(Date value) {
-            addCriterion("finish_time <", value, "finishTime");
+        public Criteria andParamValueGreaterThan(String value) {
+            addCriterion("param_value >", value, "paramValue");
             return (Criteria) this;
         }
 
-        public Criteria andFinishTimeLessThanOrEqualTo(Date value) {
-            addCriterion("finish_time <=", value, "finishTime");
+        public Criteria andParamValueGreaterThanOrEqualTo(String value) {
+            addCriterion("param_value >=", value, "paramValue");
             return (Criteria) this;
         }
 
-        public Criteria andFinishTimeIn(List<Date> values) {
-            addCriterion("finish_time in", values, "finishTime");
+        public Criteria andParamValueLessThan(String value) {
+            addCriterion("param_value <", value, "paramValue");
             return (Criteria) this;
         }
 
-        public Criteria andFinishTimeNotIn(List<Date> values) {
-            addCriterion("finish_time not in", values, "finishTime");
+        public Criteria andParamValueLessThanOrEqualTo(String value) {
+            addCriterion("param_value <=", value, "paramValue");
             return (Criteria) this;
         }
 
-        public Criteria andFinishTimeBetween(Date value1, Date value2) {
-            addCriterion("finish_time between", value1, value2, "finishTime");
+        public Criteria andParamValueLike(String value) {
+            addCriterion("param_value like", value, "paramValue");
             return (Criteria) this;
         }
 
-        public Criteria andFinishTimeNotBetween(Date value1, Date value2) {
-            addCriterion("finish_time not between", value1, value2, "finishTime");
+        public Criteria andParamValueNotLike(String value) {
+            addCriterion("param_value not like", value, "paramValue");
             return (Criteria) this;
         }
 
-        public Criteria andSurveyIdIsNull() {
-            addCriterion("survey_id is null");
+        public Criteria andParamValueIn(List<String> values) {
+            addCriterion("param_value in", values, "paramValue");
             return (Criteria) this;
         }
 
-        public Criteria andSurveyIdIsNotNull() {
-            addCriterion("survey_id is not null");
+        public Criteria andParamValueNotIn(List<String> values) {
+            addCriterion("param_value not in", values, "paramValue");
             return (Criteria) this;
         }
 
-        public Criteria andSurveyIdEqualTo(Integer value) {
-            addCriterion("survey_id =", value, "surveyId");
+        public Criteria andParamValueBetween(String value1, String value2) {
+            addCriterion("param_value between", value1, value2, "paramValue");
             return (Criteria) this;
         }
 
-        public Criteria andSurveyIdNotEqualTo(Integer value) {
-            addCriterion("survey_id <>", value, "surveyId");
+        public Criteria andParamValueNotBetween(String value1, String value2) {
+            addCriterion("param_value not between", value1, value2, "paramValue");
             return (Criteria) this;
         }
 
-        public Criteria andSurveyIdGreaterThan(Integer value) {
-            addCriterion("survey_id >", value, "surveyId");
+        public Criteria andParamTypeIsNull() {
+            addCriterion("param_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andSurveyIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("survey_id >=", value, "surveyId");
+        public Criteria andParamTypeIsNotNull() {
+            addCriterion("param_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSurveyIdLessThan(Integer value) {
-            addCriterion("survey_id <", value, "surveyId");
+        public Criteria andParamTypeEqualTo(Integer value) {
+            addCriterion("param_type =", value, "paramType");
             return (Criteria) this;
         }
 
-        public Criteria andSurveyIdLessThanOrEqualTo(Integer value) {
-            addCriterion("survey_id <=", value, "surveyId");
+        public Criteria andParamTypeNotEqualTo(Integer value) {
+            addCriterion("param_type <>", value, "paramType");
             return (Criteria) this;
         }
 
-        public Criteria andSurveyIdIn(List<Integer> values) {
-            addCriterion("survey_id in", values, "surveyId");
+        public Criteria andParamTypeGreaterThan(Integer value) {
+            addCriterion("param_type >", value, "paramType");
             return (Criteria) this;
         }
 
-        public Criteria andSurveyIdNotIn(List<Integer> values) {
-            addCriterion("survey_id not in", values, "surveyId");
+        public Criteria andParamTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("param_type >=", value, "paramType");
             return (Criteria) this;
         }
 
-        public Criteria andSurveyIdBetween(Integer value1, Integer value2) {
-            addCriterion("survey_id between", value1, value2, "surveyId");
+        public Criteria andParamTypeLessThan(Integer value) {
+            addCriterion("param_type <", value, "paramType");
             return (Criteria) this;
         }
 
-        public Criteria andSurveyIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("survey_id not between", value1, value2, "surveyId");
+        public Criteria andParamTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("param_type <=", value, "paramType");
             return (Criteria) this;
         }
 
-        public Criteria andUserSurveyIdIsNull() {
-            addCriterion("user_survey_id is null");
+        public Criteria andParamTypeIn(List<Integer> values) {
+            addCriterion("param_type in", values, "paramType");
             return (Criteria) this;
         }
 
-        public Criteria andUserSurveyIdIsNotNull() {
-            addCriterion("user_survey_id is not null");
+        public Criteria andParamTypeNotIn(List<Integer> values) {
+            addCriterion("param_type not in", values, "paramType");
             return (Criteria) this;
         }
 
-        public Criteria andUserSurveyIdEqualTo(Integer value) {
-            addCriterion("user_survey_id =", value, "userSurveyId");
+        public Criteria andParamTypeBetween(Integer value1, Integer value2) {
+            addCriterion("param_type between", value1, value2, "paramType");
             return (Criteria) this;
         }
 
-        public Criteria andUserSurveyIdNotEqualTo(Integer value) {
-            addCriterion("user_survey_id <>", value, "userSurveyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserSurveyIdGreaterThan(Integer value) {
-            addCriterion("user_survey_id >", value, "userSurveyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserSurveyIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("user_survey_id >=", value, "userSurveyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserSurveyIdLessThan(Integer value) {
-            addCriterion("user_survey_id <", value, "userSurveyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserSurveyIdLessThanOrEqualTo(Integer value) {
-            addCriterion("user_survey_id <=", value, "userSurveyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserSurveyIdIn(List<Integer> values) {
-            addCriterion("user_survey_id in", values, "userSurveyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserSurveyIdNotIn(List<Integer> values) {
-            addCriterion("user_survey_id not in", values, "userSurveyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserSurveyIdBetween(Integer value1, Integer value2) {
-            addCriterion("user_survey_id between", value1, value2, "userSurveyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserSurveyIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("user_survey_id not between", value1, value2, "userSurveyId");
+        public Criteria andParamTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("param_type not between", value1, value2, "paramType");
             return (Criteria) this;
         }
     }

@@ -4,7 +4,6 @@
   <resultMap id="BaseResultMap" type="com.ronmob.qz.model.UserDistribution">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="from_user_Id" jdbcType="INTEGER" property="fromUserId" />
-    <result column="to_user_id" jdbcType="INTEGER" property="toUserId" />
     <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
     <result column="survey_id" jdbcType="INTEGER" property="surveyId" />
     <result column="user_survey_id" jdbcType="INTEGER" property="userSurveyId" />
@@ -68,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, from_user_Id, to_user_id, finish_time, survey_id, user_survey_id
+    id, from_user_Id, finish_time, survey_id, user_survey_id
   </sql>
   <select id="selectByExample" parameterType="com.ronmob.qz.model.UserDistributionExample" resultMap="BaseResultMap">
     select
@@ -112,10 +111,10 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user_distribution (from_user_Id, to_user_id, finish_time, 
-      survey_id, user_survey_id)
-    values (#{fromUserId,jdbcType=INTEGER}, #{toUserId,jdbcType=INTEGER}, #{finishTime,jdbcType=TIMESTAMP}, 
-      #{surveyId,jdbcType=INTEGER}, #{userSurveyId,jdbcType=INTEGER})
+    insert into user_distribution (from_user_Id, finish_time, survey_id, 
+      user_survey_id)
+    values (#{fromUserId,jdbcType=INTEGER}, #{finishTime,jdbcType=TIMESTAMP}, #{surveyId,jdbcType=INTEGER}, 
+      #{userSurveyId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.ronmob.qz.model.UserDistribution">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -125,9 +124,6 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="fromUserId != null">
         from_user_Id,
-      </if>
-      <if test="toUserId != null">
-        to_user_id,
       </if>
       <if test="finishTime != null">
         finish_time,
@@ -142,9 +138,6 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="fromUserId != null">
         #{fromUserId,jdbcType=INTEGER},
-      </if>
-      <if test="toUserId != null">
-        #{toUserId,jdbcType=INTEGER},
       </if>
       <if test="finishTime != null">
         #{finishTime,jdbcType=TIMESTAMP},
@@ -172,9 +165,6 @@
       <if test="record.fromUserId != null">
         from_user_Id = #{record.fromUserId,jdbcType=INTEGER},
       </if>
-      <if test="record.toUserId != null">
-        to_user_id = #{record.toUserId,jdbcType=INTEGER},
-      </if>
       <if test="record.finishTime != null">
         finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
       </if>
@@ -193,7 +183,6 @@
     update user_distribution
     set id = #{record.id,jdbcType=INTEGER},
       from_user_Id = #{record.fromUserId,jdbcType=INTEGER},
-      to_user_id = #{record.toUserId,jdbcType=INTEGER},
       finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
       survey_id = #{record.surveyId,jdbcType=INTEGER},
       user_survey_id = #{record.userSurveyId,jdbcType=INTEGER}
@@ -206,9 +195,6 @@
     <set>
       <if test="fromUserId != null">
         from_user_Id = #{fromUserId,jdbcType=INTEGER},
-      </if>
-      <if test="toUserId != null">
-        to_user_id = #{toUserId,jdbcType=INTEGER},
       </if>
       <if test="finishTime != null">
         finish_time = #{finishTime,jdbcType=TIMESTAMP},
@@ -225,7 +211,6 @@
   <update id="updateByPrimaryKey" parameterType="com.ronmob.qz.model.UserDistribution">
     update user_distribution
     set from_user_Id = #{fromUserId,jdbcType=INTEGER},
-      to_user_id = #{toUserId,jdbcType=INTEGER},
       finish_time = #{finishTime,jdbcType=TIMESTAMP},
       survey_id = #{surveyId,jdbcType=INTEGER},
       user_survey_id = #{userSurveyId,jdbcType=INTEGER}

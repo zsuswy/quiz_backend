@@ -55,29 +55,32 @@
         <!--<table schema="" tableName="survey_class">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
-        <table schema="" tableName="survey_dimension">
+        <!--<table schema="" tableName="survey_dimension">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
         <table schema="" tableName="survey_dimension_score_text">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        </table>-->
         <!--<table schema="" tableName="survey_question">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
         <!--<table schema="" tableName="user">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-        <!--<table schema="" tableName="user_distribution">-->
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
-        <!--<table schema="" tableName="user_score_log">-->
-            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
+        <!--</table>
+        <table schema="" tableName="user_distribution">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table schema="" tableName="user_score_log">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>-->
         <!--<table schema="" tableName="user_survey">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
         <!--<table schema="" tableName="pay_order">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
+        <table schema="" tableName="system_param">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
     </context>
 </generatorConfiguration>

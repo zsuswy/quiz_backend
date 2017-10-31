@@ -43,9 +43,6 @@ public class UserDistributionServiceImpl implements UserDistributionService {
         if (params.containsKey("fromUserId")) {
             criteria.andFromUserIdEqualTo(Util.getInteger(params.get("fromUserId").toString()));
         }
-        if (params.containsKey("toUserId")) {
-            criteria.andToUserIdEqualTo(Util.getInteger(params.get("toUserId").toString()));
-        }
         if (params.containsKey("surveyId")) {
             criteria.andSurveyIdEqualTo(Util.getInteger(params.get("surveyId").toString()));
         }
